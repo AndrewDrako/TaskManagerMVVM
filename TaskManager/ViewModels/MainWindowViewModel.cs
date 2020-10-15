@@ -5,12 +5,21 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
+using TaskManager.Infrastructure.Commands;
 using TaskManager.ViewModels.Base;
+using TaskManager.Views.Pages;
 
 namespace TaskManager.ViewModels
 {
     internal class MainWindowViewModel : ViewModel
     {
+        #region Страницы приложения
+
+        private Page _Home;
+        private Page _Manager;
+
+        #endregion
+
         #region Заголовок окна
 
         private string _Title = "Task Manager";
@@ -70,11 +79,28 @@ namespace TaskManager.ViewModels
 
         private void OnButton1ClickExecuted(object p)
         {
-
+            CurrentPage = _Home;
         }
 
         #endregion
 
+        #region Конструктор класса MainWindowViewModel
 
+        public MainWindowViewModel()
+        {
+            _Home = new Views.Pages.Home();
+            _Manager = new Views.Pages.Manager();
+
+            CurrentPage = _Manager;
+
+            #region Команды
+
+            Button1Click = new LambdaCommand(OnButton1ClickExecuted, CanButton1ClickExecute);
+
+            #endregion
+
+        }
+
+        #endregion
     }
 }
