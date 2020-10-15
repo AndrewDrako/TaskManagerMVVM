@@ -19,5 +19,8 @@
             <Button Content="{Binding Path=ButtonContent1}"/>
             <Button Content="{Binding Path=ButtonContent2}"/>
         </StackPanel>
+        <UserControl Grid.Column="1" Content="sksk">
+            
+        </UserControl>
     </Grid>
 </Window>

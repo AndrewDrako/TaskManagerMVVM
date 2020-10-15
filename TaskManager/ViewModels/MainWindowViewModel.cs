@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using TaskManager.ViewModels.Base;
 
 namespace TaskManager.ViewModels
@@ -44,6 +45,19 @@ namespace TaskManager.ViewModels
             get => _ButtonContent2;
 
             set => Set(ref _ButtonContent2, value);
+        }
+
+        #endregion
+
+        #region Клик кнопки номер 1
+
+        public ICommand Button1Click { get; }
+
+        private bool CanButton1ClickExecute(object p) => true;
+
+        private void OnButton1ClickExecuted(object p)
+        {
+
         }
 
         #endregion
