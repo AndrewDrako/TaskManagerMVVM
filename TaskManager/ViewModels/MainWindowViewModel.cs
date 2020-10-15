@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
 using TaskManager.ViewModels.Base;
 
@@ -49,6 +50,18 @@ namespace TaskManager.ViewModels
 
         #endregion
 
+        #region Основная (текущая страница)
+
+        private Page _CurrentPage;
+
+        public Page CurrentPage
+        {
+            get => _CurrentPage;
+            set => Set(ref _CurrentPage, value);
+        }
+
+        #endregion
+
         #region Клик кнопки номер 1
 
         public ICommand Button1Click { get; }
@@ -61,5 +74,7 @@ namespace TaskManager.ViewModels
         }
 
         #endregion
+
+
     }
 }
