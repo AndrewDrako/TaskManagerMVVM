@@ -18,9 +18,11 @@
         <StackPanel>
             <Button Content="{Binding Path=ButtonContent1}" Command="{Binding Path=FirstButtonClick}"/>
             <Button Content="{Binding Path=ButtonContent2}" Command="{Binding Path=SecondButtonClick}"/>
+            <Button Content="{Binding Path=ButtonContent3}" Command="{Binding Path=ThirdButtonClick}"/>
         </StackPanel>
-        <Frame NavigationUIVisibility="Hidden"  Grid.Column="1" Content="{Binding Path=CurrentPage}">
+        
+        <UserControl Grid.Column="1" Content="{Binding Path=CurrentPage}">
             
-        </Frame>
+        </UserControl>
     </Grid>
 </Window>

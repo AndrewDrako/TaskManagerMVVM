@@ -7,7 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using TaskManager.Infrastructure.Commands;
 using TaskManager.ViewModels.Base;
-using TaskManager.Views.Pages;
+using TaskManager.Views.UserControls;
 
 namespace TaskManager.ViewModels
 {
@@ -15,8 +15,9 @@ namespace TaskManager.ViewModels
     {
         #region Страницы приложения
 
-        private Page _Home;
-        private Page _Manager;
+        private UserControl _Home;
+        private UserControl _Tasks;
+        private UserControl _Settings;
 
         #endregion
 
@@ -48,7 +49,7 @@ namespace TaskManager.ViewModels
 
         #region Название кнопки номер 2
 
-        private string _ButtonContent2 = "Dashboard";
+        private string _ButtonContent2 = "Tasks";
 
         public string ButtonContent2
         {
@@ -59,11 +60,24 @@ namespace TaskManager.ViewModels
 
         #endregion
 
+        #region Название кнопки номер 3
+
+        private string _ButtonContent3 = "Settings";
+
+        public string ButtonContent3
+        {
+            get => _ButtonContent3;
+
+            set => Set(ref _ButtonContent3, value);
+        }
+
+        #endregion
+
         #region Основная (текущая страница)
 
-        private Page _CurrentPage;
+        private UserControl _CurrentPage;
 
-        public Page CurrentPage
+        public UserControl CurrentPage
         {
             get => _CurrentPage;
             set => Set(ref _CurrentPage, value);
@@ -92,7 +106,20 @@ namespace TaskManager.ViewModels
 
         private void OnSecondButtonClickExecuted(object p)
         {
-            CurrentPage = _Manager;
+            CurrentPage = _Tasks;
+        }
+
+        #endregion
+
+        #region Клик кнопки номер 3
+
+        public ICommand ThirdButtonClick { get; }
+
+        private bool CanThirdButtonClickExecute(object p) => true;
+
+        private void OnThirdButtonClickExecuted(object p)
+        {
+            CurrentPage = _Settings;
         }
 
         #endregion
@@ -103,8 +130,9 @@ namespace TaskManager.ViewModels
         {
             #region Создание окон
 
-            _Home = new Views.Pages.Home();
-            _Manager = new Views.Pages.Manager();
+            _Home = new Views.UserControls.Home();
+            _Tasks = new Views.UserControls.Tasks();
+            _Settings = new Views.UserControls.Settings();
 
             CurrentPage = _Home;
 
@@ -114,6 +142,7 @@ namespace TaskManager.ViewModels
 
             FirstButtonClick = new LambdaCommand(OnFirstButtonClickExecuted, CanFirstButtonClickExecute);
             SecondButtonClick = new LambdaCommand(OnSecondButtonClickExecuted, CanSecondButtonClickExecute);
+            ThirdButtonClick = new LambdaCommand(OnThirdButtonClickExecuted, CanThirdButtonClickExecute);
 
             #endregion
 

@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TaskManager.Views.Pages
+namespace TaskManager.Views.UserControls
 {
     /// <summary>
-    /// Логика взаимодействия для Manager.xaml
+    /// Логика взаимодействия для Home.xaml
     /// </summary>
-    public partial class Manager : Page
+    public partial class Home : UserControl
     {
-        public Manager()
+        public Home()
         {
             InitializeComponent();
         }
