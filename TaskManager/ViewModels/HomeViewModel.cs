@@ -27,5 +27,17 @@ namespace TaskManager.ViewModels
         }
 
         #endregion
+
+        #region Open project or create new -- label
+
+        private string _Label2 = "Open project or create new...";
+
+        public string Label2
+        {
+            get => _Label2;
+            set => Set(ref _Label2, value);
+        }
+
+        #endregion
     }
 }

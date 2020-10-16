@@ -29,7 +29,12 @@
             <Run Text="{Binding Path=Email}"/>
         </TextBlock>
         <!--Open or create new project-->
-        
+        <TextBlock Grid.Row="1"
+                   Margin="20 0 0 0"
+                   FontSize="20"
+                   Text="{Binding Path=Label2}">
+            
+        </TextBlock>
                
 
     </Grid>
