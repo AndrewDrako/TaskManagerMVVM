@@ -18,6 +18,8 @@ namespace TaskManager.ViewModels
         private UserControl _Home;
         private UserControl _Tasks;
         private UserControl _Settings;
+        private UserControl _Account;
+        private UserControl _Help;
 
         #endregion
 
@@ -73,6 +75,32 @@ namespace TaskManager.ViewModels
 
         #endregion
 
+        #region Название кнопки номер 4
+
+        private string _ButtonContent4 = "Account";
+
+        public string ButtonContent4
+        {
+            get => _ButtonContent4;
+
+            set => Set(ref _ButtonContent4, value);
+        }
+
+        #endregion
+
+        #region Название кнопки номер 5
+
+        private string _ButtonContent5 = "Help";
+
+        public string ButtonContent5
+        {
+            get => _ButtonContent5;
+
+            set => Set(ref _ButtonContent5, value);
+        }
+
+        #endregion
+
         #region Основная (текущая страница)
 
         private UserControl _CurrentPage;
@@ -124,6 +152,32 @@ namespace TaskManager.ViewModels
 
         #endregion
 
+        #region Клик кнопки номер 4
+
+        public ICommand FourthButtonClick { get; }
+
+        private bool CanFourthButtonClickExecute(object p) => true;
+
+        private void OnFourthButtonClickExecuted(object p)
+        {
+            CurrentPage = _Account;
+        }
+
+        #endregion
+
+        #region Клик кнопки номер 5
+
+        public ICommand FifthButtonClick { get; }
+
+        private bool CanFifthButtonClickExecute(object p) => true;
+
+        private void OnFifthButtonClickExecuted(object p)
+        {
+            CurrentPage = _Help;
+        }
+
+        #endregion
+
         #region Конструктор класса MainWindowViewModel
 
         public MainWindowViewModel()
@@ -133,6 +187,8 @@ namespace TaskManager.ViewModels
             _Home = new Views.UserControls.Home();
             _Tasks = new Views.UserControls.Tasks();
             _Settings = new Views.UserControls.Settings();
+            _Account = new Account();
+            _Help = new Help();
 
             CurrentPage = _Home;
 
@@ -143,6 +199,8 @@ namespace TaskManager.ViewModels
             FirstButtonClick = new LambdaCommand(OnFirstButtonClickExecuted, CanFirstButtonClickExecute);
             SecondButtonClick = new LambdaCommand(OnSecondButtonClickExecuted, CanSecondButtonClickExecute);
             ThirdButtonClick = new LambdaCommand(OnThirdButtonClickExecuted, CanThirdButtonClickExecute);
+            FourthButtonClick = new LambdaCommand(OnFourthButtonClickExecuted, CanFourthButtonClickExecute);
+            FifthButtonClick = new LambdaCommand(OnFifthButtonClickExecuted, CanFifthButtonClickExecute);
 
             #endregion
 
