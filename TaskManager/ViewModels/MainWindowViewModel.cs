@@ -73,13 +73,26 @@ namespace TaskManager.ViewModels
 
         #region Клик кнопки номер 1
 
-        public ICommand Button1Click { get; }
+        public ICommand FirstButtonClick { get; }
 
-        private bool CanButton1ClickExecute(object p) => true;
+        private bool CanFirstButtonClickExecute(object p) => true;
 
-        private void OnButton1ClickExecuted(object p)
+        private void OnFirstButtonClickExecuted(object p)
         {
             CurrentPage = _Home;
+        }
+
+        #endregion
+
+        #region Клик кнопки номер 2
+
+        public ICommand SecondButtonClick { get; }
+
+        private bool CanSecondButtonClickExecute(object p) => true;
+
+        private void OnSecondButtonClickExecuted(object p)
+        {
+            CurrentPage = _Manager;
         }
 
         #endregion
@@ -88,14 +101,19 @@ namespace TaskManager.ViewModels
 
         public MainWindowViewModel()
         {
+            #region Создание окон
+
             _Home = new Views.Pages.Home();
             _Manager = new Views.Pages.Manager();
 
-            CurrentPage = _Manager;
+            CurrentPage = _Home;
+
+            #endregion
 
             #region Команды
 
-            Button1Click = new LambdaCommand(OnButton1ClickExecuted, CanButton1ClickExecute);
+            FirstButtonClick = new LambdaCommand(OnFirstButtonClickExecuted, CanFirstButtonClickExecute);
+            SecondButtonClick = new LambdaCommand(OnSecondButtonClickExecuted, CanSecondButtonClickExecute);
 
             #endregion
 

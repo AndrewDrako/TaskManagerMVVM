@@ -16,8 +16,8 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <StackPanel>
-            <Button Content="{Binding Path=ButtonContent1}" Command="{Binding Path=Button1Click}"/>
-            <Button Content="{Binding Path=ButtonContent2}"/>
+            <Button Content="{Binding Path=ButtonContent1}" Command="{Binding Path=FirstButtonClick}"/>
+            <Button Content="{Binding Path=ButtonContent2}" Command="{Binding Path=SecondButtonClick}"/>
         </StackPanel>
         <Frame NavigationUIVisibility="Hidden"  Grid.Column="1" Content="{Binding Path=CurrentPage}">
             
