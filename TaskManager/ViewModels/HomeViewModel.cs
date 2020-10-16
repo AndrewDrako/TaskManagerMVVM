@@ -9,5 +9,6 @@ namespace TaskManager.ViewModels
 {
     internal class HomeViewModel : ViewModel
     {
+
     }
 }
