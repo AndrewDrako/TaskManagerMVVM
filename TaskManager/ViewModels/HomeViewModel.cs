@@ -39,5 +39,17 @@ namespace TaskManager.ViewModels
         }
 
         #endregion
+
+        #region Change a note or create -- label
+
+        private string _Label3 = "Change a note or create...";
+
+        public string Label3
+        {
+            get => _Label3;
+            set => Set(ref _Label3, value);
+        }
+
+        #endregion
     }
 }

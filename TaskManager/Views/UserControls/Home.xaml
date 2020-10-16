@@ -35,7 +35,13 @@
                    Text="{Binding Path=Label2}">
             
         </TextBlock>
-               
+        <!--Change a note or create-->
+        <TextBlock Grid.Row="3"
+                   Margin="20 0 0 0"
+                   FontSize="20"
+                   Text="{Binding Path=Label3}"/>
+        
+
 
     </Grid>
 </UserControl>
