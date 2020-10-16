@@ -18,12 +18,21 @@
             <RowDefinition Height="30"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         <!--Добро пожаловать, элекстронный адрес/никнейм-->
         <TextBlock HorizontalAlignment="Left"
                    VerticalAlignment="Bottom"
                    FontSize="40"
                    Margin="20 0 0 0"
-                   Grid.Row="0">
+                   Grid.Row="0"
+                   Grid.ColumnSpan="6">
             <Run Text="{Binding Path=Welcome}"/>
             <Run Text=", "/>
             <Run Text="{Binding Path=Email}"/>
@@ -31,6 +40,7 @@
         <!--Open or create new project-->
         <TextBlock Grid.Row="1"
                    Margin="20 0 0 0"
+                   Grid.ColumnSpan="6"
                    FontSize="20"
                    Text="{Binding Path=Label2}">
             
@@ -38,9 +48,20 @@
         <!--Change a note or create-->
         <TextBlock Grid.Row="3"
                    Margin="20 0 0 0"
+                   Grid.ColumnSpan="6"
                    FontSize="20"
                    Text="{Binding Path=Label3}"/>
-        
+        <!--Button Create or open project-->
+        <Button Grid.Column="0"
+                Grid.Row="2"
+                Margin="20 30">
+            <TextBlock Text="+"
+                       FontSize="50"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Margin="0 0 0 15"/>
+
+        </Button>
 
 
     </Grid>
