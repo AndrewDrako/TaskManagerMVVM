@@ -3,12 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
+using TaskManager.Infrastructure.Commands;
 using TaskManager.ViewModels.Base;
+
 
 namespace TaskManager.ViewModels
 {
     internal class HomeViewModel : ViewModel
     {
+        #region Windows (окна)
+
+        private Window _CreateProjectWindow;
+
+        #endregion
+
         #region Добро пожаловать .com
 
         private string _Welcome = "Welcome";
@@ -51,5 +61,38 @@ namespace TaskManager.ViewModels
         }
 
         #endregion
+
+        #region Button create new project click
+
+        public ICommand CreateProjectClick { get; }
+
+        private bool CanCreateProjectClickExecute(object p) => true;
+
+        private void OnCreateProjectClickExecuted(object p)
+        {
+            _CreateProjectWindow.Show(); 
+        }
+
+        #endregion
+
+        #region Конструктор 
+
+        public HomeViewModel()
+        {
+            #region Окна создания
+
+            _CreateProjectWindow = new Views.Windows.CreateProjectWindowxaml();
+
+            #endregion
+
+            #region Комманды
+
+            CreateProjectClick = new LambdaCommand(OnCreateProjectClickExecuted, CanCreateProjectClickExecute);
+
+            #endregion
+        }
+
+        #endregion
+
     }
 }

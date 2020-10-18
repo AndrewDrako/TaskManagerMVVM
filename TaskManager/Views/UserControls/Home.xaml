@@ -54,7 +54,8 @@
         <!--Button Create or open project-->
         <Button Grid.Column="0"
                 Grid.Row="2"
-                Margin="20 30">
+                Margin="20 30"
+                Command="{Binding Path=CreateProjectClick}">
             <TextBlock Text="+"
                        FontSize="50"
                        HorizontalAlignment="Center"

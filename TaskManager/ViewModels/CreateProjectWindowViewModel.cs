@@ -71,5 +71,14 @@ namespace TaskManager.ViewModels
         }
 
         #endregion
+
+        #region Консруктор
+
+        public CreateProjectWindowViewModel()
+        {
+            
+        }
+
+        #endregion
     }
 }
