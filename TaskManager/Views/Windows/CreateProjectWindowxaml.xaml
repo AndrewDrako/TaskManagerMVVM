@@ -4,10 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TaskManager.Views.Windows"
+        xmlns:vm="clr-namespace:TaskManager.ViewModels"
         mc:Ignorable="d"
         Height="300" Width="300"
         ResizeMode="NoResize"
         WindowStyle="None">
+    <Window.DataContext>
+        <vm:CreateProjectWindowViewModel/>
+    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -18,7 +22,7 @@
         </Grid.RowDefinitions>
         <!--Enter project name -->
         <TextBlock Grid.Row="0"
-                   Text="Enter project name"
+                   Text="{Binding Path=EnterProjectNameLabel}"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center"
                    FontSize="20"/>
@@ -29,11 +33,12 @@
                  Height="20"
                  Width="250"
                  MaxLength="30"
-                 FontSize="20"/>
-        
+                 FontSize="20"
+                 Text="{Binding Path=ProjectName}"/>
+
         <!--Enter owner name or team name-->
         <TextBlock Grid.Row="2"
-                   Text="Enter owner name or team name"
+                   Text="{Binding Path=EnterTeamNameLabel}"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center"
                    FontSize="20"/>
@@ -49,7 +54,7 @@
         <!--Button accept and save properties (project name and team/user name)-->
         <Button Grid.Row="4"
                 Margin="100 15"
-                Content="OK"/>
+                Content="{Binding Path=ButtonOKContent}"/>
 
     </Grid>
 </Window>
