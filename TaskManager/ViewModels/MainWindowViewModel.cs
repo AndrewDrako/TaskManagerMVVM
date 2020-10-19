@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using TaskManager.Infrastructure.Commands;
@@ -13,6 +14,8 @@ namespace TaskManager.ViewModels
 {
     internal class MainWindowViewModel : ViewModel
     {
+
+       
         #region Страницы приложения
 
         private UserControl _Home;
@@ -182,6 +185,8 @@ namespace TaskManager.ViewModels
 
         public MainWindowViewModel()
         {
+            
+
             #region Создание окон
 
             _Home = new Views.UserControls.Home();

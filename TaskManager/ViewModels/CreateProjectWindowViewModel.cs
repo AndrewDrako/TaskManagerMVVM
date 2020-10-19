@@ -1,17 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using TaskManager.Infrastructure.Commands;
 using TaskManager.ViewModels.Base;
+using TaskManager.Views.Windows;
 
 namespace TaskManager.ViewModels
 {
     class CreateProjectWindowViewModel : ViewModel
     {
+        #region Имя проекта и имя команды Label
+
         private string _ProjectName;
 
         public string ProjectName
@@ -21,6 +26,14 @@ namespace TaskManager.ViewModels
         }
 
         private string _TeamName;
+
+        public string TeamName
+        {
+            get => _TeamName;
+            set => Set(ref _TeamName, value);
+        }
+
+        #endregion
 
         #region Название кнопки OK
 
@@ -67,7 +80,7 @@ namespace TaskManager.ViewModels
 
         private void OnButtonClickExecuted(object p)
         {
-            
+            HomeViewModel._CreateProjectWindow.Close();
         }
 
         #endregion
@@ -76,7 +89,7 @@ namespace TaskManager.ViewModels
 
         public CreateProjectWindowViewModel()
         {
-            
+            ButtonClick = new LambdaCommand(OnButtonClickExecuted, CanButtonClickExecute);
         }
 
         #endregion

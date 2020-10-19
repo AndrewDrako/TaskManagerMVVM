@@ -4,18 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using TaskManager.Infrastructure.Commands;
 using TaskManager.ViewModels.Base;
-
+using TaskManager.Views.UserControls;
 
 namespace TaskManager.ViewModels
 {
     internal class HomeViewModel : ViewModel
     {
+        private string _PName;
+        private string _TName;
+
         #region Windows (окна)
 
-        private Window _CreateProjectWindow;
+        public static Window _CreateProjectWindow;
 
         #endregion
 
@@ -70,6 +74,7 @@ namespace TaskManager.ViewModels
 
         private void OnCreateProjectClickExecuted(object p)
         {
+            _CreateProjectWindow = new Views.Windows.CreateProjectWindowxaml();
             _CreateProjectWindow.Show(); 
         }
 
@@ -80,8 +85,8 @@ namespace TaskManager.ViewModels
         public HomeViewModel()
         {
             #region Окна создания
-
-            _CreateProjectWindow = new Views.Windows.CreateProjectWindowxaml();
+            //_CreateProjectWindow = new Views.Windows.CreateProjectWindowxaml();
+            
 
             #endregion
 

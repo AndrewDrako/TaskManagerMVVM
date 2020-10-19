@@ -8,7 +8,8 @@
         mc:Ignorable="d"
         Height="300" Width="300"
         ResizeMode="NoResize"
-        WindowStyle="None">
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <vm:CreateProjectWindowViewModel/>
     </Window.DataContext>
@@ -54,7 +55,8 @@
         <!--Button accept and save properties (project name and team/user name)-->
         <Button Grid.Row="4"
                 Margin="100 15"
-                Content="{Binding Path=ButtonOKContent}"/>
+                Content="{Binding Path=ButtonOKContent}"
+                Command="{Binding Path=ButtonClick}"/>
 
     </Grid>
 </Window>
