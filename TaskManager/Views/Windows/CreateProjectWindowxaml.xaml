@@ -56,10 +56,11 @@
         <!--Button accept and save properties (project name and team/user name)-->
         <Button Grid.Row="4"
                 Margin="100 15"
-                Content="{Binding Path=ButtonOKContent}">
-            <Button.Command>
+                Content="{Binding Path=ButtonOKContent}"
+                Command="{Binding Path=ButtonClick}">
+            <!--<Button.Command>
                 <cmd:CloseWindowCommand/>
-            </Button.Command>
+            </Button.Command>-->
             
         </Button>
 

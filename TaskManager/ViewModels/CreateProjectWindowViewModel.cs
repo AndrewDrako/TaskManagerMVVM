@@ -17,7 +17,7 @@ namespace TaskManager.ViewModels
     {
         #region Имя проекта и имя команды Label
 
-        private string _ProjectName;
+        public static string _ProjectName;
 
         public string ProjectName
         {
@@ -25,7 +25,7 @@ namespace TaskManager.ViewModels
             set => Set(ref _ProjectName, value);
         }
 
-        private string _TeamName;
+        public static string _TeamName;
 
         public string TeamName
         {
@@ -74,22 +74,44 @@ namespace TaskManager.ViewModels
 
         #region Button OK click and save info
 
-        //public ICommand ButtonClick { get; }
+        // Был создан отдельный класс CloseWindowCommand.cs
 
-        //private bool CanButtonClickExecute(object p) => true;
+        public ICommand ButtonClick { get; }
 
-        //private void OnButtonClickExecuted(object p)
-        //{
-        //    HomeViewModel._CreateProjectWindow.Close();
-        //}
+        private bool CanButtonClickExecute(object p) => true;
+
+        private void OnButtonClickExecuted(object p)
+        {
+            //HomeViewModel._CreateProjectWindow.Close();
+            var window = p as Window;
+
+            if (window is null)
+            {
+                window = Application.Current.Windows.Cast<Window>().FirstOrDefault(w => w.IsFocused);
+            }
+
+            if (window is null)
+            {
+                window = Application.Current.Windows.Cast<Window>().FirstOrDefault(w => w.IsActive);
+            }
+
+            window?.Close();
+
+            #region ПЕредаем данные
+
+            //TasksViewModel._PName = _ProjectName;
+            //TasksViewModel._TName = _TeamName;
+
+            #endregion
+        }
 
         #endregion
 
-        #region Консруктор
+        #region Конструктор
 
         public CreateProjectWindowViewModel()
         {
-            //ButtonClick = new LambdaCommand(OnButtonClickExecuted, CanButtonClickExecute);
+            ButtonClick = new LambdaCommand(OnButtonClickExecuted, CanButtonClickExecute);
         }
 
         #endregion
