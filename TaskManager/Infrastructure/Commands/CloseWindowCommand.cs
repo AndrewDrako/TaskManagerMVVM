@@ -12,7 +12,7 @@ namespace TaskManager.Infrastructure.Commands
     {
         public override bool CanExecute(object parameter)
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         public override void Execute(object p)

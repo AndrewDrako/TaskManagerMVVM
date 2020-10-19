@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TaskManager.Views.Windows"
+        xmlns:cmd="clr-namespace:TaskManager.Infrastructure.Commands"
         xmlns:vm="clr-namespace:TaskManager.ViewModels"
         mc:Ignorable="d"
         Height="300" Width="300"
@@ -55,8 +56,13 @@
         <!--Button accept and save properties (project name and team/user name)-->
         <Button Grid.Row="4"
                 Margin="100 15"
-                Content="{Binding Path=ButtonOKContent}"
-                Command="{Binding Path=ButtonClick}"/>
+                Content="{Binding Path=ButtonOKContent}">
+            <Button.Command>
+                <cmd:CloseWindowCommand/>
+            </Button.Command>
+            
+        </Button>
+
 
     </Grid>
 </Window>
