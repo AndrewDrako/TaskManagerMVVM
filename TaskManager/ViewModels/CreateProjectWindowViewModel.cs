@@ -74,14 +74,14 @@ namespace TaskManager.ViewModels
 
         #region Button OK click and save info
 
-        public ICommand ButtonClick { get; }
+        //public ICommand ButtonClick { get; }
 
-        private bool CanButtonClickExecute(object p) => true;
+        //private bool CanButtonClickExecute(object p) => true;
 
-        private void OnButtonClickExecuted(object p)
-        {
-            HomeViewModel._CreateProjectWindow.Close();
-        }
+        //private void OnButtonClickExecuted(object p)
+        //{
+        //    HomeViewModel._CreateProjectWindow.Close();
+        //}
 
         #endregion
 
@@ -89,7 +89,7 @@ namespace TaskManager.ViewModels
 
         public CreateProjectWindowViewModel()
         {
-            ButtonClick = new LambdaCommand(OnButtonClickExecuted, CanButtonClickExecute);
+            //ButtonClick = new LambdaCommand(OnButtonClickExecuted, CanButtonClickExecute);
         }
 
         #endregion
