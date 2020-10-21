@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using TaskManager.Infrastructure.Commands;
+using TaskManager.Models;
 using TaskManager.ViewModels.Base;
 using TaskManager.Views.UserControls;
 
@@ -14,8 +15,6 @@ namespace TaskManager.ViewModels
 {
     internal class HomeViewModel : ViewModel
     {
-        private string _PName;
-        private string _TName;
 
         #region Windows (окна)
 
@@ -75,7 +74,50 @@ namespace TaskManager.ViewModels
         private void OnCreateProjectClickExecuted(object p)
         {
             _CreateProjectWindow = new Views.Windows.CreateProjectWindowxaml();
-            _CreateProjectWindow.Show(); 
+            _CreateProjectWindow.Show();
+            if (this.ChangeControlVisibility == Visibility.Collapsed)
+            {
+                this.ChangeControlVisibility = Visibility.Visible;
+            }
+            else
+            {
+                this.ChangeControlVisibility = Visibility.Collapsed;
+            }
+
+        }
+
+        #endregion
+
+        #region Buttons visibility
+
+        
+
+        private Visibility _Visibility = Visibility.Collapsed;
+
+        public Visibility ChangeControlVisibility
+        {
+            get => _Visibility;
+            set => Set(ref _Visibility, value);
+            
+        }
+        
+        private void FuncToCall(object context)
+        {
+            //this is called when the button is clicked
+            //for example
+            if (this.ChangeControlVisibility == Visibility.Collapsed)
+            {
+                this.ChangeControlVisibility = Visibility.Visible;
+            }
+            else
+            {
+                this.ChangeControlVisibility = Visibility.Collapsed;
+            }
+        }
+
+        private bool FuncToEvaluate(object context)
+        {
+            return true;
         }
 
         #endregion

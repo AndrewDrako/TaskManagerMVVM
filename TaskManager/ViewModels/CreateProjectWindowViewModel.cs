@@ -83,6 +83,7 @@ namespace TaskManager.ViewModels
 
         private void OnButtonClickExecuted(object p)
         {
+            #region Закрытие
             //HomeViewModel._CreateProjectWindow.Close();
             var window = p as Window;
 
@@ -98,6 +99,8 @@ namespace TaskManager.ViewModels
 
             window?.Close();
 
+            #endregion
+
             #region ПЕредаем данные
 
             CreateProjectModel.SetProjectName(_ProjectName);
@@ -105,6 +108,7 @@ namespace TaskManager.ViewModels
             CreateProjectModel.PrintToTxt();
 
             MainWindowModel.IsTasksNotEmpty = true;
+            //HomeModel.SetVisibility("Visible");
 
            
 

@@ -64,6 +64,20 @@
 
         </Button>
 
+        <!--the other five projects-->
+
+        <Button Grid.Column="1"
+                Grid.Row="2"
+                Margin="20 30"
+                Visibility="{Binding Path=ChangeControlVisibility}">
+            <TextBlock Text="имя проекта"
+                       FontSize="13"
+                       TextWrapping="Wrap"/>
+            
+
+
+        </Button>
+
 
     </Grid>
 </UserControl>
