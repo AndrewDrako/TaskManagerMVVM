@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using TaskManager.Infrastructure.Commands;
+using TaskManager.Models;
 using TaskManager.ViewModels.Base;
 using TaskManager.Views.Windows;
 
@@ -98,6 +99,10 @@ namespace TaskManager.ViewModels
             window?.Close();
 
             #region ПЕредаем данные
+
+            CreateProjectModel.SetProjectName(_ProjectName);
+            CreateProjectModel.SetTeamName(_TeamName);
+            CreateProjectModel.PrintToTxt();
 
             //TasksViewModel._PName = _ProjectName;
             //TasksViewModel._TName = _TeamName;
