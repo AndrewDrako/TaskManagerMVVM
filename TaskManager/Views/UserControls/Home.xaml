@@ -70,7 +70,7 @@
                 Grid.Row="2"
                 Margin="20 30"
                 Visibility="{Binding Path=ChangeControlVisibility}">
-            <TextBlock Text="имя проекта"
+            <TextBlock Text="{Binding Path=PName}"
                        FontSize="13"
                        TextWrapping="Wrap"/>
             

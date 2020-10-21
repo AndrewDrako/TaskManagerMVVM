@@ -15,6 +15,9 @@ namespace TaskManager.ViewModels
 {
     internal class HomeViewModel : ViewModel
     {
+        /// <summary>
+        /// Labels
+        /// </summary>
 
         #region Windows (окна)
 
@@ -65,6 +68,22 @@ namespace TaskManager.ViewModels
 
         #endregion
 
+        #region Имя проекта
+
+        //private string _PName = CreateProjectModel.ProjectName[0];
+
+        public string PName
+        {
+            get => CreateProjectModel.ProjectName[0];
+            set => Set(ref CreateProjectModel.ProjectName[0], value);
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Commands
+        /// </summary>
+
         #region Button create new project click
 
         public ICommand CreateProjectClick { get; }
@@ -79,10 +98,7 @@ namespace TaskManager.ViewModels
             {
                 this.ChangeControlVisibility = Visibility.Visible;
             }
-            else
-            {
-                this.ChangeControlVisibility = Visibility.Collapsed;
-            }
+            
 
         }
 
@@ -101,24 +117,6 @@ namespace TaskManager.ViewModels
             
         }
         
-        private void FuncToCall(object context)
-        {
-            //this is called when the button is clicked
-            //for example
-            if (this.ChangeControlVisibility == Visibility.Collapsed)
-            {
-                this.ChangeControlVisibility = Visibility.Visible;
-            }
-            else
-            {
-                this.ChangeControlVisibility = Visibility.Collapsed;
-            }
-        }
-
-        private bool FuncToEvaluate(object context)
-        {
-            return true;
-        }
 
         #endregion
 
