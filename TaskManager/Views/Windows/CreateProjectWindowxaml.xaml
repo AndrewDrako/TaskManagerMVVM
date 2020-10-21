@@ -32,7 +32,7 @@
         <TextBox Grid.Row="1"
                  HorizontalAlignment="Center"
                  VerticalAlignment="Center"
-                 Height="20"
+                 Height="30"
                  Width="250"
                  MaxLength="30"
                  FontSize="20"
@@ -48,10 +48,11 @@
         <TextBox Grid.Row="3"
                  HorizontalAlignment="Center"
                  VerticalAlignment="Center"
-                 Height="20"
+                 Height="30"
                  Width="250"
                  MaxLength="30"
-                 FontSize="20"/>
+                 FontSize="20"
+                 Text="{Binding Path=TeamName}"/>
         
         <!--Button accept and save properties (project name and team/user name)-->
         <Button Grid.Row="4"

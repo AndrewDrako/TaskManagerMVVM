@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using TaskManager.Infrastructure.Commands;
+using TaskManager.Models;
 using TaskManager.ViewModels.Base;
 using TaskManager.Views.UserControls;
 
@@ -133,10 +134,11 @@ namespace TaskManager.ViewModels
 
         public ICommand SecondButtonClick { get; }
 
-        private bool CanSecondButtonClickExecute(object p) => true;
+        private bool CanSecondButtonClickExecute(object p) => MainWindowModel.IsTasksNotEmpty;
 
         private void OnSecondButtonClickExecuted(object p)
         {
+            _Tasks = new Views.UserControls.Tasks();
             CurrentPage = _Tasks;
         }
 
@@ -190,7 +192,8 @@ namespace TaskManager.ViewModels
             #region Создание окон
 
             _Home = new Views.UserControls.Home();
-            _Tasks = new Views.UserControls.Tasks();
+            MainWindowModel.IsTasksNotEmpty = false;
+            //_Tasks = new Views.UserControls.Tasks();
             _Settings = new Views.UserControls.Settings();
             _Account = new Account();
             _Help = new Help();

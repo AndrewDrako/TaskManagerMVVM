@@ -28,9 +28,9 @@ namespace TaskManager.Models
             // true - добавлять данные в конец файла. false - перезаписать файл заново
             using (System.IO.StreamWriter file = new System.IO.StreamWriter(pathLog, true))
             {
-                file.WriteLine(ProjectName[0]);
-                file.WriteLine(TeamName[0]);
+                file.WriteLine(ProjectName[0] + " / " + TeamName[0]);
             }
+
         }
 
     }

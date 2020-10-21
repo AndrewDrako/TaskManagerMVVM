@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TaskManager.Models;
 using TaskManager.ViewModels.Base;
 
 namespace TaskManager.ViewModels
@@ -11,7 +12,7 @@ namespace TaskManager.ViewModels
     {
         #region Имя проекта и имя команды на доске
 
-        public static string _PName/* = CreateProjectWindowViewModel._ProjectName*/;
+        private string _PName = CreateProjectModel.ProjectName[0];
 
         public string PName
         {
@@ -19,13 +20,15 @@ namespace TaskManager.ViewModels
             set => Set(ref _PName, value);
         }
 
-        public static string _TName/* = CreateProjectWindowViewModel._TeamName*/;
+        public static string _TName = CreateProjectModel.TeamName[0];
 
         public string TName
         {
             get => _TName;
             set => Set(ref _TName, value);
         }
+
+        
 
         #endregion
 

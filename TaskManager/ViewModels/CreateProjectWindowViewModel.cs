@@ -104,8 +104,9 @@ namespace TaskManager.ViewModels
             CreateProjectModel.SetTeamName(_TeamName);
             CreateProjectModel.PrintToTxt();
 
-            //TasksViewModel._PName = _ProjectName;
-            //TasksViewModel._TName = _TeamName;
+            MainWindowModel.IsTasksNotEmpty = true;
+
+           
 
             #endregion
         }
