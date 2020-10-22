@@ -12,7 +12,7 @@
         WindowStyle="None"
         WindowStartupLocation="CenterScreen">
     <Window.DataContext>
-        <vm:CreateProjectWindowViewModel/>
+        <vm:HomeViewModel/>
     </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
@@ -59,9 +59,7 @@
                 Margin="100 15"
                 Content="{Binding Path=ButtonOKContent}"
                 Command="{Binding Path=ButtonClick}">
-            <!--<Button.Command>
-                <cmd:CloseWindowCommand/>
-            </Button.Command>-->
+            
             
         </Button>
 
