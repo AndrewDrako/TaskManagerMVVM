@@ -70,7 +70,7 @@ namespace TaskManager.ViewModels
 
         #region Имя проекта
 
-        //private string _PName = CreateProjectModel.ProjectName[0];
+        private string _PName;
 
         public string PName
         {

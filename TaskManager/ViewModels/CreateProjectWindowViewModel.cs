@@ -75,8 +75,6 @@ namespace TaskManager.ViewModels
 
         #region Button OK click and save info
 
-        // Был создан отдельный класс CloseWindowCommand.cs
-
         public ICommand ButtonClick { get; }
 
         private bool CanButtonClickExecute(object p) => true;

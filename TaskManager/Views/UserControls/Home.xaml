@@ -9,6 +9,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.DataContext>
         <vm:HomeViewModel/>
+        
     </UserControl.DataContext>
     <Grid Background="White">
         <Grid.RowDefinitions>
@@ -70,7 +71,7 @@
                 Grid.Row="2"
                 Margin="20 30"
                 Visibility="{Binding Path=ChangeControlVisibility}">
-            <TextBlock Text="{Binding Path=PName}"
+            <TextBlock Text="{Binding Path=PName, UpdateSourceTrigger=PropertyChanged}"
                        FontSize="13"
                        TextWrapping="Wrap"/>
             
