@@ -12,7 +12,7 @@
         WindowStyle="None"
         WindowStartupLocation="CenterScreen">
     <Window.DataContext>
-        <vm:HomeViewModel/>
+        <vm:CreateProjectWindowViewModel/>
     </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
@@ -36,7 +36,12 @@
                  Width="250"
                  MaxLength="30"
                  FontSize="20"
-                 Text="{Binding Path=ProjectName}"/>
+                 Text="{Binding PName, UpdateSourceTrigger=PropertyChanged}">
+            <TextBox.DataContext>
+                <vm:HomeViewModel/>
+            </TextBox.DataContext>
+            
+        </TextBox>
 
         <!--Enter owner name or team name-->
         <TextBlock Grid.Row="2"

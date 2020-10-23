@@ -70,14 +70,20 @@
         <Button Grid.Column="1"
                 Grid.Row="2"
                 Margin="20 30"
-                Visibility="Visible">
-            <TextBlock Text="{Binding ProjectName}"
-                       FontSize="13"
-                       TextWrapping="Wrap"/>
+                Visibility="{Binding Path=ChangeControlVisibility}">
             
+            <TextBlock FontSize="13"
+                       TextWrapping="Wrap"
+                       Text="{Binding Path=PName}">
+                
+                
+            </TextBlock>
+
 
 
         </Button>
+        <TextBox Text="{Binding Path=PName, UpdateSourceTrigger=PropertyChanged}"
+                 Grid.Row="4"/>
 
 
     </Grid>
