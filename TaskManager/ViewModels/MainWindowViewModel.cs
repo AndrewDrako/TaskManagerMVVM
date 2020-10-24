@@ -20,7 +20,7 @@ namespace TaskManager.ViewModels
         #region Страницы приложения
 
         private UserControl _Home;
-        private UserControl _Tasks;
+        public static UserControl _Tasks;
         private UserControl _Settings;
         private UserControl _Account;
         private UserControl _Help;
@@ -138,8 +138,8 @@ namespace TaskManager.ViewModels
 
         private void OnSecondButtonClickExecuted(object p)
         {
-            _Tasks = new Views.UserControls.Tasks();
             CurrentPage = _Tasks;
+            
         }
 
         #endregion

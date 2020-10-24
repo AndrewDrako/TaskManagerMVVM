@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,17 +22,33 @@ namespace TaskManager.ViewModels
 
         private Project _SelectedProject;
 
-        public Project SelectedProject
-        {
-            get => _SelectedProject;
-            set => Set(ref _SelectedProject, value);
-        }
+        
 
         #endregion
 
         #region Коллекция проектов
 
         public ObservableCollection<Project> Projects { get; set; }
+
+        #endregion
+
+        #region Labels
+
+        private string _Welcome = "Welcome";
+        private string _Email = "3954014@gmail.com";
+
+        public string Welcome
+        {
+            get => _Welcome;
+            set => Set(ref _Welcome, value);
+        }
+
+        public string Email
+        {
+            get => _Email;
+            set => Set(ref _Email, value);
+        }
+
 
         #endregion
 
@@ -44,6 +61,7 @@ namespace TaskManager.ViewModels
         {
             get
             {
+                
                 return addCommand ??
                   (addCommand = new RelayCommand(obj =>
                   {
@@ -74,7 +92,41 @@ namespace TaskManager.ViewModels
             }
         }
 
+        // Команда выбора проекта
+
+        
+
+        private RelayCommand selectProject;
+        public RelayCommand SelectProject
+        {
+            get
+            {
+                return selectProject ??
+                    (selectProject = new RelayCommand(obj =>
+                    {
+                        Project project = obj as Project;
+                        if (project != null)
+                        {
+                            Project.PrintToTxt();
+                            MainWindowModel.IsTasksNotEmpty = true;
+                            TasksViewModel._PName = project.ProjectName;
+                            TasksViewModel._TName = project.PersonName;
+                            MainWindowViewModel._Tasks = new Tasks();
+                        }
+                    }));
+            }
+        }
         #endregion
+
+        public Project SelectedProject
+        {
+            get { return _SelectedProject; }
+            set
+            {
+                _SelectedProject = value;
+                OnPropertyChanged("SelectedProject");
+            }
+        }
 
         #region Конструктор 
 
@@ -84,9 +136,14 @@ namespace TaskManager.ViewModels
             {
 
             };
+
+            // Команды
+
+            //SelectProject = new LambdaCommand(OnSelectProjectExecuted, CanSelectProjectExecute);
         }
 
         #endregion
 
+        
     }
 }

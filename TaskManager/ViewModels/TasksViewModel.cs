@@ -12,7 +12,7 @@ namespace TaskManager.ViewModels
     {
         #region Имя проекта и имя команды на доске
 
-        private string _PName;
+        public static string _PName;
 
         public string PName
         {

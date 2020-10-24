@@ -17,11 +17,13 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0"
-                   Text="{Binding Path=PName}"
-                   HorizontalAlignment="Center"/>
+                   Text="{Binding PName}"
+                   HorizontalAlignment="Center">
+        </TextBlock>
         <TextBlock Grid.Row="1"
                    Text="{Binding Path=TName}"
-                   HorizontalAlignment="Center"/>
+                   HorizontalAlignment="Center">
+        </TextBlock>
 
     </Grid>
 </UserControl>

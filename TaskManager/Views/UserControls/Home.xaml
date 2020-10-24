@@ -21,17 +21,26 @@
             <RowDefinition Height="0.2*" />
         </Grid.RowDefinitions>
 
-
+        <TextBlock Grid.Row="0"
+                   Grid.Column="0"
+                   FontSize="20"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center"
+                   Margin="10 0 0 0">
+            <Run Text="{Binding Welcome}"/>
+            <Run Text=", "/>
+            <Run Text="{Binding Email}"/>
+        </TextBlock>
 
         <ListBox Grid.Row="1"
                  Grid.Column="0"
-                 ItemsSource="{Binding Path=Projects}"
-                 SelectedItem="{Binding Path=SelectedProject}">
+                 ItemsSource="{Binding Projects}"
+                 SelectedItem="{Binding SelectedProject}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Margin="5">
-                        <TextBlock FontSize="18" Text="{Binding Path=ProjectName}"/>
-                        <TextBlock Text="{Binding Path=PersonName}"/>
+                        <TextBlock FontSize="18" Text="{Binding ProjectName}"/>
+                        <TextBlock Text="{Binding PersonName}"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -40,7 +49,8 @@
         <StackPanel Grid.Column="1" 
                     Grid.Row="1"
                     DataContext="{Binding SelectedProject}">
-            <TextBlock Text="Выбранный проект"  />
+            <TextBlock Text="Выбранный проект"
+                       FontWeight="Bold"/>
             <TextBlock Text="Имя проекта" />
             <TextBox Text="{Binding ProjectName, UpdateSourceTrigger=PropertyChanged}" />
             <TextBlock Text="Создатель" />
@@ -60,6 +70,12 @@
                     Content="-"
                     Width="70"
                     Margin="10"/>
+            <Button Command="{Binding SelectProject}"
+                    CommandParameter="{Binding SelectedProject}"
+                    Content="ok"
+                    Width="70"
+                    Margin="10"/>
+
         </StackPanel>
 
     </Grid>
