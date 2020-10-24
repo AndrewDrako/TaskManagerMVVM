@@ -10,10 +10,15 @@ namespace TaskManager.Models
 {
     internal class Note : ViewModel
     {
-        private string _Content;
+        private string _Content = "";
         public string Content
         {
-            get => _Content;
+            get
+            {
+                
+                
+                return _Content ;
+            }
             set => Set(ref _Content, value);
         }
         private string _Target;

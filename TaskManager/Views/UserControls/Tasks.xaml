@@ -189,7 +189,8 @@
                        VerticalAlignment="Center"
                        />
             <TextBox TextWrapping="WrapWithOverflow"
-                     Text="{Binding Content, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding Content, UpdateSourceTrigger=PropertyChanged}"
+                     MaxLength="250"/>
         </StackPanel>
         <StackPanel Orientation="Vertical"
                     Grid.Row="3"
@@ -200,7 +201,8 @@
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"/>
             <TextBox TextWrapping="Wrap"
-                     Text="{Binding Target, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding Target, UpdateSourceTrigger=PropertyChanged}"
+                     MaxLength="30"/>
             
         </StackPanel>
 
