@@ -86,6 +86,10 @@ namespace TaskManager.ViewModels
                       if (project != null)
                       {
                           Projects.Remove(project);
+                          if (Projects.Count == 0)
+                          {
+                              MainWindowModel.IsTasksNotEmpty = false;
+                          }
                       }
                   },
                  (obj) => Projects.Count > 0));
@@ -136,10 +140,6 @@ namespace TaskManager.ViewModels
             {
 
             };
-
-            // Команды
-
-            //SelectProject = new LambdaCommand(OnSelectProjectExecuted, CanSelectProjectExecute);
         }
 
         #endregion

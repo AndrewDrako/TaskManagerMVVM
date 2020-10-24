@@ -12,18 +12,150 @@
     </UserControl.DataContext>
     <Grid Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
             <RowDefinition/>
+            <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         <TextBlock Grid.Row="0"
+                   Grid.ColumnSpan="5"
+                   
                    Text="{Binding PName}"
-                   HorizontalAlignment="Center">
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center"
+                   Margin="10 0 0 0"
+                   FontSize="20">
         </TextBlock>
-        <TextBlock Grid.Row="1"
+        <TextBlock Grid.Row="0"
+                   Grid.Column="5"
+                   Grid.ColumnSpan="5"
                    Text="{Binding Path=TName}"
-                   HorizontalAlignment="Center">
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center"
+                   Margin="10 0 0 0"
+                   FontSize="20">
         </TextBlock>
+
+        <ListBox Grid.Row="2"
+                 Grid.Column="0"
+                 Grid.ColumnSpan="4"
+                 Margin="5 0 0 0"
+                 ItemsSource="{Binding Notes}"
+                 SelectedItem="{Binding SelectedNote}"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="5">
+                        <TextBlock FontSize="18" Text="{Binding Content}"
+                                   TextWrapping="Wrap"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+                             
+        </ListBox>
+
+        <ListBox Grid.Row="2"
+                 Grid.Column="4"
+                 Grid.ColumnSpan="3"
+                 Margin="5 0 0 0">
+
+        </ListBox>
+
+        <ListBox Grid.Row="2"
+                 Grid.Column="7"
+                 Grid.ColumnSpan="3"
+                 Margin="5 0 0 0">
+
+        </ListBox>
+        
+        <!--Buttons-->
+
+        <Button Grid.Column="1"
+                Grid.Row="1"
+                Content="+"
+                Command="{Binding AddCommand}"
+                />
+        
+        <Button Grid.Column="2"
+                Grid.Row="1"
+                Content="-"
+                />
+
+        <Button Grid.Column="3"
+                Grid.Row="1"
+                Content=">"
+                />
+        <!---->
+        <Button Grid.Column="5"
+                Grid.Row="1"
+                Content="-"
+                />
+
+        <Button Grid.Column="6"
+                Grid.Row="1"
+                Content=">"
+                />
+        <!---->
+        <Button Grid.Column="8"
+                Grid.Row="1"
+                Content="-"
+                />
+
+        <Button Grid.Column="9"
+                Grid.Row="1"
+                Content="~"
+                />
+
+        <!--3 LABels-->
+        <TextBlock Grid.Row="1"
+                   Grid.Column="0"
+                   Margin="5 0 0 0"
+                   VerticalAlignment="Center"
+                   Text="TO DO"
+                   />
+
+        <TextBlock Grid.Row="1"
+                   Grid.Column="4"
+                   Margin="5 0 0 0"
+                   VerticalAlignment="Center"
+                   Text="IN PROGRESS"/>
+
+        <TextBlock Grid.Row="1"
+                   Grid.Column="7"
+                   Margin="5 0 0 0"
+                   VerticalAlignment="Center"
+                   Text="DONE"/>
+        
+        
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="3"
+                    Grid.ColumnSpan="10"
+                    DataContext="{Binding SelectedNote}">
+            <TextBlock Text="Напишите что нужно делать"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       FontSize="20"/>
+            <TextBox TextWrapping="Wrap"
+                     Width="300"
+                     Text="{Binding Content, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Text="Для чего это нужно"
+                       VerticalAlignment="Center"/>
+            <TextBox TextWrapping="Wrap"
+                     Width="130"/>
+
+        </StackPanel>
 
     </Grid>
 </UserControl>

@@ -38,6 +38,8 @@ namespace TaskManager.Models
             ProjectName = "";
             PersonName = "";
         }
+
+        
         public static void PrintToTxt()
         {
             string pathLog = @"D:\text1111.txt";
