@@ -9,82 +9,58 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.DataContext>
         <vm:HomeViewModel/>
-        
     </UserControl.DataContext>
     <Grid Background="White">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="80"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="0.4*" />
         </Grid.ColumnDefinitions>
-        <!--Добро пожаловать, элекстронный адрес/никнейм-->
-        <TextBlock HorizontalAlignment="Left"
-                   VerticalAlignment="Bottom"
-                   FontSize="40"
-                   Margin="20 0 0 0"
-                   Grid.Row="0"
-                   Grid.ColumnSpan="6">
-            <Run Text="{Binding Path=Welcome}"/>
-            <Run Text=", "/>
-            <Run Text="{Binding Path=Email}"/>
-        </TextBlock>
-        <!--Open or create new project-->
-        <TextBlock Grid.Row="1"
-                   Margin="20 0 0 0"
-                   Grid.ColumnSpan="6"
-                   FontSize="20"
-                   Text="{Binding Path=Label2}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="0.2*" />
+        </Grid.RowDefinitions>
+
+
+
+        <ListBox Grid.Row="1"
+                 Grid.Column="0"
+                 ItemsSource="{Binding Path=Projects}"
+                 SelectedItem="{Binding Path=SelectedProject}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="5">
+                        <TextBlock FontSize="18" Text="{Binding Path=ProjectName}"/>
+                        <TextBlock Text="{Binding Path=PersonName}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
             
-        </TextBlock>
-        <!--Change a note or create-->
-        <TextBlock Grid.Row="3"
-                   Margin="20 0 0 0"
-                   Grid.ColumnSpan="6"
-                   FontSize="20"
-                   Text="{Binding Path=Label3}"/>
-        <!--Button Create or open project-->
-        <Button Grid.Column="0"
-                Grid.Row="2"
-                Margin="20 30"
-                Command="{Binding Path=CreateProjectClick}">
-            <TextBlock Text="+"
-                       FontSize="50"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center"
-                       Margin="0 0 0 15"/>
+        </ListBox>
+        <StackPanel Grid.Column="1" 
+                    Grid.Row="1"
+                    DataContext="{Binding SelectedProject}">
+            <TextBlock Text="Выбранный проект"  />
+            <TextBlock Text="Имя проекта" />
+            <TextBox Text="{Binding ProjectName, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBlock Text="Создатель" />
+            <TextBox Text="{Binding PersonName, UpdateSourceTrigger=PropertyChanged}" />
+        </StackPanel>
 
-        </Button>
-
-        <!--the other five projects-->
-
-        <Button Grid.Column="1"
-                Grid.Row="2"
-                Margin="20 30"
-                Visibility="{Binding Path=ChangeControlVisibility}">
-            
-            <TextBlock FontSize="13"
-                       TextWrapping="Wrap"
-                       Text="{Binding Path=PName}">
-                
-                
-            </TextBlock>
-
-
-
-        </Button>
-        <TextBox Text="{Binding Path=PName, UpdateSourceTrigger=PropertyChanged}"
-                 Grid.Row="4"/>
-
+        <StackPanel Grid.Row="2"
+                    Grid.Column="0"
+                    Orientation="Horizontal">
+            <Button Command="{Binding AddCommand}"
+                    Content="+"
+                    Width="70"
+                    Margin="10"
+                    />
+            <Button Command="{Binding RemoveCommand}"
+                    CommandParameter="{Binding SelectedProject}"
+                    Content="-"
+                    Width="70"
+                    Margin="10"/>
+        </StackPanel>
 
     </Grid>
 </UserControl>

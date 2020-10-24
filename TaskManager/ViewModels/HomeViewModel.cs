@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using TaskManager.Infrastructure.Commands;
+using TaskManager.Infrastructure.Commands.Base;
 using TaskManager.Models;
 using TaskManager.ViewModels.Base;
 using TaskManager.Views.UserControls;
@@ -15,123 +17,73 @@ namespace TaskManager.ViewModels
 {
     internal class HomeViewModel : ViewModel
     {
-        /// <summary>
-        /// Labels
-        /// </summary>
+        #region Projects
 
-        #region Windows (окна)
+        private Project _SelectedProject;
 
-        public static Window _CreateProjectWindow;
-
-        #endregion
-
-        #region Добро пожаловать .com
-
-        private string _Welcome = "Welcome";
-        private string _Email = "3954014@gmail.com";
-
-        public string Welcome
+        public Project SelectedProject
         {
-            get => _Welcome;
-            set => Set(ref _Welcome, value);
-        }
-
-        public string Email
-        {
-            get => _Email;
-            set => Set(ref _Email, value);
+            get => _SelectedProject;
+            set => Set(ref _SelectedProject, value);
         }
 
         #endregion
 
-        #region Open project or create new -- label
+        #region Коллекция проектов
 
-        private string _Label2 = "Open project or create new...";
-
-        public string Label2
-        {
-            get => _Label2;
-            set => Set(ref _Label2, value);
-        }
+        public ObservableCollection<Project> Projects { get; set; }
 
         #endregion
 
-        #region Change a note or create -- label
+        #region Команды
 
-        private string _Label3 = "Change a note or create...";
+        // Команда добавления проекта
 
-        public string Label3
+        private RelayCommand addCommand;
+        public RelayCommand AddCommand
         {
-            get => _Label3;
-            set => Set(ref _Label3, value);
-        }
-
-        #endregion
-
-        #region Имя проекта
-
-        private string _PName;
-
-        public string PName
-        {
-            get => _PName;
-            set => Set(ref _PName, value);
-        }
-
-        #endregion
-
-        #region Buttons visibility
-
-
-
-        private Visibility _Visibility = Visibility.Collapsed;
-
-        public Visibility ChangeControlVisibility
-        {
-            get => _Visibility;
-            set => Set(ref _Visibility, value);
-
-        }
-
-
-        #endregion
-
-        /// <summary>
-        /// Commands
-        /// </summary>
-
-        #region Button create new project click
-
-        public ICommand CreateProjectClick { get; }
-
-        private bool CanCreateProjectClickExecute(object p) => true;
-
-        private void OnCreateProjectClickExecuted(object p)
-        {
-            _CreateProjectWindow = new Views.Windows.CreateProjectWindowxaml();
-            _CreateProjectWindow.Show();
-            if (this.ChangeControlVisibility == Visibility.Collapsed)
+            get
             {
-                this.ChangeControlVisibility = Visibility.Visible;
+                return addCommand ??
+                  (addCommand = new RelayCommand(obj =>
+                  {
+                      Project project = new Project();
+                      Projects.Insert(0, project);
+                      SelectedProject = project;
+                  }));
+            }
+        }
+
+        // Команда удаления проекта
+
+        private RelayCommand removeCommand;
+        public RelayCommand RemoveCommand
+        {
+            get
+            {
+                return removeCommand ??
+                  (removeCommand = new RelayCommand(obj =>
+                  {
+                      Project project = obj as Project;
+                      if (project != null)
+                      {
+                          Projects.Remove(project);
+                      }
+                  },
+                 (obj) => Projects.Count > 0));
             }
         }
 
         #endregion
 
-        
-
-        
-
-
         #region Конструктор 
 
         public HomeViewModel()
         {
-            #region Комманды
+            Projects = new ObservableCollection<Project>
+            {
 
-            CreateProjectClick = new LambdaCommand(OnCreateProjectClickExecuted, CanCreateProjectClickExecute);
-
-            #endregion
+            };
         }
 
         #endregion

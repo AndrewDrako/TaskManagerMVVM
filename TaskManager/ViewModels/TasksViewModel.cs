@@ -12,7 +12,7 @@ namespace TaskManager.ViewModels
     {
         #region Имя проекта и имя команды на доске
 
-        private string _PName = CreateProjectModel.ProjectName[0];
+        private string _PName;
 
         public string PName
         {
@@ -20,7 +20,7 @@ namespace TaskManager.ViewModels
             set => Set(ref _PName, value);
         }
 
-        public static string _TName = CreateProjectModel.TeamName[0];
+        public static string _TName;
 
         public string TName
         {
@@ -37,8 +37,7 @@ namespace TaskManager.ViewModels
 
         public TasksViewModel()
         {
-            //_PName = CreateProjectWindowViewModel._ProjectName;
-            //_TName = CreateProjectWindowViewModel._TeamName;
+            
         }
 
         #endregion
