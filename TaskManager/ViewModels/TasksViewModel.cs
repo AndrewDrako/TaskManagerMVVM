@@ -26,7 +26,10 @@ namespace TaskManager.ViewModels
 
         #region коллекция записей
 
-        public ObservableCollection<Note> Notes { get; set; }
+        public ObservableCollection<Note> NotesToDo { get; set; }
+
+        public ObservableCollection<Note> NotesInProgress { get; set; }
+        public ObservableCollection<Note> NotesDone { get; set; }
 
         #endregion
 
@@ -55,6 +58,9 @@ namespace TaskManager.ViewModels
         #region Commands
 
         #region ToDo
+
+        // Команда добавления задачи
+
         private RelayCommand addCommand;
         public RelayCommand AddCommand
         {
@@ -65,11 +71,97 @@ namespace TaskManager.ViewModels
                   (addCommand = new RelayCommand(obj =>
                   {
                       Note note = new Note();
-                      Notes.Insert(0, note);
+                      NotesToDo.Insert(0, note);
                       SelectedNote = note;
                   }));
             }
         }
+
+        // Команда удаления задачи
+
+        private RelayCommand removeCommand;
+        public RelayCommand RemoveCommand
+        {
+            get
+            {
+                return removeCommand ??
+                  (removeCommand = new RelayCommand(obj =>
+                  {
+                      Note note = obj as Note;
+                      if (note != null)
+                      {
+                          NotesToDo.Remove(note);
+                          
+                      }
+                  },
+                 (obj) => NotesToDo.Count > 0));
+            }
+        }
+
+        // Команда переноса в IN Progress
+
+        private RelayCommand transferProject;
+        public RelayCommand TransferProject
+        {
+            get
+            {
+                return transferProject ??
+                    (transferProject = new RelayCommand(obj =>
+                    {
+                        Note note = obj as Note;
+                        if (note != null)
+                        {
+                            NotesInProgress.Insert(0, note);
+                            NotesToDo.Remove(note);
+                        }
+                    }));
+            }
+        }
+        #endregion
+
+        #region InProgress
+
+        // Команда удаления задачи
+
+        private RelayCommand removeCommandInProgress;
+        public RelayCommand RemoveCommandInProgress
+        {
+            get
+            {
+                return removeCommandInProgress ??
+                  (removeCommandInProgress = new RelayCommand(obj =>
+                  {
+                      Note note = obj as Note;
+                      if (note != null)
+                      {
+                          NotesInProgress.Remove(note);
+
+                      }
+                  },
+                 (obj) => NotesInProgress.Count > 0));
+            }
+        }
+
+        // Команда переноса в Done
+
+        private RelayCommand transferProjectInProgress;
+        public RelayCommand TransferProjectInProgress
+        {
+            get
+            {
+                return transferProjectInProgress ??
+                    (transferProjectInProgress = new RelayCommand(obj =>
+                    {
+                        Note note = obj as Note;
+                        if (note != null)
+                        {
+                            NotesDone.Insert(0, note);
+                            NotesInProgress.Remove(note);
+                        }
+                    }));
+            }
+        }
+
         #endregion
 
         #endregion
@@ -78,7 +170,15 @@ namespace TaskManager.ViewModels
 
         public TasksViewModel()
         {
-            Notes = new ObservableCollection<Note>
+            NotesToDo = new ObservableCollection<Note>
+            {
+
+            };
+            NotesInProgress = new ObservableCollection<Note>
+            {
+
+            };
+            NotesDone = new ObservableCollection<Note>
             {
 
             };
