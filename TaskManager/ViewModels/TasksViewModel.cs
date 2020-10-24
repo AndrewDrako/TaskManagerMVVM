@@ -164,6 +164,31 @@ namespace TaskManager.ViewModels
 
         #endregion
 
+        #region Done
+
+        // Команда удаления задачи
+
+        private RelayCommand removeCommandDone;
+        public RelayCommand RemoveCommandDone
+        {
+            get
+            {
+                return removeCommandDone ??
+                  (removeCommandDone = new RelayCommand(obj =>
+                  {
+                      Note note = obj as Note;
+                      if (note != null)
+                      {
+                          NotesDone.Remove(note);
+
+                      }
+                  },
+                 (obj) => NotesDone.Count > 0));
+            }
+        }
+
+        #endregion
+
         #endregion
 
         #region Конструктор

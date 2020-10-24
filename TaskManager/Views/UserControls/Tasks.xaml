@@ -15,7 +15,7 @@
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
             <RowDefinition/>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
@@ -60,7 +60,9 @@
                     <StackPanel Margin="5">
                         <TextBlock FontSize="18" Text="{Binding Content}"
                                    TextWrapping="Wrap"/>
-                        
+                        <TextBlock FontSize="10" Text="{Binding Target}"
+                                   TextWrapping="Wrap"/>
+
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -78,6 +80,8 @@
                 <DataTemplate>
                     <StackPanel Margin="5">
                         <TextBlock FontSize="18" Text="{Binding Content}"
+                                   TextWrapping="Wrap"/>
+                        <TextBlock FontSize="10" Text="{Binding Target}"
                                    TextWrapping="Wrap"/>
 
                     </StackPanel>
@@ -97,6 +101,8 @@
                 <DataTemplate>
                     <StackPanel Margin="5">
                         <TextBlock FontSize="18" Text="{Binding Content}"
+                                   TextWrapping="Wrap"/>
+                        <TextBlock FontSize="10" Text="{Binding Target}"
                                    TextWrapping="Wrap"/>
 
                     </StackPanel>
@@ -144,6 +150,8 @@
         <Button Grid.Column="8"
                 Grid.Row="1"
                 Content="-"
+                Command="{Binding RemoveCommandDone}"
+                CommandParameter="{Binding SelectedNote}"
                 />
 
         <Button Grid.Column="9"
@@ -172,22 +180,28 @@
                    Text="DONE"/>
         
         
-        <StackPanel Orientation="Horizontal"
+        <StackPanel Orientation="Vertical"
                     Grid.Row="3"
-                    Grid.ColumnSpan="10"
+                    Grid.ColumnSpan="5"
                     DataContext="{Binding SelectedNote}">
             <TextBlock Text="Напишите что нужно делать"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
-                       FontSize="20"/>
-            <TextBox TextWrapping="Wrap"
-                     Width="300"
+                       />
+            <TextBox TextWrapping="WrapWithOverflow"
                      Text="{Binding Content, UpdateSourceTrigger=PropertyChanged}"/>
+        </StackPanel>
+        <StackPanel Orientation="Vertical"
+                    Grid.Row="3"
+                    Grid.Column="5"
+                    Grid.ColumnSpan="5"
+                    DataContext="{Binding SelectedNote}">
             <TextBlock Text="Для чего это нужно"
-                       VerticalAlignment="Center"/>
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"/>
             <TextBox TextWrapping="Wrap"
-                     Width="130"/>
-
+                     Text="{Binding Target, UpdateSourceTrigger=PropertyChanged}"/>
+            
         </StackPanel>
 
     </Grid>
