@@ -47,14 +47,17 @@
             
         </ListBox>
         <StackPanel Grid.Column="1" 
-                    Grid.Row="1"
-                    DataContext="{Binding SelectedProject}">
+                    Grid.Row="1">
             <TextBlock Text="Выбранный проект"
                        FontWeight="Bold"/>
             <TextBlock Text="Имя проекта" />
-            <TextBox Text="{Binding ProjectName, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox DataContext="{Binding SelectedProject}"
+                     Text="{Binding ProjectName, UpdateSourceTrigger=PropertyChanged}"
+                     MaxLength="20"/>
             <TextBlock Text="Создатель" />
-            <TextBox Text="{Binding PersonName, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox DataContext="{Binding SelectedProject}"
+                     Text="{Binding PersonName, UpdateSourceTrigger=PropertyChanged}"
+                     MaxLength="20"/>
         </StackPanel>
 
         <StackPanel Grid.Row="2"
