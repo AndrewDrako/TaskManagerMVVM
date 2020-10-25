@@ -27,7 +27,6 @@
             <ColumnDefinition/>
             <ColumnDefinition Width="200"/>
             <ColumnDefinition/>
-            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Row="0"
                    Grid.ColumnSpan="5"
@@ -91,7 +90,7 @@
 
         <ListBox Grid.Row="2"
                  Grid.Column="7"
-                 Grid.ColumnSpan="3"
+                 Grid.ColumnSpan="2"
                  Margin="5 0 0 0"
                  ItemsSource="{Binding NotesDone}"
                  SelectedItem="{Binding SelectedNote}"
@@ -153,11 +152,6 @@
                 CommandParameter="{Binding SelectedNote}"
                 />
 
-        <Button Grid.Column="9"
-                Grid.Row="1"
-                Content="~"
-                />
-
         <!--3 LABels-->
         <TextBlock Grid.Row="1"
                    Grid.Column="0"
@@ -186,10 +180,12 @@
             <TextBlock Text="Напишите что нужно делать"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
+                       FontSize="10"
                        />
             <TextBox TextWrapping="WrapWithOverflow"
                      Text="{Binding Content, UpdateSourceTrigger=PropertyChanged}"
-                     MaxLength="250"/>
+                     MaxLength="180"
+                     Margin="10 0 0 0"/>
         </StackPanel>
         <StackPanel Orientation="Vertical"
                     Grid.Row="3"
@@ -198,10 +194,12 @@
                     DataContext="{Binding SelectedNote}">
             <TextBlock Text="Для чего это нужно"
                        VerticalAlignment="Center"
-                       HorizontalAlignment="Center"/>
+                       HorizontalAlignment="Center"
+                       FontSize="10"/>
             <TextBox TextWrapping="Wrap"
                      Text="{Binding Target, UpdateSourceTrigger=PropertyChanged}"
-                     MaxLength="30"/>
+                     MaxLength="30"
+                     Margin="10 0 10 0"/>
             
         </StackPanel>
 
