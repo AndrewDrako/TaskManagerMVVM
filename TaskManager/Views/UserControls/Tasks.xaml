@@ -50,7 +50,8 @@
                  Margin="5 0 0 0"
                  ItemsSource="{Binding NotesToDo}"
                  SelectedItem="{Binding SelectedNote}"
-                 ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 VirtualizingPanel.ScrollUnit="Pixel">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Margin="5">
@@ -71,7 +72,8 @@
                  Margin="5 0 0 0"
                  ItemsSource="{Binding NotesInProgress}"
                  SelectedItem="{Binding SelectedNote}"
-                 ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 VirtualizingPanel.ScrollUnit="Pixel">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Margin="5">
@@ -92,7 +94,8 @@
                  Margin="5 0 0 0"
                  ItemsSource="{Binding NotesDone}"
                  SelectedItem="{Binding SelectedNote}"
-                 ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 VirtualizingPanel.ScrollUnit="Pixel">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Margin="5">

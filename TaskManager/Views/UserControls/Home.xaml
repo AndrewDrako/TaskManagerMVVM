@@ -35,7 +35,8 @@
         <ListBox Grid.Row="1"
                  Grid.Column="0"
                  ItemsSource="{Binding Projects}"
-                 SelectedItem="{Binding SelectedProject}">
+                 SelectedItem="{Binding SelectedProject}"
+                 VirtualizingPanel.ScrollUnit="Pixel">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Margin="5">
