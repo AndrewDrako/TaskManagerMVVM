@@ -31,7 +31,6 @@
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Row="0"
                    Grid.ColumnSpan="5"
-                   
                    Text="{Binding PName}"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Center"

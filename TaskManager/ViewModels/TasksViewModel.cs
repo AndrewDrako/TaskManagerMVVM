@@ -109,7 +109,7 @@ namespace TaskManager.ViewModels
                     (transferProject = new RelayCommand(obj =>
                     {
                         Note note = obj as Note;
-                        if (note != null)
+                        if (note != null && NotesToDo.Contains(note) == true)
                         {
                             NotesInProgress.Insert(0, note);
                             NotesToDo.Remove(note);
@@ -153,7 +153,7 @@ namespace TaskManager.ViewModels
                     (transferProjectInProgress = new RelayCommand(obj =>
                     {
                         Note note = obj as Note;
-                        if (note != null)
+                        if (note != null && NotesInProgress.Contains(note) == true)
                         {
                             NotesDone.Insert(0, note);
                             NotesInProgress.Remove(note);
