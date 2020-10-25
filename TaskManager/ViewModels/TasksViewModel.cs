@@ -12,7 +12,72 @@ namespace TaskManager.ViewModels
 {
     internal class TasksViewModel : ViewModel
     {
-        #region Записи
+        #region Labels
+        #region Проект под именем...
+        private string _Label1 = "Структуру заметок и задач с названием";
+        public string Label1
+        {
+            get => _Label1;
+            set => Set(ref _Label1, value);
+        }
+        #endregion
+
+        #region Подготвила команда...
+        private string _Label2 = "подготовила команда";
+        public string Label2
+        {
+            get => _Label2;
+            set => Set(ref _Label2, value);
+        }
+        #endregion
+
+        #region ToDo
+        private string _Label3 = "TO DO";
+        public string Label3
+        {
+            get => _Label3;
+            set => Set(ref _Label3, value);
+        }
+        #endregion
+
+        #region InProgress
+        private string _Label4 = "IN PROGRESS";
+        public string Label4
+        {
+            get => _Label4;
+            set => Set(ref _Label4, value);
+        }
+        #endregion
+
+        #region Done
+        private string _Label5 = "DONE";
+        public string Label5
+        {
+            get => _Label5;
+            set => Set(ref _Label5, value);
+        }
+        #endregion
+
+        #region Напишите заметку
+        private string _Label6 = "Напишите что нужно сделать";
+        public string Label6
+        {
+            get => _Label6;
+            set => Set(ref _Label6, value);
+        }
+        #endregion
+
+        #region Для чего это нужно сделать
+        private string _Label7 = "Для чего это нужно";
+        public string Label7
+        {
+            get => _Label7;
+            set => Set(ref _Label7, value);
+        }
+        #endregion
+        #endregion
+
+        #region Записи/Заметки
 
         private Note _SelectedNote;
 
@@ -24,7 +89,7 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-        #region коллекция записей
+        #region коллекция записей/заметок
 
         public ObservableCollection<Note> NotesToDo { get; set; }
 
@@ -195,6 +260,7 @@ namespace TaskManager.ViewModels
 
         public TasksViewModel()
         {
+
             NotesToDo = new ObservableCollection<Note>
             {
 

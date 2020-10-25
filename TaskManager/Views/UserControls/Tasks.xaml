@@ -29,21 +29,19 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Row="0"
-                   Grid.ColumnSpan="5"
-                   Text="{Binding PName}"
+                   Grid.ColumnSpan="9"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Center"
                    Margin="10 0 0 0"
-                   FontSize="20">
-        </TextBlock>
-        <TextBlock Grid.Row="0"
-                   Grid.Column="5"
-                   Grid.ColumnSpan="5"
-                   Text="{Binding Path=TName}"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Center"
-                   Margin="10 0 0 0"
-                   FontSize="20">
+                   FontSize="15"
+                   TextWrapping="WrapWithOverflow">
+            <Run Text="{Binding Label1}"/>
+            <Run Text=" "/>
+            <Run Text="{Binding PName}"/>
+            <Run Text=", "/>
+            <Run Text="{Binding Label2}"/>
+            <Run Text=" "/>
+            <Run Text="{Binding TName}"/>
         </TextBlock>
 
         <ListBox Grid.Row="2"
@@ -157,27 +155,27 @@
                    Grid.Column="0"
                    Margin="5 0 0 0"
                    VerticalAlignment="Center"
-                   Text="TO DO"
+                   Text="{Binding Label3}"
                    />
 
         <TextBlock Grid.Row="1"
                    Grid.Column="4"
                    Margin="5 0 0 0"
                    VerticalAlignment="Center"
-                   Text="IN PROGRESS"/>
+                   Text="{Binding Label4}"/>
 
         <TextBlock Grid.Row="1"
                    Grid.Column="7"
                    Margin="5 0 0 0"
                    VerticalAlignment="Center"
-                   Text="DONE"/>
+                   Text="{Binding Label5}"/>
         
         
         <StackPanel Orientation="Vertical"
                     Grid.Row="3"
                     Grid.ColumnSpan="5"
                     DataContext="{Binding SelectedNote}">
-            <TextBlock Text="Напишите что нужно делать"
+            <TextBlock Text="Напишите что нужно сделать"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
                        FontSize="10"
