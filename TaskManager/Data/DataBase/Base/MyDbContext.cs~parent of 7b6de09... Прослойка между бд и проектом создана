@@ -1,0 +1,15 @@
+﻿using System;
+using System.Data.Entity;
+
+namespace TaskManager.Data.DataBase.Base
+{
+    public class MyDbContext : DbContext
+    {
+        public MyDbContext() : base("DbConnectionString")
+        {
+
+        }
+
+
+    }
+}

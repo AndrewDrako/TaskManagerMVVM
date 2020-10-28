@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using TaskManager.Infrastructure.Commands.Base;
 using TaskManager.Models;
 using TaskManager.ViewModels.Base;
@@ -138,6 +139,7 @@ namespace TaskManager.ViewModels
                       Note note = new Note();
                       NotesToDo.Insert(0, note);
                       SelectedNote = note;
+                      
                   }));
             }
         }
@@ -178,6 +180,7 @@ namespace TaskManager.ViewModels
                         {
                             NotesInProgress.Insert(0, note);
                             NotesToDo.Remove(note);
+                            
                         }
                     }));
             }
@@ -256,6 +259,11 @@ namespace TaskManager.ViewModels
 
         #endregion
 
+        #region БД
+
+        
+        #endregion
+
         #region Конструктор
 
         public TasksViewModel()
@@ -273,6 +281,7 @@ namespace TaskManager.ViewModels
             {
 
             };
+            
         }
 
         #endregion
