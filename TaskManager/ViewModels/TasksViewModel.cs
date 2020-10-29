@@ -18,7 +18,7 @@ namespace TaskManager.ViewModels
         public string[] Colors;
         public string[] ColorsRepeat;
 
-        
+        public int Counter = 0;
 
         #endregion
 
@@ -146,7 +146,7 @@ namespace TaskManager.ViewModels
                   (addCommand = new RelayCommand(obj =>
                   {
                       Note note = new Note();
-                      note.Color = Colors[0];
+                      note.Color = Colors[Counter++];
                       NotesToDo.Insert(0, note);
                       SelectedNote = note;
                       
