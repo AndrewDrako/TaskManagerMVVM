@@ -9,6 +9,7 @@ namespace TaskManager.Models
 {
     internal class Project : ViewModel
     {
+
         #region Имя проекта
 
         private string _ProjectName;

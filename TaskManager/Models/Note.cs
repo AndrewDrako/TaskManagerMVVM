@@ -10,6 +10,21 @@ namespace TaskManager.Models
 {
     internal class Note : ViewModel
     {
+        #region Цвет заметки
+
+        private string _Color;
+
+        public string Color
+        {
+            get => _Color;
+            set => Set(ref _Color, value);
+        }
+
+
+        #endregion
+
+        #region Контент заметки
+
         private string _Content = "";
         public string Content
         {
@@ -21,11 +36,18 @@ namespace TaskManager.Models
             }
             set => Set(ref _Content, value);
         }
+
+        #endregion
+
+        #region Цель записи. Заголовок
+
         private string _Target;
         public string Target
         {
             get => _Target;
             set => Set(ref _Target, value);
         }
+
+        #endregion
     }
 }

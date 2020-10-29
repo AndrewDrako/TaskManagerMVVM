@@ -13,6 +13,15 @@ namespace TaskManager.ViewModels
 {
     internal class TasksViewModel : ViewModel
     {
+        #region Color Notes
+
+        public string[] Colors;
+        public string[] ColorsRepeat;
+
+        
+
+        #endregion
+
         #region Labels
         #region Проект под именем...
         private string _Label1 = "Структуру заметок и задач с названием";
@@ -137,6 +146,7 @@ namespace TaskManager.ViewModels
                   (addCommand = new RelayCommand(obj =>
                   {
                       Note note = new Note();
+                      note.Color = Colors[0];
                       NotesToDo.Insert(0, note);
                       SelectedNote = note;
                       
@@ -281,7 +291,20 @@ namespace TaskManager.ViewModels
             {
 
             };
-            
+
+            // Цвета заметок
+
+            Colors = new string[]
+            {
+                "#1F85DE",
+                "#DEB41F",
+                "#62DE1F",
+                "#1FDEA1",
+                "#8C1FDE",
+                "#DE1F9B",
+                "#E7435D",
+            };
+            ColorsRepeat = new string[10];
         }
 
         #endregion

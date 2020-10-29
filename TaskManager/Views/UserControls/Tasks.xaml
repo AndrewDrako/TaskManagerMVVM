@@ -54,7 +54,8 @@
                  VirtualizingPanel.ScrollUnit="Pixel">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Margin="5">
+                    <StackPanel Margin="5"
+                                Background="{Binding Color}">
                         <TextBlock FontSize="18" Text="{Binding Content}"
                                    TextWrapping="Wrap"/>
                         <TextBlock FontSize="10" Text="{Binding Target}"
