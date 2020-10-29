@@ -54,7 +54,7 @@
                  VirtualizingPanel.ScrollUnit="Pixel">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Margin="5" Background="{Binding Color}">
+                    <StackPanel Margin="0 10 0 10" Background="{Binding Color}">
                         <TextBlock FontSize="18" Text="{Binding Content}"
                                    TextWrapping="Wrap"/>
                         <TextBlock FontSize="10" Text="{Binding Target}"
@@ -76,7 +76,7 @@
                  VirtualizingPanel.ScrollUnit="Pixel">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Margin="5" Background="{Binding Color}">
+                    <StackPanel Margin="0 10 0 10" Background="{Binding Color}">
                         <TextBlock FontSize="18" Text="{Binding Content}"
                                    TextWrapping="Wrap"/>
                         <TextBlock FontSize="10" Text="{Binding Target}"
@@ -98,7 +98,7 @@
                  VirtualizingPanel.ScrollUnit="Pixel">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Margin="5" Background="{Binding Color}">
+                    <StackPanel Margin="0 10 0 10" Background="{Binding Color}">
                         <TextBlock FontSize="18" Text="{Binding Content}"
                                    TextWrapping="Wrap"/>
                         <TextBlock FontSize="10" Text="{Binding Target}"
