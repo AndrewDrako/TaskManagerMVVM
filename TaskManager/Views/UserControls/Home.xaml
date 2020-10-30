@@ -48,7 +48,8 @@
             
         </ListBox>
         <StackPanel Grid.Column="1" 
-                    Grid.Row="1">
+                    Grid.Row="1"
+                    Visibility="{Binding ChangeControlVisibility, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <TextBlock Text="Выбранный проект"
                        FontWeight="Bold"/>
             <TextBlock Text="Имя проекта" />

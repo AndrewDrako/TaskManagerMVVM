@@ -52,6 +52,18 @@ namespace TaskManager.ViewModels
 
         #endregion
 
+        #region Visibiliity input
+
+        private Visibility _Visibility = Visibility.Collapsed;
+
+        public Visibility ChangeControlVisibility
+        {
+            get { return _Visibility; }
+            set => Set(ref _Visibility, value);
+        }
+
+        #endregion
+
         #region Команды
 
         // Команда добавления проекта
@@ -65,6 +77,10 @@ namespace TaskManager.ViewModels
                 return addCommand ??
                   (addCommand = new RelayCommand(obj =>
                   {
+                      if (this.ChangeControlVisibility == Visibility.Collapsed)
+                      {
+                          this.ChangeControlVisibility = Visibility.Visible;
+                      }
                       Project project = new Project();
                       Projects.Insert(0, project);
                       SelectedProject = project;
