@@ -19,7 +19,7 @@ namespace TaskManager.Models
 
         public AppLanguage()
         {
-            //Language = "English";
+            
         }
     }
 }

@@ -13,7 +13,7 @@ namespace TaskManager.ViewModels
     {
         #region Коллекция языков
 
-        public ObservableCollection<AppLanguage> Languages { get; set; }
+        public static ObservableCollection<AppLanguage> Languages { get; set; }
 
         #endregion
 

@@ -191,10 +191,9 @@ namespace TaskManager.ViewModels
 
             #region Создание окон
 
-            _Home = new Views.UserControls.Home();
+            _Home = new Home();
             MainWindowModel.IsTasksNotEmpty = false;
-            //_Tasks = new Views.UserControls.Tasks();
-            _Settings = new Views.UserControls.Settings();
+            _Settings = new Settings();
             _Account = new Account();
             _Help = new Help();
 
