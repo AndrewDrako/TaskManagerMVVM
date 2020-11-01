@@ -22,7 +22,15 @@ namespace TaskManager.ViewModels
 
         private Project _SelectedProject;
 
-        
+        public Project SelectedProject
+        {
+            get { return _SelectedProject; }
+            set
+            {
+                _SelectedProject = value;
+                OnPropertyChanged("SelectedProject");
+            }
+        }
 
         #endregion
 
@@ -125,9 +133,8 @@ namespace TaskManager.ViewModels
                     (selectProject = new RelayCommand(obj =>
                     {
                         Project project = obj as Project;
-                        if (project != null)
+                        if (project != null && project.PersonName != "" && project.ProjectName != "")
                         {
-                            Project.PrintToTxt();
                             MainWindowModel.IsTasksNotEmpty = true;
                             TasksViewModel._PName = project.ProjectName;
                             TasksViewModel._TName = project.PersonName;
@@ -137,16 +144,6 @@ namespace TaskManager.ViewModels
             }
         }
         #endregion
-
-        public Project SelectedProject
-        {
-            get { return _SelectedProject; }
-            set
-            {
-                _SelectedProject = value;
-                OnPropertyChanged("SelectedProject");
-            }
-        }
 
         #region Конструктор 
 
