@@ -55,11 +55,11 @@ namespace TaskManager.ViewModels
 
         #region Название кнопки номер 2
 
-        private string _ButtonContent2 = "Tasks";
+        private string _ButtonContent2;
 
         public string ButtonContent2
         {
-            get => _ButtonContent2;
+            get => TranslateLanguage.LabelTask[TranslateLanguage.iLanguage];
 
             set => Set(ref _ButtonContent2, value);
         }
@@ -68,11 +68,11 @@ namespace TaskManager.ViewModels
 
         #region Название кнопки номер 3
 
-        private string _ButtonContent3 = "Settings";
+        private string _ButtonContent3;
 
         public string ButtonContent3
         {
-            get => _ButtonContent3;
+            get => TranslateLanguage.LabelSettings[TranslateLanguage.iLanguage];
 
             set => Set(ref _ButtonContent3, value);
         }
@@ -81,11 +81,11 @@ namespace TaskManager.ViewModels
 
         #region Название кнопки номер 4
 
-        private string _ButtonContent4 = "Account";
+        private string _ButtonContent4;
 
         public string ButtonContent4
         {
-            get => _ButtonContent4;
+            get => TranslateLanguage.LabelAcc[TranslateLanguage.iLanguage];
 
             set => Set(ref _ButtonContent4, value);
         }
@@ -94,11 +94,11 @@ namespace TaskManager.ViewModels
 
         #region Название кнопки номер 5
 
-        private string _ButtonContent5 = "Help";
+        private string _ButtonContent5;
 
         public string ButtonContent5
         {
-            get => _ButtonContent5;
+            get => TranslateLanguage.LabelHelp[TranslateLanguage.iLanguage];
 
             set => Set(ref _ButtonContent5, value);
         }
