@@ -180,6 +180,26 @@ namespace TaskManager.Models
 
         #endregion
 
+        #region Account Labels
+
+        // button log out label
+
+        public static string[] LabelAccBtn1 = new string[2]
+        {
+            "Log out",
+            "Выйти"
+        };
+
+        // button create a new label
+
+        public static string[] LabelAccBtn2 = new string[2]
+        {
+            "Create a new",
+            "Создать новый"
+        };
+
+        #endregion
+
         public static int iLanguage;
     }
 }

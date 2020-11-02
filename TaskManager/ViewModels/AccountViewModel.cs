@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TaskManager.Models;
 using TaskManager.ViewModels.Base;
 
 namespace TaskManager.ViewModels
@@ -11,7 +12,7 @@ namespace TaskManager.ViewModels
     {
         #region Labels
 
-        private string _ButtonLabel1 = "Log out";
+        private string _ButtonLabel1 = TranslateLanguage.LabelAccBtn1[TranslateLanguage.iLanguage];
 
         public string ButtonLabel1 
         { 
@@ -19,7 +20,7 @@ namespace TaskManager.ViewModels
             set => Set(ref _ButtonLabel1, value); 
         }
 
-        private string _ButtonLabel2 = "Create a new";
+        private string _ButtonLabel2 = TranslateLanguage.LabelAccBtn2[TranslateLanguage.iLanguage];
 
         public string ButtonLabel2
         {
