@@ -46,13 +46,6 @@ namespace TaskManager.Models
                 {
                     return 1;
                 }
-                else
-                {
-                    if (textFromFile == "Espanol\r\n")
-                    {
-                        return 2;
-                    }
-                }
             }
             return 0;
 

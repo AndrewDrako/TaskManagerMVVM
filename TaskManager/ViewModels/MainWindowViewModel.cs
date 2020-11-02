@@ -187,13 +187,17 @@ namespace TaskManager.ViewModels
 
         public MainWindowViewModel()
         {
-            
+            #region Read Language
+
+            TranslateLanguage.iLanguage = MainWindowModel.ReadLanguageKey();
+            _Settings = new Settings();
+
+            #endregion
 
             #region Создание окон
 
             _Home = new Home();
             MainWindowModel.IsTasksNotEmpty = false;
-            _Settings = new Settings();
             _Account = new Account();
             _Help = new Help();
 
@@ -211,11 +215,7 @@ namespace TaskManager.ViewModels
 
             #endregion
 
-            #region Read Language
-
-            TranslateLanguage.iLanguage = MainWindowModel.ReadLanguageKey();
-
-            #endregion
+            
 
         }
 

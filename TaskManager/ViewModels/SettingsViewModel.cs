@@ -62,7 +62,7 @@ namespace TaskManager.ViewModels
                 new AppLanguage {Language = "Russian"},
                 new AppLanguage {Language = "Espanol"}
             };
-            _SelectedLanguage = Languages[0];
+            _SelectedLanguage = Languages[TranslateLanguage.iLanguage];
 
             // Comands
             ButtonSaveSettingsClick = new LambdaCommand(OnButtonSaveSettingsClickExecuted, CanButtonSaveSettingsClickExecute);

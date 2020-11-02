@@ -50,13 +50,13 @@
         <StackPanel Grid.Column="1" 
                     Grid.Row="1"
                     Visibility="{Binding ChangeControlVisibility, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-            <TextBlock Text="Выбранный проект"
+            <TextBlock Text="{Binding Label2}"
                        FontWeight="Bold"/>
-            <TextBlock Text="Имя проекта" />
+            <TextBlock Text="{Binding Label3}" />
             <TextBox DataContext="{Binding SelectedProject}"
                      Text="{Binding ProjectName, UpdateSourceTrigger=PropertyChanged}"
                      MaxLength="20"/>
-            <TextBlock Text="Создатель" />
+            <TextBlock Text="{Binding Label4}" />
             <TextBox DataContext="{Binding SelectedProject}"
                      Text="{Binding PersonName, UpdateSourceTrigger=PropertyChanged}"
                      MaxLength="20"/>

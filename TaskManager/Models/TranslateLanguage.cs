@@ -52,6 +52,44 @@ namespace TaskManager.Models
 
         #endregion
 
+        #region Home
+
+        // Welcome Label
+
+        public static string[] LabelWelcome = new string[2]
+        {
+            "Welcome",
+            "Добро пожаловать"
+        };
+
+        // Selceted project label
+
+        public static string[] LabelSP = new string[2]
+        {
+            "Selected project",
+            "Выбранный проект"
+        };
+
+        // Project name label
+
+        public static string[] LabelPN = new string[2]
+        {
+            "Project name", 
+            "Имя проекта"
+        };
+
+        // Owner name label
+
+        public static string[] LabelON = new string[2]
+        {
+            "Owner",
+            "Владелец"
+        };
+
+
+
+        #endregion
+
         public static int iLanguage;
     }
 }

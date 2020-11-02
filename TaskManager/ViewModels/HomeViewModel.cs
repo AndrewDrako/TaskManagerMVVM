@@ -42,12 +42,15 @@ namespace TaskManager.ViewModels
 
         #region Labels
 
-        private string _Welcome = "Welcome";
-        private string _Email = "3954014@gmail.com";
+        private string _Welcome;
+        private string _Email = "3954014@gmail.com";  
+        private string _Label2;
+        private string _Label3;
+        private string _Label4;
 
         public string Welcome
         {
-            get => _Welcome;
+            get => TranslateLanguage.LabelWelcome[TranslateLanguage.iLanguage];
             set => Set(ref _Welcome, value);
         }
 
@@ -57,6 +60,23 @@ namespace TaskManager.ViewModels
             set => Set(ref _Email, value);
         }
 
+        public string Label2
+        {
+            get => TranslateLanguage.LabelSP[TranslateLanguage.iLanguage];
+            set => Set(ref _Label2, value);
+        }
+
+        public string Label3
+        {
+            get => TranslateLanguage.LabelPN[TranslateLanguage.iLanguage];
+            set => Set(ref _Label3, value);
+        }
+
+        public string Label4
+        {
+            get => TranslateLanguage.LabelON[TranslateLanguage.iLanguage];
+            set => Set(ref _Label4, value);
+        }
 
         #endregion
 
