@@ -52,7 +52,7 @@ namespace TaskManager.Models
 
         #endregion
 
-        #region Home
+        #region Home labels
 
         // Welcome Label
 
@@ -149,6 +149,34 @@ namespace TaskManager.Models
         };
 
 
+
+        #endregion
+
+        #region Settings Labels
+
+        // Language label
+
+        public static string[] LabelSettings1 = new string[2]
+        {
+            "Language",
+            "Язык"
+        };
+
+        // Add colors label
+
+        public static string[] LabelSettings2 = new string[2]
+        {
+            "Add colors",
+            "Добавить краски"
+        };
+
+        // Button apply label
+
+        public static string[] LabelSettingsButton = new string[2]
+        {
+            "Apply",
+            "Применить"
+        };
 
         #endregion
 

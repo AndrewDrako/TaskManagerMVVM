@@ -14,6 +14,34 @@ namespace TaskManager.ViewModels
 {
     internal class SettingsViewModel : ViewModel
     {
+        #region Labels
+
+        private string _LabelLanguage = TranslateLanguage.LabelSettings1[TranslateLanguage.iLanguage];
+
+        public string LabelLanguage
+        {
+            get => _LabelLanguage;
+            set => Set(ref _LabelLanguage, value);
+        }
+
+        private string _LabelAddColors = TranslateLanguage.LabelSettings2[TranslateLanguage.iLanguage];
+
+        public string LabelAddColors
+        {
+            get => _LabelAddColors;
+            set => Set(ref _LabelAddColors, value);
+        }
+
+        private string _LabelButtonApply = TranslateLanguage.LabelSettingsButton[TranslateLanguage.iLanguage];
+
+        public string LabelButtonApply
+        {
+            get => _LabelButtonApply;
+            set => Set(ref _LabelButtonApply, value);
+        }
+
+        #endregion
+
         #region Коллекция языков
 
         public static ObservableCollection<AppLanguage> Languages { get; set; }
