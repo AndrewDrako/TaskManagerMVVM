@@ -90,6 +90,68 @@ namespace TaskManager.Models
 
         #endregion
 
+        #region Tasks Labels
+
+        // Structure of notes and tasks with title...
+
+        public static string[] LabelTasks1 = new string[2]
+        {
+            "Structure of notes and tasks with title",
+            "Структуру заметок и задач с названием"
+        };
+
+        // prepared by the team...
+
+        public static string[] LabelTasks2 = new string[2]
+        {
+            "prepared by the team",
+            "подготовила команда"
+        };
+
+        // TO DO label
+
+        public static string[] LabelTasksToDo = new string[2]
+        {
+            "TO DO",
+            "СДЕЛАТЬ"
+        };
+
+        // IN Progress label
+
+        public static string[] LabelTasksInProgress = new string[2]
+        {
+            "IN PROGRESS",
+            "В ПРОЦЕССЕ"
+        };
+
+        // DONE label
+
+        public static string[] LabelTasksDone = new string[2]
+        {
+            "DONE",
+            "ГОТОВО"
+        };
+
+        // write a note label
+
+        public static string[] LabelTasks3 = new string[2]
+        {
+            "Write a note label",
+            "Напишите заметку"
+        };
+
+        // Why do you need to do it
+
+        public static string[] LabelTasks4 = new string[2]
+        {
+            "Why do you need to do it",
+            "Для чего это нужно сделать"
+        };
+
+
+
+        #endregion
+
         public static int iLanguage;
     }
 }

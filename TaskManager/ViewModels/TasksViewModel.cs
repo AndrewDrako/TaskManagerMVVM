@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using TaskManager.Infrastructure.Commands.Base;
 using TaskManager.Models;
 using TaskManager.ViewModels.Base;
@@ -24,25 +23,25 @@ namespace TaskManager.ViewModels
 
         #region Labels
         #region Проект под именем...
-        private string _Label1 = "Структуру заметок и задач с названием";
+        private string _Label1;
         public string Label1
         {
-            get => _Label1;
+            get => TranslateLanguage.LabelTasks1[TranslateLanguage.iLanguage];
             set => Set(ref _Label1, value);
         }
         #endregion
 
         #region Подготвила команда...
-        private string _Label2 = "подготовила команда";
+        private string _Label2;
         public string Label2
         {
-            get => _Label2;
+            get => TranslateLanguage.LabelTasks2[TranslateLanguage.iLanguage];
             set => Set(ref _Label2, value);
         }
         #endregion
 
         #region ToDo
-        private string _Label3 = "TO DO";
+        private string _Label3 = TranslateLanguage.LabelTasksToDo[TranslateLanguage.iLanguage];
         public string Label3
         {
             get => _Label3;
@@ -51,7 +50,7 @@ namespace TaskManager.ViewModels
         #endregion
 
         #region InProgress
-        private string _Label4 = "IN PROGRESS";
+        private string _Label4 = TranslateLanguage.LabelTasksInProgress[TranslateLanguage.iLanguage];
         public string Label4
         {
             get => _Label4;
@@ -60,7 +59,7 @@ namespace TaskManager.ViewModels
         #endregion
 
         #region Done
-        private string _Label5 = "DONE";
+        private string _Label5 = TranslateLanguage.LabelTasksDone[TranslateLanguage.iLanguage];
         public string Label5
         {
             get => _Label5;
@@ -69,7 +68,7 @@ namespace TaskManager.ViewModels
         #endregion
 
         #region Напишите заметку
-        private string _Label6 = "Напишите что нужно сделать";
+        private string _Label6 = TranslateLanguage.LabelTasks3[TranslateLanguage.iLanguage];
         public string Label6
         {
             get => _Label6;
@@ -78,7 +77,7 @@ namespace TaskManager.ViewModels
         #endregion
 
         #region Для чего это нужно сделать
-        private string _Label7 = "Для чего это нужно";
+        private string _Label7 = TranslateLanguage.LabelTasks4[TranslateLanguage.iLanguage];
         public string Label7
         {
             get => _Label7;
