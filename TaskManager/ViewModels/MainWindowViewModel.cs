@@ -42,11 +42,11 @@ namespace TaskManager.ViewModels
 
         #region Название кнопки номер 1
 
-        private string _ButtonContent1 = "Home";
+        private string _ButtonContent1;
 
         public string ButtonContent1
         {
-            get => _ButtonContent1;
+            get => TranslateLanguage.LabelHome[TranslateLanguage.iLanguage];
 
             set => Set(ref _ButtonContent1, value);
         }
@@ -208,6 +208,12 @@ namespace TaskManager.ViewModels
             ThirdButtonClick = new LambdaCommand(OnThirdButtonClickExecuted, CanThirdButtonClickExecute);
             FourthButtonClick = new LambdaCommand(OnFourthButtonClickExecuted, CanFourthButtonClickExecute);
             FifthButtonClick = new LambdaCommand(OnFifthButtonClickExecuted, CanFifthButtonClickExecute);
+
+            #endregion
+
+            #region Read Language
+
+            TranslateLanguage.iLanguage = MainWindowModel.ReadLanguageKey();
 
             #endregion
 

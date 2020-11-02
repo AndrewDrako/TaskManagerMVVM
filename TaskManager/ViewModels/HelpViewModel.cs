@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using TaskManager.Infrastructure.Commands;
 using TaskManager.ViewModels.Base;
@@ -67,6 +68,8 @@ namespace TaskManager.ViewModels
         private void OnButtonClickMyContact4Executed(object p)
         {
             Process.Start("https://www.instagram.com/andrew_drako/");
+            //System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+            //Application.Current.Shutdown();
         }
 
         #endregion

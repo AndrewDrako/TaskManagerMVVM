@@ -105,6 +105,7 @@
     <Compile Include="Models\Note.cs" />
     <Compile Include="Models\Project.cs" />
     <Compile Include="Models\ProjectContentToDo.cs" />
+    <Compile Include="Models\TranslateLanguage.cs" />
     <Compile Include="ViewModels\AccountViewModel.cs" />
     <Compile Include="ViewModels\Base\ViewModel.cs" />
     <Compile Include="ViewModels\HelpViewModel.cs" />

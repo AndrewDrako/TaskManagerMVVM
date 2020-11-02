@@ -4,6 +4,9 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
+using TaskManager.Infrastructure.Commands;
 using TaskManager.Models;
 using TaskManager.ViewModels.Base;
 
@@ -33,7 +36,21 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-       
+        #region Commands
+
+        public ICommand ButtonSaveSettingsClick { get; }
+
+        private bool CanButtonSaveSettingsClickExecute(object p) => true;
+
+        private void OnButtonSaveSettingsClickExecuted(object p)
+        {
+            string s = SelectedLanguage.Language;
+            MainWindowModel.PrintLanguageKey(s);
+            System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+            Application.Current.Shutdown();
+        }
+
+        #endregion
 
         #region Конструктор
 
@@ -46,6 +63,9 @@ namespace TaskManager.ViewModels
                 new AppLanguage {Language = "Espanol"}
             };
             _SelectedLanguage = Languages[0];
+
+            // Comands
+            ButtonSaveSettingsClick = new LambdaCommand(OnButtonSaveSettingsClickExecuted, CanButtonSaveSettingsClickExecute);
         }
 
         #endregion
