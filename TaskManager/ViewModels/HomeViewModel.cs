@@ -4,11 +4,14 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using TaskManager.Data.DataBase;
+using TaskManager.Data.DataBase.Base;
+using TaskManager.Data.DataBase.Tables;
 using TaskManager.Infrastructure.Commands;
 using TaskManager.Infrastructure.Commands.Base;
 using TaskManager.Models;
@@ -172,14 +175,48 @@ namespace TaskManager.ViewModels
         }
         #endregion
 
+        #region Колво записей в таблице
+
+        public static int _GetCount = -1;
+
+        #endregion
+
+        //public static async Task GetCount(MyDbContext db)
+        //{
+        //    await Task.Run(() => _GetCount = db.Users.Count());
+        //}
+
         #region Конструктор 
 
         public HomeViewModel()
         {
+            
             Projects = new ObservableCollection<Project>
             {
 
             };
+            //Thread.Sleep(3000);
+            // Колво записей втаблице Бд
+            int amt;
+            DataBaseCommands.GetCount(MainWindowViewModel.db);
+            //while (_GetCount < 0)
+            //{
+            //    Thread.Sleep(1000);
+            //}
+            
+            amt = _GetCount;
+            User user;
+            Project project;
+            for (int i = 0; i < amt; i++)
+            {
+                project = new Project();
+                user = MainWindowViewModel.db.Users.Local[i];
+                project.ProjectName = user.ProjectName;
+                project.PersonName = user.MasterName;
+                Projects.Add(project);
+
+            }
+
         }
 
         #endregion

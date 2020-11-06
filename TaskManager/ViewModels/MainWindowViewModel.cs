@@ -216,6 +216,14 @@ namespace TaskManager.ViewModels
 
             #endregion
 
+
+            #region Подключение к БД
+
+            db = new MyDbContext();
+            DataBaseCommands.LoadDB(db);
+
+            #endregion
+
             #region Создание окон
 
             _Home = new Home();
@@ -224,12 +232,6 @@ namespace TaskManager.ViewModels
             _Help = new Help();
 
             CurrentPage = _Home;
-
-            #endregion
-
-            #region Подключение к БД
-            db = new MyDbContext();
-            AsyncCommands.ConnectToDB(db);
 
             #endregion
 

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TaskManager.Data.DataBase.Base;
 using TaskManager.Data.DataBase.Tables;
+using TaskManager.ViewModels;
 
 namespace TaskManager.Data.DataBase
 {
@@ -19,7 +20,8 @@ namespace TaskManager.Data.DataBase
         public static async Task ConnectToDB(MyDbContext db)
         {
             //await Task.Run(() => db = new MyDbContext());
-            await LoadDataFromDB(db);
+            await Task.Run(() => db.Users.Load());
+            await Task.Run(() => HomeViewModel._GetCount = db.Users.Count()); 
         }
 
         /// <summary>
@@ -54,7 +56,15 @@ namespace TaskManager.Data.DataBase
             await Task.Run(() => db.Users.Remove(user));
         }
 
-        //public async Task GetDataFromDB(MyDbContext db, User user, )
+        /// <summary>
+        /// Количесво записей в таблице
+        /// </summary>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        public static async Task GetCount(MyDbContext db)
+        {
+            await Task.Run(() => HomeViewModel._GetCount = db.Users.Count()); 
+        }
 
 
     }
