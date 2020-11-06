@@ -137,6 +137,21 @@ namespace TaskManager.ViewModels
                       if (project != null)
                       {
                           Projects.Remove(project);
+                          int j = 0;
+                          //MainWindowViewModel.user.ProjectName = project.ProjectName;
+                          //MainWindowViewModel.user.MasterName = project.PersonName;
+                          for (int i = 0; i < Projects.Count(); i++)
+                          { 
+                                if (project.ProjectName == MainWindowViewModel.db.Users.Local[i].ProjectName)
+                                {
+                                    j = i;
+                                    //MainWindowViewModel.user = MainWindowViewModel.db.Users.Local[i];
+                                    break;
+                                }
+                          }
+                          MainWindowViewModel.user = MainWindowViewModel.db.Users.Local[j];
+                          MainWindowViewModel.db.Users.Remove((MainWindowViewModel.user));
+                          MainWindowViewModel.db.SaveChanges();
                           if (Projects.Count == 0)
                           {
                               MainWindowModel.IsTasksNotEmpty = false;
