@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using TaskManager.Data.DataBase;
 using TaskManager.Infrastructure.Commands;
 using TaskManager.Infrastructure.Commands.Base;
 using TaskManager.Models;
@@ -113,8 +114,7 @@ namespace TaskManager.ViewModels
                       Projects.Insert(0, project);
                       SelectedProject = project;
                       // бд
-                      MainWindowViewModel.user.ProjectName = project.ProjectName;
-                      MainWindowViewModel.user.MasterName = project.PersonName;
+                      
 
                   }));
             }
@@ -163,6 +163,9 @@ namespace TaskManager.ViewModels
                             TasksViewModel._PName = project.ProjectName;
                             TasksViewModel._TName = project.PersonName;
                             MainWindowViewModel._Tasks = new Tasks();
+                            MainWindowViewModel.user.ProjectName = project.ProjectName;
+                            MainWindowViewModel.user.MasterName = project.PersonName;
+                            AsyncCommands.AddToDB(MainWindowViewModel.db, MainWindowViewModel.user);
                         }
                     }));
             }

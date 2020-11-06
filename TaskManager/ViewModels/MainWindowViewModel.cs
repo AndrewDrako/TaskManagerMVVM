@@ -192,6 +192,19 @@ namespace TaskManager.ViewModels
 
         #endregion
 
+        #region Клик кнопки номер 5
+
+        public ICommand SixButtonClick { get; }
+
+        private bool CanSixButtonClickExecute(object p) => true;
+
+        private void OnSixButtonClickExecuted(object p)
+        {
+            db.SaveChanges();
+        }
+
+        #endregion
+
         #region Конструктор класса MainWindowViewModel
 
         public MainWindowViewModel()
@@ -215,7 +228,7 @@ namespace TaskManager.ViewModels
             #endregion
 
             #region Подключение к БД
-
+            db = new MyDbContext();
             AsyncCommands.ConnectToDB(db);
 
             #endregion
@@ -227,6 +240,7 @@ namespace TaskManager.ViewModels
             ThirdButtonClick = new LambdaCommand(OnThirdButtonClickExecuted, CanThirdButtonClickExecute);
             FourthButtonClick = new LambdaCommand(OnFourthButtonClickExecuted, CanFourthButtonClickExecute);
             FifthButtonClick = new LambdaCommand(OnFifthButtonClickExecuted, CanFifthButtonClickExecute);
+            SixButtonClick = new LambdaCommand(OnSixButtonClickExecuted, CanSixButtonClickExecute);
 
             #endregion
 

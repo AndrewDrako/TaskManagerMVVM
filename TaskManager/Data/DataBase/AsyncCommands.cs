@@ -18,8 +18,8 @@ namespace TaskManager.Data.DataBase
         /// <returns></returns>
         public static async Task ConnectToDB(MyDbContext db)
         {
-            await Task.Run(() => db = new MyDbContext());
-            LoadDataFromDB(db);
+            //await Task.Run(() => db = new MyDbContext());
+            await LoadDataFromDB(db);
         }
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace TaskManager.Data.DataBase
         /// <param name="db"></param>
         /// <param name="user"></param>
         /// <returns></returns>
-        public async Task AddToDB(MyDbContext db, User user)
+        public static async Task AddToDB(MyDbContext db, User user)
         {
             await Task.Run(() => db.Users.Add(user));
         }
@@ -49,7 +49,7 @@ namespace TaskManager.Data.DataBase
         /// <param name="db"></param>
         /// <param name="user"></param>
         /// <returns></returns>
-        public async Task RemoveFromDB(MyDbContext db, User user)
+        public static async Task RemoveFromDB(MyDbContext db, User user)
         {
             await Task.Run(() => db.Users.Remove(user));
         }
