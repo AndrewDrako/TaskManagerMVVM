@@ -200,7 +200,7 @@ namespace TaskManager.ViewModels
 
         private void OnSixButtonClickExecuted(object p)
         {
-            db.SaveChanges();
+            //db.SaveChanges();
         }
 
         #endregion

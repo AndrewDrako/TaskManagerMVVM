@@ -168,7 +168,9 @@ namespace TaskManager.ViewModels
                             MainWindowViewModel._Tasks = new Tasks();
                             MainWindowViewModel.user.ProjectName = project.ProjectName;
                             MainWindowViewModel.user.MasterName = project.PersonName;
-                            AsyncCommands.AddToDB(MainWindowViewModel.db, MainWindowViewModel.user);
+                            MainWindowViewModel.db.Users.Add(MainWindowViewModel.user);
+                            MainWindowViewModel.db.SaveChanges();
+                            //AsyncCommands.AddToDB(MainWindowViewModel.db, MainWindowViewModel.user);
                         }
                     }));
             }
