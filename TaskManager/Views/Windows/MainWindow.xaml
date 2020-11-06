@@ -28,6 +28,7 @@
                     Height="50" FontSize="20"/>
             <Button Content="{Binding Path=ButtonContent5}" Command="{Binding Path=FifthButtonClick}"
                     Height="50" FontSize="20"/>
+            
             <TextBox Text="{Binding Path=Title, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
         

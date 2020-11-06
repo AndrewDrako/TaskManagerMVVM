@@ -16,7 +16,7 @@ namespace TaskManager.Data.DataBase
         /// </summary>
         /// <param name="db"></param>
         /// <returns></returns>
-        public async Task ConnectToDB(MyDbContext db)
+        public static async Task ConnectToDB(MyDbContext db)
         {
             await Task.Run(() => db = new MyDbContext());
             LoadDataFromDB(db);
@@ -27,7 +27,7 @@ namespace TaskManager.Data.DataBase
         /// </summary>
         /// <param name="db"></param>
         /// <returns></returns>
-        public async Task LoadDataFromDB(MyDbContext db)
+        public static async Task LoadDataFromDB(MyDbContext db)
         {
             await Task.Run(() => db.Users.Load());
         }

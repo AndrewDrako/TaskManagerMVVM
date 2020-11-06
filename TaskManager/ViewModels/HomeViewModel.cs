@@ -112,6 +112,10 @@ namespace TaskManager.ViewModels
                       Project project = new Project();
                       Projects.Insert(0, project);
                       SelectedProject = project;
+                      // бд
+                      MainWindowViewModel.user.ProjectName = project.ProjectName;
+                      MainWindowViewModel.user.MasterName = project.PersonName;
+
                   }));
             }
         }

@@ -6,17 +6,26 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using TaskManager.Data.DataBase.Base;
 using TaskManager.Infrastructure.Commands;
 using TaskManager.Models;
 using TaskManager.ViewModels.Base;
 using TaskManager.Views.UserControls;
+using TaskManager.Data.DataBase;
+using TaskManager.Data.DataBase.Tables;
 
 namespace TaskManager.ViewModels
 {
     internal class MainWindowViewModel : ViewModel
     {
+        #region DBContext
 
-       
+        public static MyDbContext db;
+
+        public static User user;
+
+        #endregion
+
         #region Страницы приложения
 
         private UserControl _Home;
@@ -205,6 +214,12 @@ namespace TaskManager.ViewModels
 
             #endregion
 
+            #region Подключение к БД
+
+            AsyncCommands.ConnectToDB(db);
+
+            #endregion
+
             #region Команды
 
             FirstButtonClick = new LambdaCommand(OnFirstButtonClickExecuted, CanFirstButtonClickExecute);
@@ -215,7 +230,13 @@ namespace TaskManager.ViewModels
 
             #endregion
 
-            
+            #region Конструктор БД
+
+            user = new User();
+            user.UserName = "Andrew";
+            user.Password = "sdghvjd12";
+
+            #endregion            
 
         }
 
