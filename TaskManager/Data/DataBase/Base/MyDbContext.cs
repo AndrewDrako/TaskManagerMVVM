@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TaskManager.Data.DataBase.Tables;
 
 namespace TaskManager.Data.DataBase.Base
 {
@@ -13,6 +14,6 @@ namespace TaskManager.Data.DataBase.Base
         {
             
         }
-
+        public DbSet<User> Users { get; set; }
     }
 }
