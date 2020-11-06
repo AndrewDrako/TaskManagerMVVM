@@ -31,6 +31,10 @@ namespace TaskManager.ViewModels
             get { return _SelectedProject; }
             set
             {
+                if (this.ChangeControlVisibility == Visibility.Collapsed)
+                {
+                    this.ChangeControlVisibility = Visibility.Visible;
+                }
                 _SelectedProject = value;
                 OnPropertyChanged("SelectedProject");
             }
@@ -116,9 +120,6 @@ namespace TaskManager.ViewModels
                       Project project = new Project();
                       Projects.Insert(0, project);
                       SelectedProject = project;
-                      // бд
-                      
-
                   }));
             }
         }
@@ -137,6 +138,10 @@ namespace TaskManager.ViewModels
                       if (project != null)
                       {
                           Projects.Remove(project);
+                          if (this.ChangeControlVisibility == Visibility.Visible)
+                          {
+                              this.ChangeControlVisibility = Visibility.Collapsed;
+                          }
                           int j = 0;
                           //MainWindowViewModel.user.ProjectName = project.ProjectName;
                           //MainWindowViewModel.user.MasterName = project.PersonName;
@@ -181,15 +186,29 @@ namespace TaskManager.ViewModels
                             TasksViewModel._PName = project.ProjectName;
                             TasksViewModel._TName = project.PersonName;
                             MainWindowViewModel._Tasks = new Tasks();
-                            MainWindowViewModel.user.ProjectName = project.ProjectName;
-                            MainWindowViewModel.user.MasterName = project.PersonName;
-                            MainWindowViewModel.db.Users.Add(MainWindowViewModel.user);
-                            MainWindowViewModel.db.SaveChanges();
+                            bool checker = false;
+                            for (int i = 0; i < MainWindowViewModel.db.Users.Count(); i++)
+                            {
+                                if (project.ProjectName == MainWindowViewModel.db.Users.Local[i].ProjectName && project.PersonName == MainWindowViewModel.db.Users.Local[i].MasterName)
+                                {
+                                    checker = true;
+                                    break;
+                                }
+                            }
+                            if (checker == false)
+                            {
+                                MainWindowViewModel.user.ProjectName = project.ProjectName;
+                                MainWindowViewModel.user.MasterName = project.PersonName;
+                                MainWindowViewModel.db.Users.Add(MainWindowViewModel.user);
+                                MainWindowViewModel.db.SaveChanges();
+
+                            }
                             //AsyncCommands.AddToDB(MainWindowViewModel.db, MainWindowViewModel.user);
                         }
                     }));
             }
         }
+
         #endregion
 
         #region Колво записей в таблице
@@ -207,20 +226,22 @@ namespace TaskManager.ViewModels
 
         public HomeViewModel()
         {
-            
+            #region Коллекция объектов
+
             Projects = new ObservableCollection<Project>
             {
 
             };
-            //Thread.Sleep(3000);
+
+            #endregion
+
+            #region БД: заносим данные в коллекцию объектов
+
             // Колво записей втаблице Бд
             int amt;
+            // Заносит в _Count колво записей в таблице
             DataBaseCommands.GetCount(MainWindowViewModel.db);
-            //while (_GetCount < 0)
-            //{
-            //    Thread.Sleep(1000);
-            //}
-            
+
             amt = _GetCount;
             User user;
             Project project;
@@ -231,13 +252,17 @@ namespace TaskManager.ViewModels
                 project.ProjectName = user.ProjectName;
                 project.PersonName = user.MasterName;
                 Projects.Add(project);
-
             }
 
+            #endregion
+
+            #region Commands
+
+            #endregion
         }
 
         #endregion
 
-        
+
     }
 }

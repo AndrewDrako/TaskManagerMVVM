@@ -37,8 +37,7 @@ namespace TaskManager.Models
         
         public Project()
         {
-            ProjectName = "";
-            PersonName = "";
+           
         }
 
         
