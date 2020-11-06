@@ -95,6 +95,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Data\DataBase\AsyncCommands.cs" />
     <Compile Include="Data\DataBase\Base\MyDbContext.cs" />
     <Compile Include="Data\DataBase\Tables\User.cs" />
     <Compile Include="Infrastructure\Commands\Base\Command.cs" />
