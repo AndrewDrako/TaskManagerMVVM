@@ -19,7 +19,7 @@ namespace TaskManager.ViewModels
     internal class HomeViewModel : ViewModel
     {
         #region Projects
-
+//
         private Project _SelectedProject;
 
         public Project SelectedProject
