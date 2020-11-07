@@ -86,14 +86,19 @@ namespace TaskManager.ViewModels
         #endregion
         #endregion
 
-        #region Записи/Заметки
+        #region Записи/Заметки Selected
 
         private Note _SelectedNote;
+        public Note PreviousNote;
 
         public Note SelectedNote
         {
             get => _SelectedNote;
-            set => Set(ref _SelectedNote, value);
+            set
+            {
+                PreviousNote = SelectedNote;
+                Set(ref _SelectedNote, value);
+            }
         }
 
         #endregion

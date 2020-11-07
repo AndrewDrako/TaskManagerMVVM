@@ -205,6 +205,27 @@ namespace TaskManager.ViewModels
 
         #endregion
 
+        #region Закрытие Окна
+
+        public ICommand CloseApplication { get; }
+        private bool CanCloseApplicationExecute(object p) => true;
+        private void OnCloseApplicationExecuted(object p)
+        {
+            //MessageBox.Show("Вы уверены, что хотите выйти из приложения?", "Exit", MessageBoxButton.OKCancel);
+            if (MessageBox.Show("Close Application?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                Application.Current.Shutdown();
+            }
+            else
+            {
+                //do yes stuff
+            }
+
+            //Application.Current.Shutdown();
+        }
+
+        #endregion
+
         #region Конструктор класса MainWindowViewModel
 
         public MainWindowViewModel()
@@ -237,12 +258,15 @@ namespace TaskManager.ViewModels
 
             #region Команды
 
+            CloseApplication = new LambdaCommand(OnCloseApplicationExecuted, CanCloseApplicationExecute);
+
             FirstButtonClick = new LambdaCommand(OnFirstButtonClickExecuted, CanFirstButtonClickExecute);
             SecondButtonClick = new LambdaCommand(OnSecondButtonClickExecuted, CanSecondButtonClickExecute);
             ThirdButtonClick = new LambdaCommand(OnThirdButtonClickExecuted, CanThirdButtonClickExecute);
             FourthButtonClick = new LambdaCommand(OnFourthButtonClickExecuted, CanFourthButtonClickExecute);
             FifthButtonClick = new LambdaCommand(OnFifthButtonClickExecuted, CanFifthButtonClickExecute);
             SixButtonClick = new LambdaCommand(OnSixButtonClickExecuted, CanSixButtonClickExecute);
+
 
             #endregion
 
