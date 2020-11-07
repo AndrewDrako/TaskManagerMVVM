@@ -181,7 +181,7 @@ namespace TaskManager.ViewModels
 
             }
             if (this.ChangeControlVisibility == Visibility.Visible)
-            {
+            { 
                 this.ChangeControlVisibility = Visibility.Collapsed;
             }
             MainWindowViewModel.db.SaveChanges();
