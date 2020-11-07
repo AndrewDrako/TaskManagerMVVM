@@ -9,7 +9,7 @@
         Title="{Binding Path=Title}" Height="450" Width="900"
         MinWidth="800"
         MinHeight="400"
-        WindowStyle="None">
+        WindowStyle="SingleBorderWindow">
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
@@ -17,12 +17,8 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="120"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+        
         <StackPanel Grid.Row="1">
             <Button Content="{Binding Path=ButtonContent1}" Command="{Binding Path=FirstButtonClick}"
                     Height="50" FontSize="20"/>
@@ -38,15 +34,9 @@
 
             <TextBox Text="{Binding Path=Title, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
-        <Button Content="X"
-                Grid.Column="2"
-                Grid.Row="0"
-                Command="{Binding CloseApplication}"/>
         
         <UserControl Grid.Column="1" 
-                     Content="{Binding Path=CurrentPage}"
-                     Grid.ColumnSpan="2"
-                     Grid.Row="1">
+                     Content="{Binding Path=CurrentPage}">
             
         </UserControl>
     </Grid>
