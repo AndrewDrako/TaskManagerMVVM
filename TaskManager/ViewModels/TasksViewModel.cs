@@ -4,6 +4,9 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
+using TaskManager.Infrastructure.Commands;
 using TaskManager.Infrastructure.Commands.Base;
 using TaskManager.Models;
 using TaskManager.ViewModels.Base;
@@ -135,6 +138,17 @@ namespace TaskManager.ViewModels
         #endregion
 
         #region Commands
+
+        #region Сохранение заметки
+
+        public ICommand SaveNote { get; }
+        private bool CanSaveNoteExecute(object p) => true;
+        private void OnSaveNoteExecuted(object p)
+        {
+            MessageBox.Show("000000000");
+        }
+
+        #endregion
 
         #region ToDo
 
@@ -282,6 +296,11 @@ namespace TaskManager.ViewModels
 
         public TasksViewModel()
         {
+            #region Commands
+
+            SaveNote = new LambdaCommand(OnSaveNoteExecuted, CanSaveNoteExecute);
+
+            #endregion
 
             NotesToDo = new ObservableCollection<Note>
             {
