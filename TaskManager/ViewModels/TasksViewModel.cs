@@ -96,10 +96,12 @@ namespace TaskManager.ViewModels
 
         public Note SelectedNote
         {
-            get => _SelectedNote;
+            get
+            {
+                return _SelectedNote;
+            }
             set
             {
-                PreviousNote = SelectedNote;
                 Set(ref _SelectedNote, value);
             }
         }
@@ -139,7 +141,7 @@ namespace TaskManager.ViewModels
 
         #region Visibiliity 
 
-        private Visibility _Visibility = Visibility.Visible;
+        private Visibility _Visibility = Visibility.Collapsed;
 
         public Visibility ChangeControlVisibility
         {
@@ -157,10 +159,34 @@ namespace TaskManager.ViewModels
         private bool CanSaveNoteExecute(object p) => true;
         private void OnSaveNoteExecuted(object p)
         {
+            //PreviousNote = _SelectedNote;
+            PreviousNote = NotesToDo[0];
+            int j = 0;
+            for (int i = 0; i < MainWindowViewModel.db.Users.Count(); i++)
+            {
+                if (MainWindowViewModel.db.Users.Local[i].ProjectName == PName && MainWindowViewModel.db.Users.Local[i].MasterName == TName)
+                {
+                    j = i;
+                }
+            }
+            MainWindowViewModel.db.Users.Local[j].ToDoContext = NotesToDo[0].Content;
+            MainWindowViewModel.db.Users.Local[j].ToDoLilContext = NotesToDo[0].Target;
+            for (int i = 1; i < NotesToDo.Count(); i++)
+            {
+                MainWindowViewModel.user.ProjectName = PName;
+                MainWindowViewModel.user.MasterName = TName;
+                MainWindowViewModel.user.ToDoContext = NotesToDo[i].Content;
+                MainWindowViewModel.user.ToDoLilContext = NotesToDo[i].Target;
+                MainWindowViewModel.db.Users.Add(MainWindowViewModel.user);
+
+            }
             if (this.ChangeControlVisibility == Visibility.Visible)
             {
                 this.ChangeControlVisibility = Visibility.Collapsed;
             }
+            MainWindowViewModel.db.SaveChanges();
+
+
         }
 
         #endregion
@@ -182,7 +208,11 @@ namespace TaskManager.ViewModels
                       note.Color = Colors[Counter++];
                       NotesToDo.Insert(0, note);
                       SelectedNote = note;
-                      
+                      if (this.ChangeControlVisibility == Visibility.Collapsed)
+                      {
+                          this.ChangeControlVisibility = Visibility.Visible;
+                      }
+
                   }));
             }
         }
