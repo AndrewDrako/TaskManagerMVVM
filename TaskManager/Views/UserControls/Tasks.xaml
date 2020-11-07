@@ -116,7 +116,8 @@
         <Button Grid.Column="1"
                 Grid.Row="1"
                 Content="S"
-                />
+                Command="{Binding SaveNote}"
+                Visibility="{Binding ChangeControlVisibility}"/>
 
         <Button Grid.Column="2"
                 Grid.Row="1"

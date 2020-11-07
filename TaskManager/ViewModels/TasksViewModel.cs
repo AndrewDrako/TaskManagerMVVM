@@ -137,6 +137,18 @@ namespace TaskManager.ViewModels
 
         #endregion
 
+        #region Visibiliity 
+
+        private Visibility _Visibility = Visibility.Visible;
+
+        public Visibility ChangeControlVisibility
+        {
+            get { return _Visibility; }
+            set => Set(ref _Visibility, value);
+        }
+
+        #endregion
+
         #region Commands
 
         #region Сохранение заметки
@@ -145,7 +157,10 @@ namespace TaskManager.ViewModels
         private bool CanSaveNoteExecute(object p) => true;
         private void OnSaveNoteExecuted(object p)
         {
-            MessageBox.Show("000000000");
+            if (this.ChangeControlVisibility == Visibility.Visible)
+            {
+                this.ChangeControlVisibility = Visibility.Collapsed;
+            }
         }
 
         #endregion
