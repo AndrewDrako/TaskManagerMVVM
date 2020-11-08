@@ -15,5 +15,10 @@ namespace TaskManager.Data.DataBase.Base
             
         }
         public DbSet<User> Users { get; set; }
+        public DbSet<ProjectTable> Projects { get; set; }
+
+        public DbSet<ToDoTable> ToDos { get; set; }
+        public DbSet<InProgressTable> InProgresses { get; set; }
+        public DbSet<DoneTable> Dones { get; set; }
     }
 }

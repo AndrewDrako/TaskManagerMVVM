@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TaskManager.Data.DataBase.Tables
 {
-    public class ToDoTable
+    public class DoneTable
     {
         /// <summary>
         /// Первичный ключ 

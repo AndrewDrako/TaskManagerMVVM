@@ -17,48 +17,20 @@ namespace TaskManager.Data.DataBase.Tables
         /// Имя пользователя
         /// </summary>
         public string UserName { get; set; }
-
+        
         /// <summary>
-        /// Название проекта
+        /// Электронный адрес
         /// </summary>
-        public string ProjectName { get; set; }
-
-        /// <summary>
-        /// Имя Создателя проекта
-        /// </summary>
-        public string MasterName { get; set; }
-
-        /// <summary>
-        /// Содержимое To Do
-        /// </summary>
-        public string ToDoContext { get; set; }
-
-        /// <summary>
-        /// Предметная область To Do
-        /// </summary>
-        public string ToDoLilContext { get; set; }
-        /// <summary>
-        /// Содержимое In Progress
-        /// </summary>
-        public string InProgressContext { get; set; }
-
-        /// <summary>
-        /// Предметная область In Progress
-        /// </summary>
-        public string InProgressLilContext { get; set; }
-        /// <summary>
-        /// Содержимое Done
-        /// </summary>
-        public string DoneContext { get; set; }
-
-        /// <summary>
-        /// Предметная область Done
-        /// </summary>
-        public string DoneLilContext { get; set; }
+        public string Email { get; set; }
 
         /// <summary>
         /// Пароль
         /// </summary>
         public string Password { get; set; }
+
+        /// <summary>
+        /// Связь с таблицей ProjectTable
+        /// </summary>
+        public virtual ICollection<ProjectTable> ProjectTables { get; set; }
     }
 }
