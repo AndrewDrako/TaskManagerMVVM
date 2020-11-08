@@ -148,8 +148,27 @@ namespace TaskManager.ViewModels
                           {
                               this.ChangeControlVisibility = Visibility.Collapsed;
                           }
-                          //int j = 0;
-                          
+
+                          int j = 0;
+                          //int n_size = Projects.Count();
+                          int n_size = MainWindowViewModel.db.Projects.Count();
+                          for (int i = 0; i < n_size; i++)
+                          {
+                              if (project.ProjectName == MainWindowViewModel.db.Projects.Local[i].ProjectName)
+                              {
+                                  j = i;
+                                  break;
+                              }
+                          }
+                          try
+                          {
+                              MainWindowViewModel.db.Projects.Remove(MainWindowViewModel.db.Projects.Local[j]);
+                              MainWindowViewModel.db.SaveChanges();
+                          }
+                          catch
+                          {
+
+                          }
                           //for (int i = 0; i < Projects.Count(); i++)
                           //{ 
                           //      if (project.ProjectName == MainWindowViewModel.db.Users.Local[i].ProjectName)
@@ -248,21 +267,19 @@ namespace TaskManager.ViewModels
             #region БД: заносим данные в коллекцию объектов
 
             // Колво записей втаблице Бд
-            //int amt;
+            int kolvo;
             // Заносит в _Count колво записей в таблице
             //DataBaseCommands.GetCount(MainWindowViewModel.db);
-
-            //amt = _GetCount;
-            //User user;
-            //Project project;
-            //for (int i = 0; i < amt; i++)
-            //{
-            //    project = new Project();
-            //    user = MainWindowViewModel.db.Users.Local[i];
-            //    project.ProjectName = user.ProjectName;
-            //    project.PersonName = user.MasterName;
-            //    Projects.Add(project);
-            //}
+            kolvo = MainWindowViewModel.db.Projects.Count();
+            //amt = _GetCount
+            Project project;
+            for (int i = 0; i < kolvo; i++)
+            {
+                project = new Project();
+                project.ProjectName = MainWindowViewModel.db.Projects.Local[i].ProjectName;
+                project.PersonName = MainWindowViewModel.db.Projects.Local[i].MasterName;
+                Projects.Add(project);
+            }
 
             #endregion
 
