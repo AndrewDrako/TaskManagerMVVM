@@ -22,8 +22,14 @@ namespace TaskManager.ViewModels
 {
     internal class HomeViewModel : ViewModel
     {
+        #region  data base Записи в таблице ProjectTable
+
+        public static ProjectTable projectTable;
+
+        #endregion
+
         #region Projects
-//
+        //
         private Project _SelectedProject;
 
         public Project SelectedProject
@@ -168,8 +174,6 @@ namespace TaskManager.ViewModels
 
         // Команда выбора проекта
 
-        
-
         private RelayCommand selectProject;
         public RelayCommand SelectProject
         {
@@ -185,23 +189,23 @@ namespace TaskManager.ViewModels
                             TasksViewModel._PName = project.ProjectName;
                             TasksViewModel._TName = project.PersonName;
                             MainWindowViewModel._Tasks = new Tasks();
-                            //bool checker = false;
-                            //for (int i = 0; i < MainWindowViewModel.db.Users.Count(); i++)
-                            //{
-                            //    if (project.ProjectName == MainWindowViewModel.db.Users.Local[i].ProjectName && project.PersonName == MainWindowViewModel.db.Users.Local[i].MasterName)
-                            //    {
-                            //        checker = true;
-                            //        break;
-                            //    }
-                            //}
-                            //if (checker == false)
-                            //{
-                            //    MainWindowViewModel.user.ProjectName = project.ProjectName;
-                            //    MainWindowViewModel.user.MasterName = project.PersonName;
-                            //    MainWindowViewModel.db.Users.Add(MainWindowViewModel.user);
-                            //    MainWindowViewModel.db.SaveChanges();
-
-                            //}
+                            bool checker = false; // Проверка на не повторяющииеся проекты
+                            int n_size = MainWindowViewModel.db.Projects.Count();
+                            for (int i = 0; i < n_size; i++)
+                            {
+                                if (project.ProjectName == MainWindowViewModel.db.Projects.Local[i].ProjectName)
+                                {
+                                    checker = true;
+                                    break;
+                                }
+                            }
+                            if (checker == false)
+                            {
+                                projectTable.ProjectName = project.ProjectName;
+                                projectTable.MasterName = project.PersonName;
+                                MainWindowViewModel.db.Projects.Add(projectTable);
+                                MainWindowViewModel.db.SaveChanges();
+                            }
                             //AsyncCommands.AddToDB(MainWindowViewModel.db, MainWindowViewModel.user);
                         }
                     }));
@@ -231,6 +235,13 @@ namespace TaskManager.ViewModels
             {
 
             };
+
+            #endregion
+
+            #region Конструтор БД
+
+            projectTable = new ProjectTable();
+            projectTable.UserId = MainWindowViewModel.user.Id;
 
             #endregion
 

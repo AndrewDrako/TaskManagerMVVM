@@ -14,6 +14,7 @@ namespace TaskManager.Data.DataBase
         public static void LoadDB(MyDbContext db)
         {
             db.Users.Load();
+            db.Projects.Load();
         }
         public static void GetCount(MyDbContext db)
         {

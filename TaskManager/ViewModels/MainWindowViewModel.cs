@@ -22,7 +22,7 @@ namespace TaskManager.ViewModels
 
         public static MyDbContext db;
 
-        //public static User user;
+        public static User user;
 
         #endregion
 
@@ -240,6 +240,11 @@ namespace TaskManager.ViewModels
 
             db = new MyDbContext();
             DataBaseCommands.LoadDB(db);
+            user = new User();
+            user.UserName = "admin";
+            user.Password = "password";
+            user.Email = "3954014@gmai.com";
+            db.Users.Add(user);
 
             #endregion
 
@@ -270,9 +275,10 @@ namespace TaskManager.ViewModels
 
             #region Конструктор БД
 
-            //user = new User();
-            //user.UserName = "Andrew";
-            //user.Password = "sdghvjd12";
+            user = new User();
+            user.UserName = "Andrew";
+            user.Password = "sdghvjd12";
+            user.Email = "3954014@gmail.com";
 
             #endregion            
 
