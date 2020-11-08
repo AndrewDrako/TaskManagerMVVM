@@ -23,14 +23,32 @@ namespace TaskManager.Data.DataBase
         public static void SaveToDoContentDB(MyDbContext db, ToDoTable todo, bool sign) 
         {
             int n = TasksViewModel.NotesToDo.Count();
+            int nn = MainWindowViewModel.db.ToDos.Count();
+            bool checker = false;
             if (sign == true)
             {
                 for (int i = 0; i < n; i++)
                 {
-                    todo.Content = TasksViewModel.NotesToDo[i].Content;
-                    todo.LContent = TasksViewModel.NotesToDo[i].Target;
-                    MainWindowViewModel.db.ToDos.Add(todo);
-                    MainWindowViewModel.db.SaveChanges();
+                    for (int j = 0; j < nn; j++)
+                    {
+                        if (TasksViewModel.NotesToDo[i].Content == MainWindowViewModel.db.ToDos.Local[j].Content)
+                        {
+                            if (i == n - 1)
+                            {
+                                checker = true;
+                                break;
+                            }
+                            i++;
+                            j = -1;
+                        }
+                    }
+                    if (checker == false)
+                    {
+                        todo.Content = TasksViewModel.NotesToDo[i].Content;
+                        todo.LContent = TasksViewModel.NotesToDo[i].Target;
+                        MainWindowViewModel.db.ToDos.Add(todo);
+                        MainWindowViewModel.db.SaveChanges();
+                    }
                 }
             }
         }

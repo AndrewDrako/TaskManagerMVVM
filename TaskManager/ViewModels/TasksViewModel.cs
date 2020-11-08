@@ -352,7 +352,8 @@ namespace TaskManager.ViewModels
 
             toDoTable = new ToDoTable();
             int j = 0;
-            for (int i = 0; i < MainWindowViewModel.db.Projects.Count(); i++)
+            int size = MainWindowViewModel.db.Projects.Count();
+            for (int i = 0; i < size; i++)
             {
                 if (HomeViewModel._SelectedProject.ProjectName == MainWindowViewModel.db.Projects.Local[i].ProjectName)
                 {
@@ -402,17 +403,19 @@ namespace TaskManager.ViewModels
             #endregion
 
             #region Заполнение коллекций
-
             Note note;
-            for (int i = 0; i < MainWindowViewModel.db.ToDos.Count(); i++)
+            size = MainWindowViewModel.db.ToDos.Count();
+            for (int i = 0; i < size; i++)
             {
                 if (MainWindowViewModel.db.ToDos.Local[i].ProjectId == toDoTable.ProjectId)
                 {
-                    note = new Note();
-                    note.Content = MainWindowViewModel.db.ToDos.Local[i].Content;
-                    note.Target = MainWindowViewModel.db.ToDos.Local[i].LContent;
+                    note = new Note
+                    {
+                        Content = MainWindowViewModel.db.ToDos.Local[i].Content,
+                        Target = MainWindowViewModel.db.ToDos.Local[i].LContent
+                    };
+                    //note.Color = Colors[0];
                     NotesToDo.Add(note);
-                    
                 }
             }
 

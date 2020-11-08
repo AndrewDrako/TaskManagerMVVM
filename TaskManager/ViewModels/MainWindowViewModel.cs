@@ -124,7 +124,7 @@ namespace TaskManager.ViewModels
             set
             {
                 Set(ref _CurrentPage, value);
-                if (_Tasks != null)
+                if (_Tasks != null && _CurrentPage != _Tasks)
                 {
                     DataBaseCommands.SaveToDoContentDB(db, TasksViewModel.toDoTable, true);
                 }
