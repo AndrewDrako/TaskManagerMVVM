@@ -250,7 +250,7 @@ namespace TaskManager.ViewModels
                     {
                         Note note = obj as Note;
                         if (note != null && NotesToDo.Contains(note) == true)
-                        {
+                        { 
                             NotesInProgress.Insert(0, note);
                             NotesToDo.Remove(note);
                             
