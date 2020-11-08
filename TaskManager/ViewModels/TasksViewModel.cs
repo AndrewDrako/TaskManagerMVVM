@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using TaskManager.Data.DataBase.Tables;
 using TaskManager.Infrastructure.Commands;
 using TaskManager.Infrastructure.Commands.Base;
 using TaskManager.Models;
@@ -15,6 +16,12 @@ namespace TaskManager.ViewModels
 {
     internal class TasksViewModel : ViewModel
     {
+        #region БД
+
+        public static ToDoTable toDoTable;
+
+        #endregion
+
         #region Color Notes
 
         public string[] Colors;
@@ -341,11 +348,28 @@ namespace TaskManager.ViewModels
 
         public TasksViewModel()
         {
+            #region Конструктор БД
+
+            toDoTable = new ToDoTable();
+            int j = 0;
+            for (int i = 0; i < MainWindowViewModel.db.Projects.Count(); i++)
+            {
+                if (HomeViewModel._SelectedProject.ProjectName == MainWindowViewModel.db.Projects.Local[i].ProjectName)
+                {
+                    j = i;
+                }
+            }
+            toDoTable.ProjectId = MainWindowViewModel.db.Projects.Local[j].Id;
+
+            #endregion
+
             #region Commands
 
             SaveNote = new LambdaCommand(OnSaveNoteExecuted, CanSaveNoteExecute);
 
             #endregion
+
+            #region Коллекции
 
             NotesToDo = new ObservableCollection<Note>
             {
@@ -360,6 +384,7 @@ namespace TaskManager.ViewModels
 
             };
 
+
             // Цвета заметок
 
             Colors = new string[]
@@ -373,6 +398,8 @@ namespace TaskManager.ViewModels
                 "#E7435D",
             };
             ColorsRepeat = new string[10];
+
+            #endregion
         }
 
         #endregion

@@ -126,7 +126,7 @@ namespace TaskManager.ViewModels
                 Set(ref _CurrentPage, value);
                 if (_Tasks != null)
                 {
-
+                    DataBaseCommands.SaveToDoContentDB(db, TasksViewModel.toDoTable, true);
                 }
             }
         }
@@ -251,7 +251,19 @@ namespace TaskManager.ViewModels
             user.UserName = "admin";
             user.Password = "password";
             user.Email = "3954014@gmai.com";
-            db.Users.Add(user);
+            bool checker = false;
+            for (int i = 0; i < db.Users.Count(); i++)
+            {
+                if (user.Password == db.Users.Local[i].Password)
+                {
+                    checker = true;
+                    break;
+                }
+            }
+            if (checker == false)
+            {
+                db.Users.Add(user);
+            }
 
             #endregion
 

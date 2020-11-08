@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TaskManager.Data.DataBase.Base;
 using TaskManager.Data.DataBase.Tables;
+using TaskManager.Models;
 using TaskManager.ViewModels;
 
 namespace TaskManager.Data.DataBase
@@ -21,9 +22,16 @@ namespace TaskManager.Data.DataBase
         
         public static void SaveToDoContentDB(MyDbContext db, ToDoTable todo, bool sign) 
         {
-            if (TasksViewModel.NotesToDo.Count() > 0)
+            int n = TasksViewModel.NotesToDo.Count();
+            if (sign == true)
             {
-
+                for (int i = 0; i < n; i++)
+                {
+                    todo.Content = TasksViewModel.NotesToDo[i].Content;
+                    todo.LContent = TasksViewModel.NotesToDo[i].Target;
+                    MainWindowViewModel.db.ToDos.Add(todo);
+                    MainWindowViewModel.db.SaveChanges();
+                }
             }
         }
     }

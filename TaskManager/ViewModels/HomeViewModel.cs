@@ -30,7 +30,7 @@ namespace TaskManager.ViewModels
 
         #region Projects
         //
-        private Project _SelectedProject;
+        public static Project _SelectedProject;
 
         public Project SelectedProject
         {
@@ -43,6 +43,7 @@ namespace TaskManager.ViewModels
                 }
                 _SelectedProject = value;
                 OnPropertyChanged("SelectedProject");
+                
             }
         }
 
@@ -233,7 +234,12 @@ namespace TaskManager.ViewModels
             #region Конструтор БД
 
             projectTable = new ProjectTable();
-            projectTable.UserId = MainWindowViewModel.user.Id;
+            //int j;
+            //for (int i = 0; i < MainWindowViewModel.db.Users.Count(); i++)
+            //{
+                
+            //}
+            projectTable.UserId = MainWindowViewModel.db.Users.Local[0].Id;
 
             #endregion
 
