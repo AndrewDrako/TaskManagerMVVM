@@ -110,7 +110,7 @@ namespace TaskManager.ViewModels
 
         #region коллекция записей/заметок
 
-        public ObservableCollection<Note> NotesToDo { get; set; }
+        public static ObservableCollection<Note> NotesToDo { get; set; }
 
         public ObservableCollection<Note> NotesInProgress { get; set; }
         public ObservableCollection<Note> NotesDone { get; set; }
@@ -180,10 +180,10 @@ namespace TaskManager.ViewModels
             //    MainWindowViewModel.db.Users.Add(MainWindowViewModel.user);
 
             //}
-            //if (this.ChangeControlVisibility == Visibility.Visible)
-            //{ 
-            //    this.ChangeControlVisibility = Visibility.Collapsed;
-            //}
+            if (this.ChangeControlVisibility == Visibility.Visible)
+            {
+                this.ChangeControlVisibility = Visibility.Collapsed;
+            }
             //MainWindowViewModel.db.SaveChanges();
 
 
@@ -208,7 +208,7 @@ namespace TaskManager.ViewModels
                       note.Color = Colors[Counter++];
                       NotesToDo.Insert(0, note);
                       SelectedNote = note;
-                      if (this.ChangeControlVisibility == Visibility.Collapsed)
+                      if (this.ChangeControlVisibility == Visibility.Collapsed && NotesToDo.Count() > 1)
                       {
                           this.ChangeControlVisibility = Visibility.Visible;
                       }

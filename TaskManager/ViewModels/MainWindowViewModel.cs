@@ -121,7 +121,14 @@ namespace TaskManager.ViewModels
         public UserControl CurrentPage
         {
             get => _CurrentPage;
-            set => Set(ref _CurrentPage, value);
+            set
+            {
+                Set(ref _CurrentPage, value);
+                if (_Tasks != null)
+                {
+
+                }
+            }
         }
 
         #endregion

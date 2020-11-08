@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TaskManager.Data.DataBase.Base;
+using TaskManager.Data.DataBase.Tables;
 using TaskManager.ViewModels;
 
 namespace TaskManager.Data.DataBase
@@ -15,10 +16,15 @@ namespace TaskManager.Data.DataBase
         {
             db.Users.Load();
             db.Projects.Load();
+            db.ToDos.Load();
         }
-        public static void GetCount(MyDbContext db)
+        
+        public static void SaveToDoContentDB(MyDbContext db, ToDoTable todo, bool sign) 
         {
-            HomeViewModel._GetCount = db.Users.Count();
+            if (TasksViewModel.NotesToDo.Count() > 0)
+            {
+
+            }
         }
     }
 }

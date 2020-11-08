@@ -21,7 +21,7 @@ namespace TaskManager.Data.DataBase
         {
             //await Task.Run(() => db = new MyDbContext());
             await Task.Run(() => db.Users.Load());
-            await Task.Run(() => HomeViewModel._GetCount = db.Users.Count()); 
+            
         }
 
         /// <summary>
@@ -55,17 +55,5 @@ namespace TaskManager.Data.DataBase
         {
             await Task.Run(() => db.Users.Remove(user));
         }
-
-        /// <summary>
-        /// Количесво записей в таблице
-        /// </summary>
-        /// <param name="db"></param>
-        /// <returns></returns>
-        public static async Task GetCount(MyDbContext db)
-        {
-            await Task.Run(() => HomeViewModel._GetCount = db.Users.Count()); 
-        }
-
-
     }
 }

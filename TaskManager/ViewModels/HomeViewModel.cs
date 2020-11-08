@@ -169,22 +169,6 @@ namespace TaskManager.ViewModels
                           {
 
                           }
-                          //for (int i = 0; i < Projects.Count(); i++)
-                          //{ 
-                          //      if (project.ProjectName == MainWindowViewModel.db.Users.Local[i].ProjectName)
-                          //      {
-                          //          j = i;
-                          //          //MainWindowViewModel.user = MainWindowViewModel.db.Users.Local[i];
-                          //          break;
-                          //      }
-                          //}
-                          //MainWindowViewModel.user = MainWindowViewModel.db.Users.Local[j];
-                          //MainWindowViewModel.db.Users.Remove((MainWindowViewModel.user));
-                          //MainWindowViewModel.db.SaveChanges();
-                          //if (Projects.Count == 0)
-                          //{
-                          //    MainWindowModel.IsTasksNotEmpty = false;
-                          //}
                       }
                   },
                  (obj) => Projects.Count > 0));
@@ -233,17 +217,6 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-        #region Колво записей в таблице
-
-        public static int _GetCount = -1;
-
-        #endregion
-
-        //public static async Task GetCount(MyDbContext db)
-        //{
-        //    await Task.Run(() => _GetCount = db.Users.Count());
-        //}
-
         #region Конструктор 
 
         public HomeViewModel()
@@ -267,10 +240,7 @@ namespace TaskManager.ViewModels
             #region БД: заносим данные в коллекцию объектов
 
             // Колво записей втаблице Бд
-            int kolvo;
-            // Заносит в _Count колво записей в таблице
-            //DataBaseCommands.GetCount(MainWindowViewModel.db);
-            kolvo = MainWindowViewModel.db.Projects.Count();
+            int kolvo = MainWindowViewModel.db.Projects.Count();
             //amt = _GetCount
             Project project;
             for (int i = 0; i < kolvo; i++)
