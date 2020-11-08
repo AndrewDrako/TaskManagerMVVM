@@ -218,10 +218,8 @@ namespace TaskManager.ViewModels
             }
             else
             {
-                //do yes stuff
+                
             }
-
-            //Application.Current.Shutdown();
         }
 
         #endregion
