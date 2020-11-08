@@ -22,7 +22,7 @@ namespace TaskManager.ViewModels
 
         public static MyDbContext db;
 
-        public static User user;
+        //public static User user;
 
         #endregion
 
@@ -270,9 +270,9 @@ namespace TaskManager.ViewModels
 
             #region Конструктор БД
 
-            user = new User();
-            user.UserName = "Andrew";
-            user.Password = "sdghvjd12";
+            //user = new User();
+            //user.UserName = "Andrew";
+            //user.Password = "sdghvjd12";
 
             #endregion            
 

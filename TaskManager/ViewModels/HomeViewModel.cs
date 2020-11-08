@@ -142,25 +142,24 @@ namespace TaskManager.ViewModels
                           {
                               this.ChangeControlVisibility = Visibility.Collapsed;
                           }
-                          int j = 0;
-                          //MainWindowViewModel.user.ProjectName = project.ProjectName;
-                          //MainWindowViewModel.user.MasterName = project.PersonName;
-                          for (int i = 0; i < Projects.Count(); i++)
-                          { 
-                                if (project.ProjectName == MainWindowViewModel.db.Users.Local[i].ProjectName)
-                                {
-                                    j = i;
-                                    //MainWindowViewModel.user = MainWindowViewModel.db.Users.Local[i];
-                                    break;
-                                }
-                          }
-                          MainWindowViewModel.user = MainWindowViewModel.db.Users.Local[j];
-                          MainWindowViewModel.db.Users.Remove((MainWindowViewModel.user));
-                          MainWindowViewModel.db.SaveChanges();
-                          if (Projects.Count == 0)
-                          {
-                              MainWindowModel.IsTasksNotEmpty = false;
-                          }
+                          //int j = 0;
+                          
+                          //for (int i = 0; i < Projects.Count(); i++)
+                          //{ 
+                          //      if (project.ProjectName == MainWindowViewModel.db.Users.Local[i].ProjectName)
+                          //      {
+                          //          j = i;
+                          //          //MainWindowViewModel.user = MainWindowViewModel.db.Users.Local[i];
+                          //          break;
+                          //      }
+                          //}
+                          //MainWindowViewModel.user = MainWindowViewModel.db.Users.Local[j];
+                          //MainWindowViewModel.db.Users.Remove((MainWindowViewModel.user));
+                          //MainWindowViewModel.db.SaveChanges();
+                          //if (Projects.Count == 0)
+                          //{
+                          //    MainWindowModel.IsTasksNotEmpty = false;
+                          //}
                       }
                   },
                  (obj) => Projects.Count > 0));
@@ -186,23 +185,23 @@ namespace TaskManager.ViewModels
                             TasksViewModel._PName = project.ProjectName;
                             TasksViewModel._TName = project.PersonName;
                             MainWindowViewModel._Tasks = new Tasks();
-                            bool checker = false;
-                            for (int i = 0; i < MainWindowViewModel.db.Users.Count(); i++)
-                            {
-                                if (project.ProjectName == MainWindowViewModel.db.Users.Local[i].ProjectName && project.PersonName == MainWindowViewModel.db.Users.Local[i].MasterName)
-                                {
-                                    checker = true;
-                                    break;
-                                }
-                            }
-                            if (checker == false)
-                            {
-                                MainWindowViewModel.user.ProjectName = project.ProjectName;
-                                MainWindowViewModel.user.MasterName = project.PersonName;
-                                MainWindowViewModel.db.Users.Add(MainWindowViewModel.user);
-                                MainWindowViewModel.db.SaveChanges();
+                            //bool checker = false;
+                            //for (int i = 0; i < MainWindowViewModel.db.Users.Count(); i++)
+                            //{
+                            //    if (project.ProjectName == MainWindowViewModel.db.Users.Local[i].ProjectName && project.PersonName == MainWindowViewModel.db.Users.Local[i].MasterName)
+                            //    {
+                            //        checker = true;
+                            //        break;
+                            //    }
+                            //}
+                            //if (checker == false)
+                            //{
+                            //    MainWindowViewModel.user.ProjectName = project.ProjectName;
+                            //    MainWindowViewModel.user.MasterName = project.PersonName;
+                            //    MainWindowViewModel.db.Users.Add(MainWindowViewModel.user);
+                            //    MainWindowViewModel.db.SaveChanges();
 
-                            }
+                            //}
                             //AsyncCommands.AddToDB(MainWindowViewModel.db, MainWindowViewModel.user);
                         }
                     }));
@@ -238,21 +237,21 @@ namespace TaskManager.ViewModels
             #region БД: заносим данные в коллекцию объектов
 
             // Колво записей втаблице Бд
-            int amt;
+            //int amt;
             // Заносит в _Count колво записей в таблице
-            DataBaseCommands.GetCount(MainWindowViewModel.db);
+            //DataBaseCommands.GetCount(MainWindowViewModel.db);
 
-            amt = _GetCount;
-            User user;
-            Project project;
-            for (int i = 0; i < amt; i++)
-            {
-                project = new Project();
-                user = MainWindowViewModel.db.Users.Local[i];
-                project.ProjectName = user.ProjectName;
-                project.PersonName = user.MasterName;
-                Projects.Add(project);
-            }
+            //amt = _GetCount;
+            //User user;
+            //Project project;
+            //for (int i = 0; i < amt; i++)
+            //{
+            //    project = new Project();
+            //    user = MainWindowViewModel.db.Users.Local[i];
+            //    project.ProjectName = user.ProjectName;
+            //    project.PersonName = user.MasterName;
+            //    Projects.Add(project);
+            //}
 
             #endregion
 

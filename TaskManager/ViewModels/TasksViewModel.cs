@@ -161,30 +161,30 @@ namespace TaskManager.ViewModels
         {
             //PreviousNote = _SelectedNote;
             PreviousNote = NotesToDo[0];
-            int j = 0;
-            for (int i = 0; i < MainWindowViewModel.db.Users.Count(); i++)
-            {
-                if (MainWindowViewModel.db.Users.Local[i].ProjectName == PName && MainWindowViewModel.db.Users.Local[i].MasterName == TName)
-                {
-                    j = i;
-                }
-            }
-            MainWindowViewModel.db.Users.Local[j].ToDoContext = NotesToDo[0].Content;
-            MainWindowViewModel.db.Users.Local[j].ToDoLilContext = NotesToDo[0].Target;
-            for (int i = 1; i < NotesToDo.Count(); i++)
-            {
-                MainWindowViewModel.user.ProjectName = PName;
-                MainWindowViewModel.user.MasterName = TName;
-                MainWindowViewModel.user.ToDoContext = NotesToDo[i].Content;
-                MainWindowViewModel.user.ToDoLilContext = NotesToDo[i].Target;
-                MainWindowViewModel.db.Users.Add(MainWindowViewModel.user);
+            //int j = 0;
+            //for (int i = 0; i < MainWindowViewModel.db.Users.Count(); i++)
+            //{
+            //    if (MainWindowViewModel.db.Users.Local[i].ProjectName == PName && MainWindowViewModel.db.Users.Local[i].MasterName == TName)
+            //    {
+            //        j = i;
+            //    }
+            //}
+            //MainWindowViewModel.db.Users.Local[j].ToDoContext = NotesToDo[0].Content;
+            //MainWindowViewModel.db.Users.Local[j].ToDoLilContext = NotesToDo[0].Target;
+            //for (int i = 1; i < NotesToDo.Count(); i++)
+            //{
+            //    MainWindowViewModel.user.ProjectName = PName;
+            //    MainWindowViewModel.user.MasterName = TName;
+            //    MainWindowViewModel.user.ToDoContext = NotesToDo[i].Content;
+            //    MainWindowViewModel.user.ToDoLilContext = NotesToDo[i].Target;
+            //    MainWindowViewModel.db.Users.Add(MainWindowViewModel.user);
 
-            }
-            if (this.ChangeControlVisibility == Visibility.Visible)
-            { 
-                this.ChangeControlVisibility = Visibility.Collapsed;
-            }
-            MainWindowViewModel.db.SaveChanges();
+            //}
+            //if (this.ChangeControlVisibility == Visibility.Visible)
+            //{ 
+            //    this.ChangeControlVisibility = Visibility.Collapsed;
+            //}
+            //MainWindowViewModel.db.SaveChanges();
 
 
         }
