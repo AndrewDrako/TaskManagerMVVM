@@ -400,6 +400,23 @@ namespace TaskManager.ViewModels
             ColorsRepeat = new string[10];
 
             #endregion
+
+            #region Заполнение коллекций
+
+            Note note;
+            for (int i = 0; i < MainWindowViewModel.db.ToDos.Count(); i++)
+            {
+                if (MainWindowViewModel.db.ToDos.Local[i].ProjectId == toDoTable.ProjectId)
+                {
+                    note = new Note();
+                    note.Content = MainWindowViewModel.db.ToDos.Local[i].Content;
+                    note.Target = MainWindowViewModel.db.ToDos.Local[i].LContent;
+                    NotesToDo.Add(note);
+                    
+                }
+            }
+
+            #endregion
         }
 
         #endregion
