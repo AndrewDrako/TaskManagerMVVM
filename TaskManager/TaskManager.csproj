@@ -101,6 +101,8 @@
     <Compile Include="Data\DataBase\AsyncCommands.cs" />
     <Compile Include="Data\DataBase\Base\MyDbContext.cs" />
     <Compile Include="Data\DataBase\DataBaseCommands.cs" />
+    <Compile Include="Data\DataBase\Tables\ProjectTable.cs" />
+    <Compile Include="Data\DataBase\Tables\ToDoTable.cs" />
     <Compile Include="Data\DataBase\Tables\User.cs" />
     <Compile Include="Infrastructure\Commands\Base\Command.cs" />
     <Compile Include="Infrastructure\Commands\Base\RelayCommand.cs" />
