@@ -126,7 +126,7 @@ namespace TaskManager.ViewModels
                 Set(ref _CurrentPage, value);
                 if (_Tasks != null && _CurrentPage != _Tasks)
                 {
-                    DataBaseCommands.SaveToDoContentDB(db, TasksViewModel.toDoTable, true);
+                   DataBaseCommands.SaveToDoContentDB(true);
                 }
             }
         }
@@ -219,14 +219,14 @@ namespace TaskManager.ViewModels
         private void OnCloseApplicationExecuted(object p)
         {
             //MessageBox.Show("Вы уверены, что хотите выйти из приложения?", "Exit", MessageBoxButton.OKCancel);
-            if (MessageBox.Show("Close Application?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
-            {
-                Application.Current.Shutdown();
-            }
-            else
-            {
+            //if (MessageBox.Show("Close Application?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            //{
+            //    Application.Current.Shutdown();
+            //}
+            //else
+            //{
                 
-            }
+            //}
         }
 
         #endregion

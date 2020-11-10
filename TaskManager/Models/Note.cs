@@ -8,7 +8,7 @@ using TaskManager.ViewModels.Base;
 
 namespace TaskManager.Models
 {
-    internal class Note : ViewModel
+    public class Note : ViewModel
     {
         #region Первичный ключ
 

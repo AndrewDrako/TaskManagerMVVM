@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using TaskManager.Data.DataBase;
 using TaskManager.Data.DataBase.Tables;
 using TaskManager.Infrastructure.Commands;
 using TaskManager.Infrastructure.Commands.Base;
@@ -238,6 +239,7 @@ namespace TaskManager.ViewModels
                       if (note != null)
                       {
                           NotesToDo.Remove(note);
+                          DataBaseCommands.RemoveFromDb(note, "ToDo");
                           
                       }
                   },
@@ -411,20 +413,30 @@ namespace TaskManager.ViewModels
 
             #region Заполнение коллекций
             Note note;
+            int temp;
             size = MainWindowViewModel.db.ToDos.Count();
-            for (int i = 0; i < size; i++)
+            try
             {
-                if (MainWindowViewModel.db.ToDos.Local[i].ProjectId == toDoTable.ProjectId)
+                for (int i = 0; i < size; i++)
                 {
-                    note = new Note
+                    temp = MainWindowViewModel.db.ToDos.Local[i].ProjectId;
+                    temp = MainWindowViewModel.db.ToDos.Local[i].Id;
+                    if (MainWindowViewModel.db.ToDos.Local[i].ProjectId == toDoTable.ProjectId)
                     {
-                        //Id = MainWindowViewModel.db.ToDos.Local[i].Id,
-                        Content = MainWindowViewModel.db.ToDos.Local[i].Content,
-                        Target = MainWindowViewModel.db.ToDos.Local[i].LContent
-                    };
-                    //note.Color = Colors[0];
-                    NotesToDo.Add(note);
+                        note = new Note
+                        {
+                            //Id = MainWindowViewModel.db.ToDos.Local[i].Id,
+                            Content = MainWindowViewModel.db.ToDos.Local[i].Content,
+                            Target = MainWindowViewModel.db.ToDos.Local[i].LContent
+                        };
+                        //note.Color = Colors[0];
+                        NotesToDo.Add(note);
+                    }
                 }
+            }
+            catch
+            {
+                MessageBox.Show("проблема в заполнении коллекции NotesToDo");
             }
 
             #endregion
