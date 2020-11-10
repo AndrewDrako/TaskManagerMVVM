@@ -10,6 +10,12 @@ namespace TaskManager.Models
 {
     internal class Note : ViewModel
     {
+        #region Первичный ключ
+
+        public int Id { get; set; }
+
+        #endregion
+
         #region Цвет заметки
 
         private string _Color;

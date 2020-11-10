@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Runtime.Serialization.Formatters;
 using System.Text;
 using System.Threading.Tasks;
 using TaskManager.Data.DataBase.Base;
@@ -22,35 +23,26 @@ namespace TaskManager.Data.DataBase
         
         public static void SaveToDoContentDB(MyDbContext db, ToDoTable todo, bool sign) 
         {
-            int n = TasksViewModel.NotesToDo.Count();
-            int nn = MainWindowViewModel.db.ToDos.Count();
+            int colSize = TasksViewModel.NotesToDo.Count();
+            int colDbSize = MainWindowViewModel.db.ToDos.Count();
+            int needSize = 0;
+            int[] mas = new int[100];
             bool checker = false;
-            if (sign == true)
+            int iCounter = 0;
+            // Удаляем из БД данные которые у нас есть по этому проекту в этом столбце
+            for (int j = 0; j < colDbSize; j++)
             {
-                for (int i = 0; i < n; i++)
+                if (TasksViewModel.CurrentProjectId == MainWindowViewModel.db.ToDos.Local[j].Id)
                 {
-                    for (int j = 0; j < nn; j++)
-                    {
-                        if (TasksViewModel.NotesToDo[i].Content == MainWindowViewModel.db.ToDos.Local[j].Content)
-                        {
-                            if (i == n - 1)
-                            {
-                                checker = true;
-                                break;
-                            }
-                            i++;
-                            j = -1;
-                        }
-                    }
-                    if (checker == false)
-                    {
-                        todo.Content = TasksViewModel.NotesToDo[i].Content;
-                        todo.LContent = TasksViewModel.NotesToDo[i].Target;
-                        MainWindowViewModel.db.ToDos.Add(todo);
-                        MainWindowViewModel.db.SaveChanges();
-                    }
+                    MainWindowViewModel.db.ToDos.Remove(MainWindowViewModel.db.ToDos.Local[j]);
                 }
             }
+            // Добавляем данные в БД которые у нас в колонке 
+            for (int i = 0; i < colSize; i++)
+            {
+                to
+            }
+            
         }
     }
 }

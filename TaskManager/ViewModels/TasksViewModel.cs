@@ -339,9 +339,15 @@ namespace TaskManager.ViewModels
 
         #endregion
 
+        #region К какому проекту относиться запись
+
+        public static int CurrentProjectId { get; set; }
+
+        #endregion
+
         #region БД
 
-        
+
         #endregion
 
         #region Конструктор
@@ -361,6 +367,7 @@ namespace TaskManager.ViewModels
                 }
             }
             toDoTable.ProjectId = MainWindowViewModel.db.Projects.Local[j].Id;
+            CurrentProjectId = MainWindowViewModel.db.Projects.Local[j].Id;
 
             #endregion
 
@@ -411,6 +418,7 @@ namespace TaskManager.ViewModels
                 {
                     note = new Note
                     {
+                        //Id = MainWindowViewModel.db.ToDos.Local[i].Id,
                         Content = MainWindowViewModel.db.ToDos.Local[i].Content,
                         Target = MainWindowViewModel.db.ToDos.Local[i].LContent
                     };
