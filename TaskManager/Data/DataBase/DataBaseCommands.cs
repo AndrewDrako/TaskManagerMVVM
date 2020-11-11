@@ -18,7 +18,7 @@ namespace TaskManager.Data.DataBase
         {
             db.Users.Load();
             db.Projects.Load();
-            db.ToDos.Load();
+            //db.ToDos.Load();
         }
 
         public static void SaveToDb(int i, string s)

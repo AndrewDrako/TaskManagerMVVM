@@ -167,32 +167,7 @@ namespace TaskManager.ViewModels
         private bool CanSaveNoteExecute(object p) => true;
         private void OnSaveNoteExecuted(object p)
         {
-            //PreviousNote = _SelectedNote;
-            PreviousNote = NotesToDo[0];
-            //int j = 0;
-            //for (int i = 0; i < MainWindowViewModel.db.Users.Count(); i++)
-            //{
-            //    if (MainWindowViewModel.db.Users.Local[i].ProjectName == PName && MainWindowViewModel.db.Users.Local[i].MasterName == TName)
-            //    {
-            //        j = i;
-            //    }
-            //}
-            //MainWindowViewModel.db.Users.Local[j].ToDoContext = NotesToDo[0].Content;
-            //MainWindowViewModel.db.Users.Local[j].ToDoLilContext = NotesToDo[0].Target;
-            //for (int i = 1; i < NotesToDo.Count(); i++)
-            //{
-            //    MainWindowViewModel.user.ProjectName = PName;
-            //    MainWindowViewModel.user.MasterName = TName;
-            //    MainWindowViewModel.user.ToDoContext = NotesToDo[i].Content;
-            //    MainWindowViewModel.user.ToDoLilContext = NotesToDo[i].Target;
-            //    MainWindowViewModel.db.Users.Add(MainWindowViewModel.user);
-
-            //}
-            if (this.ChangeControlVisibility == Visibility.Visible)
-            {
-                this.ChangeControlVisibility = Visibility.Collapsed;
-            }
-            //MainWindowViewModel.db.SaveChanges();
+            
 
 
         }
@@ -239,7 +214,7 @@ namespace TaskManager.ViewModels
                       if (note != null)
                       {
                           NotesToDo.Remove(note);
-                          DataBaseCommands.RemoveFromDb(note, "ToDo");
+                          //DataBaseCommands.RemoveFromDb(note, "ToDo");
                           
                       }
                   },
@@ -358,18 +333,18 @@ namespace TaskManager.ViewModels
         {
             #region Конструктор БД
 
-            toDoTable = new ToDoTable();
-            int j = 0;
-            int size = MainWindowViewModel.db.Projects.Count();
-            for (int i = 0; i < size; i++)
-            {
-                if (HomeViewModel._SelectedProject.ProjectName == MainWindowViewModel.db.Projects.Local[i].ProjectName)
-                {
-                    j = i;
-                }
-            }
-            toDoTable.ProjectId = MainWindowViewModel.db.Projects.Local[j].Id;
-            CurrentProjectId = MainWindowViewModel.db.Projects.Local[j].Id;
+            //toDoTable = new ToDoTable();
+            //int j = 0;
+            //int size = MainWindowViewModel.db.Projects.Local.Count();
+            //for (int i = 0; i < size; i++)
+            //{
+            //    if (HomeViewModel._SelectedProject.ProjectName == MainWindowViewModel.db.Projects.Local[i].ProjectName)
+            //    {
+            //        j = i;
+            //    }
+            //}
+            //toDoTable.ProjectId = MainWindowViewModel.db.Projects.Local[j].Id;
+            //CurrentProjectId = MainWindowViewModel.db.Projects.Local[j].Id;
 
             #endregion
 
@@ -412,32 +387,32 @@ namespace TaskManager.ViewModels
             #endregion
 
             #region Заполнение коллекций
-            Note note;
-            int temp;
-            size = MainWindowViewModel.db.ToDos.Count();
-            try
-            {
-                for (int i = 0; i < size; i++)
-                {
-                    temp = MainWindowViewModel.db.ToDos.Local[i].ProjectId;
-                    temp = MainWindowViewModel.db.ToDos.Local[i].Id;
-                    if (MainWindowViewModel.db.ToDos.Local[i].ProjectId == toDoTable.ProjectId)
-                    {
-                        note = new Note
-                        {
-                            //Id = MainWindowViewModel.db.ToDos.Local[i].Id,
-                            Content = MainWindowViewModel.db.ToDos.Local[i].Content,
-                            Target = MainWindowViewModel.db.ToDos.Local[i].LContent
-                        };
-                        //note.Color = Colors[0];
-                        NotesToDo.Add(note);
-                    }
-                }
-            }
-            catch
-            {
-                MessageBox.Show("проблема в заполнении коллекции NotesToDo");
-            }
+            //Note note;
+            //int temp;
+            //size = MainWindowViewModel.db.ToDos.Count();
+            //try
+            //{
+            //    for (int i = 0; i < size; i++)
+            //    {
+            //        temp = MainWindowViewModel.db.ToDos.Local[i].ProjectId;
+            //        temp = MainWindowViewModel.db.ToDos.Local[i].Id;
+            //        if (MainWindowViewModel.db.ToDos.Local[i].ProjectId == toDoTable.ProjectId)
+            //        {
+            //            note = new Note
+            //            {
+            //                //Id = MainWindowViewModel.db.ToDos.Local[i].Id,
+            //                Content = MainWindowViewModel.db.ToDos.Local[i].Content,
+            //                Target = MainWindowViewModel.db.ToDos.Local[i].LContent
+            //            };
+            //            //note.Color = Colors[0];
+            //            NotesToDo.Add(note);
+            //        }
+            //    }
+            //}
+            //catch
+            //{
+            //    MessageBox.Show("проблема в заполнении коллекции NotesToDo");
+            //}
 
             #endregion
         }
