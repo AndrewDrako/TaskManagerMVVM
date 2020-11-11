@@ -32,22 +32,19 @@ namespace TaskManager.ViewModels
         #region Projects
         //
         public static Project _SelectedProject;
-
+        public static Project _PreviousProject;
+        public static bool check = true;
 
         public Project SelectedProject
         {
-            get { return _SelectedProject; }
+            get 
+            {    
+                return _SelectedProject;   
+            }
             set
             {
-                if (this.ChangeControlVisibility == Visibility.Collapsed)
-                {
-                    this.ChangeControlVisibility = Visibility.Visible;
-                }
-               
                 _SelectedProject = value;
-                
                 OnPropertyChanged("SelectedProject");
-                
             }
         }
 
@@ -131,6 +128,8 @@ namespace TaskManager.ViewModels
                       Project project = new Project();
                       Projects.Insert(0, project);
                       SelectedProject = project;
+                      _PreviousProject = project;
+
                   }));
             }
         }
@@ -146,9 +145,10 @@ namespace TaskManager.ViewModels
                   (removeCommand = new RelayCommand(obj =>
                   {
                       Project project = obj as Project;
-                      if (project != null)
+                      if (true)
                       {
                           Projects.Remove(project);
+                          MainWindowModel.IsTasksNotEmpty = false;
                           if (this.ChangeControlVisibility == Visibility.Visible)
                           {
                               this.ChangeControlVisibility = Visibility.Collapsed;
@@ -168,7 +168,7 @@ namespace TaskManager.ViewModels
                           }
                           catch
                           {
-
+                              MessageBox.Show("проблема возникла при удалении проекта");
                           }
                       }
                   },
@@ -187,12 +187,16 @@ namespace TaskManager.ViewModels
                     (selectProject = new RelayCommand(obj =>
                     {
                         Project project = obj as Project;
-                        if (project != null && project.PersonName != "" && project.ProjectName != "")
+                        if (project.PersonName != null && project.ProjectName != null)
                         {
                             MainWindowModel.IsTasksNotEmpty = true;
                             TasksViewModel._PName = project.ProjectName;
                             TasksViewModel._TName = project.PersonName;
                             MainWindowViewModel._Tasks = new Tasks();
+                            if (this.ChangeControlVisibility == Visibility.Visible)
+                            {
+                                this.ChangeControlVisibility = Visibility.Collapsed;
+                            }
                             bool checker = false; // Проверка на не повторяющииеся проекты
                             try
                             {

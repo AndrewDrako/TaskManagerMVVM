@@ -18,7 +18,10 @@ namespace TaskManager.Models
         public string ProjectName
         {
             get => _ProjectName;
-            set => Set(ref _ProjectName, value);
+            set
+            {   
+                Set(ref _ProjectName, value);
+            }
         }
 
         #endregion
@@ -43,13 +46,7 @@ namespace TaskManager.Models
         
         public static void PrintToTxt()
         {
-            string pathLog = @"D:\text1111.txt";
-            // true - добавлять данные в конец файла. false - перезаписать файл заново
-            using (System.IO.StreamWriter file = new System.IO.StreamWriter(pathLog, true))
-            {
-                //file.WriteLine(_ProjectName);
-                //file.WriteLine(_PersonName);
-            }
+            
         }
     }
 }
