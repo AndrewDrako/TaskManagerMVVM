@@ -201,7 +201,7 @@ namespace TaskManager.ViewModels
                                 {
                                     for (int i = 0; i < Projects.Count(); i++)  // Ищем элемент который есть в БД , но отсутсвует в коллекции проектов
                                     {
-                                        if (p.ProjectName == Projects[i].ProjectName)  // Если очередной элемент из Бд присуствует в текущей коллекции, то чекер становиться true, и прекращаем искать
+                                        if (p.ProjectName == Projects[i].ProjectName && p.MasterName == Projects[i].PersonName)  // Если очередной элемент из Бд присуствует в текущей коллекции, то чекер становиться true, и прекращаем искать
                                         {
                                             isContains = true;
                                             break;
@@ -218,7 +218,7 @@ namespace TaskManager.ViewModels
                                 }
                                 foreach (var p in projects)
                                 {
-                                    if(project.ProjectName == p.ProjectName)
+                                    if(project.ProjectName == p.ProjectName && project.PersonName == p.MasterName)
                                     {
                                         checker = true;
                                         break;

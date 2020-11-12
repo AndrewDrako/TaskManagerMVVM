@@ -21,19 +21,6 @@ namespace TaskManager.Data.DataBase
             //db.ToDos.Load();
         }
 
-        //public static bool Contains(Project project)
-        //{
-
-        //    for (int i = 0; i < HomeViewModel.Projects.Count(); i++)
-        //    {
-        //        if (project.ProjectName == HomeViewModel.Projects[i].ProjectName)
-        //        {
-        //            return true;
-        //        }
-        //    }
-        //    return false;
-        //}
-
         public static void SaveToDb(int i, string s)
         {
             if (s == "ToDo")
