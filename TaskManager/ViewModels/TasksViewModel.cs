@@ -179,7 +179,7 @@ namespace TaskManager.ViewModels
                         break;
                     }
                 }
-                if (checker == false)
+                if (NotesToDo[i].Content != "" && checker == false)
                 {
                     toDoTable.Content = NotesToDo[i].Content;
                     toDoTable.LContent = NotesToDo[i].Target;
@@ -211,7 +211,7 @@ namespace TaskManager.ViewModels
                       note.Color = Colors[Counter++];
                       NotesToDo.Insert(0, note);
                       SelectedNote = note;
-                      if (this.ChangeControlVisibility == Visibility.Collapsed && NotesToDo.Count() > 1)
+                      if (this.ChangeControlVisibility == Visibility.Collapsed)
                       {
                           this.ChangeControlVisibility = Visibility.Visible;
                       }
@@ -234,8 +234,28 @@ namespace TaskManager.ViewModels
                       if (note != null)
                       {
                           NotesToDo.Remove(note);
-                          //DataBaseCommands.RemoveFromDb(note, "ToDo");
-                          
+                          try
+                          {
+                              var todos = MainWindowViewModel.db.ToDos.ToList();
+                              foreach (var t in todos)
+                              {
+                                  if (t.ProjectId == toDoTable.ProjectId)
+                                  {
+                                      if (note.Content == t.Content && note.Target == t.LContent)
+                                      {
+                                          MainWindowViewModel.db.ToDos.Attach(t);
+                                          MainWindowViewModel.db.ToDos.Remove(t);
+                                          MainWindowViewModel.db.SaveChanges();
+                                          break;
+                                      }
+                                  }
+                              }
+                          }
+                          catch
+                          {
+                              MessageBox.Show("Проблема возникла при удалении заметки из To Do");
+                          }
+
                       }
                   },
                  (obj) => NotesToDo.Count > 0));
@@ -257,7 +277,28 @@ namespace TaskManager.ViewModels
                         { 
                             NotesInProgress.Insert(0, note);
                             NotesToDo.Remove(note);
-                            
+                            try
+                            {
+                                var todos = MainWindowViewModel.db.ToDos.ToList();
+                                foreach (var t in todos)
+                                {
+                                    if (t.ProjectId == toDoTable.ProjectId)
+                                    {
+                                        if (note.Content == t.Content && note.Target == t.LContent)
+                                        {
+                                            MainWindowViewModel.db.ToDos.Attach(t);
+                                            MainWindowViewModel.db.ToDos.Remove(t);
+                                            MainWindowViewModel.db.SaveChanges();
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                            catch
+                            {
+                                MessageBox.Show("Проблема возникла при переносе заметки из To Do");
+                            }
+
                         }
                     }));
             }
