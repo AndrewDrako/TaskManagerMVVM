@@ -7,7 +7,7 @@ using TaskManager.ViewModels.Base;
 
 namespace TaskManager.Models
 {
-    internal class Project : ViewModel
+    public class Project : ViewModel
     {
 
 

@@ -32,13 +32,13 @@ namespace TaskManager.ViewModels
         #region Projects
         //
         public static Project _SelectedProject;
-        public static Project _PreviousProject;
+        
         public static bool check = true;
 
         public Project SelectedProject
         {
             get 
-            {    
+            {
                 return _SelectedProject;   
             }
             set
@@ -98,7 +98,7 @@ namespace TaskManager.ViewModels
 
         #region Visibiliity input
 
-        private Visibility _Visibility = Visibility.Collapsed;
+        private Visibility _Visibility = Visibility.Visible;
 
         public Visibility ChangeControlVisibility
         {
@@ -121,14 +121,13 @@ namespace TaskManager.ViewModels
                 return addCommand ??
                   (addCommand = new RelayCommand(obj =>
                   {
-                      if (this.ChangeControlVisibility == Visibility.Collapsed)
-                      {
-                          this.ChangeControlVisibility = Visibility.Visible;
-                      }
+                      //if (this.ChangeControlVisibility == Visibility.Collapsed)
+                      //{
+                      //    this.ChangeControlVisibility = Visibility.Visible;
+                      //}
                       Project project = new Project();
                       Projects.Insert(0, project);
                       SelectedProject = project;
-                      _PreviousProject = project;
 
                   }));
             }
@@ -149,10 +148,10 @@ namespace TaskManager.ViewModels
                       {
                           Projects.Remove(project);
                           MainWindowModel.IsTasksNotEmpty = false;
-                          if (this.ChangeControlVisibility == Visibility.Visible)
-                          {
-                              this.ChangeControlVisibility = Visibility.Collapsed;
-                          }
+                          //if (this.ChangeControlVisibility == Visibility.Visible)
+                          //{
+                          //    this.ChangeControlVisibility = Visibility.Collapsed;
+                          //}
                           try
                           {
                               var projects = MainWindowViewModel.db.Projects.ToList();
@@ -189,19 +188,35 @@ namespace TaskManager.ViewModels
                         Project project = obj as Project;
                         if (project.PersonName != null && project.ProjectName != null)
                         {
-                            MainWindowModel.IsTasksNotEmpty = true;
+                            MainWindowModel.IsTasksNotEmpty = true;  // Разблокировка кнопки tasks
                             TasksViewModel._PName = project.ProjectName;
                             TasksViewModel._TName = project.PersonName;
-                            MainWindowViewModel._Tasks = new Tasks();
-                            if (this.ChangeControlVisibility == Visibility.Visible)
-                            {
-                                this.ChangeControlVisibility = Visibility.Collapsed;
-                            }
+                            MainWindowViewModel._Tasks = new Tasks(); // Открытие tasks
+                            bool isContains = false; // Чекер для проверки измененных проектов
                             bool checker = false; // Проверка на не повторяющииеся проекты
                             try
                             {
-                                var projects = MainWindowViewModel.db.Projects.ToList();
-                                foreach(var p in projects)
+                                var projects = MainWindowViewModel.db.Projects.ToList();  // Выгружаем данные из бд в массив
+                                foreach (var p in projects)  // Идем по массиву
+                                {
+                                    for (int i = 0; i < Projects.Count(); i++)  // Ищем элемент который есть в БД , но отсутсвует в коллекции проектов
+                                    {
+                                        if (p.ProjectName == Projects[i].ProjectName)  // Если очередной элемент из Бд присуствует в текущей коллекции, то чекер становиться true, и прекращаем искать
+                                        {
+                                            isContains = true;
+                                            break;
+                                        }
+                                    }
+                                    if (isContains == false)  // Усли очередной эл-нт из бд отсуствует в текущей коллекции, то мы его удаляем из бд
+                                    {
+                                        MainWindowViewModel.db.Projects.Attach(p);
+                                        MainWindowViewModel.db.Projects.Remove(p);
+                                        MainWindowViewModel.db.SaveChanges();
+                                        break;
+                                    }
+                                    isContains = false;  // Ставим чекер false, чтобы продолжить цикл
+                                }
+                                foreach (var p in projects)
                                 {
                                     if(project.ProjectName == p.ProjectName)
                                     {
@@ -217,6 +232,7 @@ namespace TaskManager.ViewModels
                                     MainWindowViewModel.db.Projects.Add(projectTable);
                                     MainWindowViewModel.db.SaveChanges();
                                 }
+                                
                             }
                             catch
                             {
