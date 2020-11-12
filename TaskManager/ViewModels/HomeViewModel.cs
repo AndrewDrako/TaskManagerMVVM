@@ -30,10 +30,9 @@ namespace TaskManager.ViewModels
         #endregion
 
         #region Projects
-        //
         public static Project _SelectedProject;
         
-        public static bool check = true;
+        //public static bool check = true;
 
         public Project SelectedProject
         {
@@ -191,7 +190,6 @@ namespace TaskManager.ViewModels
                             MainWindowModel.IsTasksNotEmpty = true;  // Разблокировка кнопки tasks
                             TasksViewModel._PName = project.ProjectName;
                             TasksViewModel._TName = project.PersonName;
-                            MainWindowViewModel._Tasks = new Tasks(); // Открытие tasks
                             bool isContains = false; // Чекер для проверки измененных проектов
                             bool checker = false; // Проверка на не повторяющииеся проекты
                             try
@@ -220,6 +218,7 @@ namespace TaskManager.ViewModels
                                 {
                                     if(project.ProjectName == p.ProjectName && project.PersonName == p.MasterName)
                                     {
+
                                         checker = true;
                                         break;
                                     }
@@ -232,7 +231,7 @@ namespace TaskManager.ViewModels
                                     MainWindowViewModel.db.Projects.Add(projectTable);
                                     MainWindowViewModel.db.SaveChanges();
                                 }
-                                
+                                MainWindowViewModel._Tasks = new Tasks(); // Открытие tasks
                             }
                             catch
                             {
@@ -267,17 +266,24 @@ namespace TaskManager.ViewModels
             #endregion
 
             #region БД: заносим данные в коллекцию объектов
-            
-            var projects = MainWindowViewModel.db.Projects.ToList();
-            foreach (var p in projects)
+
+            try
             {
-                if (p.UserId == projectTable.UserId)
+                var projects = MainWindowViewModel.db.Projects.ToList();
+                foreach (var p in projects)
                 {
-                    Project pr = new Project();
-                    pr.ProjectName = p.ProjectName;
-                    pr.PersonName = p.MasterName;
-                    Projects.Add(pr);
+                    if (p.UserId == projectTable.UserId)
+                    {
+                        Project pr = new Project();
+                        pr.ProjectName = p.ProjectName;
+                        pr.PersonName = p.MasterName;
+                        Projects.Add(pr);
+                    }
                 }
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка произошла при заполнении коллекции Проекты");
             }
             
             #endregion

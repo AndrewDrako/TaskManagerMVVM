@@ -100,7 +100,7 @@ namespace TaskManager.ViewModels
         #region Записи/Заметки Selected
 
         private Note _SelectedNote;
-        public Note PreviousNote;
+        //public Note PreviousNote;
 
         public Note SelectedNote
         {
@@ -118,7 +118,7 @@ namespace TaskManager.ViewModels
 
         #region коллекция записей/заметок
 
-        public static ObservableCollection<Note> NotesToDo { get; set; }
+        public ObservableCollection<Note> NotesToDo { get; set; }
 
         public ObservableCollection<Note> NotesInProgress { get; set; }
         public ObservableCollection<Note> NotesDone { get; set; }
@@ -149,7 +149,7 @@ namespace TaskManager.ViewModels
 
         #region Visibiliity 
 
-        private Visibility _Visibility = Visibility.Collapsed;
+        private Visibility _Visibility = Visibility.Visible;
 
         public Visibility ChangeControlVisibility
         {
@@ -167,7 +167,27 @@ namespace TaskManager.ViewModels
         private bool CanSaveNoteExecute(object p) => true;
         private void OnSaveNoteExecuted(object p)
         {
-            
+            var todos = MainWindowViewModel.db.ToDos.ToList();
+            bool checker = false;
+            for (int i = 0; i < NotesToDo.Count(); i++)
+            {
+                foreach(var t in todos)
+                {
+                    if(NotesToDo[i].Content == t.Content && NotesToDo[i].Target == t.LContent)
+                    {
+                        checker = true;
+                        break;
+                    }
+                }
+                if (checker == false)
+                {
+                    toDoTable.Content = NotesToDo[i].Content;
+                    toDoTable.LContent = NotesToDo[i].Target;
+                    MainWindowViewModel.db.ToDos.Attach(toDoTable);
+                    MainWindowViewModel.db.ToDos.Add(toDoTable);
+                    MainWindowViewModel.db.SaveChanges();
+                }
+            }
 
 
         }
@@ -333,18 +353,26 @@ namespace TaskManager.ViewModels
         {
             #region Конструктор БД
 
-            //toDoTable = new ToDoTable();
-            //int j = 0;
-            //int size = MainWindowViewModel.db.Projects.Local.Count();
-            //for (int i = 0; i < size; i++)
-            //{
-            //    if (HomeViewModel._SelectedProject.ProjectName == MainWindowViewModel.db.Projects.Local[i].ProjectName)
-            //    {
-            //        j = i;
-            //    }
-            //}
-            //toDoTable.ProjectId = MainWindowViewModel.db.Projects.Local[j].Id;
-            //CurrentProjectId = MainWindowViewModel.db.Projects.Local[j].Id;
+            #region For ToDo
+            toDoTable = new ToDoTable();
+            try
+            {
+                var projects = MainWindowViewModel.db.Projects.ToList();  // Выгружаем данные из бд в массив
+                foreach (var p in projects)
+                {
+                    if (_PName == p.ProjectName && _TName == p.MasterName)
+                    {
+                        toDoTable.ProjectId = p.Id;
+                        break;
+                    }
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка возникла в консрукторе бд для To DO");
+            }
+
+            #endregion
 
             #endregion
 
@@ -387,32 +415,28 @@ namespace TaskManager.ViewModels
             #endregion
 
             #region Заполнение коллекций
-            //Note note;
-            //int temp;
-            //size = MainWindowViewModel.db.ToDos.Count();
-            //try
-            //{
-            //    for (int i = 0; i < size; i++)
-            //    {
-            //        temp = MainWindowViewModel.db.ToDos.Local[i].ProjectId;
-            //        temp = MainWindowViewModel.db.ToDos.Local[i].Id;
-            //        if (MainWindowViewModel.db.ToDos.Local[i].ProjectId == toDoTable.ProjectId)
-            //        {
-            //            note = new Note
-            //            {
-            //                //Id = MainWindowViewModel.db.ToDos.Local[i].Id,
-            //                Content = MainWindowViewModel.db.ToDos.Local[i].Content,
-            //                Target = MainWindowViewModel.db.ToDos.Local[i].LContent
-            //            };
-            //            //note.Color = Colors[0];
-            //            NotesToDo.Add(note);
-            //        }
-            //    }
-            //}
-            //catch
-            //{
-            //    MessageBox.Show("проблема в заполнении коллекции NotesToDo");
-            //}
+
+            #region Заполение To DO
+            try
+            {
+                var todos = MainWindowViewModel.db.ToDos.ToList();
+                foreach (var t in todos)
+                {
+                    if (t.ProjectId == toDoTable.ProjectId)
+                    {
+                        Note note = new Note();
+                        note.Content = t.Content;
+                        note.Target = t.LContent;
+                        NotesToDo.Add(note);
+                    }
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка произошла при заполнении коллеции TODO");
+            }
+
+            #endregion
 
             #endregion
         }

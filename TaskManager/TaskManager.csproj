@@ -110,7 +110,6 @@
     <Compile Include="Infrastructure\Commands\Base\RelayCommand.cs" />
     <Compile Include="Infrastructure\Commands\CloseWindowCommand.cs" />
     <Compile Include="Infrastructure\Commands\LambdaCommand.cs" />
-    <Compile Include="Models\HomeModel.cs" />
     <Compile Include="Models\Language.cs" />
     <Compile Include="Models\MainWindowModel.cs" />
     <Compile Include="Models\Note.cs" />
