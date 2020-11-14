@@ -167,26 +167,57 @@ namespace TaskManager.ViewModels
         private bool CanSaveNoteExecute(object p) => true;
         private void OnSaveNoteExecuted(object p)
         {
-            var todos = MainWindowViewModel.db.ToDos.ToList();
-            bool checker = false;
-            for (int i = 0; i < NotesToDo.Count(); i++)
+            try
             {
-                foreach(var t in todos)
+                var todos = MainWindowViewModel.db.ToDos.ToList();
+                bool isContains = false; // Чекер для проверки измененных заметок To Do
+                foreach (var t in todos)
                 {
-                    if(NotesToDo[i].Content == t.Content && NotesToDo[i].Target == t.LContent)
+                    for (int i = 0; i < NotesToDo.Count(); i++)  // Ищем элемент который есть в БД , но отсутсвует в коллекции заметок
                     {
-                        checker = true;
-                        break;
+                        if (t.Content == NotesToDo[i].Content && t.LContent == NotesToDo[i].Target)  // Если очередной элемент из Бд присуствует в текущей коллекции, то чекер становиться true, и прекращаем искать
+                        {
+                            isContains = true;
+                            break;
+                        }
                     }
+                    if (isContains == false)  // Усли очередной эл-нт из бд отсуствует в текущей коллекции, то мы его удаляем из бд
+                    {
+                        MainWindowViewModel.db.ToDos.Attach(t);
+                        MainWindowViewModel.db.ToDos.Remove(t);
+                        MainWindowViewModel.db.SaveChanges();
+                        //todos = MainWindowViewModel.db.ToDos.ToList();
+                        
+                    }
+                    isContains = false;  // Ставим чекер false, чтобы продолжить цикл
                 }
-                if (NotesToDo[i].Content != "" && checker == false)
+                todos = MainWindowViewModel.db.ToDos.ToList();
+                bool checker = false;
+                for (int i = 0; i < NotesToDo.Count(); i++)
                 {
-                    toDoTable.Content = NotesToDo[i].Content;
-                    toDoTable.LContent = NotesToDo[i].Target;
-                    MainWindowViewModel.db.ToDos.Attach(toDoTable);
-                    MainWindowViewModel.db.ToDos.Add(toDoTable);
-                    MainWindowViewModel.db.SaveChanges();
+                    foreach (var t in todos)
+                    {
+                        if (NotesToDo[i].Content == t.Content && NotesToDo[i].Target == t.LContent)
+                        {
+                            checker = true;
+                            break;
+                        }
+                    }
+                    if (NotesToDo[i].Content != "" && checker == false)
+                    {
+                        toDoTable.Content = NotesToDo[i].Content;
+                        toDoTable.LContent = NotesToDo[i].Target;
+                        MainWindowViewModel.db.ToDos.Attach(toDoTable);
+                        MainWindowViewModel.db.ToDos.Add(toDoTable);
+                        MainWindowViewModel.db.SaveChanges();
+                        todos = MainWindowViewModel.db.ToDos.ToList();
+                    }
+                    checker = false;
                 }
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка возникла при сохранении заметок To Do");
             }
 
 
