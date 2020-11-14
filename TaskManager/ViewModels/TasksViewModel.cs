@@ -100,12 +100,25 @@ namespace TaskManager.ViewModels
         #region Записи/Заметки Selected
 
         private Note _SelectedNote;
-        //public Note PreviousNote;
 
         public Note SelectedNote
         {
             get
             {
+                if (NotesInProgress.Contains(_SelectedNote) == true || NotesDone.Contains(_SelectedNote) == true)
+                {
+                    if (this.ChangeControlVisibilityRead == Visibility.Visible)
+                    {
+                        this.ChangeControlVisibilityRead = Visibility.Collapsed;
+                    }
+                }
+                else
+                {
+                    if (this.ChangeControlVisibilityRead == Visibility.Collapsed)
+                    {
+                        this.ChangeControlVisibilityRead = Visibility.Visible;
+                    }
+                }
                 return _SelectedNote;
             }
             set
@@ -113,6 +126,7 @@ namespace TaskManager.ViewModels
                 Set(ref _SelectedNote, value);
             }
         }
+
 
         #endregion
 
@@ -147,7 +161,7 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-        #region Visibiliity 
+        #region Visibiliity Кнопки save
 
         private Visibility _Visibility = Visibility.Visible;
 
@@ -155,6 +169,21 @@ namespace TaskManager.ViewModels
         {
             get { return _Visibility; }
             set => Set(ref _Visibility, value);
+        }
+
+        #endregion
+
+        #region Visibiliity Поля для ввода
+
+        private Visibility _VisibilityRead = Visibility.Visible;
+
+        public Visibility ChangeControlVisibilityRead
+        {
+            get { return _VisibilityRead; }
+            set
+            {
+                Set(ref _VisibilityRead, value);
+            }
         }
 
         #endregion

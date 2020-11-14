@@ -183,7 +183,8 @@
         
         <StackPanel Orientation="Vertical"
                     Grid.Row="3"
-                    Grid.ColumnSpan="5">
+                    Grid.ColumnSpan="5"
+                    Visibility="{Binding ChangeControlVisibilityRead}">
             <TextBlock Text="{Binding Label6}"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
@@ -198,7 +199,8 @@
         <StackPanel Orientation="Vertical"
                     Grid.Row="3"
                     Grid.Column="5"
-                    Grid.ColumnSpan="5">
+                    Grid.ColumnSpan="5"
+                    Visibility="{Binding ChangeControlVisibilityRead}">
             <TextBlock Text="{Binding Label7}"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"

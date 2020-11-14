@@ -214,6 +214,7 @@ namespace TaskManager.ViewModels
                                     }
                                     isContains = false;  // Ставим чекер false, чтобы продолжить цикл
                                 }
+                                projects = MainWindowViewModel.db.Projects.ToList();
                                 foreach (var p in projects)
                                 {
                                     if(project.ProjectName == p.ProjectName && project.PersonName == p.MasterName)
@@ -230,8 +231,10 @@ namespace TaskManager.ViewModels
                                     MainWindowViewModel.db.Projects.Attach(projectTable);
                                     MainWindowViewModel.db.Projects.Add(projectTable);
                                     MainWindowViewModel.db.SaveChanges();
+                                    projects = MainWindowViewModel.db.Projects.ToList();
                                 }
                                 MainWindowViewModel._Tasks = new Tasks(); // Открытие tasks
+                                MainWindowViewModel.SecondButtonClick.Execute(obj);
                             }
                             catch
                             {

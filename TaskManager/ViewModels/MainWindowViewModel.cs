@@ -16,7 +16,7 @@ using TaskManager.Data.DataBase.Tables;
 
 namespace TaskManager.ViewModels
 {
-    internal class MainWindowViewModel : ViewModel
+    public class MainWindowViewModel : ViewModel
     {
         #region DBContext
 
@@ -124,12 +124,9 @@ namespace TaskManager.ViewModels
             set
             {
                 Set(ref _CurrentPage, value);
-                if (_Tasks != null && _CurrentPage != _Tasks)
-                {
-                   //DataBaseCommands.SaveToDoContentDB(true);
-                }
             }
         }
+
 
         #endregion
 
@@ -148,7 +145,7 @@ namespace TaskManager.ViewModels
 
         #region Клик кнопки номер 2
 
-        public ICommand SecondButtonClick { get; }
+        public static ICommand SecondButtonClick { get; set; }
 
         private bool CanSecondButtonClickExecute(object p) => MainWindowModel.IsTasksNotEmpty;
 
