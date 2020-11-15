@@ -160,7 +160,7 @@
                 CommandParameter="{Binding ReadSelectedNote}"
                 />
 
-        <!--3 LABels-->
+        <!--3 Labels-->
         <TextBlock Grid.Row="1"
                    Grid.Column="0"
                    Margin="5 0 0 0"

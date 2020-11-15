@@ -165,20 +165,6 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-        #region Visibiliity Поля для ввода
-
-        //private Visibility _VisibilityRead = Visibility.Visible;
-
-        //public Visibility ChangeControlVisibilityRead
-        //{
-        //    get { return _VisibilityRead; }
-        //    set
-        //    {
-        //        Set(ref _VisibilityRead, value);
-        //    }
-        //}
-
-        #endregion
 
         #region Commands
 
@@ -373,6 +359,7 @@ namespace TaskManager.ViewModels
                       if (note != null)
                       {
                           NotesInProgress.Remove(note);
+                          
 
                       }
                   },

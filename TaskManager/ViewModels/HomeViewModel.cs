@@ -147,10 +147,6 @@ namespace TaskManager.ViewModels
                       {
                           Projects.Remove(project);
                           MainWindowModel.IsTasksNotEmpty = false;
-                          //if (this.ChangeControlVisibility == Visibility.Visible)
-                          //{
-                          //    this.ChangeControlVisibility = Visibility.Collapsed;
-                          //}
                           try
                           {
                               var projects = MainWindowViewModel.db.Projects.ToList();
