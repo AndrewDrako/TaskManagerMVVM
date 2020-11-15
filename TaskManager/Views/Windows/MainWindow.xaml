@@ -36,7 +36,6 @@
                     Height="50" FontSize="20"/>
             <Button Content="{Binding Path=ButtonContent5}" Command="{Binding Path=FifthButtonClick}"
                     Height="50" FontSize="20"/>
-            <Button Content="SAVE" Height="50" FontSize="20" Command="{Binding SixButtonClick}"/>
 
             <TextBox Text="{Binding Path=Title, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
