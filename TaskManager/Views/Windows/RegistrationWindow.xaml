@@ -4,10 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TaskManager.Views.Windows"
+        xmlns:vm="clr-namespace:TaskManager.ViewModels"
         mc:Ignorable="d"
         Title="RegistrationWindow" Height="450" Width="400"
-        WindowStartupLocation="CenterScreen"
-        >
+        WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <vm:RegistrationWindowViewModel/>
+    </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -28,47 +31,59 @@
                    Margin="10 10"
                    Text="Введите электронную почту"
                    FontSize="20"
-                   TextAlignment="Center"/>
+                   TextAlignment="Center"
+                   Visibility="{Binding ChangeControlVisibility1}"/>
         <TextBox Grid.Row="1"
                  Grid.ColumnSpan="2"
                  Margin="20 10"
-                 FontSize="20"/>
+                 FontSize="20"
+                 Visibility="{Binding ChangeControlVisibility1}"/>
         <TextBlock Grid.Row="2"
                    Grid.ColumnSpan="2"
                    Margin="10 10"
                    Text="Придумайте имя пользователя"
                    FontSize="20"
-                   TextAlignment="Center"/>
+                   TextAlignment="Center"
+                   Visibility="{Binding ChangeControlVisibility1}"/>
         <TextBox Grid.Row="3"
                  Grid.ColumnSpan="2"
                  Margin="20 10"
-                 FontSize="20"/>
+                 FontSize="20"
+                 Visibility="{Binding ChangeControlVisibility1}"/>
         <TextBlock Grid.Row="4"
                    Grid.ColumnSpan="2"
                    Margin="10 10"
                    Text="Придумайте пароль"
                    FontSize="20"
-                   TextAlignment="Center"/>
+                   TextAlignment="Center"
+                   Visibility="{Binding ChangeControlVisibility1}"/>
         <TextBlock Grid.Row="5"
                    Grid.Column="0"
                    Text="Введите пароль"
-                   TextAlignment="Center"/>
+                   TextAlignment="Center"
+                   Visibility="{Binding ChangeControlVisibility1}"/>
         <TextBlock Grid.Row="5"
                    Grid.Column="1"
                    Text="Введите повторно пароль"
-                   TextAlignment="Center"/>
+                   TextAlignment="Center"
+                   Visibility="{Binding ChangeControlVisibility1}"/>
         <PasswordBox Grid.Column="0"
                      Grid.Row="6"
-                     Margin="10 10"/>
+                     Margin="10 10"
+                     Visibility="{Binding ChangeControlVisibility1}"/>
         <PasswordBox Grid.Column="1"
                      Grid.Row="6"
-                     Margin="10 10"/>
+                     Margin="10 10"
+                     Visibility="{Binding ChangeControlVisibility1}"/>
         <Button Grid.ColumnSpan="2"
                 Grid.Row="7"
                 Margin="120 10"
-                Content="OK"/>
+                Content="OK"
+                Command="{Binding BtnClick}"
+                Visibility="{Binding ChangeControlVisibility1}"/>
         
-        
-        
+
+
+
     </Grid>
 </Window>
