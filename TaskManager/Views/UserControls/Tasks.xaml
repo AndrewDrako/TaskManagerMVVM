@@ -72,7 +72,7 @@
                  Grid.ColumnSpan="3"
                  Margin="5 0 0 0"
                  ItemsSource="{Binding NotesInProgress}"
-                 SelectedItem="{Binding SelectedNote}"
+                 SelectedItem="{Binding ReadSelectedNote}"
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                  VirtualizingPanel.ScrollUnit="Pixel">
             <ListBox.ItemTemplate>
@@ -94,7 +94,7 @@
                  Grid.ColumnSpan="2"
                  Margin="5 0 0 0"
                  ItemsSource="{Binding NotesDone}"
-                 SelectedItem="{Binding SelectedNote}"
+                 SelectedItem="{Binding ReadSelectedNote}"
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                  VirtualizingPanel.ScrollUnit="Pixel">
             <ListBox.ItemTemplate>
@@ -143,21 +143,21 @@
                 Grid.Row="1"
                 Content="-"
                 Command="{Binding RemoveCommandInProgress}"
-                CommandParameter="{Binding SelectedNote}"
+                CommandParameter="{Binding ReadSelectedNote}"
                 />
 
         <Button Grid.Column="7"
                 Grid.Row="1"
                 Content=">"
                 Command="{Binding TransferProjectInProgress}"
-                CommandParameter="{Binding SelectedNote}"
+                CommandParameter="{Binding ReadSelectedNote}"
                 />
         <!---->
         <Button Grid.Column="9"
                 Grid.Row="1"
                 Content="-"
                 Command="{Binding RemoveCommandDone}"
-                CommandParameter="{Binding SelectedNote}"
+                CommandParameter="{Binding ReadSelectedNote}"
                 />
 
         <!--3 LABels-->
@@ -183,8 +183,7 @@
         
         <StackPanel Orientation="Vertical"
                     Grid.Row="3"
-                    Grid.ColumnSpan="5"
-                    Visibility="{Binding ChangeControlVisibilityRead}">
+                    Grid.ColumnSpan="5">
             <TextBlock Text="{Binding Label6}"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
@@ -199,8 +198,7 @@
         <StackPanel Orientation="Vertical"
                     Grid.Row="3"
                     Grid.Column="5"
-                    Grid.ColumnSpan="5"
-                    Visibility="{Binding ChangeControlVisibilityRead}">
+                    Grid.ColumnSpan="5">
             <TextBlock Text="{Binding Label7}"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
