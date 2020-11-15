@@ -29,7 +29,10 @@ namespace TaskManager.ViewModels
         /// </summary>
         public static InProgressTable inProgressTable;
 
-
+        /// <summary>
+        /// Done Column
+        /// </summary>
+        public static DoneTable doneTable;
 
         #endregion
 
@@ -416,7 +419,7 @@ namespace TaskManager.ViewModels
                           }
                           catch
                           {
-                              MessageBox.Show("Проблема возникла при удалении заметки из To Do");
+                              MessageBox.Show("Проблема возникла при удалении заметки из In Progress");
                           }
 
                       }
@@ -439,7 +442,53 @@ namespace TaskManager.ViewModels
                         if (note != null && NotesInProgress.Contains(note) == true)
                         {
                             NotesDone.Insert(0, note);
+                            try
+                            {
+                                bool checker = false;
+                                var dones = MainWindowViewModel.db.Dones.ToList();
+                                foreach(var d in dones)
+                                {
+                                    if (d.Content == note.Content && d.LContent == note.Target)
+                                    {
+                                        checker = true;
+                                        break;
+                                    }
+                                }
+                                if (checker == false)
+                                {
+                                    doneTable.Content = note.Content;
+                                    doneTable.LContent = note.Target;
+                                    MainWindowViewModel.db.Dones.Attach(doneTable);
+                                    MainWindowViewModel.db.Dones.Add(doneTable);
+                                    MainWindowViewModel.db.SaveChanges();
+                                }
+                            }
+                            catch
+                            {
+                                MessageBox.Show("Проблема возникла при переносе(добавлении) заметки из In Progress");
+                            }
                             NotesInProgress.Remove(note);
+                            try
+                            {
+                                var inprogresses = MainWindowViewModel.db.InProgresses.ToList();
+                                foreach (var inp in inprogresses)
+                                {
+                                    if (inp.ProjectId == inProgressTable.ProjectId)
+                                    {
+                                        if (note.Content == inp.Content && note.Target == inp.LContent)
+                                        {
+                                            MainWindowViewModel.db.InProgresses.Attach(inp);
+                                            MainWindowViewModel.db.InProgresses.Remove(inp);
+                                            MainWindowViewModel.db.SaveChanges();
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                            catch
+                            {
+                                MessageBox.Show("Проблема возникла при переносе заметки из In Progress");
+                            }
                         }
                     }));
             }
@@ -463,7 +512,27 @@ namespace TaskManager.ViewModels
                       if (note != null)
                       {
                           NotesDone.Remove(note);
-
+                          try
+                          {
+                              var dones = MainWindowViewModel.db.Dones.ToList();
+                              foreach (var d in dones)
+                              {
+                                  if (d.ProjectId == doneTable.ProjectId)
+                                  {
+                                      if (note.Content == d.Content && note.Target == d.LContent)
+                                      {
+                                          MainWindowViewModel.db.Dones.Attach(d);
+                                          MainWindowViewModel.db.Dones.Remove(d);
+                                          MainWindowViewModel.db.SaveChanges();
+                                          break;
+                                      }
+                                  }
+                              }
+                          }
+                          catch
+                          {
+                              MessageBox.Show("Проблема возникла при удалении заметки из Done");
+                          }
                       }
                   },
                  (obj) => NotesDone.Count > 0));
@@ -490,10 +559,10 @@ namespace TaskManager.ViewModels
         public TasksViewModel()
         {
             #region Конструктор БД
-
-            #region For ToDo and InProgress
+            
             toDoTable = new ToDoTable();
             inProgressTable = new InProgressTable();
+            doneTable = new DoneTable();
             try
             {
                 var projects = MainWindowViewModel.db.Projects.ToList();  // Выгружаем данные из бд в массив
@@ -503,6 +572,7 @@ namespace TaskManager.ViewModels
                     {
                         toDoTable.ProjectId = p.Id;
                         inProgressTable.ProjectId = p.Id;
+                        doneTable.ProjectId = p.Id;
                         break;
                     }
                 }
@@ -511,9 +581,6 @@ namespace TaskManager.ViewModels
             {
                 MessageBox.Show("Ошибка возникла в консрукторе бд для To DO и In Progress");
             }
-
-            #endregion
-
 
             #endregion
 
@@ -565,9 +632,11 @@ namespace TaskManager.ViewModels
                 {
                     if (t.ProjectId == toDoTable.ProjectId)
                     {
-                        Note note = new Note();
-                        note.Content = t.Content;
-                        note.Target = t.LContent;
+                        Note note = new Note
+                        {
+                            Content = t.Content,
+                            Target = t.LContent
+                        };
                         NotesToDo.Add(note);
                     }
                 }
@@ -588,9 +657,11 @@ namespace TaskManager.ViewModels
                 {
                     if (inp.ProjectId == inProgressTable.ProjectId)
                     {
-                        Note note = new Note();
-                        note.Content = inp.Content;
-                        note.Target = inp.LContent;
+                        Note note = new Note
+                        {
+                            Content = inp.Content,
+                            Target = inp.LContent
+                        };
                         NotesInProgress.Add(note);
                     }
                 }
@@ -598,6 +669,31 @@ namespace TaskManager.ViewModels
             catch
             {
                 MessageBox.Show("Ошибка произошла при заполнении коллеции INPROGRESS");
+            }
+
+            #endregion
+
+            #region Заполнение Done
+
+            try
+            {
+                var dones = MainWindowViewModel.db.Dones.ToList();
+                foreach(var d in dones)
+                {
+                    if (d.ProjectId == doneTable.ProjectId)
+                    {
+                        Note note = new Note
+                        {
+                            Content = d.Content,
+                            Target = d.LContent
+                        };
+                        NotesDone.Add(note);
+                    }
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка произошла при заполнении коллеции DONE");
             }
 
             #endregion
