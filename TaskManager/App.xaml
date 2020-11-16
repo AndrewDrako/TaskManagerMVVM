@@ -4,6 +4,5 @@
              xmlns:local="clr-namespace:TaskManager"
              StartupUri="Views/Windows/RegistrationWindow.xaml">
     <Application.Resources>
-         
     </Application.Resources>
 </Application>

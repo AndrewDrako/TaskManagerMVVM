@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using TaskManager.Data.DataBase.Base;
 using TaskManager.Data.DataBase.Tables;
 using TaskManager.ViewModels;
@@ -21,7 +22,11 @@ namespace TaskManager.Data.DataBase
         {
             //await Task.Run(() => db = new MyDbContext());
             await Task.Run(() => db.Users.Load());
-            
+            await Task.Run(() => db.Projects.Load());
+            await Task.Run(() => db.ToDos.Load());
+            await Task.Run(() => db.InProgresses.Load());
+            await Task.Run(() => db.Dones.Load());
+            MessageBox.Show("Соеденение с Бд завершено");
         }
 
         /// <summary>

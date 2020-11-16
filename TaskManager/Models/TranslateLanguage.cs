@@ -200,6 +200,53 @@ namespace TaskManager.Models
 
         #endregion
 
+        #region RegWindow Labels
+
+        // Enter email label
+
+        public static string[] RegLabelEnterEmail = new string[2]
+        {
+            "Enter your email",
+            "Введите свой электронный адрес"
+        };
+
+        // Enter nickname
+
+        public static string[] RegLabelEnterNickname = new string[2]
+        {
+            "What is your nickname",
+            "Придумайте имя пользователя"
+        };
+
+        // Enter password
+
+        public static string[] RegLabelEnterPassword = new string[2]
+        {
+            "Your password",
+            "Придумайте пароль"
+        };
+
+        // Enter password x1
+
+        public static string[] RegLabelEnterPassword1 = new string[2]
+        {
+            "Enter password",
+            "Введите пароль"
+        };
+
+        // Enter password x2
+
+        public static string[] RegLabelEnterPassword2 = new string[2]
+        {
+            "Repeat password",
+            "Повторите пароль"
+        };
+
+
+
+
+        #endregion
+
         public static int iLanguage;
     }
 }

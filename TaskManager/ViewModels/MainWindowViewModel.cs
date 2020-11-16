@@ -13,6 +13,8 @@ using TaskManager.ViewModels.Base;
 using TaskManager.Views.UserControls;
 using TaskManager.Data.DataBase;
 using TaskManager.Data.DataBase.Tables;
+using TaskManager.Views.Windows;
+using System.Threading;
 
 namespace TaskManager.ViewModels
 {
@@ -20,7 +22,7 @@ namespace TaskManager.ViewModels
     {
         #region DBContext
 
-        public static MyDbContext db;
+        public static MyDbContext db = RegistrationWindowViewModel.myDbContext;
 
         public static User user;
 
@@ -220,10 +222,13 @@ namespace TaskManager.ViewModels
 
         #endregion
 
+        public static bool IsReg = false;
+
         #region Конструктор класса MainWindowViewModel
 
         public MainWindowViewModel()
         {
+
             #region Read Language
 
             TranslateLanguage.iLanguage = MainWindowModel.ReadLanguageKey();
@@ -231,22 +236,20 @@ namespace TaskManager.ViewModels
 
             #endregion
 
-
             #region Подключение к БД
 
-            db = new MyDbContext();
-            DataBaseCommands.LoadDB(db);
+            //DataBaseCommands.LoadDB(db);
             user = new User();
             user.UserName = "admin";
             user.Password = "password";
             user.Email = "3954014@gmai.com";
             bool checker = false;
-            int sizedb = db.Users.Local.Count();
+            var users = db.Users.ToList();
             try
             {
-                for (int i = 0; i < sizedb; i++)
+                foreach(var ur in users)
                 {
-                    if (user.Password == db.Users.Local[i].Password)
+                    if (user.Password == ur.Password)
                     {
                         checker = true;
                         break;
@@ -254,7 +257,9 @@ namespace TaskManager.ViewModels
                 }
                 if (checker == false)
                 {
-                    db.Users.Local.Add(user);
+                    db.Users.Attach(user);
+                    db.Users.Add(user);
+                    db.SaveChanges();
                 }
             }
             catch
