@@ -77,9 +77,45 @@ namespace TaskManager.ViewModels
 
         #endregion
 
+        #region Enter key
+        
+        private string _Label6;
 
+        public string Label6
+        {
+            get => TranslateLanguage.RegLabelKey[TranslateLanguage.iLanguage];
+            set => Set(ref _Label6, value);
+        }
 
+        #endregion
 
+        #region Button content
+
+        private string _BtnContent1;
+
+        public string BtnContent1
+        {
+            get => TranslateLanguage.RegBtnOk[TranslateLanguage.iLanguage];
+            set => Set(ref _BtnContent1, value);
+        }
+
+        private string _BtnContent2;
+
+        public string BtnContent2
+        {
+            get => TranslateLanguage.RegBtnAccept[TranslateLanguage.iLanguage];
+            set => Set(ref _BtnContent2, value);
+        }
+
+        private string _BtnContent3;
+
+        public string BtnContent3
+        {
+            get => TranslateLanguage.RegBtnLogIn[TranslateLanguage.iLanguage];
+            set => Set(ref _BtnContent3, value);
+        }
+
+        #endregion
 
         #endregion
 
@@ -142,6 +178,8 @@ namespace TaskManager.ViewModels
 
         #region Команды
 
+        #region Click after enter email, password and username
+
         public ICommand BtnClick { get; }
         private bool CanBtnClickExecute(object p) => true;
         private void OnBtnClickExecuted(object p)
@@ -162,6 +200,9 @@ namespace TaskManager.ViewModels
             this.ChangeControlVisibility2 = Visibility.Visible;
         }
 
+        #endregion
+
+        #region Click after enter key from email
 
         public ICommand BtnClickAccept { get; }
         private bool CanBtnClickAcceptExecute(object p) => true;
@@ -175,15 +216,30 @@ namespace TaskManager.ViewModels
             if (true)
             {
                 MessageBox.Show("Це шикарно");
-                //Application.Current.MainWindow.Show();
                 Window window = new MainWindow();
+                //window.Activate();
                 window.Show();
+                Application.Current.Windows[0].Close();
             }
             else
             {
                 MessageBox.Show("Неверный код");
             }
         }
+
+        #endregion
+
+        #region Log In click
+
+        public ICommand BtnClickLogIn { get; }
+        private bool CanBtnClickLogInExecute(object p) => true;
+        private void OnBtnClickLogInExecuted(object p)
+        {
+            // Создание окна AuthWindow
+            Application.Current.Windows[0].Close();
+        }
+
+        #endregion
 
         #endregion
 
@@ -221,9 +277,13 @@ namespace TaskManager.ViewModels
             AsyncCommands.ConnectToDB(myDbContext);
 
 
-            // Команды
+            #region Commands
+            
             BtnClick = new LambdaCommand(OnBtnClickExecuted, CanBtnClickExecute);
             BtnClickAccept = new LambdaCommand(OnBtnClickAcceptExecuted, CanBtnClickAcceptExecute);
+            BtnClickLogIn = new LambdaCommand(OnBtnClickLogInExecuted, CanBtnClickLogInExecute);
+            
+            #endregion
         }
 
         #endregion

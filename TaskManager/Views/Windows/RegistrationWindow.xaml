@@ -84,12 +84,19 @@
                      Margin="10 10"
                      Visibility="{Binding ChangeControlVisibility1}"
                      />-->
-        <Button Grid.ColumnSpan="2"
+        <Button Grid.Column="0"
                 Grid.Row="7"
-                Margin="120 10"
-                Content="OK"
+                Margin="20 10"
+                Content="{Binding BtnContent1}"
                 Command="{Binding BtnClick}"
                 CommandParameter="{Binding ElementName=regPasswordBox}"
+                Visibility="{Binding ChangeControlVisibility1}"/>
+
+        <Button Grid.Column="1"
+                Grid.Row="7"
+                Margin="20 10"
+                Content="{Binding BtnContent3}"
+                Command="{Binding BtnClickLogIn}"
                 Visibility="{Binding ChangeControlVisibility1}"/>
 
         <TextBlock Text="Проверьте почту и введите ключ из письма"
@@ -108,7 +115,7 @@
                 Grid.RowSpan="2"
                 Grid.Row="6"
                 Margin="150 40"
-                Content="Подтвердить"
+                Content="{Binding BtnContent2}"
                 Command="{Binding BtnClickAccept}"
                 Visibility="{Binding ChangeControlVisibility2}"/>
 

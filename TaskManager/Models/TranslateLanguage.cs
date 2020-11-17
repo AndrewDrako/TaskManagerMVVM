@@ -242,8 +242,33 @@ namespace TaskManager.Models
             "Повторите пароль"
         };
 
+        // Enter Key
 
+        public static string[] RegLabelKey = new string[2]
+        {
+            "Check your mail and enter the key from the letter",
+            "Проверьте почту и введите ключ из письма"
+        };
 
+        // Button content
+
+        public static string[] RegBtnOk = new string[2]
+        {
+            "Next",
+            "Продолжить"
+        };
+
+        public static string[] RegBtnAccept = new string[2]
+        {
+            "Accept",
+            "Подтвердить"
+        };
+
+        public static string[] RegBtnLogIn = new string[2]
+        {
+            "Log In",
+            "Войти"
+        };
 
         #endregion
 
