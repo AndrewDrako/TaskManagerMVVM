@@ -19,7 +19,6 @@ namespace TaskManager.ViewModels
 {
     public class RegistrationWindowViewModel : ViewModel
     {
-        public static MyDbContext myDbContext;
         public static User user;
 
         #region Labels
@@ -186,6 +185,22 @@ namespace TaskManager.ViewModels
         private bool CanBtnClickExecute(object p) => true;
         private void OnBtnClickExecuted(object p)
         {
+            if (UserEmail == null || UserEmail == null)
+            {
+                MessageBox.Show("Заполните поля");
+                return;
+            }
+
+
+            var users = AuthWindowViewModel.dbContext.Users.ToList();
+            foreach(var ur in users)
+            {
+                if (UserName == ur.UserName)
+                {
+                    MessageBox.Show("Введенное имя занято попробуйте другое");
+                    return;
+                }
+            }
             Random rnd = new Random();
             KeyFromEmail = rnd.Next(100000, 999999);
             try
@@ -205,7 +220,7 @@ namespace TaskManager.ViewModels
         #region Click after enter key from email
 
         public ICommand BtnClickAccept { get; }
-        private bool CanBtnClickAcceptExecute(object p) => true;
+        private bool CanBtnClickAcceptExecute(object p) => AuthWindowViewModel._CanClickOk;
         private void OnBtnClickAcceptExecuted(object p)
         {
             if (KeyInput == null)
@@ -221,7 +236,7 @@ namespace TaskManager.ViewModels
                 user.Email = UserEmail;
                 user.Password = password;
                 user.UserName = UserName;
-                var users = myDbContext.Users.ToList();
+                var users = AuthWindowViewModel.dbContext.Users.ToList();
                 var checker = false;
                 foreach(var ur in users)
                 {
@@ -234,14 +249,14 @@ namespace TaskManager.ViewModels
                 }
                 if (checker == false)
                 {
-                    myDbContext.Users.Attach(user);
-                    myDbContext.Users.Add(user);
-                    myDbContext.SaveChanges();
+                    AuthWindowViewModel.dbContext.Users.Attach(user);
+                    AuthWindowViewModel.dbContext.Users.Add(user);
+                    AuthWindowViewModel.dbContext.SaveChanges();
+                    MessageBox.Show("Отлично, у вас есть аккаунт!\nТеперь выполните вход");
+                    Window authWindow = new AuthWindow();
+                    authWindow.Show();
+                    Application.Current.Windows[0].Close();
                 }
-                Window window = new MainWindow();
-                //window.Activate();
-                window.Show();
-                Application.Current.Windows[0].Close();
             }
             else
             {
@@ -297,10 +312,7 @@ namespace TaskManager.ViewModels
 
         public RegistrationWindowViewModel()
         {
-            myDbContext = new MyDbContext();
             user = new User();
-            AsyncCommands.ConnectToDB(myDbContext);
-
 
             #region Commands
             

@@ -15,18 +15,19 @@ namespace TaskManager.Models
 
         public static void PrintLanguageKey(string s)
         {
-            string pathLog = @"D:\language_key.txt";
-            // true - добавлять данные в конец файла. false - перезаписать файл заново
-            using (System.IO.StreamWriter file = new System.IO.StreamWriter(pathLog, false))
+            using (FileStream fstream = new FileStream(@"D:\language_key.txt", FileMode.OpenOrCreate))
             {
-                file.WriteLine(s);
+                // преобразуем строку в байты
+                byte[] array = System.Text.Encoding.Default.GetBytes(s);
+                // запись массива байтов в файл
+                fstream.Write(array, 0, array.Length);
             }
         }
 
         public static int ReadLanguageKey()
         {
             string textFromFile;
-            using (FileStream fstream = File.OpenRead("D:\\language_key.txt"))
+            using (FileStream fstream = File.OpenRead(@"D:\language_key.txt"))
             {
                 // преобразуем строку в байты
                 byte[] array = new byte[fstream.Length];

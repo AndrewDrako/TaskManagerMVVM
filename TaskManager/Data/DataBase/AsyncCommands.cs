@@ -26,7 +26,7 @@ namespace TaskManager.Data.DataBase
             await Task.Run(() => db.ToDos.Load());
             await Task.Run(() => db.InProgresses.Load());
             await Task.Run(() => db.Dones.Load());
-            MessageBox.Show("Соеденение с Бд завершено");
+            AuthWindowViewModel._CanClickOk = true;
         }
 
         /// <summary>
@@ -37,6 +37,7 @@ namespace TaskManager.Data.DataBase
         public static async Task LoadDataFromDB(MyDbContext db)
         {
             await Task.Run(() => db.Users.Load());
+
         }
 
         /// <summary>

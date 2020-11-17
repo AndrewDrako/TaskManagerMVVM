@@ -196,7 +196,7 @@ namespace TaskManager.ViewModels
                                 {
                                     for (int i = 0; i < Projects.Count(); i++)  // Ищем элемент который есть в БД , но отсутсвует в коллекции проектов
                                     {
-                                        if (p.UserId == RegistrationWindowViewModel.user.Id)
+                                        if (p.UserId == projectTable.UserId)
                                         {
                                             if (p.ProjectName == Projects[i].ProjectName && p.MasterName == Projects[i].PersonName)  // Если очередной элемент из Бд присуствует в текущей коллекции, то чекер становиться true, и прекращаем искать
                                             {

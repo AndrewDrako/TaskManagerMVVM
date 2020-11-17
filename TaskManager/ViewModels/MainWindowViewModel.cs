@@ -22,7 +22,7 @@ namespace TaskManager.ViewModels
     {
         #region DBContext
 
-        public static MyDbContext db = RegistrationWindowViewModel.myDbContext;
+        public static MyDbContext db = AuthWindowViewModel.dbContext;
 
         public static User user;
 
@@ -231,41 +231,12 @@ namespace TaskManager.ViewModels
 
             #region Read Language
 
-            TranslateLanguage.iLanguage = MainWindowModel.ReadLanguageKey();
+            //TranslateLanguage.iLanguage = MainWindowModel.ReadLanguageKey();
             _Settings = new Settings();
 
             #endregion
 
             #region Подключение к БД
-
-            //DataBaseCommands.LoadDB(db);
-            //user = new User();
-            //user.UserName = "admin";
-            //user.Password = "password";
-            //user.Email = "3954014@gmai.com";
-            //bool checker = false;
-            //var users = db.Users.ToList();
-            //try
-            //{
-            //    foreach(var ur in users)
-            //    {
-            //        if (user.Password == ur.Password)
-            //        {
-            //            checker = true;
-            //            break;
-            //        }
-            //    }
-            //    if (checker == false)
-            //    {
-            //        db.Users.Attach(user);
-            //        db.Users.Add(user);
-            //        db.SaveChanges();
-            //    }
-            //}
-            //catch
-            //{
-            //    MessageBox.Show("Проблема при подключении бд и юзеров");
-            //}
 
             #endregion
 

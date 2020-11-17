@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using TaskManager.Data.DataBase;
+using TaskManager.Data.DataBase.Base;
 using TaskManager.Data.DataBase.Tables;
 using TaskManager.Infrastructure.Commands;
 using TaskManager.Models;
@@ -16,6 +18,7 @@ namespace TaskManager.ViewModels
 {
     public class AuthWindowViewModel : ViewModel
     {
+        public static MyDbContext dbContext;
         public static User authUser;
 
         #region Labels
@@ -74,17 +77,28 @@ namespace TaskManager.ViewModels
 
         #endregion
 
+        #region Checker unlock button ok
+
+        public static bool _CanClickOk = false;
+        public bool CanClickOk
+        {
+            get => _CanClickOk;
+            set => Set(ref _CanClickOk, value);
+        }
+
+        #endregion
+
         #region Commands
 
         // Команда кнопки ОК
 
-        public ICommand BtnClickOk { get; }
-        private bool CanBtnClickOkExecute(object p) => true;
+        public static ICommand BtnClickOk { get; set; }
+        private bool CanBtnClickOkExecute(object p) => _CanClickOk;
         private void OnBtnClickOkExecuted(object p)
         {
             var passwordBox = p as PasswordBox;
             var password = passwordBox.Password;
-            var users = RegistrationWindowViewModel.myDbContext.Users.ToList();
+            var users = dbContext.Users.ToList();
             var checker = false;
             foreach(var ur in users)
             {
@@ -124,6 +138,20 @@ namespace TaskManager.ViewModels
 
         public AuthWindowViewModel()
         {
+            #region Translation dictionary
+
+            TranslateLanguage.iLanguage = MainWindowModel.ReadLanguageKey();
+
+            #endregion
+
+            #region Связь с БД
+
+            dbContext = new MyDbContext();
+            authUser = new User();
+            AsyncCommands.ConnectToDB(dbContext);
+
+            #endregion
+
             #region Commands
 
             BtnClickOk = new LambdaCommand(OnBtnClickOkExecuted, CanBtnClickOkExecute);
