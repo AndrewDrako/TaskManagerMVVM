@@ -89,7 +89,6 @@
                 Margin="20 10"
                 Content="{Binding BtnContent1}"
                 Command="{Binding BtnClick}"
-                CommandParameter="{Binding ElementName=regPasswordBox}"
                 Visibility="{Binding ChangeControlVisibility1}"/>
 
         <Button Grid.Column="1"
@@ -117,6 +116,7 @@
                 Margin="150 40"
                 Content="{Binding BtnContent2}"
                 Command="{Binding BtnClickAccept}"
+                CommandParameter="{Binding ElementName=regPasswordBox}"
                 Visibility="{Binding ChangeControlVisibility2}"/>
 
 

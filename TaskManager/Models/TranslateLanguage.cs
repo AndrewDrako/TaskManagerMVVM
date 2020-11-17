@@ -272,6 +272,29 @@ namespace TaskManager.Models
 
         #endregion
 
+        #region AuthWindow Labels
+
+        // Enter username
+
+        public static string[] AuthLabelEnterUsername = new string[2]
+        {
+            "Enter your nickname",
+            "Введите имя пользователя"
+        };
+
+        // Enter password
+        // same as RegLabelEnterPassword1
+
+        // Button content register
+
+        public static string[] AuthLabelRegister = new string[2]
+        {
+            "Register",
+            "Зарегистрироваться"
+        };
+
+        #endregion
+
         public static int iLanguage;
     }
 }

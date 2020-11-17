@@ -13,12 +13,14 @@ using System.Windows.Controls;
 using TaskManager.Data.DataBase.Base;
 using TaskManager.Views.Windows;
 using TaskManager.Data.DataBase;
+using TaskManager.Data.DataBase.Tables;
 
 namespace TaskManager.ViewModels
 {
     public class RegistrationWindowViewModel : ViewModel
     {
         public static MyDbContext myDbContext;
+        public static User user;
 
         #region Labels
 
@@ -184,8 +186,6 @@ namespace TaskManager.ViewModels
         private bool CanBtnClickExecute(object p) => true;
         private void OnBtnClickExecuted(object p)
         {
-            var passwordBox = p as PasswordBox;
-            var password = passwordBox.Password;
             Random rnd = new Random();
             KeyFromEmail = rnd.Next(100000, 999999);
             try
@@ -215,7 +215,29 @@ namespace TaskManager.ViewModels
             }
             if (true)
             {
+                var passwordBox = p as PasswordBox;
+                var password = passwordBox.Password;
                 MessageBox.Show("Це шикарно");
+                user.Email = UserEmail;
+                user.Password = password;
+                user.UserName = UserName;
+                var users = myDbContext.Users.ToList();
+                var checker = false;
+                foreach(var ur in users)
+                {
+                    if (user.UserName == ur.UserName && user.Password == ur.Password)
+                    {
+                        checker = true;
+                        MessageBox.Show("У вас уже есть аккаунт");
+                        break;
+                    }
+                }
+                if (checker == false)
+                {
+                    myDbContext.Users.Attach(user);
+                    myDbContext.Users.Add(user);
+                    myDbContext.SaveChanges();
+                }
                 Window window = new MainWindow();
                 //window.Activate();
                 window.Show();
@@ -236,6 +258,8 @@ namespace TaskManager.ViewModels
         private void OnBtnClickLogInExecuted(object p)
         {
             // Создание окна AuthWindow
+            Window authWindow = new AuthWindow();
+            authWindow.Show();
             Application.Current.Windows[0].Close();
         }
 
@@ -274,6 +298,7 @@ namespace TaskManager.ViewModels
         public RegistrationWindowViewModel()
         {
             myDbContext = new MyDbContext();
+            user = new User();
             AsyncCommands.ConnectToDB(myDbContext);
 
 

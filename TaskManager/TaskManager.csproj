@@ -71,6 +71,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\RegModel.cs" />
+    <Compile Include="ViewModels\AuthWindowViewModel.cs" />
     <Compile Include="ViewModels\RegistrationWindowViewModel.cs" />
     <Compile Include="Views\Windows\AuthWindow.xaml.cs">
       <DependentUpon>AuthWindow.xaml</DependentUpon>

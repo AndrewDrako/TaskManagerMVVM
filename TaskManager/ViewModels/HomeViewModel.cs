@@ -188,6 +188,7 @@ namespace TaskManager.ViewModels
                             TasksViewModel._TName = project.PersonName;
                             bool isContains = false; // Чекер для проверки измененных проектов
                             bool checker = false; // Проверка на не повторяющииеся проекты
+                            bool isCurrentProject = false;
                             try
                             {
                                 var projects = MainWindowViewModel.db.Projects.ToList();  // Выгружаем данные из бд в массив
@@ -195,13 +196,17 @@ namespace TaskManager.ViewModels
                                 {
                                     for (int i = 0; i < Projects.Count(); i++)  // Ищем элемент который есть в БД , но отсутсвует в коллекции проектов
                                     {
-                                        if (p.ProjectName == Projects[i].ProjectName && p.MasterName == Projects[i].PersonName)  // Если очередной элемент из Бд присуствует в текущей коллекции, то чекер становиться true, и прекращаем искать
+                                        if (p.UserId == RegistrationWindowViewModel.user.Id)
                                         {
-                                            isContains = true;
-                                            break;
+                                            if (p.ProjectName == Projects[i].ProjectName && p.MasterName == Projects[i].PersonName)  // Если очередной элемент из Бд присуствует в текущей коллекции, то чекер становиться true, и прекращаем искать
+                                            {
+                                                isContains = true;
+                                                break;
+                                            }
+                                            isCurrentProject = true;
                                         }
                                     }
-                                    if (isContains == false)  // Усли очередной эл-нт из бд отсуствует в текущей коллекции, то мы его удаляем из бд
+                                    if (isContains == false && isCurrentProject == true)  // Усли очередной эл-нт из бд отсуствует в текущей коллекции, то мы его удаляем из бд
                                     {
                                         MainWindowViewModel.db.Projects.Attach(p);
                                         MainWindowViewModel.db.Projects.Remove(p);
@@ -260,7 +265,7 @@ namespace TaskManager.ViewModels
             #region Конструтор БД
 
             projectTable = new ProjectTable();
-            projectTable.UserId = MainWindowViewModel.db.Users.Local[0].Id;
+            projectTable.UserId = AuthWindowViewModel.authUser.Id;
 
             #endregion
 
