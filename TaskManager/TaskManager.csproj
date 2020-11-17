@@ -72,6 +72,9 @@
     </ApplicationDefinition>
     <Compile Include="Models\RegModel.cs" />
     <Compile Include="ViewModels\RegistrationWindowViewModel.cs" />
+    <Compile Include="Views\Windows\AuthWindow.xaml.cs">
+      <DependentUpon>AuthWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Windows\RegistrationWindow.xaml.cs">
       <DependentUpon>RegistrationWindow.xaml</DependentUpon>
     </Compile>
@@ -92,6 +95,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserControls\Tasks.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\AuthWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
