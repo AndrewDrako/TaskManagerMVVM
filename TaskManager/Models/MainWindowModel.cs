@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace TaskManager.Models
 {
@@ -15,7 +16,18 @@ namespace TaskManager.Models
 
         public static void PrintLanguageKey(string s)
         {
-            using (FileStream fstream = new FileStream(@"D:\language_key.txt", FileMode.OpenOrCreate))
+            string filename = "language_key.txt";
+            string path = Directory.GetCurrentDirectory();
+            //или ;
+            if (!Directory.Exists(path + "/Files")) //если папки нет - создаем
+            {
+                Directory.CreateDirectory(path + "/Files");
+            }
+            //FileStream fs = File.Create(path + "/Files/" + filename);
+            //StreamWriter writer = new StreamWriter(fs);
+            //writer.Write("text");
+            //writer.Close();
+            using (FileStream fstream = new FileStream(path + "/Files/" + filename, FileMode.OpenOrCreate))
             {
                 // преобразуем строку в байты
                 byte[] array = System.Text.Encoding.Default.GetBytes(s);
@@ -26,9 +38,18 @@ namespace TaskManager.Models
 
         public static int ReadLanguageKey()
         {
-            string textFromFile;
-            using (FileStream fstream = File.OpenRead(@"D:\language_key.txt"))
+            string filename = "language_key.txt";
+            string path = Directory.GetCurrentDirectory();
+            //или ;
+            if (!Directory.Exists(path + "/Files")) //если папки нет - создаем
             {
+                Directory.CreateDirectory(path + "/Files");
+            }
+            
+            string textFromFile;
+            using (FileStream fstream = new FileStream(path + "/Files/" + filename, FileMode.OpenOrCreate))
+            {
+                
                 // преобразуем строку в байты
                 byte[] array = new byte[fstream.Length];
                 // считываем данные
@@ -37,13 +58,13 @@ namespace TaskManager.Models
                 textFromFile = System.Text.Encoding.Default.GetString(array);
                 
             }
-            if (textFromFile == "English\r\n")
+            if (textFromFile == "English")
             {
                 return 0;
             }
             else
             {
-                if (textFromFile == "Russian\r\n")
+                if (textFromFile == "Russian")
                 {
                     return 1;
                 }

@@ -92,8 +92,8 @@ namespace TaskManager.ViewModels
 
         // Команда кнопки ОК
 
-        public static ICommand BtnClickOk { get; set; }
-        private bool CanBtnClickOkExecute(object p) => _CanClickOk;
+        public  ICommand BtnClickOk { get; }
+        private bool CanBtnClickOkExecute(object p) => CanClickOk;
         private void OnBtnClickOkExecuted(object p)
         {
             var passwordBox = p as PasswordBox;
