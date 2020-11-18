@@ -32,8 +32,6 @@ namespace TaskManager.ViewModels
         #region Projects
         public static Project _SelectedProject;
         
-        //public static bool check = true;
-
         public Project SelectedProject
         {
             get 
@@ -58,7 +56,7 @@ namespace TaskManager.ViewModels
         #region Labels
 
         private string _Welcome;
-        private string _Email = "3954014@gmail.com";  
+        private string _Email = AuthWindowViewModel.authUser.Email;  
         private string _Label2;
         private string _Label3;
         private string _Label4;

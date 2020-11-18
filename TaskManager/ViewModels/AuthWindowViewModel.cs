@@ -107,6 +107,7 @@ namespace TaskManager.ViewModels
                     checker = true;
                     authUser = new User();
                     authUser.Id = ur.Id;
+                    authUser.Email = ur.Email;
                     Window mainWindow = new MainWindow();
                     mainWindow.Show();
                     Application.Current.Windows[0].Close();

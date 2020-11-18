@@ -232,7 +232,6 @@ namespace TaskManager.ViewModels
             {
                 var passwordBox = p as PasswordBox;
                 var password = passwordBox.Password;
-                MessageBox.Show("Це шикарно");
                 user.Email = UserEmail;
                 user.Password = password;
                 user.UserName = UserName;

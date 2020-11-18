@@ -26,6 +26,7 @@
                    Height="150"
                    Width="300"
                    Fill="LightPink"/>
+        
         <TextBlock Text="{Binding Email}"
                    Grid.Row="1"
                    Grid.ColumnSpan="2"
@@ -39,12 +40,14 @@
         <Button Grid.Column="0"
                 Grid.Row="2"
                 Margin="250 30 30 120"
-                Content="{Binding ButtonLabel1}"/>
-
+                Content="{Binding ButtonLabel1}"
+                Command="{Binding BtnClickLogOut}"/>
+        
         <Button Grid.Column="1"
                 Grid.Row="2"
                 Margin="30 30 250 120"
-                Content="{Binding ButtonLabel2}"/>
+                Content="{Binding ButtonLabel2}"
+                Command="{Binding BtnClickCreate}"/>
 
     </Grid>
 </UserControl>
