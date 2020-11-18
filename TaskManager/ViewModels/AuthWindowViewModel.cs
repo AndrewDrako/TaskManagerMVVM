@@ -110,6 +110,7 @@ namespace TaskManager.ViewModels
                     authUser.Email = ur.Email;
                     Window mainWindow = new MainWindow();
                     mainWindow.Show();
+                    AuthWindowModel.PrintKey("Can");
                     Application.Current.Windows[0].Close();
                     break;
                 }
@@ -139,6 +140,13 @@ namespace TaskManager.ViewModels
 
         public AuthWindowViewModel()
         {
+            #region With auth and registration or not
+
+            AuthWindowModel.Key = AuthWindowModel.ReadKey();
+
+            #endregion
+
+
             #region Translation dictionary
 
             TranslateLanguage.iLanguage = MainWindowModel.ReadLanguageKey();
@@ -149,7 +157,22 @@ namespace TaskManager.ViewModels
 
             dbContext = new MyDbContext();
             authUser = new User();
-            AsyncCommands.ConnectToDB(dbContext);
+            if (AuthWindowModel.Key == 0)
+            {
+                AsyncCommands.ConnectToDB(dbContext);
+            }
+            else
+            {
+                if (AuthWindowModel.Key == 1)
+                {
+                    DataBaseCommands.LoadDB(dbContext);
+                    Window mainWindow = new MainWindow();
+                    mainWindow.Show();
+                    Application.Current.Windows[0].Close();
+
+                    // из txt вставляем имя пользователя 
+                }
+            }
 
             #endregion
 

@@ -19,6 +19,8 @@ namespace TaskManager.Data.DataBase
             db.Users.Load();
             db.Projects.Load();
             db.ToDos.Load();
+            db.InProgresses.Load();
+            db.Dones.Load();
         }
 
         //public static void SaveToDb(int i, string s)

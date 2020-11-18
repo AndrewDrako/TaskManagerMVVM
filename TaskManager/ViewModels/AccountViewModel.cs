@@ -42,6 +42,7 @@ namespace TaskManager.ViewModels
         private bool CanBtnClickLogOutExecute(object p) => true;
         private void OnBtnClickLogOutExecuted(object p)
         {
+            AuthWindowModel.PrintKey("Cannot");
             Window authWindow = new AuthWindow();
             authWindow.Show();
             Application.Current.Windows[0].Close();
@@ -53,6 +54,7 @@ namespace TaskManager.ViewModels
         private bool CanBtnClickCreateExecute(object p) => true;
         private void OnBtnClickCreateExecuted(object p)
         {
+            AuthWindowModel.PrintKey("Cannot");
             Window regWindow = new RegistrationWindow();
             regWindow.Show();
             Application.Current.Windows[0].Close();
