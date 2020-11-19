@@ -110,7 +110,8 @@ namespace TaskManager.ViewModels
                     authUser.Email = ur.Email;
                     Window mainWindow = new MainWindow();
                     mainWindow.Show();
-                    AuthWindowModel.PrintKey("Can");
+                    AuthWindowModel.PrintKey("Can", "authreg_key.txt");
+                    AuthWindowModel.PrintKey(ur.UserName, "last_user_name.txt");
                     Application.Current.Windows[0].Close();
                     break;
                 }
@@ -166,11 +167,21 @@ namespace TaskManager.ViewModels
                 if (AuthWindowModel.Key == 1)
                 {
                     DataBaseCommands.LoadDB(dbContext);
+                    authUser.UserName = AuthWindowModel.ReadLastUserName();  // из txt вставляем имя пользователя 
+                    var users = dbContext.Users.ToList();
+                    foreach(var ur in users)
+                    {
+                        if (ur.UserName == authUser.UserName)
+                        {
+                            authUser.Id = ur.Id;
+                            authUser.Password = ur.Password;
+                            authUser.Email = ur.Email;
+                            break;
+                        }
+                    }
                     Window mainWindow = new MainWindow();
                     mainWindow.Show();
                     Application.Current.Windows[0].Close();
-
-                    // из txt вставляем имя пользователя 
                 }
             }
 
