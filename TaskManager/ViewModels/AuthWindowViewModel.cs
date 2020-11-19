@@ -187,6 +187,7 @@ namespace TaskManager.ViewModels
 
             #endregion
 
+
             #region Commands
 
             BtnClickOk = new LambdaCommand(OnBtnClickOkExecuted, CanBtnClickOkExecute);
