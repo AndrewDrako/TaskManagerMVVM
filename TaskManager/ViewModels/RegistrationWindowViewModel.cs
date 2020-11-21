@@ -19,7 +19,6 @@ namespace TaskManager.ViewModels
 {
     public class RegistrationWindowViewModel : ViewModel
     {
-        public static User user;
 
         #region Labels
 
@@ -92,6 +91,8 @@ namespace TaskManager.ViewModels
 
         #region Button content
 
+        // Ok
+
         private string _BtnContent1;
 
         public string BtnContent1
@@ -100,6 +101,8 @@ namespace TaskManager.ViewModels
             set => Set(ref _BtnContent1, value);
         }
 
+        // Accept key from email
+
         private string _BtnContent2;
 
         public string BtnContent2
@@ -107,6 +110,8 @@ namespace TaskManager.ViewModels
             get => TranslateLanguage.RegBtnAccept[TranslateLanguage.iLanguage];
             set => Set(ref _BtnContent2, value);
         }
+
+        // Log In
 
         private string _BtnContent3;
 
@@ -120,7 +125,7 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-        #region TextBoxes
+        #region OutPuts
 
         #region Email
 
@@ -141,26 +146,6 @@ namespace TaskManager.ViewModels
             get => _UserName;
             set => Set(ref _UserName, value);
         }
-
-        #endregion
-
-        #region Passwords
-
-        private SecureString _Password1;
-        public SecureString Password1
-        {
-            get => _Password1;
-            set => Set(ref _Password1, value);
-        }
-
-        private SecureString _Password2;
-        public SecureString Password2
-        {
-            get => _Password2;
-            set => Set(ref _Password2, value);
-        }
-
-
 
         #endregion
 
@@ -191,15 +176,11 @@ namespace TaskManager.ViewModels
                 return;
             }
 
-
-            var users = AuthWindowViewModel.dbContext.Users.ToList();
-            foreach(var ur in users)
+            User user = Model.FindUser(AuthWindowViewModel.dbContext, UserName);
+            if (user != null)
             {
-                if (UserName == ur.UserName)
-                {
-                    MessageBox.Show("Введенное имя занято попробуйте другое");
-                    return;
-                }
+                MessageBox.Show("Введенное имя занято попробуйте другое");
+                return;
             }
             Random rnd = new Random();
             KeyFromEmail = rnd.Next(100000, 999999);
@@ -232,22 +213,20 @@ namespace TaskManager.ViewModels
             {
                 var passwordBox = p as PasswordBox;
                 var password = passwordBox.Password;
-                user.Email = UserEmail;
-                user.Password = password;
-                user.UserName = UserName;
-                var users = AuthWindowViewModel.dbContext.Users.ToList();
-                var checker = false;
-                foreach(var ur in users)
+
+                User user = Model.FindUser(AuthWindowViewModel.dbContext, password, UserName);
+                if (user != null)
                 {
-                    if (user.UserName == ur.UserName && user.Password == ur.Password)
-                    {
-                        checker = true;
-                        MessageBox.Show("У вас уже есть аккаунт");
-                        break;
-                    }
+                    MessageBox.Show("У вас уже есть аккаунт");
                 }
-                if (checker == false)
+                else
                 {
+                    user = new User
+                    {
+                        Email = UserEmail,
+                        Password = password,
+                        UserName = UserName
+                    };
                     AuthWindowViewModel.dbContext.Users.Attach(user);
                     AuthWindowViewModel.dbContext.Users.Add(user);
                     AuthWindowViewModel.dbContext.SaveChanges();
@@ -283,6 +262,8 @@ namespace TaskManager.ViewModels
 
         #region Visibility 
 
+        // Visibilite first page
+
         private Visibility _VisibilityFirst = Visibility.Visible;
 
         public Visibility ChangeControlVisibility1
@@ -290,6 +271,8 @@ namespace TaskManager.ViewModels
             get { return _VisibilityFirst; }
             set => Set(ref _VisibilityFirst, value);
         }
+
+        // Visibility second page
 
         private Visibility _VisibilitySecond = Visibility.Collapsed;
 
@@ -301,7 +284,7 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-        #region Key from email
+        #region Random Key from email
 
         public static int KeyFromEmail;
 
@@ -311,8 +294,6 @@ namespace TaskManager.ViewModels
 
         public RegistrationWindowViewModel()
         {
-            user = new User();
-
             #region Commands
             
             BtnClick = new LambdaCommand(OnBtnClickExecuted, CanBtnClickExecute);
