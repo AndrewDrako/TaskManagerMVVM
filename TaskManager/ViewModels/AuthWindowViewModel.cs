@@ -18,8 +18,12 @@ namespace TaskManager.ViewModels
 {
     public class AuthWindowViewModel : ViewModel
     {
+        #region DbContext and User
+
         public static MyDbContext dbContext;
         public static User authUser;
+
+        #endregion
 
         #region Labels
 
@@ -67,6 +71,8 @@ namespace TaskManager.ViewModels
 
         #region Outputs
 
+        #region Username/Nickname
+
         private string _Username;
 
         public string Username
@@ -74,6 +80,8 @@ namespace TaskManager.ViewModels
             get => _Username;
             set => Set(ref _Username, value);
         }
+
+        #endregion
 
         #endregion
 
@@ -96,28 +104,22 @@ namespace TaskManager.ViewModels
         private bool CanBtnClickOkExecute(object p) => CanClickOk;
         private void OnBtnClickOkExecuted(object p)
         {
-            var passwordBox = p as PasswordBox;
+            var passwordBox = p as PasswordBox; 
             var password = passwordBox.Password;
-            var users = dbContext.Users.ToList();
-            var checker = false;
-            foreach(var ur in users)
+
+            User user = Model.FindUser(dbContext, password, Username);
+            if(user != null)
             {
-                if (ur.Password == password && ur.UserName == Username)
-                {
-                    checker = true;
-                    authUser = new User();
-                    authUser.Id = ur.Id;
-                    authUser.Email = ur.Email;
-                    Window mainWindow = new MainWindow();
-                    mainWindow.Show();
-                    AuthWindowModel.PrintKey("Can", "authreg_key.txt");
-                    AuthWindowModel.PrintKey(ur.UserName, "last_user_name.txt");
-                    Application.Current.Windows[0].Close();
-                    break;
-                }
-                
+                authUser = new User();
+                authUser.Id = user.Id;
+                authUser.Email = user.Email;
+                Window mainWindow = new MainWindow();
+                mainWindow.Show();
+                AuthWindowModel.PrintKey("Can", "authreg_key.txt");
+                AuthWindowModel.PrintKey(user.UserName, "last_user_name.txt");
+                Application.Current.Windows[0].Close();
             }
-            if (checker == false)
+            else
             {
                 MessageBox.Show("Неверное имя пользователя или пароль");
             }
@@ -136,7 +138,6 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-
         #region Конструктор
 
         public AuthWindowViewModel()
@@ -146,7 +147,6 @@ namespace TaskManager.ViewModels
             AuthWindowModel.Key = AuthWindowModel.ReadKey();
 
             #endregion
-
 
             #region Translation dictionary
 
@@ -167,26 +167,25 @@ namespace TaskManager.ViewModels
                 if (AuthWindowModel.Key == 1)
                 {
                     DataBaseCommands.LoadDB(dbContext);
-                    authUser.UserName = AuthWindowModel.ReadLastUserName();  // из txt вставляем имя пользователя 
-                    var users = dbContext.Users.ToList();
-                    foreach(var ur in users)
+                    User user = Model.FindUser(dbContext, AuthWindowModel.ReadLastUserName());  // из txt вставляем имя пользователя 
+                    if (user != null)
                     {
-                        if (ur.UserName == authUser.UserName)
-                        {
-                            authUser.Id = ur.Id;
-                            authUser.Password = ur.Password;
-                            authUser.Email = ur.Email;
-                            break;
-                        }
+                        authUser.Id = user.Id;
+                        authUser.Password = user.Password;
+                        authUser.Email = user.Email;
+                        Window mainWindow = new MainWindow();
+                        mainWindow.Show();
+                        Application.Current.Windows[0].Close();
                     }
-                    Window mainWindow = new MainWindow();
-                    mainWindow.Show();
-                    Application.Current.Windows[0].Close();
+                    else
+                    {
+                        MessageBox.Show("Ошибка возникла со связью с БД\n(AuthWindowViewModel/конструктор/Связь с БД)");
+                    }
+
                 }
             }
 
             #endregion
-
 
             #region Commands
 
