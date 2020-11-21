@@ -24,8 +24,6 @@ namespace TaskManager.ViewModels
 
         public static MyDbContext db = AuthWindowViewModel.dbContext;
 
-        public static User user;
-
         #endregion
 
         #region Страницы приложения
@@ -37,6 +35,8 @@ namespace TaskManager.ViewModels
         private UserControl _Help;
 
         #endregion
+
+        #region Labels
 
         #region Заголовок окна
 
@@ -116,6 +116,8 @@ namespace TaskManager.ViewModels
 
         #endregion
 
+        #endregion
+
         #region Основная (текущая страница)
 
         private UserControl _CurrentPage;
@@ -129,8 +131,9 @@ namespace TaskManager.ViewModels
             }
         }
 
-
         #endregion
+
+        #region Commands
 
         #region Клик кнопки номер 1
 
@@ -222,23 +225,12 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-        public static bool IsReg = false;
+        #endregion
 
-        #region Конструктор класса MainWindowViewModel
-
+        #region Конструктор 
         public MainWindowViewModel()
-        {
-
-            #region Read Language
-
-            //TranslateLanguage.iLanguage = MainWindowModel.ReadLanguageKey();
+        { 
             _Settings = new Settings();
-
-            #endregion
-
-            #region Подключение к БД
-
-            #endregion
 
             #region Создание окон
 
@@ -264,12 +256,6 @@ namespace TaskManager.ViewModels
 
 
             #endregion
-
-            #region Конструктор БД
-
-            
-
-            #endregion            
 
         }
 
