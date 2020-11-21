@@ -568,12 +568,15 @@ namespace TaskManager.ViewModels
                 var projects = MainWindowViewModel.db.Projects.ToList();  // Выгружаем данные из бд в массив
                 foreach (var p in projects)
                 {
-                    if (_PName == p.ProjectName && _TName == p.MasterName)
+                    if (p.UserId == AuthWindowViewModel.authUser.Id)
                     {
-                        toDoTable.ProjectId = p.Id;
-                        inProgressTable.ProjectId = p.Id;
-                        doneTable.ProjectId = p.Id;
-                        break;
+                        if (_PName == p.ProjectName && _TName == p.MasterName)
+                        {
+                            toDoTable.ProjectId = p.Id;
+                            inProgressTable.ProjectId = p.Id;
+                            doneTable.ProjectId = p.Id;
+                            break;
+                        }
                     }
                 }
             }

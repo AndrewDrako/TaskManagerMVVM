@@ -23,13 +23,14 @@ namespace TaskManager.ViewModels
 {
     internal class HomeViewModel : ViewModel
     {
-        #region  data base Записи в таблице ProjectTable
+        #region  data base: Записи в таблице ProjectTable
 
         public static ProjectTable projectTable;
 
         #endregion
 
-        #region Projects
+        #region  selected project
+
         public static Project _SelectedProject;
         
         public Project SelectedProject
@@ -47,7 +48,7 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-        #region Коллекция проектов
+        #region Коллекция проектов в приложении
 
         public ObservableCollection<Project> Projects { get; set; }
 
@@ -73,17 +74,23 @@ namespace TaskManager.ViewModels
             set => Set(ref _Email, value);
         }
 
+        // Выбранный проект
+
         public string Label2
         {
             get => TranslateLanguage.LabelSP[TranslateLanguage.iLanguage];
             set => Set(ref _Label2, value);
         }
 
+        // Имя проекта
+
         public string Label3
         {
             get => TranslateLanguage.LabelPN[TranslateLanguage.iLanguage];
             set => Set(ref _Label3, value);
         }
+
+        // Имя команды работающей над проектом
 
         public string Label4
         {
@@ -107,7 +114,7 @@ namespace TaskManager.ViewModels
 
         #region Команды
 
-        // Команда добавления проекта
+        #region Добавление проекта
 
         private RelayCommand addCommand;
         public RelayCommand AddCommand
@@ -118,10 +125,6 @@ namespace TaskManager.ViewModels
                 return addCommand ??
                   (addCommand = new RelayCommand(obj =>
                   {
-                      //if (this.ChangeControlVisibility == Visibility.Collapsed)
-                      //{
-                      //    this.ChangeControlVisibility = Visibility.Visible;
-                      //}
                       Project project = new Project();
                       Projects.Insert(0, project);
                       SelectedProject = project;
@@ -130,7 +133,9 @@ namespace TaskManager.ViewModels
             }
         }
 
-        // Команда удаления проекта
+        #endregion
+
+        #region Удаление проекта
 
         private RelayCommand removeCommand;
         public RelayCommand RemoveCommand
@@ -145,30 +150,16 @@ namespace TaskManager.ViewModels
                       {
                           Projects.Remove(project);
                           MainWindowModel.IsTasksNotEmpty = false;
-                          try
-                          {
-                              var projects = MainWindowViewModel.db.Projects.ToList();
-                              foreach(var p in projects)
-                              {
-                                  if (p.ProjectName == project.ProjectName)
-                                  {
-                                      MainWindowViewModel.db.Projects.Attach(p);
-                                      MainWindowViewModel.db.Projects.Remove(p);
-                                      MainWindowViewModel.db.SaveChanges();
-                                  }
-                              }
-                          }
-                          catch
-                          {
-                              MessageBox.Show("проблема возникла при удалении проекта");
-                          }
+                          Model.RemoveProjectFromDB(MainWindowViewModel.db, project);
                       }
                   },
                  (obj) => Projects.Count > 0));
             }
         }
 
-        // Команда выбора проекта
+        #endregion
+
+        #region Выбор проекта
 
         private RelayCommand selectProject;
         public RelayCommand SelectProject
@@ -184,66 +175,17 @@ namespace TaskManager.ViewModels
                             MainWindowModel.IsTasksNotEmpty = true;  // Разблокировка кнопки tasks
                             TasksViewModel._PName = project.ProjectName;
                             TasksViewModel._TName = project.PersonName;
-                            bool isContains = false; // Чекер для проверки измененных проектов
-                            bool checker = false; // Проверка на не повторяющииеся проекты
-                            bool isCurrentProject = false;
-                            try
-                            {
-                                var projects = MainWindowViewModel.db.Projects.ToList();  // Выгружаем данные из бд в массив
-                                foreach (var p in projects)  // Идем по массиву
-                                {
-                                    for (int i = 0; i < Projects.Count(); i++)  // Ищем элемент который есть в БД , но отсутсвует в коллекции проектов
-                                    {
-                                        if (p.UserId == projectTable.UserId)
-                                        {
-                                            if (p.ProjectName == Projects[i].ProjectName && p.MasterName == Projects[i].PersonName)  // Если очередной элемент из Бд присуствует в текущей коллекции, то чекер становиться true, и прекращаем искать
-                                            {
-                                                isContains = true;
-                                                break;
-                                            }
-                                            isCurrentProject = true;
-                                        }
-                                    }
-                                    if (isContains == false && isCurrentProject == true)  // Усли очередной эл-нт из бд отсуствует в текущей коллекции, то мы его удаляем из бд
-                                    {
-                                        MainWindowViewModel.db.Projects.Attach(p);
-                                        MainWindowViewModel.db.Projects.Remove(p);
-                                        MainWindowViewModel.db.SaveChanges();
-                                        break;
-                                    }
-                                    isContains = false;  // Ставим чекер false, чтобы продолжить цикл
-                                }
-                                projects = MainWindowViewModel.db.Projects.ToList();
-                                foreach (var p in projects)
-                                {
-                                    if(project.ProjectName == p.ProjectName && project.PersonName == p.MasterName)
-                                    {
+                            Model.EditProjectName(MainWindowViewModel.db, Projects, projectTable.UserId);
+                            Model.AddProjectToDB(MainWindowViewModel.db, project, projectTable);
+                            MainWindowViewModel._Tasks = new Tasks(); // Открытие tasks
+                            MainWindowViewModel.SecondButtonClick.Execute(obj);
 
-                                        checker = true;
-                                        break;
-                                    }
-                                }
-                                if (checker == false)
-                                {
-                                    projectTable.ProjectName = project.ProjectName;
-                                    projectTable.MasterName = project.PersonName;
-                                    MainWindowViewModel.db.Projects.Attach(projectTable);
-                                    MainWindowViewModel.db.Projects.Add(projectTable);
-                                    MainWindowViewModel.db.SaveChanges();
-                                    projects = MainWindowViewModel.db.Projects.ToList();
-                                }
-                                MainWindowViewModel._Tasks = new Tasks(); // Открытие tasks
-                                MainWindowViewModel.SecondButtonClick.Execute(obj);
-                            }
-                            catch
-                            {
-                                MessageBox.Show("Проблема возникла при выборе проекта");
-                            }
-                            
                         }
                     }));
             }
         }
+
+        #endregion
 
         #endregion
 
@@ -276,9 +218,11 @@ namespace TaskManager.ViewModels
                 {
                     if (p.UserId == projectTable.UserId)
                     {
-                        Project pr = new Project();
-                        pr.ProjectName = p.ProjectName;
-                        pr.PersonName = p.MasterName;
+                        Project pr = new Project
+                        {
+                            ProjectName = p.ProjectName,
+                            PersonName = p.MasterName
+                        };
                         Projects.Add(pr);
                     }
                 }
@@ -290,9 +234,6 @@ namespace TaskManager.ViewModels
             
             #endregion
 
-            #region Commands
-
-            #endregion
         }
 
         #endregion
