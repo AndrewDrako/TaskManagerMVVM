@@ -18,6 +18,9 @@ namespace TaskManager.ViewModels
 
         private string _LabelLanguage = TranslateLanguage.LabelSettings1[TranslateLanguage.iLanguage];
 
+        /// <summary>
+        /// Label Change language
+        /// </summary>
         public string LabelLanguage
         {
             get => _LabelLanguage;
@@ -26,6 +29,9 @@ namespace TaskManager.ViewModels
 
         private string _LabelAddColors = TranslateLanguage.LabelSettings2[TranslateLanguage.iLanguage];
 
+        /// <summary>
+        /// Label Do you want to add colors
+        /// </summary>
         public string LabelAddColors
         {
             get => _LabelAddColors;
@@ -34,6 +40,9 @@ namespace TaskManager.ViewModels
 
         private string _LabelButtonApply = TranslateLanguage.LabelSettingsButton[TranslateLanguage.iLanguage];
 
+        /// <summary>
+        /// Label content button accept
+        /// </summary>
         public string LabelButtonApply
         {
             get => _LabelButtonApply;
@@ -84,6 +93,8 @@ namespace TaskManager.ViewModels
 
         public SettingsViewModel()
         {
+            #region Install Language
+
             Languages = new ObservableCollection<AppLanguage>
             {
                 new AppLanguage {Language = "English"},
@@ -92,8 +103,13 @@ namespace TaskManager.ViewModels
             };
             _SelectedLanguage = Languages[TranslateLanguage.iLanguage];
 
-            // Comands
+            #endregion
+
+            #region Commands
+
             ButtonSaveSettingsClick = new LambdaCommand(OnButtonSaveSettingsClickExecuted, CanButtonSaveSettingsClickExecute);
+
+            #endregion
         }
 
         #endregion

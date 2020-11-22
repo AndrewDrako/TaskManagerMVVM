@@ -34,7 +34,14 @@ namespace TaskManager.ViewModels
 
         private void OnButtonClickMyContact1Executed(object p)
         {
-            Process.Start("https://vk.com/andrew_drako");
+            try
+            {
+                Process.Start("https://vk.com/andrew_drako");
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка открытия браузера, попробуйте снова");
+            }
         }
 
         // LinkedIn
@@ -45,7 +52,14 @@ namespace TaskManager.ViewModels
 
         private void OnButtonClickMyContact2Executed(object p)
         {
-            Process.Start("https://www.linkedin.com/in/andrew-drako-30b8ab193/");
+            try
+            {
+                Process.Start("https://www.linkedin.com/in/andrew-drako-30b8ab193/");
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка открытия браузера, попробуйте снова");
+            }
         }
 
         // GitHub
@@ -56,7 +70,14 @@ namespace TaskManager.ViewModels
 
         private void OnButtonClickMyContact3Executed(object p)
         {
-            Process.Start("https://github.com/AndrewDrako");
+            try
+            {
+                Process.Start("https://github.com/AndrewDrako");
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка открытия браузера, попробуйте снова");
+            }
         }
 
         // Instagram
@@ -67,9 +88,14 @@ namespace TaskManager.ViewModels
 
         private void OnButtonClickMyContact4Executed(object p)
         {
-            Process.Start("https://www.instagram.com/andrew_drako/");
-            //System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
-            //Application.Current.Shutdown();
+            try
+            {
+                Process.Start("https://www.instagram.com/andrew_drako/");
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка открытия браузера, попробуйте снова");
+            }
         }
 
         #endregion
