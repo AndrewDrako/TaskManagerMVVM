@@ -9,7 +9,7 @@ namespace TaskManager.Models
 {
     public class AuthWindowModel
     {
-        public static int Key;
+        public static int Key; 
         public static void PrintKey(string s, string filename)
         {
             //string filename = "authreg_key.txt";
