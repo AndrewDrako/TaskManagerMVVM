@@ -11,7 +11,7 @@ using TaskManager.Data.DataBase.Tables;
 namespace TaskManager.Models
 {
     public class Model
-    {
+    { 
         public static User FindUser(MyDbContext myDbContext, string password, string userName)
         {
             var users = myDbContext.Users.ToList();
