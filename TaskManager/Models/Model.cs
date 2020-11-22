@@ -127,5 +127,209 @@ namespace TaskManager.Models
                 MessageBox.Show("Исключение возникло при добавлении проекта(выборе)");
             }
         }
+
+        public static void RemoveNoteFromDB(MyDbContext myDbContext, Note note, int projectId, string s)
+        {
+            if (s == "TODO")
+            {
+                try
+                {
+                    var todos = myDbContext.ToDos.ToList();
+                    foreach (var t in todos)
+                    {
+                        if (t.ProjectId == projectId)
+                        {
+                            if (note.Content == t.Content && note.Target == t.LContent)
+                            {
+                                myDbContext.ToDos.Attach(t);
+                                myDbContext.ToDos.Remove(t);
+                                myDbContext.SaveChanges();
+                                break;
+                            }
+                        }
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("Проблема возникла при удалении заметки из To Do");
+                }
+            }
+            if (s == "INPROGRESS")
+            {
+                try
+                {
+                    var inprogresses = myDbContext.InProgresses.ToList();
+                    foreach (var inp in inprogresses)
+                    {
+                        if (inp.ProjectId == projectId)
+                        {
+                            if (note.Content == inp.Content && note.Target == inp.LContent)
+                            {
+                                myDbContext.InProgresses.Attach(inp);
+                                myDbContext.InProgresses.Remove(inp);
+                                myDbContext.SaveChanges();
+                                break;
+                            }
+                        }
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("Проблема возникла при удалении заметки из In Progress");
+                }
+            }
+            if(s == "DONE")
+            {
+                try
+                {
+                    var dones = myDbContext.Dones.ToList();
+                    foreach (var d in dones)
+                    {
+                        if (d.ProjectId == projectId)
+                        {
+                            if (note.Content == d.Content && note.Target == d.LContent)
+                            {
+                                myDbContext.Dones.Attach(d);
+                                myDbContext.Dones.Remove(d);
+                                myDbContext.SaveChanges();
+                                break;
+                            }
+                        }
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("Проблема возникла при удалении заметки из Done");
+                }
+            }
+        }
+
+        public static void TransferTo(MyDbContext myDbContext, Note note , InProgressTable inProgressTable)
+        {
+            try
+            {
+                bool checker = false;
+                var inprogresses = myDbContext.InProgresses.ToList();
+                foreach (var inp in inprogresses)
+                {
+                    if (inp.Content == note.Content && inp.LContent == note.Target)
+                    {
+                        checker = true;
+                        break;
+                    }
+                }
+                if (checker == false)
+                {
+                    inProgressTable.Content = note.Content;
+                    inProgressTable.LContent = note.Target;
+                    myDbContext.InProgresses.Attach(inProgressTable);
+                    myDbContext.InProgresses.Add(inProgressTable);
+                    myDbContext.SaveChanges();
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка возникла при переносе заметки в In Progress");
+            }
+        }
+
+        public static void TransferTo(MyDbContext myDbContext, Note note, DoneTable doneTable)
+        {
+            try
+            {
+                bool checker = false;
+                var dones = myDbContext.Dones.ToList();
+                foreach (var d in dones)
+                {
+                    if (d.Content == note.Content && d.LContent == note.Target)
+                    {
+                        checker = true;
+                        break;
+                    }
+                }
+                if (checker == false)
+                {
+                    doneTable.Content = note.Content;
+                    doneTable.LContent = note.Target;
+                    myDbContext.Dones.Attach(doneTable);
+                    myDbContext.Dones.Add(doneTable);
+                    myDbContext.SaveChanges();
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Проблема возникла при переносе(добавлении) заметки из In Progress");
+            }
+        }
+
+        public static void EditNote(MyDbContext myDbContext, ObservableCollection<Note> NotesToDo, int projectId)
+        {
+            try
+            {
+                var todos = myDbContext.ToDos.ToList();
+                bool isContains = false; // Чекер для проверки измененных заметок To Do
+                foreach (var t in todos)
+                {
+                    if (t.ProjectId == /*toDoTable.ProjectId*/projectId)
+                    {
+                        for (int i = 0; i < NotesToDo.Count(); i++)  // Ищем элемент который есть в БД , но отсутсвует в коллекции заметок
+                        {
+                            if (t.Content == NotesToDo[i].Content && t.LContent == NotesToDo[i].Target)  // Если очередной элемент из Бд присуствует в текущей коллекции,
+                            {                                                                            // то чекер становиться true, и прекращаем искать
+                                isContains = true;
+                                break;
+                            }
+                        }
+                        if (isContains == false)  // Усли очередной эл-нт из бд отсуствует в текущей коллекции, то мы его удаляем из бд
+                        {
+                            myDbContext.ToDos.Attach(t);
+                            myDbContext.ToDos.Remove(t);
+                            myDbContext.SaveChanges();
+                            //todos = MainWindowViewModel.db.ToDos.ToList();
+
+                        }
+                    }
+                    isContains = false;  // Ставим чекер false, чтобы продолжить цикл
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Исключение возникло при сохранении измененного проекта");
+            }
+        }
+
+        public static void AddNotesToDB(MyDbContext myDbContext, ObservableCollection<Note> NotesToDo, ToDoTable toDoTable)
+        {
+            try
+            {
+                var todos = myDbContext.ToDos.ToList();
+                bool checker = false;
+                for (int i = 0; i < NotesToDo.Count(); i++)
+                {
+                    foreach (var t in todos)
+                    {
+                        if (toDoTable.ProjectId == t.ProjectId && NotesToDo[i].Content == t.Content && NotesToDo[i].Target == t.LContent)
+                        {
+                            checker = true;
+                            break;
+                        }
+                    }
+                    if (NotesToDo[i].Content != "" && checker == false)
+                    {
+                        toDoTable.Content = NotesToDo[i].Content;
+                        toDoTable.LContent = NotesToDo[i].Target;
+                        myDbContext.ToDos.Attach(toDoTable);
+                        myDbContext.ToDos.Add(toDoTable);
+                        myDbContext.SaveChanges();
+                        todos = myDbContext.ToDos.ToList();
+                    }
+                    checker = false;
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Исключение возникло при добавлении заметки в БД");
+            }
+        }
     }
 }

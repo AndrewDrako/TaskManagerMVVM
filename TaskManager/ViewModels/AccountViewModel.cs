@@ -18,14 +18,21 @@ namespace TaskManager.ViewModels
 
         private string _ButtonLabel1 = TranslateLanguage.LabelAccBtn1[TranslateLanguage.iLanguage];
 
+        /// <summary>
+        /// Label Log Iut
+        /// </summary>
         public string ButtonLabel1 
         { 
             get => _ButtonLabel1; 
             set => Set(ref _ButtonLabel1, value); 
         }
 
+
         private string _ButtonLabel2 = TranslateLanguage.LabelAccBtn2[TranslateLanguage.iLanguage];
 
+        /// <summary>
+        /// Label Create a new
+        /// </summary>
         public string ButtonLabel2
         {
             get => _ButtonLabel2;
@@ -36,7 +43,7 @@ namespace TaskManager.ViewModels
 
         #region Commands
 
-        // Log Out
+        #region Log Out
 
         public ICommand BtnClickLogOut { get; }
         private bool CanBtnClickLogOutExecute(object p) => true;
@@ -48,7 +55,9 @@ namespace TaskManager.ViewModels
             Application.Current.Windows[0].Close();
         }
 
-        // Create a new
+        #endregion
+
+        #region Create a new
 
         public ICommand BtnClickCreate { get; }
         private bool CanBtnClickCreateExecute(object p) => true;
@@ -62,6 +71,10 @@ namespace TaskManager.ViewModels
 
         #endregion
 
+        #endregion
+
+        #region Конструктор
+
         public AccountViewModel()
         {
             #region Commands
@@ -71,5 +84,7 @@ namespace TaskManager.ViewModels
 
             #endregion
         }
+
+        #endregion
     }
 }

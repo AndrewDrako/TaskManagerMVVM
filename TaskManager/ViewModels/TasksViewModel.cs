@@ -178,7 +178,6 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-
         #region Commands
 
         #region Сохранение заметки
@@ -187,62 +186,12 @@ namespace TaskManager.ViewModels
         private bool CanSaveNoteExecute(object p) => true;
         private void OnSaveNoteExecuted(object p)
         {
-            try
+            Model.EditNote(MainWindowViewModel.db, NotesToDo, toDoTable.ProjectId);
+            Model.AddNotesToDB(MainWindowViewModel.db, NotesToDo, toDoTable);
+            if (this.ChangeControlVisibility == Visibility.Visible)
             {
-                var todos = MainWindowViewModel.db.ToDos.ToList();
-                bool isContains = false; // Чекер для проверки измененных заметок To Do
-                foreach (var t in todos)
-                {
-                    if (t.ProjectId == toDoTable.ProjectId)
-                    {
-                        for (int i = 0; i < NotesToDo.Count(); i++)  // Ищем элемент который есть в БД , но отсутсвует в коллекции заметок
-                        {
-                            if (t.Content == NotesToDo[i].Content && t.LContent == NotesToDo[i].Target)  // Если очередной элемент из Бд присуствует в текущей коллекции,
-                            {                                                                            // то чекер становиться true, и прекращаем искать
-                                isContains = true;
-                                break;
-                            }
-                        }
-                        if (isContains == false)  // Усли очередной эл-нт из бд отсуствует в текущей коллекции, то мы его удаляем из бд
-                        {
-                            MainWindowViewModel.db.ToDos.Attach(t);
-                            MainWindowViewModel.db.ToDos.Remove(t);
-                            MainWindowViewModel.db.SaveChanges();
-                            //todos = MainWindowViewModel.db.ToDos.ToList();
-
-                        }
-                    }
-                    isContains = false;  // Ставим чекер false, чтобы продолжить цикл
-                }
-                todos = MainWindowViewModel.db.ToDos.ToList();
-                bool checker = false;
-                for (int i = 0; i < NotesToDo.Count(); i++)
-                {
-                    foreach (var t in todos)
-                    {
-                        if (NotesToDo[i].Content == t.Content && NotesToDo[i].Target == t.LContent)
-                        {
-                            checker = true;
-                            break;
-                        }
-                    }
-                    if (NotesToDo[i].Content != "" && checker == false)
-                    {
-                        toDoTable.Content = NotesToDo[i].Content;
-                        toDoTable.LContent = NotesToDo[i].Target;
-                        MainWindowViewModel.db.ToDos.Attach(toDoTable);
-                        MainWindowViewModel.db.ToDos.Add(toDoTable);
-                        MainWindowViewModel.db.SaveChanges();
-                        todos = MainWindowViewModel.db.ToDos.ToList();
-                    }
-                    checker = false;
-                }
+                this.ChangeControlVisibility = Visibility.Collapsed;
             }
-            catch
-            {
-                MessageBox.Show("Ошибка возникла при сохранении заметок To Do");
-            }
-
 
         }
 
@@ -250,7 +199,7 @@ namespace TaskManager.ViewModels
 
         #region ToDo
 
-        // Команда добавления задачи
+        #region Add
 
         private RelayCommand addCommand;
         public RelayCommand AddCommand
@@ -265,16 +214,18 @@ namespace TaskManager.ViewModels
                       note.Color = Colors[Counter++];
                       NotesToDo.Insert(0, note);
                       SelectedNote = note;
-                      //if (this.ChangeControlVisibility == Visibility.Collapsed)
-                      //{
-                      //    this.ChangeControlVisibility = Visibility.Visible;
-                      //}
+                      if (this.ChangeControlVisibility == Visibility.Collapsed)
+                      {
+                          this.ChangeControlVisibility = Visibility.Visible;
+                      }
 
                   }));
             }
         }
 
-        // Команда удаления задачи
+        #endregion
+
+        #region Remove
 
         private RelayCommand removeCommand;
         public RelayCommand RemoveCommand
@@ -288,27 +239,7 @@ namespace TaskManager.ViewModels
                       if (note != null)
                       {
                           NotesToDo.Remove(note);
-                          try
-                          {
-                              var todos = MainWindowViewModel.db.ToDos.ToList();
-                              foreach (var t in todos)
-                              {
-                                  if (t.ProjectId == toDoTable.ProjectId)
-                                  {
-                                      if (note.Content == t.Content && note.Target == t.LContent)
-                                      {
-                                          MainWindowViewModel.db.ToDos.Attach(t);
-                                          MainWindowViewModel.db.ToDos.Remove(t);
-                                          MainWindowViewModel.db.SaveChanges();
-                                          break;
-                                      }
-                                  }
-                              }
-                          }
-                          catch
-                          {
-                              MessageBox.Show("Проблема возникла при удалении заметки из To Do");
-                          }
+                          Model.RemoveNoteFromDB(MainWindowViewModel.db, note, toDoTable.ProjectId, "TODO");
 
                       }
                   },
@@ -316,7 +247,9 @@ namespace TaskManager.ViewModels
             }
         }
 
-        // Команда переноса в IN Progress
+        #endregion
+
+        #region Transfer to InProgress
 
         private RelayCommand transferProject;
         public RelayCommand TransferProject
@@ -330,63 +263,22 @@ namespace TaskManager.ViewModels
                         if (note != null && NotesToDo.Contains(note) == true)
                         { 
                             NotesInProgress.Insert(0, note);
-                            try
-                            {
-                                bool checker = false;
-                                var inprogresses = MainWindowViewModel.db.InProgresses.ToList();
-                                foreach(var inp in inprogresses)
-                                {
-                                    if (inp.Content == note.Content && inp.LContent == note.Target)
-                                    {
-                                        checker = true;
-                                        break;
-                                    }
-                                }
-                                if (checker == false)
-                                {
-                                    inProgressTable.Content = note.Content;
-                                    inProgressTable.LContent = note.Target;
-                                    MainWindowViewModel.db.InProgresses.Attach(inProgressTable);
-                                    MainWindowViewModel.db.InProgresses.Add(inProgressTable);
-                                    MainWindowViewModel.db.SaveChanges();
-                                }
-                            }
-                            catch
-                            {
-                                MessageBox.Show("Ошибка возникла при добавлении(переносе) заметки в In Progress");
-                            }
+                            Model.TransferTo(MainWindowViewModel.db, note, inProgressTable);
                             NotesToDo.Remove(note);
-                            try
-                            {
-                                var todos = MainWindowViewModel.db.ToDos.ToList();
-                                foreach (var t in todos)
-                                {
-                                    if (t.ProjectId == toDoTable.ProjectId)
-                                    {
-                                        if (note.Content == t.Content && note.Target == t.LContent)
-                                        {
-                                            MainWindowViewModel.db.ToDos.Attach(t);
-                                            MainWindowViewModel.db.ToDos.Remove(t);
-                                            MainWindowViewModel.db.SaveChanges();
-                                            break;
-                                        }
-                                    }
-                                }
-                            }
-                            catch
-                            {
-                                MessageBox.Show("Проблема возникла при переносе заметки из To Do");
-                            }
+                            Model.RemoveNoteFromDB(MainWindowViewModel.db, note, toDoTable.ProjectId, "TODO");
 
                         }
                     }));
             }
         }
+
+        #endregion
+
         #endregion
 
         #region InProgress
 
-        // Команда удаления задачи
+        #region Remove
 
         private RelayCommand removeCommandInProgress;
         public RelayCommand RemoveCommandInProgress
@@ -400,27 +292,7 @@ namespace TaskManager.ViewModels
                       if (note != null)
                       {
                           NotesInProgress.Remove(note);
-                          try
-                          {
-                              var inprogresses = MainWindowViewModel.db.InProgresses.ToList();
-                              foreach (var inp in inprogresses)
-                              {
-                                  if (inp.ProjectId == inProgressTable.ProjectId)
-                                  {
-                                      if (note.Content == inp.Content && note.Target == inp.LContent)
-                                      {
-                                          MainWindowViewModel.db.InProgresses.Attach(inp);
-                                          MainWindowViewModel.db.InProgresses.Remove(inp);
-                                          MainWindowViewModel.db.SaveChanges();
-                                          break;
-                                      }
-                                  }
-                              }
-                          }
-                          catch
-                          {
-                              MessageBox.Show("Проблема возникла при удалении заметки из In Progress");
-                          }
+                          Model.RemoveNoteFromDB(MainWindowViewModel.db, note, inProgressTable.ProjectId, "INPROGRESS");
 
                       }
                   },
@@ -428,7 +300,9 @@ namespace TaskManager.ViewModels
             }
         }
 
-        // Команда переноса в Done
+        #endregion
+
+        #region Transfer to DONE
 
         private RelayCommand transferProjectInProgress;
         public RelayCommand TransferProjectInProgress
@@ -442,53 +316,9 @@ namespace TaskManager.ViewModels
                         if (note != null && NotesInProgress.Contains(note) == true)
                         {
                             NotesDone.Insert(0, note);
-                            try
-                            {
-                                bool checker = false;
-                                var dones = MainWindowViewModel.db.Dones.ToList();
-                                foreach(var d in dones)
-                                {
-                                    if (d.Content == note.Content && d.LContent == note.Target)
-                                    {
-                                        checker = true;
-                                        break;
-                                    }
-                                }
-                                if (checker == false)
-                                {
-                                    doneTable.Content = note.Content;
-                                    doneTable.LContent = note.Target;
-                                    MainWindowViewModel.db.Dones.Attach(doneTable);
-                                    MainWindowViewModel.db.Dones.Add(doneTable);
-                                    MainWindowViewModel.db.SaveChanges();
-                                }
-                            }
-                            catch
-                            {
-                                MessageBox.Show("Проблема возникла при переносе(добавлении) заметки из In Progress");
-                            }
+                            Model.TransferTo(MainWindowViewModel.db, note, doneTable);
                             NotesInProgress.Remove(note);
-                            try
-                            {
-                                var inprogresses = MainWindowViewModel.db.InProgresses.ToList();
-                                foreach (var inp in inprogresses)
-                                {
-                                    if (inp.ProjectId == inProgressTable.ProjectId)
-                                    {
-                                        if (note.Content == inp.Content && note.Target == inp.LContent)
-                                        {
-                                            MainWindowViewModel.db.InProgresses.Attach(inp);
-                                            MainWindowViewModel.db.InProgresses.Remove(inp);
-                                            MainWindowViewModel.db.SaveChanges();
-                                            break;
-                                        }
-                                    }
-                                }
-                            }
-                            catch
-                            {
-                                MessageBox.Show("Проблема возникла при переносе заметки из In Progress");
-                            }
+                            Model.RemoveNoteFromDB(MainWindowViewModel.db, note, inProgressTable.ProjectId, "INPROGRESS");
                         }
                     }));
             }
@@ -496,9 +326,11 @@ namespace TaskManager.ViewModels
 
         #endregion
 
+        #endregion
+
         #region Done
 
-        // Команда удаления задачи
+        #region Remove
 
         private RelayCommand removeCommandDone;
         public RelayCommand RemoveCommandDone
@@ -512,32 +344,14 @@ namespace TaskManager.ViewModels
                       if (note != null)
                       {
                           NotesDone.Remove(note);
-                          try
-                          {
-                              var dones = MainWindowViewModel.db.Dones.ToList();
-                              foreach (var d in dones)
-                              {
-                                  if (d.ProjectId == doneTable.ProjectId)
-                                  {
-                                      if (note.Content == d.Content && note.Target == d.LContent)
-                                      {
-                                          MainWindowViewModel.db.Dones.Attach(d);
-                                          MainWindowViewModel.db.Dones.Remove(d);
-                                          MainWindowViewModel.db.SaveChanges();
-                                          break;
-                                      }
-                                  }
-                              }
-                          }
-                          catch
-                          {
-                              MessageBox.Show("Проблема возникла при удалении заметки из Done");
-                          }
+                          Model.RemoveNoteFromDB(MainWindowViewModel.db, note, doneTable.ProjectId, "DONE");
                       }
                   },
                  (obj) => NotesDone.Count > 0));
             }
         }
+
+        #endregion
 
         #endregion
 

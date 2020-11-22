@@ -186,7 +186,7 @@ namespace TaskManager.ViewModels
             KeyFromEmail = rnd.Next(100000, 999999);
             try
             {
-                //RegModel.SendEmailAsync(UserEmail, KeyFromEmail);
+                RegModel.SendEmailAsync(UserEmail, KeyFromEmail);
             }
             catch
             {
