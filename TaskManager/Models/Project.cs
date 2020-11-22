@@ -44,9 +44,6 @@ namespace TaskManager.Models
         }
 
         
-        public static void PrintToTxt()
-        {
-            
-        }
+        
     }
 }
