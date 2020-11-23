@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -156,7 +158,20 @@ namespace TaskManager.ViewModels
 
             #region Связь с БД
 
+
             dbContext = new MyDbContext();
+            
+            string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            SqlConnection sqlConnection = new SqlConnection(connectionString);
+            try
+            {
+                sqlConnection.Open();
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка соединения с БД\nПриложение будет запущено, но не сможет сохранять файлы\n");
+                MainWindowModel.IsConnectedToLocalServer = false;
+            }
             authUser = new User();
             if (MainWindowModel.IsConnectedToLocalServer == true)
             {
@@ -198,13 +213,15 @@ namespace TaskManager.ViewModels
                     }
                 }
             }
-            //else
-            //{
-            //    //Window mainWindow = new MainWindow();
-            //    //mainWindow.Show();
-            //    //Application.Current.Windows[0].Close();
+            else
+            {
+                authUser.Email = "guest";
+                Window mainWindow = new MainWindow();
+                mainWindow.Show();
+                Application.Current.Windows[0].Close();
 
-            //}
+
+            }
             #endregion
 
             #region Commands

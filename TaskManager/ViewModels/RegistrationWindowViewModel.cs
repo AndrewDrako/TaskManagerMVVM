@@ -167,7 +167,7 @@ namespace TaskManager.ViewModels
         #region Click after enter email, password and username
 
         public ICommand BtnClick { get; }
-        private bool CanBtnClickExecute(object p) => AuthWindowViewModel._CanClickOk;
+        private bool CanBtnClickExecute(object p) => true;
         private void OnBtnClickExecuted(object p)
         {
             if (UserEmail == null || UserEmail == null)

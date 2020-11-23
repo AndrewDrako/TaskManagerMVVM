@@ -27,11 +27,9 @@ namespace TaskManager.Data.DataBase
             }
             catch
             {
-                MessageBox.Show("Не удается найти локальный сервер на вашем ПК\n");
+                MessageBox.Show("Не удается найти загрузить данные с сервера\n");
                 MainWindowModel.IsConnectedToLocalServer = false;
-                Window mainWindow = new MainWindow();
-                mainWindow.Show();
-                Application.Current.Windows[0].Close();
+                Application.Current.Shutdown();
             }
         }
     }
