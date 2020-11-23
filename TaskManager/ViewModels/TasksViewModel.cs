@@ -183,7 +183,7 @@ namespace TaskManager.ViewModels
         #region Сохранение заметки
 
         public ICommand SaveNote { get; }
-        private bool CanSaveNoteExecute(object p) => true;
+        private bool CanSaveNoteExecute(object p) => MainWindowModel.IsConnectedToLocalServer;
         private void OnSaveNoteExecuted(object p)
         {
             Model.EditNote(MainWindowViewModel.db, NotesToDo, toDoTable.ProjectId);
@@ -239,7 +239,10 @@ namespace TaskManager.ViewModels
                       if (note != null)
                       {
                           NotesToDo.Remove(note);
-                          Model.RemoveNoteFromDB(MainWindowViewModel.db, note, toDoTable.ProjectId, "TODO");
+                          if (MainWindowModel.IsConnectedToLocalServer == true)
+                          {
+                              Model.RemoveNoteFromDB(MainWindowViewModel.db, note, toDoTable.ProjectId, "TODO");
+                          }
 
                       }
                   },
@@ -263,9 +266,12 @@ namespace TaskManager.ViewModels
                         if (note != null && NotesToDo.Contains(note) == true)
                         { 
                             NotesInProgress.Insert(0, note);
-                            Model.TransferTo(MainWindowViewModel.db, note, inProgressTable);
                             NotesToDo.Remove(note);
-                            Model.RemoveNoteFromDB(MainWindowViewModel.db, note, toDoTable.ProjectId, "TODO");
+                            if (MainWindowModel.IsConnectedToLocalServer == true)
+                            {
+                                Model.TransferTo(MainWindowViewModel.db, note, inProgressTable);
+                                Model.RemoveNoteFromDB(MainWindowViewModel.db, note, toDoTable.ProjectId, "TODO");
+                            }
 
                         }
                     }));
@@ -292,7 +298,10 @@ namespace TaskManager.ViewModels
                       if (note != null)
                       {
                           NotesInProgress.Remove(note);
-                          Model.RemoveNoteFromDB(MainWindowViewModel.db, note, inProgressTable.ProjectId, "INPROGRESS");
+                          if (MainWindowModel.IsConnectedToLocalServer == true)
+                          {
+                              Model.RemoveNoteFromDB(MainWindowViewModel.db, note, inProgressTable.ProjectId, "INPROGRESS");
+                          }
 
                       }
                   },
@@ -316,9 +325,12 @@ namespace TaskManager.ViewModels
                         if (note != null && NotesInProgress.Contains(note) == true)
                         {
                             NotesDone.Insert(0, note);
-                            Model.TransferTo(MainWindowViewModel.db, note, doneTable);
                             NotesInProgress.Remove(note);
-                            Model.RemoveNoteFromDB(MainWindowViewModel.db, note, inProgressTable.ProjectId, "INPROGRESS");
+                            if (MainWindowModel.IsConnectedToLocalServer == true)
+                            {
+                                Model.TransferTo(MainWindowViewModel.db, note, doneTable);
+                                Model.RemoveNoteFromDB(MainWindowViewModel.db, note, inProgressTable.ProjectId, "INPROGRESS");
+                            }
                         }
                     }));
             }
@@ -344,7 +356,10 @@ namespace TaskManager.ViewModels
                       if (note != null)
                       {
                           NotesDone.Remove(note);
-                          Model.RemoveNoteFromDB(MainWindowViewModel.db, note, doneTable.ProjectId, "DONE");
+                          if (MainWindowModel.IsConnectedToLocalServer == true)
+                          {
+                              Model.RemoveNoteFromDB(MainWindowViewModel.db, note, doneTable.ProjectId, "DONE");
+                          }
                       }
                   },
                  (obj) => NotesDone.Count > 0));
@@ -377,26 +392,29 @@ namespace TaskManager.ViewModels
             toDoTable = new ToDoTable();
             inProgressTable = new InProgressTable();
             doneTable = new DoneTable();
-            try
+            if (MainWindowModel.IsConnectedToLocalServer == true)
             {
-                var projects = MainWindowViewModel.db.Projects.ToList();  // Выгружаем данные из бд в массив
-                foreach (var p in projects)
+                try
                 {
-                    if (p.UserId == AuthWindowViewModel.authUser.Id)
+                    var projects = MainWindowViewModel.db.Projects.ToList();  // Выгружаем данные из бд в массив
+                    foreach (var p in projects)
                     {
-                        if (_PName == p.ProjectName && _TName == p.MasterName)
+                        if (p.UserId == AuthWindowViewModel.authUser.Id)
                         {
-                            toDoTable.ProjectId = p.Id;
-                            inProgressTable.ProjectId = p.Id;
-                            doneTable.ProjectId = p.Id;
-                            break;
+                            if (_PName == p.ProjectName && _TName == p.MasterName)
+                            {
+                                toDoTable.ProjectId = p.Id;
+                                inProgressTable.ProjectId = p.Id;
+                                doneTable.ProjectId = p.Id;
+                                break;
+                            }
                         }
                     }
                 }
-            }
-            catch
-            {
-                MessageBox.Show("Ошибка возникла в консрукторе бд для To DO и In Progress");
+                catch
+                {
+                    MessageBox.Show("Ошибка возникла в консрукторе бд для To DO и In Progress");
+                }
             }
 
             #endregion
@@ -439,83 +457,89 @@ namespace TaskManager.ViewModels
 
             #endregion
 
-            #region Заполнение коллекций
-
-            #region Заполение To DO
-            try
+            if (MainWindowModel.IsConnectedToLocalServer == true)
             {
-                var todos = MainWindowViewModel.db.ToDos.ToList();
-                foreach (var t in todos)
+
+                #region Заполнение коллекций
+
+                #region Заполение To DO
+
+                try
                 {
-                    if (t.ProjectId == toDoTable.ProjectId)
+                    var todos = MainWindowViewModel.db.ToDos.ToList();
+                    foreach (var t in todos)
                     {
-                        Note note = new Note
+                        if (t.ProjectId == toDoTable.ProjectId)
                         {
-                            Content = t.Content,
-                            Target = t.LContent
-                        };
-                        NotesToDo.Add(note);
+                            Note note = new Note
+                            {
+                                Content = t.Content,
+                                Target = t.LContent
+                            };
+                            NotesToDo.Add(note);
+                        }
                     }
                 }
-            }
-            catch
-            {
-                MessageBox.Show("Ошибка произошла при заполнении коллеции TODO");
-            }
-
-            #endregion
-
-            #region Заполнение In Progress
-
-            try
-            {
-                var inprogresses = MainWindowViewModel.db.InProgresses.ToList();
-                foreach(var inp in inprogresses)
+                catch
                 {
-                    if (inp.ProjectId == inProgressTable.ProjectId)
+                    MessageBox.Show("Ошибка произошла при заполнении коллеции TODO");
+                }
+
+                #endregion
+
+                #region Заполнение In Progress
+
+                try
+                {
+                    var inprogresses = MainWindowViewModel.db.InProgresses.ToList();
+                    foreach (var inp in inprogresses)
                     {
-                        Note note = new Note
+                        if (inp.ProjectId == inProgressTable.ProjectId)
                         {
-                            Content = inp.Content,
-                            Target = inp.LContent
-                        };
-                        NotesInProgress.Add(note);
+                            Note note = new Note
+                            {
+                                Content = inp.Content,
+                                Target = inp.LContent
+                            };
+                            NotesInProgress.Add(note);
+                        }
                     }
                 }
-            }
-            catch
-            {
-                MessageBox.Show("Ошибка произошла при заполнении коллеции INPROGRESS");
-            }
-
-            #endregion
-
-            #region Заполнение Done
-
-            try
-            {
-                var dones = MainWindowViewModel.db.Dones.ToList();
-                foreach(var d in dones)
+                catch
                 {
-                    if (d.ProjectId == doneTable.ProjectId)
+                    MessageBox.Show("Ошибка произошла при заполнении коллеции INPROGRESS");
+                }
+
+                #endregion
+
+                #region Заполнение Done
+
+                try
+                {
+                    var dones = MainWindowViewModel.db.Dones.ToList();
+                    foreach (var d in dones)
                     {
-                        Note note = new Note
+                        if (d.ProjectId == doneTable.ProjectId)
                         {
-                            Content = d.Content,
-                            Target = d.LContent
-                        };
-                        NotesDone.Add(note);
+                            Note note = new Note
+                            {
+                                Content = d.Content,
+                                Target = d.LContent
+                            };
+                            NotesDone.Add(note);
+                        }
                     }
                 }
-            }
-            catch
-            {
-                MessageBox.Show("Ошибка произошла при заполнении коллеции DONE");
-            }
+                catch
+                {
+                    MessageBox.Show("Ошибка произошла при заполнении коллеции DONE");
+                }
 
-            #endregion
+                #endregion
 
-            #endregion
+                #endregion
+
+            }
         }
 
         #endregion

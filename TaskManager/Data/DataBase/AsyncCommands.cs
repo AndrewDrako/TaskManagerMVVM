@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using TaskManager.Data.DataBase.Base;
 using TaskManager.Data.DataBase.Tables;
+using TaskManager.Models;
 using TaskManager.ViewModels;
 
 namespace TaskManager.Data.DataBase
@@ -20,14 +21,26 @@ namespace TaskManager.Data.DataBase
         /// <returns></returns>
         public static async Task ConnectToDB(MyDbContext db)
         {
-            //await Task.Run(() => db = new MyDbContext());
-            await Task.Run(() => db.Users.Load());
-            await Task.Run(() => db.Projects.Load());
-            await Task.Run(() => db.ToDos.Load());
-            await Task.Run(() => db.InProgresses.Load());
-            await Task.Run(() => db.Dones.Load());
-            AuthWindowViewModel._CanClickOk = true;
+            try
+            {
+                //await Task.Run(() => db = new MyDbContext());
+                await Task.Run(() => db.Users.Load());
+                await Task.Run(() => db.Projects.Load());
+                await Task.Run(() => db.ToDos.Load());
+                await Task.Run(() => db.InProgresses.Load());
+                await Task.Run(() => db.Dones.Load());
+                AuthWindowViewModel._CanClickOk = true;
+            }
+            catch
+            {
+                MessageBox.Show("Не удается найти локальный сервер на вашем ПК\n");
+                MainWindowModel.IsConnectedToLocalServer = false;
+                Window mainWindow = new MainWindow();
+                mainWindow.Show();
+                Application.Current.Windows[0].Close();
+            }
         }
+
 
         /// <summary>
         /// Загрузка данных из БД

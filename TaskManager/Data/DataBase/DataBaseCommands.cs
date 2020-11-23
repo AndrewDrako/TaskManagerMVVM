@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.Serialization.Formatters;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using TaskManager.Data.DataBase.Base;
 using TaskManager.Data.DataBase.Tables;
 using TaskManager.Models;
@@ -16,11 +17,22 @@ namespace TaskManager.Data.DataBase
     {
         public static void LoadDB(MyDbContext db)
         {
-            db.Users.Load();
-            db.Projects.Load();
-            db.ToDos.Load();
-            db.InProgresses.Load();
-            db.Dones.Load();
+            try
+            {
+                db.Users.Load();
+                db.Projects.Load();
+                db.ToDos.Load();
+                db.InProgresses.Load();
+                db.Dones.Load();
+            }
+            catch
+            {
+                MessageBox.Show("Не удается найти локальный сервер на вашем ПК\n");
+                MainWindowModel.IsConnectedToLocalServer = false;
+                Window mainWindow = new MainWindow();
+                mainWindow.Show();
+                Application.Current.Windows[0].Close();
+            }
         }
     }
 }

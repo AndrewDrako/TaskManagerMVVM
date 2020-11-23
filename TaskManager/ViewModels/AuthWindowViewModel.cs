@@ -158,33 +158,53 @@ namespace TaskManager.ViewModels
 
             dbContext = new MyDbContext();
             authUser = new User();
-            if (AuthWindowModel.Key == 0)
+            if (MainWindowModel.IsConnectedToLocalServer == true)
             {
-                AsyncCommands.ConnectToDB(dbContext);
-            }
-            else
-            {
-                if (AuthWindowModel.Key == 1)
+                if (AuthWindowModel.Key == 0)
                 {
-                    DataBaseCommands.LoadDB(dbContext);
-                    User user = Model.FindUser(dbContext, AuthWindowModel.ReadLastUserName());  // из txt вставляем имя пользователя 
-                    if (user != null)
+                    AsyncCommands.ConnectToDB(dbContext);
+                    //DataBaseCommands.LoadDB(dbContext);
+                }
+                else
+                {
+                    try
                     {
-                        authUser.Id = user.Id;
-                        authUser.Password = user.Password;
-                        authUser.Email = user.Email;
-                        Window mainWindow = new MainWindow();
-                        mainWindow.Show();
-                        Application.Current.Windows[0].Close();
+                        if (AuthWindowModel.Key == 1)
+                        {
+                            DataBaseCommands.LoadDB(dbContext);
+                            User user = Model.FindUser(dbContext, AuthWindowModel.ReadLastUserName());  // из txt вставляем имя пользователя 
+                            if (user != null)
+                            {
+                                authUser.Id = user.Id;
+                                authUser.Password = user.Password;
+                                authUser.Email = user.Email;
+                                Window mainWindow = new MainWindow();
+                                mainWindow.Show();
+                                Application.Current.Windows[0].Close();
+                            }
+                            else
+                            {
+                                AuthWindowModel.PrintKey("Cannot", "authreg_key.txt");
+                                MessageBox.Show("Что-то пошло не так, перезайдите в приложение");
+                                Application.Current.Shutdown();
+                            }
+
+                        }
                     }
-                    else
+                    catch
                     {
                         MessageBox.Show("Ошибка возникла со связью с БД\n(AuthWindowViewModel/конструктор/Связь с БД)");
+                        Application.Current.Shutdown();
                     }
-
                 }
             }
+            //else
+            //{
+            //    //Window mainWindow = new MainWindow();
+            //    //mainWindow.Show();
+            //    //Application.Current.Windows[0].Close();
 
+            //}
             #endregion
 
             #region Commands

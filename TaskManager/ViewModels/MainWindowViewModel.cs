@@ -179,7 +179,7 @@ namespace TaskManager.ViewModels
 
         public ICommand FourthButtonClick { get; }
 
-        private bool CanFourthButtonClickExecute(object p) => true;
+        private bool CanFourthButtonClickExecute(object p) => MainWindowModel.IsConnectedToLocalServer;
 
         private void OnFourthButtonClickExecuted(object p)
         {

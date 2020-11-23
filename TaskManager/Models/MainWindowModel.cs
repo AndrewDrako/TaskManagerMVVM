@@ -10,9 +10,13 @@ namespace TaskManager.Models
 {
     internal class MainWindowModel
     {
-        // bool переменная которая отвечает за активность TAsks как только создан проект
 
-        public static bool IsTasksNotEmpty; 
+        /// <summary>
+        /// bool переменная которая отвечает за активность TAsks как только создан проект
+        /// </summary>
+        public static bool IsTasksNotEmpty;
+
+        public static bool IsConnectedToLocalServer = true;
 
         public static void PrintLanguageKey(string s)
         {

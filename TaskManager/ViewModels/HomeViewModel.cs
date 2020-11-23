@@ -150,7 +150,10 @@ namespace TaskManager.ViewModels
                       {
                           Projects.Remove(project);
                           MainWindowModel.IsTasksNotEmpty = false;
-                          Model.RemoveProjectFromDB(MainWindowViewModel.db, project);
+                          if (MainWindowModel.IsConnectedToLocalServer == true)
+                          {
+                              Model.RemoveProjectFromDB(MainWindowViewModel.db, project);
+                          }
                       }
                   },
                  (obj) => Projects.Count > 0));
@@ -175,8 +178,11 @@ namespace TaskManager.ViewModels
                             MainWindowModel.IsTasksNotEmpty = true;  // Разблокировка кнопки tasks
                             TasksViewModel._PName = project.ProjectName;
                             TasksViewModel._TName = project.PersonName;
-                            Model.EditProjectName(MainWindowViewModel.db, Projects, projectTable.UserId);
-                            Model.AddProjectToDB(MainWindowViewModel.db, project, projectTable);
+                            if (MainWindowModel.IsConnectedToLocalServer == true)
+                            {
+                                Model.EditProjectName(MainWindowViewModel.db, Projects, projectTable.UserId);
+                                Model.AddProjectToDB(MainWindowViewModel.db, project, projectTable);
+                            }
                             MainWindowViewModel._Tasks = new Tasks(); // Открытие tasks
                             MainWindowViewModel.SecondButtonClick.Execute(obj);
 
@@ -203,35 +209,37 @@ namespace TaskManager.ViewModels
             #endregion
 
             #region Конструтор БД
-
-            projectTable = new ProjectTable();
-            projectTable.UserId = AuthWindowViewModel.authUser.Id;
-
+            if (MainWindowModel.IsConnectedToLocalServer == true)
+            {
+                projectTable = new ProjectTable();
+                projectTable.UserId = AuthWindowViewModel.authUser.Id;
+            }
             #endregion
 
             #region БД: заносим данные в коллекцию объектов
-
-            try
+            if (MainWindowModel.IsConnectedToLocalServer == true)
             {
-                var projects = MainWindowViewModel.db.Projects.ToList();
-                foreach (var p in projects)
+                try
                 {
-                    if (p.UserId == projectTable.UserId)
+                    var projects = MainWindowViewModel.db.Projects.ToList();
+                    foreach (var p in projects)
                     {
-                        Project pr = new Project
+                        if (p.UserId == projectTable.UserId)
                         {
-                            ProjectName = p.ProjectName,
-                            PersonName = p.MasterName
-                        };
-                        Projects.Add(pr);
+                            Project pr = new Project
+                            {
+                                ProjectName = p.ProjectName,
+                                PersonName = p.MasterName
+                            };
+                            Projects.Add(pr);
+                        }
                     }
                 }
+                catch
+                {
+                    MessageBox.Show("Ошибка произошла при заполнении коллекции Проекты");
+                }
             }
-            catch
-            {
-                MessageBox.Show("Ошибка произошла при заполнении коллекции Проекты");
-            }
-            
             #endregion
 
         }
