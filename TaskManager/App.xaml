@@ -4,5 +4,6 @@
              xmlns:local="clr-namespace:TaskManager"
              StartupUri="Views/Windows/AuthWindow.xaml">
     <Application.Resources>
+        
     </Application.Resources>
 </Application>
