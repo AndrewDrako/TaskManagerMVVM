@@ -41,7 +41,8 @@
                  Text="{Binding Username}"
                  TextAlignment="Center"
                  Foreground="White"
-                 FontFamily="Cursive"/>
+                 FontFamily="Cursive"
+                 Background="#321C35"/>
         <TextBlock Grid.Row="2"
                    Grid.ColumnSpan="2"
                    Text="{Binding Label2}"

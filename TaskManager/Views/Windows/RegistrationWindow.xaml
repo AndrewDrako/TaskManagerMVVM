@@ -5,14 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TaskManager.Views.Windows"
         xmlns:vm="clr-namespace:TaskManager.ViewModels"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:m="clr-namespace:TaskManager.Models"
         mc:Ignorable="d"
-        Title="RegistrationWindow" Height="450" Width="400"
+        Title="" Height="450" Width="400"
         WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <vm:RegistrationWindowViewModel/>
     </Window.DataContext>
-    <Grid>
+    <Grid Background="Black">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -33,35 +34,48 @@
                    Text="{Binding Label1}"
                    FontSize="20"
                    TextAlignment="Center"
-                   Visibility="{Binding ChangeControlVisibility1}"/>
+                   Visibility="{Binding ChangeControlVisibility1}"
+                   Foreground="White"
+                   FontFamily="Cursive"/>
+        
         <TextBox Grid.Row="1"
                  Grid.ColumnSpan="2"
                  Margin="20 10"
                  FontSize="20"
                  Visibility="{Binding ChangeControlVisibility1}"
                  Text="{Binding UserEmail}"
-                 TextAlignment="Center"/>
+                 TextAlignment="Center"
+                 Foreground="White"
+                 FontFamily="Cursive"/>
+        
         <TextBlock Grid.Row="2"
                    Grid.ColumnSpan="2"
                    Margin="10 10"
                    Text="{Binding Label2}"
                    FontSize="20"
                    TextAlignment="Center"
-                   Visibility="{Binding ChangeControlVisibility1}"/>
+                   Visibility="{Binding ChangeControlVisibility1}"
+                   Foreground="White"
+                   FontFamily="Cursive"/>
+        
         <TextBox Grid.Row="3"
                  Grid.ColumnSpan="2"
                  Margin="20 10"
                  FontSize="20"
                  Visibility="{Binding ChangeControlVisibility1}"
                  Text="{Binding UserName}"
-                 TextAlignment="Center"/>
+                 TextAlignment="Center"
+                 Foreground="White"
+                 FontFamily="Cursive"/>
         <TextBlock Grid.Row="4"
                    Grid.ColumnSpan="2"
                    Margin="10 10"
                    Text="{Binding Label3}"
                    FontSize="20"
                    TextAlignment="Center"
-                   Visibility="{Binding ChangeControlVisibility1}"/>
+                   Visibility="{Binding ChangeControlVisibility1}"
+                   Foreground="White"
+                   FontFamily="Cursive"/>
         <!--<TextBlock Grid.Row="5"
                    Grid.Column="0"
                    Text="{Binding Label4}"
@@ -77,7 +91,10 @@
                      Margin="10 10"
                      Visibility="{Binding ChangeControlVisibility1}"
                      x:Name="regPasswordBox"
-                     HorizontalContentAlignment="Center">
+                     HorizontalContentAlignment="Center"
+                     Foreground="White"
+                     FontFamily="Cursive"
+                     >
         </PasswordBox>
         <!--<PasswordBox Grid.Column="1"
                      Grid.Row="6"
@@ -89,27 +106,40 @@
                 Margin="20 10"
                 Content="{Binding BtnContent1}"
                 Command="{Binding BtnClick}"
-                Visibility="{Binding ChangeControlVisibility1}"/>
+                Visibility="{Binding ChangeControlVisibility1}"
+                Foreground="White"
+                FontFamily="Cursive"
+                Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                materialDesign:ButtonAssist.CornerRadius="15"/>
 
         <Button Grid.Column="1"
                 Grid.Row="7"
                 Margin="20 10"
                 Content="{Binding BtnContent3}"
                 Command="{Binding BtnClickLogIn}"
-                Visibility="{Binding ChangeControlVisibility1}"/>
+                Visibility="{Binding ChangeControlVisibility1}"
+                Foreground="White"
+                FontFamily="Cursive"
+                Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                materialDesign:ButtonAssist.CornerRadius="15"/>
 
         <TextBlock Text="Проверьте почту и введите ключ из письма"
                    TextWrapping="Wrap"
                    TextAlignment="Center"
                    FontSize="20"
                    Grid.ColumnSpan="2"
-                   Visibility="{Binding ChangeControlVisibility2}"/>
+                   Visibility="{Binding ChangeControlVisibility2}"
+                   Foreground="White"
+                   FontFamily="Cursive"/>
         <TextBox Grid.ColumnSpan="2"
                  Grid.Row="1"
                  TextAlignment="Center"
                  FontSize="20"
                  Text="{Binding KeyInput}"
-                 Visibility="{Binding ChangeControlVisibility2}"/>
+                 Visibility="{Binding ChangeControlVisibility2}"
+                 Foreground="White"
+                 FontFamily="Cursive"
+                 />
         <Button Grid.ColumnSpan="2"
                 Grid.RowSpan="2"
                 Grid.Row="6"
@@ -117,7 +147,11 @@
                 Content="{Binding BtnContent2}"
                 Command="{Binding BtnClickAccept}"
                 CommandParameter="{Binding ElementName=regPasswordBox}"
-                Visibility="{Binding ChangeControlVisibility2}"/>
+                Visibility="{Binding ChangeControlVisibility2}"
+                Foreground="White"
+                FontFamily="Cursive"
+                Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                materialDesign:ButtonAssist.CornerRadius="15"/>
 
 
 
