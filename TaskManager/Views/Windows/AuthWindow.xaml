@@ -4,14 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TaskManager.Views.Windows"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:vm="clr-namespace:TaskManager.ViewModels"
         mc:Ignorable="d"
-        Title="AuthWindow" Height="450" Width="400"
-        WindowStartupLocation="CenterScreen">
+        Height="450" Width="400"
+        WindowStartupLocation="CenterScreen"
+        BorderBrush="Black">
     <Window.DataContext>
         <vm:AuthWindowViewModel/>
     </Window.DataContext>
-    <Grid>
+    <Grid Background="#000000">
         
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -29,37 +31,53 @@
                    Grid.Column="0"
                    Grid.ColumnSpan="2"
                    FontSize="20"
-                   VerticalAlignment="Center"/>
+                   VerticalAlignment="Center"
+                   Foreground="White"
+                   FontFamily="Cursive"/>
         <TextBox Grid.Row="1"
                  Grid.ColumnSpan="2"
                  Margin="10 20"
                  FontSize="20"
-                 Text="{Binding Username}"/>
+                 Text="{Binding Username}"
+                 TextAlignment="Center"
+                 Foreground="White"
+                 FontFamily="Cursive"/>
         <TextBlock Grid.Row="2"
                    Grid.ColumnSpan="2"
                    Text="{Binding Label2}"
                    TextAlignment="Center"
                    FontSize="20"
-                   VerticalAlignment="Center"/>
+                   VerticalAlignment="Center"
+                   FontFamily="Cursive"
+                   Foreground="White"/>
 
         <PasswordBox Grid.Row="3"
                      Grid.ColumnSpan="2"
                      Margin="10 20"
                      FontSize="20"
-                     x:Name="myPswdBox"/>
+                     x:Name="myPswdBox"
+                     HorizontalContentAlignment="Center"
+                     Foreground="White"/>
         
         <Button Grid.Column="0"
                 Grid.Row="4"
                 Margin="10 20"
+                Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                materialDesign:ButtonAssist.CornerRadius="15"
                 CommandParameter="{Binding ElementName=myPswdBox}"
                 Command="{Binding BtnClickOk}"
-                Content="{Binding BtnContentOk}"/>
+                Content="{Binding BtnContentOk}"
+                FontFamily="Cursive"/>
 
         <Button Grid.Column="1"
                 Grid.Row="4"
                 Margin="10 20"
+                
+                Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                materialDesign:ButtonAssist.CornerRadius="15"
                 Command="{Binding BtnClickReg}"
-                Content="{Binding BtnContentRegister}"/>
+                Content="{Binding BtnContentRegister}"
+                FontFamily="Cursive"/>
         
     </Grid>
 </Window>
