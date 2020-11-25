@@ -12,6 +12,7 @@
         <vm:AuthWindowViewModel/>
     </Window.DataContext>
     <Grid>
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
