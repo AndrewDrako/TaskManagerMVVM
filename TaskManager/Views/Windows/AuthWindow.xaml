@@ -15,9 +15,11 @@
         <vm:AuthWindowViewModel/>
     </Window.DataContext>
     <Grid>
-        <!--<Grid.Background>
-            <ImageBrush ImageSource="Images/bg.png"/>
-        </Grid.Background>-->
+        <Grid.Background>
+            <ImageBrush ImageSource="/Design/Images/BackgroundDark.jpg"
+                        Stretch="UniformToFill"/>
+            
+        </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>

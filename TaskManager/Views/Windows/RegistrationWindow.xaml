@@ -13,7 +13,11 @@
     <Window.DataContext>
         <vm:RegistrationWindowViewModel/>
     </Window.DataContext>
-    <Grid Background="#4B4B4B">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Design/Images/BackgroundDark.jpg"
+                        Stretch="UniformToFill"/>
+        </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
