@@ -89,6 +89,17 @@ namespace TaskManager.ViewModels
 
         #endregion
 
+        #region Check email
+
+        private string _Label8;
+        public string Label8
+        {
+            get => TranslateLanguage.RegLabelKey[TranslateLanguage.iLanguage];
+            set => Set(ref _Label8, value);
+        }
+
+        #endregion
+
         #region Button content
 
         // Ok

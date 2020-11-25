@@ -250,11 +250,13 @@ namespace TaskManager.Models
             "Проверьте почту и введите ключ из письма"
         };
 
+
+
         // Button content
 
         public static string[] RegBtnOk = new string[2]
         {
-            "Next",
+            "OK",
             "Продолжить"
         };
 

@@ -9,12 +9,12 @@
         mc:Ignorable="d"
         Height="450" Width="400"
         WindowStartupLocation="CenterScreen"
-        BorderBrush="Black">
+        BorderBrush="Black"
+        ResizeMode="NoResize">
     <Window.DataContext>
         <vm:AuthWindowViewModel/>
     </Window.DataContext>
-    <Grid Background="#000000">
-        
+    <Grid Background="#4B4B4B">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -33,7 +33,7 @@
                    FontSize="20"
                    VerticalAlignment="Center"
                    Foreground="White"
-                   FontFamily="Cursive"/>
+                   FontFamily="Lucida Grande"/>
         <TextBox Grid.Row="1"
                  Grid.ColumnSpan="2"
                  Margin="10 20"
@@ -41,15 +41,19 @@
                  Text="{Binding Username}"
                  TextAlignment="Center"
                  Foreground="White"
-                 FontFamily="Cursive"
-                 Background="#321C35"/>
+                 FontFamily="Lucida Grande"
+                 Style="{StaticResource MaterialDesignTextBox}"
+                 BorderBrush="#38c2a4"
+                 materialDesign:TextFieldAssist.UnderlineBrush="White"
+                 CaretBrush="White"
+                 />
         <TextBlock Grid.Row="2"
                    Grid.ColumnSpan="2"
                    Text="{Binding Label2}"
                    TextAlignment="Center"
                    FontSize="20"
                    VerticalAlignment="Center"
-                   FontFamily="Cursive"
+                   FontFamily="Lucida Grande"
                    Foreground="White"/>
 
         <PasswordBox Grid.Row="3"
@@ -58,27 +62,41 @@
                      FontSize="20"
                      x:Name="myPswdBox"
                      HorizontalContentAlignment="Center"
-                     Foreground="White"/>
+                     Foreground="White"
+                     Style="{StaticResource MaterialDesignPasswordBox}"
+                     materialDesign:TextFieldAssist.UnderlineBrush="White"
+                     BorderBrush="#38c2a4"
+                     CaretBrush="White"/>
         
         <Button Grid.Column="0"
                 Grid.Row="4"
-                Margin="10 20"
+                Margin="10"
+                Height="40"
                 Style="{StaticResource MaterialDesignRaisedDarkButton}"
                 materialDesign:ButtonAssist.CornerRadius="15"
                 CommandParameter="{Binding ElementName=myPswdBox}"
                 Command="{Binding BtnClickOk}"
                 Content="{Binding BtnContentOk}"
-                FontFamily="Cursive"/>
+                FontFamily="Lucida Grande"
+                Background="#38c2a4"
+                BorderBrush="#38c2a4"
+                FontSize="20"
+                >
+            
+        </Button>
 
         <Button Grid.Column="1"
                 Grid.Row="4"
-                Margin="10 20"
-                
+                Margin="10"
+                Height="40"
+                Background="#38c2a4"
+                BorderBrush="#38c2a4"
                 Style="{StaticResource MaterialDesignRaisedDarkButton}"
                 materialDesign:ButtonAssist.CornerRadius="15"
                 Command="{Binding BtnClickReg}"
                 Content="{Binding BtnContentRegister}"
-                FontFamily="Cursive"/>
+                FontFamily="Lucida Grande"
+                FontSize="20"/>
         
     </Grid>
 </Window>
