@@ -5,12 +5,17 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TaskManager.Views.UserControls"
              xmlns:vm="clr-namespace:TaskManager.ViewModels"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.DataContext>
         <vm:TasksViewModel/>
     </UserControl.DataContext>
-    <Grid Background="White">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Design/Images/BackgroundWide.jpg"
+                            Stretch="UniformToFill"/>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
@@ -18,24 +23,28 @@
             <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="150"/>
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
-            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="150"/>
             <ColumnDefinition/>
             <ColumnDefinition/>
-            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="150"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Row="0"
-                   Grid.ColumnSpan="9"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Center"
-                   Margin="10 0 0 0"
-                   FontSize="15"
-                   TextWrapping="WrapWithOverflow">
+        <Grid Grid.Row="0"
+              Grid.ColumnSpan="12"
+              Background="#4E4E4E">
+            <TextBlock HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       Margin="10 0 0 0"
+                       FontSize="15"
+                       TextWrapping="WrapWithOverflow"
+                       FontWeight="Bold"
+                       Foreground="White"
+                       FontFamily="Lucida Grande">
             <Run Text="{Binding Label1}"/>
             <Run Text=" "/>
             <Run Text="{Binding PName}"/>
@@ -43,10 +52,12 @@
             <Run Text="{Binding Label2}"/>
             <Run Text=" "/>
             <Run Text="{Binding TName}"/>
-        </TextBlock>
+            </TextBlock>
+        </Grid>
 
         <ListBox Grid.Row="2"
                  Grid.Column="0"
+                 x:Name="LB1"
                  Grid.ColumnSpan="5"
                  Margin="5 0 0 0"
                  ItemsSource="{Binding NotesToDo}"
@@ -55,11 +66,18 @@
                  VirtualizingPanel.ScrollUnit="Pixel">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Margin="0 10 0 10" Background="{Binding Color}">
+                    <StackPanel Margin="0 0" 
+                                Background="#4E4E4E"
+                                >
                         <TextBlock FontSize="18" Text="{Binding Content}"
-                                   TextWrapping="Wrap"/>
+                                   TextWrapping="Wrap"
+                                   Foreground="White"
+                                   FontFamily="Lucida Grande"
+                                   FontWeight="DemiBold"/>
                         <TextBlock FontSize="10" Text="{Binding Target}"
-                                   TextWrapping="Wrap"/>
+                                   TextWrapping="Wrap"
+                                   Foreground="White"
+                                   FontFamily="Lucida Grande"/>
 
                     </StackPanel>
                 </DataTemplate>
@@ -77,11 +95,18 @@
                  VirtualizingPanel.ScrollUnit="Pixel">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Margin="0 10 0 10" Background="{Binding Color}">
+                    <StackPanel Margin="0"
+                                Background="#4E4E4E"
+                                >
                         <TextBlock FontSize="18" Text="{Binding Content}"
-                                   TextWrapping="Wrap"/>
+                                   TextWrapping="Wrap"
+                                   Foreground="White"
+                                   FontFamily="Lucida Grande"
+                                   FontWeight="DemiBold"/>
                         <TextBlock FontSize="10" Text="{Binding Target}"
-                                   TextWrapping="Wrap"/>
+                                   TextWrapping="Wrap"
+                                   Foreground="White"
+                                   FontFamily="Lucida Grande"/>
 
                     </StackPanel>
                 </DataTemplate>
@@ -99,11 +124,18 @@
                  VirtualizingPanel.ScrollUnit="Pixel">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Margin="0 10 0 10" Background="{Binding Color}">
+                    <StackPanel Margin="0"
+                                Background="#4E4E4E"
+                                >
                         <TextBlock FontSize="18" Text="{Binding Content}"
-                                   TextWrapping="Wrap"/>
+                                   TextWrapping="Wrap"
+                                   Foreground="White"
+                                   FontFamily="Lucida Grande"
+                                   FontWeight="DemiBold"/>
                         <TextBlock FontSize="10" Text="{Binding Target}"
-                                   TextWrapping="Wrap"/>
+                                   TextWrapping="Wrap"
+                                   Foreground="White"
+                                   FontFamily="Lucida Grande"/>
 
                     </StackPanel>
                 </DataTemplate>
@@ -112,102 +144,191 @@
         </ListBox>
         
         <!--Buttons-->
+        <Grid Grid.Row="1"
+              Grid.ColumnSpan="12"
+              Background="#3F3F3F">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition />
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
 
-        <Button Grid.Column="1"
-                Grid.Row="1"
-                Content="S"
-                Command="{Binding SaveNote}"
-                Visibility="{Binding ChangeControlVisibility}"/>
+            <Button Grid.Column="1"
+                    Grid.Row="1"
+                    ToolTip="Сохранить"
+                    Foreground="White"
+                    FontFamily="Lucida Grande"
+                    Command="{Binding SaveNote}"
+                    Visibility="{Binding ChangeControlVisibility}"
+                    Background="{x:Null}"
+                    BorderBrush="{x:Null}">
+                <materialDesign:PackIcon Kind="ContentSaveAlert" Foreground="#38c2a4" />
+                
+            </Button>
 
-        <Button Grid.Column="2"
-                Grid.Row="1"
-                Content="+"
-                Command="{Binding AddCommand}"
-                />
-        
-        <Button Grid.Column="3"
-                Grid.Row="1"
-                Content="-"
-                Command="{Binding RemoveCommand}"
-                CommandParameter="{Binding SelectedNote}"
-                />
+            <Button Grid.Column="2"
+                    Grid.Row="1"
+                    ToolTip="Добавить"
+                    Foreground="White"
+                    FontFamily="Lucida Grande"
+                    Background="{x:Null}"
+                    BorderBrush="{x:Null}"
+                    Command="{Binding AddCommand}"
+                    >
+                <materialDesign:PackIcon Kind="ViewGridPlus" Foreground="#38c2a4" />
+            </Button>
 
-        <Button Grid.Column="4"
-                Grid.Row="1"
-                Content=">"
-                Command="{Binding TransferProject}"
-                CommandParameter="{Binding SelectedNote}"
-                />
-        <!---->
-        <Button Grid.Column="6"
-                Grid.Row="1"
-                Content="-"
-                Command="{Binding RemoveCommandInProgress}"
-                CommandParameter="{Binding ReadSelectedNote}"
-                />
+            <Button Grid.Column="3"
+                    Grid.Row="1"
+                    ToolTip="Удалить"
+                    Foreground="White"
+                    FontFamily="Lucida Grande"
+                    Background="{x:Null}"
+                    BorderBrush="{x:Null}"
+                    Command="{Binding RemoveCommand}"
+                    CommandParameter="{Binding SelectedNote}"
+                    >
+                <materialDesign:PackIcon Kind="StickerRemove" Foreground="#38c2a4" />
+            </Button>
 
-        <Button Grid.Column="7"
-                Grid.Row="1"
-                Content=">"
-                Command="{Binding TransferProjectInProgress}"
-                CommandParameter="{Binding ReadSelectedNote}"
-                />
-        <!---->
-        <Button Grid.Column="9"
-                Grid.Row="1"
-                Content="-"
-                Command="{Binding RemoveCommandDone}"
-                CommandParameter="{Binding ReadSelectedNote}"
-                />
+            <Button Grid.Column="4"
+                    Grid.Row="1"
+                    ToolTip="Переместить"
+                    Foreground="White"
+                    FontFamily="Lucida Grande"
+                    Background="{x:Null}"
+                    BorderBrush="{x:Null}"
+                    Command="{Binding TransferProject}"
+                    CommandParameter="{Binding SelectedNote}"
+                    >
+                <materialDesign:PackIcon Kind="Transfer" Foreground="#38c2a4" />
+            </Button>
+            <!---->
+            <Button Grid.Column="6"
+                    Grid.Row="1"
+                    Command="{Binding RemoveCommandInProgress}"
+                    CommandParameter="{Binding ReadSelectedNote}"
+                    ToolTip="Удалить"
+                    Foreground="White"
+                    FontFamily="Lucida Grande"
+                    Background="{x:Null}"
+                    BorderBrush="{x:Null}"
+                    >
+                <materialDesign:PackIcon Kind="StickerRemove" Foreground="#38c2a4" />
+            </Button>
 
-        <!--3 Labels-->
-        <TextBlock Grid.Row="1"
-                   Grid.Column="0"
-                   Margin="5 0 0 0"
-                   VerticalAlignment="Center"
-                   Text="{Binding Label3}"
-                   />
+            <Button Grid.Column="7"
+                    Grid.Row="1"
+                    ToolTip="Переместить"
+                    Foreground="White"
+                    FontFamily="Lucida Grande"
+                    Background="{x:Null}"
+                    BorderBrush="{x:Null}"
+                    Command="{Binding TransferProjectInProgress}"
+                    CommandParameter="{Binding ReadSelectedNote}"
+                    >
+                <materialDesign:PackIcon Kind="Transfer" Foreground="#38c2a4" />
+            </Button>
+            <!---->
+            <Button Grid.Column="9"
+                    Grid.Row="1"
+                    Command="{Binding RemoveCommandDone}"
+                    CommandParameter="{Binding ReadSelectedNote}"
+                    ToolTip="Убрать"
+                    Foreground="White"
+                    FontFamily="Lucida Grande"
+                    Background="{x:Null}"
+                    BorderBrush="{x:Null}"
+                    >
+                <materialDesign:PackIcon Kind="FileCheck" Foreground="#38c2a4" />
+            </Button>
 
-        <TextBlock Grid.Row="1"
-                   Grid.Column="5"
-                   Margin="5 0 0 0"
-                   VerticalAlignment="Center"
-                   Text="{Binding Label4}"/>
+            <!--3 Labels-->
+            <TextBlock Grid.Row="1"
+                       Grid.Column="0"
+                       Margin="5 0 0 0"
+                       VerticalAlignment="Center"
+                       Text="{Binding Label3}"
+                       Foreground="White"
+                       FontFamily="Lucida Grande"
+                       FontSize="20"
+                       FontWeight="ExtraBold"
+                       />
 
-        <TextBlock Grid.Row="1"
-                   Grid.Column="8"
-                   Margin="5 0 0 0"
-                   VerticalAlignment="Center"
-                   Text="{Binding Label5}"/>
-        
+            <TextBlock Grid.Row="1"
+                       Grid.Column="5"
+                       Margin="5 0 0 0"
+                       VerticalAlignment="Center"
+                       Text="{Binding Label4}"
+                       Foreground="White"
+                       FontFamily="Lucida Grande"
+                       FontSize="20"
+                       FontWeight="ExtraBold"/>
+
+            <TextBlock Grid.Row="1"
+                       Grid.Column="8"
+                       Margin="5 0 0 0"
+                       VerticalAlignment="Center"
+                       Text="{Binding Label5}"
+                       Foreground="White"
+                       FontFamily="Lucida Grande"
+                       FontSize="20"
+                       FontWeight="ExtraBold"/>
+        </Grid>
         
         <StackPanel Orientation="Vertical"
                     Grid.Row="3"
-                    Grid.ColumnSpan="5">
+                    Grid.ColumnSpan="5"
+                    Background="#4E4E4E">
             <TextBlock Text="{Binding Label6}"
+                       Foreground="White"
+                       FontFamily="Lucida Grande"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
-                       FontSize="10"
+                       FontSize="15"
                        />
             <TextBox TextWrapping="WrapWithOverflow"
                      DataContext="{Binding SelectedNote}"
                      Text="{Binding Content, UpdateSourceTrigger=PropertyChanged}"
                      MaxLength="180"
-                     Margin="10 0 0 0"/>
+                     Margin="10 0 0 0"
+                     Foreground="White"
+                     FontFamily="Lucida Grande"
+                     Style="{StaticResource MaterialDesignTextBox}"
+                     BorderBrush="#38c2a4"
+                     materialDesign:TextFieldAssist.UnderlineBrush="White"
+                     CaretBrush="White"/>
         </StackPanel>
         <StackPanel Orientation="Vertical"
                     Grid.Row="3"
                     Grid.Column="5"
-                    Grid.ColumnSpan="5">
+                    Grid.ColumnSpan="5"
+                    Background="#4E4E4E">
             <TextBlock Text="{Binding Label7}"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
-                       FontSize="10"/>
+                       FontSize="15"
+                       Foreground="White"
+                       FontFamily="Lucida Grande"
+                       />
             <TextBox TextWrapping="Wrap"
                      DataContext="{Binding SelectedNote}"
                      Text="{Binding Target, UpdateSourceTrigger=PropertyChanged}"
                      MaxLength="30"
-                     Margin="10 0 10 0"/>
+                     Margin="10 0 10 0"
+                     Style="{StaticResource MaterialDesignTextBox}"
+                     BorderBrush="#38c2a4"
+                     materialDesign:TextFieldAssist.UnderlineBrush="White"
+                     CaretBrush="White"
+                     Foreground="White"
+                     FontFamily="Lucida Grande"/>
             
         </StackPanel>
 

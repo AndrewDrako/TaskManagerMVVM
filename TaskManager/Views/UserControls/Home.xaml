@@ -12,10 +12,6 @@
         <vm:HomeViewModel/>
     </UserControl.DataContext>
     <Grid Background="#3F3F3F">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="0.4*" />
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.2*"/>
             <RowDefinition Height="*"/>
@@ -34,80 +30,86 @@
             <Run Text=", "/>
             <Run Text="{Binding Email}"/>
         </TextBlock>
+        <Grid Grid.Row="1">
+            <Grid.Background>
+                <ImageBrush ImageSource="/Design/Images/BackgroundDark.jpg"
+                            Stretch="UniformToFill"/>
+            </Grid.Background>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="0.4*"/>
+            </Grid.ColumnDefinitions>
 
-        <ListBox Grid.Row="1"
+            <ListBox
                  Grid.Column="0"
                  ItemsSource="{Binding Projects}"
                  SelectedItem="{Binding SelectedProject}"
                  VirtualizingPanel.ScrollUnit="Pixel"
                  x:Name="listBoxProject">
-            <ListBox.Background>
+                <!--<ListBox.Background>
                 <ImageBrush ImageSource="/Design/Images/BackgroundDark.jpg"
                             Stretch="UniformToFill"/>
-            </ListBox.Background>
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Margin="10 0"
+            </ListBox.Background>-->
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Margin="10 0"
                                 Background="#4E4E4E"
                                 Width="600">
-                        <TextBlock FontSize="20"
+                            <TextBlock FontSize="20"
                                    Margin="10 5"
                                    Text="{Binding ProjectName}"
                                    Foreground="White"
                                    FontWeight="Bold"
                                    FontFamily="Lucida Grande">
-                        </TextBlock>
-                        <TextBlock Text="{Binding PersonName}"
+                            </TextBlock>
+                            <TextBlock Text="{Binding PersonName}"
                                    Foreground="White"
                                    Margin="10 5"
                                    FontFamily="Lucida Grande"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+
+            </ListBox>
             
-        </ListBox>
-        <StackPanel Grid.Column="1" 
-                    Grid.Row="1"
+            <StackPanel Grid.Column="1"
                     Background="#4E4E4E"
                     Visibility="{Binding ChangeControlVisibility, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-            <TextBlock Text="{Binding Label2}"
-                       FontWeight="Bold"
-                       Foreground="White"
-                       Margin="10 5"
-                       FontFamily="Lucida Grande"/>
-            <TextBlock Text="{Binding Label3}" 
-                       Foreground="White"
-                       FontFamily="Lucida Grande"
-                       Margin="10 5"/>
-            <TextBox DataContext="{Binding SelectedProject}"
-                     Text="{Binding ProjectName, UpdateSourceTrigger=PropertyChanged}"
-                     MaxLength="20"
-                     Foreground="White"
-                     FontFamily="Lucida Grande"
-                     Margin="10 5"
-                     Style="{StaticResource MaterialDesignTextBox}"
-                     BorderBrush="#38c2a4"
-                     materialDesign:TextFieldAssist.UnderlineBrush="White"
-                     CaretBrush="White"/>
-            <TextBlock Text="{Binding Label4}"
-                       Foreground="White"
-                       FontFamily="Lucida Grande"
-                       Margin="10 5"/>
-            <TextBox DataContext="{Binding SelectedProject}"
-                     Text="{Binding PersonName, UpdateSourceTrigger=PropertyChanged}"
-                     MaxLength="20"
-                     Foreground="White"
-                     FontFamily="Lucida Grande"
-                     Margin="10 5"
-                     Style="{StaticResource MaterialDesignTextBox}"
-                     BorderBrush="#38c2a4"
-                     materialDesign:TextFieldAssist.UnderlineBrush="White"
-                     CaretBrush="White"/>
-            <!--<StackPanel.Background>
-                <ImageBrush ImageSource="/Design/Images/BackgroundDark.jpg"
-                            Stretch="UniformToFill"/>
-            </StackPanel.Background>-->
-        </StackPanel>
+                <TextBlock Text="{Binding Label2}"
+                           FontWeight="Bold"
+                           Foreground="White"
+                           Margin="10 5"
+                           FontFamily="Lucida Grande"/>
+                <TextBlock Text="{Binding Label3}" 
+                           Foreground="White"
+                           FontFamily="Lucida Grande"
+                           Margin="10 5"/>
+                <TextBox DataContext="{Binding SelectedProject}"
+                         Text="{Binding ProjectName, UpdateSourceTrigger=PropertyChanged}"
+                         MaxLength="20"
+                         Foreground="White"
+                         FontFamily="Lucida Grande"
+                         Margin="10 5"
+                         Style="{StaticResource MaterialDesignTextBox}"
+                         BorderBrush="#38c2a4"
+                         materialDesign:TextFieldAssist.UnderlineBrush="White"
+                         CaretBrush="White"/>
+                <TextBlock Text="{Binding Label4}"
+                           Foreground="White"
+                           FontFamily="Lucida Grande"
+                           Margin="10 5"/>
+                <TextBox DataContext="{Binding SelectedProject}"
+                         Text="{Binding PersonName, UpdateSourceTrigger=PropertyChanged}"
+                         MaxLength="20"
+                         Foreground="White"
+                         FontFamily="Lucida Grande"
+                         Margin="10 5"
+                         Style="{StaticResource MaterialDesignTextBox}"
+                         BorderBrush="#38c2a4"
+                         materialDesign:TextFieldAssist.UnderlineBrush="White"
+                         CaretBrush="White"/>
+            </StackPanel>
+        </Grid>
 
         <StackPanel Grid.Row="2"
                     Grid.Column="0"
