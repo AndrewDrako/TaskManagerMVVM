@@ -6,14 +6,18 @@
         xmlns:local="clr-namespace:TaskManager"
         xmlns:vm="clr-namespace:TaskManager.ViewModels" 
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="{Binding Path=Title}" Height="450" Width="900"
         MinWidth="800"
         MinHeight="400"
-        WindowStyle="SingleBorderWindow">
+        WindowStyle="SingleBorderWindow"
+        Icon="/Design/Icons/MainWindowIcon.png"
+        Background="#393939">
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
+    
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closing" >
             <i:InvokeCommandAction Command="{Binding CloseApplication}" />
@@ -21,23 +25,54 @@
     </i:Interaction.Triggers>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="120"/>
+            <ColumnDefinition Width="60"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         
         <StackPanel Grid.Row="1">
-            <Button Content="{Binding Path=ButtonContent1}" Command="{Binding Path=FirstButtonClick}"
-                    Height="50" FontSize="20"/>
-            <Button Content="{Binding Path=ButtonContent2}" Command="{Binding Path=SecondButtonClick}"
-                    Height="50" FontSize="20"/>
-            <Button Content="{Binding Path=ButtonContent3}" Command="{Binding Path=ThirdButtonClick}"
-                    Height="50" FontSize="20"/>
-            <Button Content="{Binding Path=ButtonContent4}" Command="{Binding Path=FourthButtonClick}"
-                    Height="50" FontSize="20"/>
-            <Button Content="{Binding Path=ButtonContent5}" Command="{Binding Path=FifthButtonClick}"
-                    Height="50" FontSize="20"/>
+            <Button Command="{Binding Path=FirstButtonClick}"
+                    ToolTip="{Binding Path=ButtonContent1}"
+                    Background="{x:Null}"
+                    BorderBrush="{x:Null}"
+                    Height="50" 
+                    FontSize="10">
+                <materialDesign:PackIcon Kind="Home" Foreground="#38c2a4"/>
+            </Button>
+            
+            <Button ToolTip="{Binding Path=ButtonContent2}" 
+                    Command="{Binding Path=SecondButtonClick}"
+                    Background="{x:Null}"
+                    BorderBrush="{x:Null}"
+                    Height="50" 
+                    FontSize="10">
+                <materialDesign:PackIcon Kind="GridLarge" Foreground="#38c2a4"/>
+            </Button>
 
-            <TextBox Text="{Binding Path=Title, UpdateSourceTrigger=PropertyChanged}"/>
+            <Button ToolTip="{Binding Path=ButtonContent3}" 
+                    Command="{Binding Path=ThirdButtonClick}"
+                    Background="{x:Null}"
+                    BorderBrush="{x:Null}"
+                    Height="50" 
+                    FontSize="10">
+                <materialDesign:PackIcon Kind="Settings" Foreground="#38c2a4"/>
+            </Button>
+
+            <Button ToolTip="{Binding Path=ButtonContent4}" 
+                    Command="{Binding Path=FourthButtonClick}"
+                    Background="{x:Null}"
+                    BorderBrush="{x:Null}"
+                    Height="50" 
+                    FontSize="10">
+                <materialDesign:PackIcon Kind="Account" Foreground="#38c2a4"/>
+            </Button>
+            <Button ToolTip="{Binding Path=ButtonContent5}" 
+                    Command="{Binding Path=FifthButtonClick}"
+                    Background="{x:Null}"
+                    BorderBrush="{x:Null}"
+                    Height="50" 
+                    FontSize="10">
+                <materialDesign:PackIcon Kind="HelpBox" Foreground="#38c2a4"/>
+            </Button>
         </StackPanel>
         
         <UserControl Grid.Column="1" 
