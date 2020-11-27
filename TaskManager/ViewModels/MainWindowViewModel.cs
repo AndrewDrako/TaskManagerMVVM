@@ -118,6 +118,7 @@ namespace TaskManager.ViewModels
 
         #endregion
 
+
         #region Основная (текущая страница)
 
         private UserControl _CurrentPage;

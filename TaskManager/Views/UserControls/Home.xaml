@@ -116,7 +116,7 @@
                     Grid.Column="0"
                     Orientation="Horizontal">
             <Button Command="{Binding AddCommand}"
-                    ToolTip="Добавить проект"
+                    ToolTip="{Binding AddTT}"
                     Foreground="White"
                     FontFamily="Lucida Grande"
                     Margin="10 0"
@@ -127,7 +127,7 @@
             </Button>
             <Button Command="{Binding RemoveCommand}"
                     CommandParameter="{Binding SelectedProject}"
-                    ToolTip="Удалить проект"
+                    ToolTip="{Binding RemoveTT}"
                     Foreground="White"
                     FontFamily="Lucida Grande"
                     Background="{x:Null}"
@@ -136,7 +136,7 @@
             </Button>
             <Button Command="{Binding SelectProject}"
                     CommandParameter="{Binding SelectedProject}"
-                    ToolTip="Выбрать проект"
+                    ToolTip="{Binding SelectTT}"
                     Foreground="White"
                     FontFamily="Lucida Grande"
                     Margin="10 0"

@@ -101,6 +101,43 @@ namespace TaskManager.ViewModels
 
         #endregion
 
+        #region Tooltips
+
+        #region add tooltip
+
+        private string _AddTT;
+        public string AddTT
+        {
+            get => TranslateLanguage.AddTT[TranslateLanguage.iLanguage];
+            set => Set(ref _AddTT, value);
+        }
+
+        #endregion
+
+        #region remove tooltip
+
+        private string _RemoveTT;
+        public string RemoveTT
+        {
+            get => TranslateLanguage.RemoveTT[TranslateLanguage.iLanguage];
+            set => Set(ref _RemoveTT, value);
+        }
+
+        #endregion
+
+        #region select tooltip
+
+        private string _SelectTT;
+        public string SelectTT
+        {
+            get => TranslateLanguage.SelectTT[TranslateLanguage.iLanguage];
+            set => Set(ref _SelectTT, value);
+        }
+
+        #endregion
+
+        #endregion
+
         #region Visibiliity input
 
         private Visibility _Visibility = Visibility.Collapsed;

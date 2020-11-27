@@ -110,6 +110,65 @@ namespace TaskManager.ViewModels
         #endregion
         #endregion
 
+        #region ToolTips
+
+        #region Save note 
+
+        private string _SaveNoteTT;
+        public string SaveNoteTT
+        {
+            get => TranslateLanguage.SaveNoteTT[TranslateLanguage.iLanguage];
+            set => Set(ref _SaveNoteTT, value);
+        }
+
+        #endregion
+
+        #region Add note 
+
+        private string _AddNoteTT;
+        public string AddNoteTT
+        {
+            get => TranslateLanguage.AddNoteTT[TranslateLanguage.iLanguage];
+            set => Set(ref _AddNoteTT, value);
+        }
+
+        #endregion
+
+        #region Remove note 
+
+        private string _DelNoteTT;
+        public string delNoteTT
+        {
+            get => TranslateLanguage.DelNoteTT[TranslateLanguage.iLanguage];
+            set => Set(ref _DelNoteTT, value);
+        }
+
+        #endregion
+
+        #region Transfer note 
+
+        private string _TransferNoteTT;
+        public string TransferNoteTT
+        {
+            get => TranslateLanguage.TransferNoteTT[TranslateLanguage.iLanguage];
+            set => Set(ref _TransferNoteTT, value);
+        }
+
+        #endregion
+
+        #region Clear note 
+
+        private string _ClearNoteTT;
+        public string ClearNoteTT
+        {
+            get => TranslateLanguage.ClearNoteTT[TranslateLanguage.iLanguage];
+            set => Set(ref _ClearNoteTT, value);
+        }
+
+        #endregion
+
+        #endregion
+
         #region Записи/Заметки Selected
 
         private Note _SelectedNote;
@@ -171,7 +230,7 @@ namespace TaskManager.ViewModels
 
         #region Visibiliity Кнопки save
 
-        private Visibility _Visibility = Visibility.Visible;
+        private Visibility _Visibility = Visibility.Collapsed;
 
         public Visibility ChangeControlVisibility
         {

@@ -86,7 +86,29 @@ namespace TaskManager.Models
             "Владелец"
         };
 
+        // tooltip add
 
+        public static string[] AddTT = new string[2]
+        {
+            "Create a project",
+            "Создать проект"
+        };
+
+        // tooltip remove
+
+        public static string[] RemoveTT = new string[2]
+        {
+            "Delete a project",
+            "Удалить проект"
+        };
+
+        // tooltip Select
+
+        public static string[] SelectTT = new string[2]
+        {
+            "Run this project",
+            "Запустить выбранный проект"
+        };
 
         #endregion
 
@@ -148,7 +170,45 @@ namespace TaskManager.Models
             "Для чего это нужно сделать"
         };
 
+        // Save note tooltip
 
+        public static string[] SaveNoteTT = new string[2]
+        {
+            "Save all notes",
+            "Сохранить заметки"
+        };
+
+        // Remove note tooltip
+
+        public static string[] DelNoteTT = new string[2]
+        {
+            "Delete a note",
+            "Удалить заметку"
+        };
+
+        // Add note tooltip
+
+        public static string[] AddNoteTT = new string[2]
+        {
+            "Create a note",
+            "Создать заметку"
+        };
+
+        // Transfer note tooltip
+
+        public static string[] TransferNoteTT = new string[2]
+        {
+            "Transfer to next state",
+            "Переместить в следущее положение"
+        };
+
+        // Clear note tooltip
+
+        public static string[] ClearNoteTT = new string[2]
+        {
+            "Clear done note",
+            "Очистить выполненную задачу"
+        };
 
         #endregion
 

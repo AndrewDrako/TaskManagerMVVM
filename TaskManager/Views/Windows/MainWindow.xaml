@@ -23,6 +23,7 @@
             <i:InvokeCommandAction Command="{Binding CloseApplication}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="60"/>
