@@ -193,6 +193,7 @@ namespace TaskManager.ViewModels
                                 authUser.Id = user.Id;
                                 authUser.Password = user.Password;
                                 authUser.Email = user.Email;
+                                authUser.UserName = user.UserName;
                                 Window mainWindow = new MainWindow();
                                 mainWindow.Show();
                                 Application.Current.Windows[0].Close();

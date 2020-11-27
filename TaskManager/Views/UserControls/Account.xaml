@@ -5,49 +5,89 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TaskManager.Views.UserControls"
              xmlns:vm="clr-namespace:TaskManager.ViewModels"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.DataContext>
         <vm:AccountViewModel/>
     </UserControl.DataContext>
-    <Grid Background="White">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Design/Images/ThemeGreen.jpg"
+                            Stretch="UniformToFill"/>
+        </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="50"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Rectangle Grid.Column="0"
+        <!--<Rectangle Grid.Column="0"
                    Grid.ColumnSpan="2"
                    Grid.Row="0"
                    Height="150"
                    Width="300"
-                   Fill="LightPink"/>
-        
-        <TextBlock Text="{Binding Email}"
-                   Grid.Row="1"
-                   Grid.ColumnSpan="2"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
-                   FontSize="40">
-            <TextBlock.DataContext>
-                <vm:HomeViewModel/>
-            </TextBlock.DataContext>
-        </TextBlock>
-        <Button Grid.Column="0"
-                Grid.Row="2"
-                Margin="250 30 30 120"
-                Content="{Binding ButtonLabel1}"
-                Command="{Binding BtnClickLogOut}"/>
-        
-        <Button Grid.Column="1"
-                Grid.Row="2"
-                Margin="30 30 250 120"
-                Content="{Binding ButtonLabel2}"
-                Command="{Binding BtnClickCreate}"/>
+                   Fill="LightPink">
+        </Rectangle>-->
+        <Grid Grid.ColumnSpan="2"
+              Grid.Column="1"
+              Background="#3F3F3F">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <materialDesign:PackIcon Kind="AccountBox"
+                                     Grid.Row="0"
+                                     Grid.ColumnSpan="4"
+                                     HorizontalAlignment="Center"
+                                     VerticalAlignment="Center"
+                                     Height="150"
+                                     Width="150"
+                                     Foreground="#38c2a4"/>
 
+            <TextBlock Text="{Binding Email}"
+                       Grid.Row="1"
+                       Grid.RowSpan="2"
+                       Grid.ColumnSpan="2"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       FontSize="40"
+                       Foreground="White"
+                       FontFamily="Lucida Grande"
+                       FontWeight="Bold">
+                <TextBlock.DataContext>
+                    <vm:HomeViewModel/>
+                </TextBlock.DataContext>
+            </TextBlock>
+            <Button Grid.Column="0"
+                    Grid.Row="3"
+                    Margin="20 30 20 90"
+                    Content="{Binding ButtonLabel1}"
+                    Command="{Binding BtnClickLogOut}"
+                    Background="#38c2a4"
+                    BorderBrush="#38c2a4"
+                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                    materialDesign:ButtonAssist.CornerRadius="15"
+                    FontFamily="Lucida Grande"
+                    FontSize="20"/>
+        
+            <Button Grid.Column="1"
+                    Grid.Row="3"
+                    Margin="20 30 20 90"
+                    Content="{Binding ButtonLabel2}"
+                    Command="{Binding BtnClickCreate}"
+                    Background="#38c2a4"
+                    BorderBrush="#38c2a4"
+                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                    materialDesign:ButtonAssist.CornerRadius="15"
+                    FontFamily="Lucida Grande"
+                    FontSize="20"/>
+        </Grid>
     </Grid>
 </UserControl>
