@@ -131,7 +131,10 @@ namespace TaskManager.ViewModels
         public Note ReadSelectedNote
         {
             get => _ReadSelectedNote;
-            set => Set(ref _ReadSelectedNote, value);
+            set
+            {
+                Set(ref _ReadSelectedNote, value);
+            }
         }
         #endregion
 
@@ -178,7 +181,17 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-        #region
+        #region Visibility поля ввода заметок
+
+        private Visibility _VisibilityWriteNote = Visibility.Collapsed;
+
+        public Visibility ChangeControlVisibilityWriteNote
+        {
+            get { return _VisibilityWriteNote; }
+            set => Set(ref _VisibilityWriteNote, value);
+        }
+
+        #endregion
 
         #region Commands
 
@@ -237,6 +250,7 @@ namespace TaskManager.ViewModels
                 return removeCommand ??
                   (removeCommand = new RelayCommand(obj =>
                   {
+
                       Note note = obj as Note;
                       if (note != null)
                       {

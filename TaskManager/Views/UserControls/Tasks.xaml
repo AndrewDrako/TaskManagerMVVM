@@ -11,11 +11,11 @@
     <UserControl.DataContext>
         <vm:TasksViewModel/>
     </UserControl.DataContext>
-    <Grid Background="#38c2a4">
-        <!--<Grid.Background>
-            <ImageBrush ImageSource="/Design/Images/BackgroundWide.jpg"
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Design/Images/ThemeGreen.jpg"
                             Stretch="UniformToFill"/>
-        </Grid.Background>-->
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
@@ -254,7 +254,7 @@
             <TextBlock Grid.Row="1"
                        Grid.Column="0"
                        Margin="5 0 0 0"
-                       VerticalAlignment="Center"
+                       VerticalAlignment="Bottom"
                        Text="{Binding Label3}"
                        Foreground="White"
                        FontFamily="Lucida Grande"
@@ -265,7 +265,7 @@
             <TextBlock Grid.Row="1"
                        Grid.Column="5"
                        Margin="5 0 0 0"
-                       VerticalAlignment="Center"
+                       VerticalAlignment="Bottom"
                        Text="{Binding Label4}"
                        Foreground="White"
                        FontFamily="Lucida Grande"
@@ -275,7 +275,7 @@
             <TextBlock Grid.Row="1"
                        Grid.Column="8"
                        Margin="5 0 0 0"
-                       VerticalAlignment="Center"
+                       VerticalAlignment="Bottom"
                        Text="{Binding Label5}"
                        Foreground="White"
                        FontFamily="Lucida Grande"
@@ -329,8 +329,6 @@
                      CaretBrush="White"
                      Foreground="White"
                      FontFamily="Lucida Grande"/>
-            
         </StackPanel>
-
     </Grid>
 </UserControl>

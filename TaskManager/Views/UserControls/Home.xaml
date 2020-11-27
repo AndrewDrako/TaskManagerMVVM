@@ -30,12 +30,11 @@
             <Run Text=", "/>
             <Run Text="{Binding Email}"/>
         </TextBlock>
-        <Grid Grid.Row="1"
-              Background="#38c2a4">
-            <!--<Grid.Background>
-                <ImageBrush ImageSource="/Design/Images/BackgroundDark.jpg"
+        <Grid Grid.Row="1">
+            <Grid.Background>
+                <ImageBrush ImageSource="/Design/Images/ThemeGreen.jpg"
                             Stretch="UniformToFill"/>
-            </Grid.Background>-->
+            </Grid.Background>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="0.4*"/>
