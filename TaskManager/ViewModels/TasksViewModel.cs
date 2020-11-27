@@ -178,6 +178,8 @@ namespace TaskManager.ViewModels
 
         #endregion
 
+        #region
+
         #region Commands
 
         #region Сохранение заметки

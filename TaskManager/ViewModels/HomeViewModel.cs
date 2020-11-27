@@ -41,6 +41,7 @@ namespace TaskManager.ViewModels
             }
             set
             {
+                this.ChangeControlVisibility = Visibility.Visible;
                 _SelectedProject = value;
                 OnPropertyChanged("SelectedProject");
             }
@@ -102,7 +103,7 @@ namespace TaskManager.ViewModels
 
         #region Visibiliity input
 
-        private Visibility _Visibility = Visibility.Visible;
+        private Visibility _Visibility = Visibility.Collapsed;
 
         public Visibility ChangeControlVisibility
         {
@@ -125,6 +126,7 @@ namespace TaskManager.ViewModels
                 return addCommand ??
                   (addCommand = new RelayCommand(obj =>
                   {
+                      this.ChangeControlVisibility = Visibility.Visible;
                       Project project = new Project();
                       Projects.Insert(0, project);
                       SelectedProject = project;
@@ -148,6 +150,7 @@ namespace TaskManager.ViewModels
                       Project project = obj as Project;
                       if (true)
                       {
+                          this.ChangeControlVisibility = Visibility.Collapsed;
                           Projects.Remove(project);
                           MainWindowModel.IsTasksNotEmpty = false;
                           if (MainWindowModel.IsConnectedToLocalServer == true)

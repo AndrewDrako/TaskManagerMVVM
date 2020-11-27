@@ -11,11 +11,11 @@
     <UserControl.DataContext>
         <vm:TasksViewModel/>
     </UserControl.DataContext>
-    <Grid>
-        <Grid.Background>
+    <Grid Background="#38c2a4">
+        <!--<Grid.Background>
             <ImageBrush ImageSource="/Design/Images/BackgroundWide.jpg"
                             Stretch="UniformToFill"/>
-        </Grid.Background>
+        </Grid.Background>-->
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
