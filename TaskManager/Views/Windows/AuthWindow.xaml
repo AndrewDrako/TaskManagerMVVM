@@ -10,7 +10,8 @@
         Height="450" Width="400"
         WindowStartupLocation="CenterScreen"
         BorderBrush="Black"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        Icon="/Design/Icons/AuthWindowIcon.png">
     <Window.DataContext>
         <vm:AuthWindowViewModel/>
     </Window.DataContext>

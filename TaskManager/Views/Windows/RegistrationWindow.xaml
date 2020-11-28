@@ -9,7 +9,8 @@
         xmlns:m="clr-namespace:TaskManager.Models"
         mc:Ignorable="d"
         Title="" Height="450" Width="400"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        Icon="/Design/Icons/RegWindowIcon.png">
     <Window.DataContext>
         <vm:RegistrationWindowViewModel/>
     </Window.DataContext>
