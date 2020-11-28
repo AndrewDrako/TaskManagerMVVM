@@ -118,6 +118,25 @@ namespace TaskManager.ViewModels
 
         #endregion
 
+        #region Design
+
+
+        private string _BackgroundColorOne = "#38c2a4";
+        public string BackgroundColorOne
+        {
+            get => _BackgroundColorOne;
+            set => Set(ref _BackgroundColorOne, value);
+        }
+
+
+        private string _BackgroundColorTwo = "#323232";
+        public string BackgroundColorTwo
+        {
+            get => _BackgroundColorTwo;
+            set => Set(ref _BackgroundColorTwo, value);
+        }
+
+        #endregion
 
         #region Основная (текущая страница)
 

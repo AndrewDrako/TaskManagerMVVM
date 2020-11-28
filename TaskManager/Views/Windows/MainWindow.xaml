@@ -13,7 +13,7 @@
         MinHeight="550"
         WindowStyle="SingleBorderWindow"
         Icon="/Design/Icons/MainWindowIcon.png"
-        Background="#323232">
+        Background="{Binding BackgroundColorTwo}">
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
