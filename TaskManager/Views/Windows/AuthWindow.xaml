@@ -86,7 +86,7 @@
                 FontFamily="Lucida Grande"
                 Background="#38c2a4"
                 BorderBrush="#38c2a4"
-                FontSize="20"
+                FontSize="13"
                 >
             
         </Button>
@@ -102,7 +102,7 @@
                 Command="{Binding BtnClickReg}"
                 Content="{Binding BtnContentRegister}"
                 FontFamily="Lucida Grande"
-                FontSize="20"/>
+                FontSize="13"/>
         
     </Grid>
 </Window>

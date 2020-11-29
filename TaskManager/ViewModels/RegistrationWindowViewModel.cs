@@ -220,7 +220,7 @@ namespace TaskManager.ViewModels
                 MessageBox.Show("Поле не должно быть пусто!");
                 return;
             }
-            if (true)
+            if (KeyInput == KeyFromEmail.ToString())
             {
                 var passwordBox = p as PasswordBox;
                 var password = passwordBox.Password;

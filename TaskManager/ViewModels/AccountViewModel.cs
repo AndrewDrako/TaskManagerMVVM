@@ -64,6 +64,7 @@ namespace TaskManager.ViewModels
         private void OnBtnClickCreateExecuted(object p)
         {
             AuthWindowModel.PrintKey("Cannot", "authreg_key.txt");
+            AuthWindowViewModel._CanClickOk = true;
             Window regWindow = new RegistrationWindow();
             regWindow.Show();
             Application.Current.Windows[0].Close();
