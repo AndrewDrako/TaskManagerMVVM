@@ -154,7 +154,7 @@ namespace TaskManager.ViewModels
 
         private void OnFirstButtonClickExecuted(object p)
         {
-            CurrentPage = _Home;
+            SlowOpacity(_Home);
         }
 
         #endregion
@@ -167,7 +167,7 @@ namespace TaskManager.ViewModels
 
         private void OnSecondButtonClickExecuted(object p)
         {
-            CurrentPage = _Tasks;
+            SlowOpacity(_Tasks);
             
         }
 
@@ -212,19 +212,6 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-        #region Клик кнопки номер 5
-
-        public ICommand SixButtonClick { get; }
-
-        private bool CanSixButtonClickExecute(object p) => true;
-
-        private void OnSixButtonClickExecuted(object p)
-        {
-            //db.SaveChanges();
-        }
-
-        #endregion
-
         #region Закрытие Окна
 
         public ICommand CloseApplication { get; }
@@ -240,20 +227,20 @@ namespace TaskManager.ViewModels
 
         #region Functions
 
-        private async void SlowOpacity(Page page)
+        private async void SlowOpacity(UserControl page)
         {
             await Task.Factory.StartNew(() =>
             {
-                for (double i = 1.0; i > 0.0; i -= 0.1)
+                for (double i = 1.0; i > 0.1; i -= 0.1)
                 {
                     UserControlOpacity = i;
-                    Thread.Sleep(50);
+                    Thread.Sleep(25);
                 }
-
-                for (double i = 0.0; i < 1.1; i += 0.1)
+                CurrentPage = page;
+                for (double i = 0.2; i < 1.1; i += 0.1)
                 {
                     UserControlOpacity = i;
-                    Thread.Sleep(50);
+                    Thread.Sleep(25);
                 }
 
             });
@@ -286,7 +273,7 @@ namespace TaskManager.ViewModels
             ThirdButtonClick = new LambdaCommand(OnThirdButtonClickExecuted, CanThirdButtonClickExecute);
             FourthButtonClick = new LambdaCommand(OnFourthButtonClickExecuted, CanFourthButtonClickExecute);
             FifthButtonClick = new LambdaCommand(OnFifthButtonClickExecuted, CanFifthButtonClickExecute);
-            SixButtonClick = new LambdaCommand(OnSixButtonClickExecuted, CanSixButtonClickExecute);
+            //SixButtonClick = new LambdaCommand(OnSixButtonClickExecuted, CanSixButtonClickExecute);
 
 
             #endregion

@@ -77,7 +77,8 @@
         </StackPanel>
 
         <UserControl Grid.Column="1" 
-                     Content="{Binding Path=CurrentPage}">
+                     Content="{Binding Path=CurrentPage}"
+                     Opacity="{Binding UserControlOpacity}">
 
 
         </UserControl>
