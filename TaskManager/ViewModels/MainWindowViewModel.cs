@@ -118,6 +118,17 @@ namespace TaskManager.ViewModels
 
         #endregion
 
+        #region Opacity
+
+        private double _UserControlOpacity;
+        public double UserControlOpacity
+        {
+            get => _UserControlOpacity;
+            set => Set(ref _UserControlOpacity, value);
+        }
+
+        #endregion
+
         #region Основная (текущая страница)
 
         private UserControl _CurrentPage;
@@ -227,6 +238,29 @@ namespace TaskManager.ViewModels
 
         #endregion
 
+        #region Functions
+
+        private async void SlowOpacity(Page page)
+        {
+            await Task.Factory.StartNew(() =>
+            {
+                for (double i = 1.0; i > 0.0; i -= 0.1)
+                {
+                    UserControlOpacity = i;
+                    Thread.Sleep(50);
+                }
+
+                for (double i = 0.0; i < 1.1; i += 0.1)
+                {
+                    UserControlOpacity = i;
+                    Thread.Sleep(50);
+                }
+
+            });
+        } 
+
+        #endregion
+
         #region Конструктор 
         public MainWindowViewModel()
         { 
@@ -238,7 +272,7 @@ namespace TaskManager.ViewModels
             MainWindowModel.IsTasksNotEmpty = false;
             _Account = new Account();
             _Help = new Help();
-
+            UserControlOpacity = 1;
             CurrentPage = _Home;
 
             #endregion
