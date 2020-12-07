@@ -193,6 +193,8 @@ namespace TaskManager.ViewModels
                 MessageBox.Show("Введенное имя занято попробуйте другое");
                 return;
             }
+            this.ChangeControlVisibility1 = Visibility.Collapsed;
+            this.ChangeControlVisibility2 = Visibility.Visible;
             Random rnd = new Random();
             KeyFromEmail = rnd.Next(100000, 999999);
             try
@@ -203,8 +205,6 @@ namespace TaskManager.ViewModels
             {
                 MessageBox.Show("Невозможно отправить на почту");
             }
-            this.ChangeControlVisibility1 = Visibility.Collapsed;
-            this.ChangeControlVisibility2 = Visibility.Visible;
         }
 
         #endregion
