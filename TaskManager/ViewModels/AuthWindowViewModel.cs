@@ -156,6 +156,12 @@ namespace TaskManager.ViewModels
 
             #endregion
 
+            #region App Theme
+
+            MainWindowModel.iTheme = MainWindowModel.ReadThemeKey();
+
+            #endregion
+
             #region Связь с БД
 
 

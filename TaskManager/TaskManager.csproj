@@ -77,6 +77,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\AppTheme.cs" />
     <Compile Include="Models\AuthWindowModel.cs" />
     <Compile Include="Models\Model.cs" />
     <Compile Include="Models\RegModel.cs" />

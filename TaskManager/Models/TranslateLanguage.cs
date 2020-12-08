@@ -226,8 +226,8 @@ namespace TaskManager.Models
 
         public static string[] LabelSettings2 = new string[2]
         {
-            "Add colors",
-            "Добавить краски"
+            "Change theme",
+            "Изменить тему"
         };
 
         // Button apply label

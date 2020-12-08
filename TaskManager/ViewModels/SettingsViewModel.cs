@@ -51,9 +51,10 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-        #region Коллекция языков
+        #region Коллекции
 
         public static ObservableCollection<AppLanguage> Languages { get; set; }
+        public static ObservableCollection<AppTheme> Themes { get; set; }
 
         #endregion
 
@@ -67,22 +68,43 @@ namespace TaskManager.ViewModels
             set
             {
                 _SelectedLanguage = value;
+                IsEdited = true;
                 OnPropertyChanged("SelectedLanguage");
             }
         }
 
         #endregion
 
+        #region Themes
+
+        public static int iTheme;
+
+        private AppTheme _SelectesTheme;
+        public AppTheme SelectedTheme
+        {
+            get => _SelectesTheme;
+            set => Set(ref _SelectesTheme, value);
+        }
+
+        #endregion
+
         #region Commands
 
+        public bool IsEdited = false;
         public ICommand ButtonSaveSettingsClick { get; }
 
-        private bool CanButtonSaveSettingsClickExecute(object p) => true;
+        private bool CanButtonSaveSettingsClickExecute(object p) => IsEdited;
 
         private void OnButtonSaveSettingsClickExecuted(object p)
         {
+            //Language
             string s = SelectedLanguage.Language;
             MainWindowModel.PrintLanguageKey(s);
+
+            //Theme
+            string ss = SelectedTheme.Name;
+            MainWindowModel.PrintThemeKey(ss);
+
             System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
             Application.Current.Shutdown();
         }
@@ -98,10 +120,20 @@ namespace TaskManager.ViewModels
             Languages = new ObservableCollection<AppLanguage>
             {
                 new AppLanguage {Language = "English"},
-                new AppLanguage {Language = "Russian"},
-                new AppLanguage {Language = "Espanol"}
+                new AppLanguage {Language = "Russian"}
             };
             _SelectedLanguage = Languages[TranslateLanguage.iLanguage];
+
+            #endregion
+
+            #region Install Theme
+
+            Themes = new ObservableCollection<AppTheme>
+            {
+                new AppTheme{ Name = "Custom", Background = "/Design/Images/ThemeGreen.jpg", FontColor = "#FFFFFF", MainColor = "#323232", FirstColor = "#3F3F3F", SecondColor = "#38c2a4"}, 
+                new AppTheme{ Name = "Light", Background = "{x:Null}", FontColor = "#000000", MainColor = "#FFFFFF", FirstColor = "#FFFFFF", SecondColor = "#3F3F3F"}
+            };
+            _SelectesTheme = Themes[0];
 
             #endregion
 
