@@ -128,7 +128,7 @@ namespace TaskManager.Models
             }
             else
             {
-                if (textFromFile == "Light")
+                if (textFromFile == "Lightm")
                 {
                     return 1;
                 }

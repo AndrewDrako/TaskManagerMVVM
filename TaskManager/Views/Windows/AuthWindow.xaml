@@ -17,7 +17,7 @@
     </Window.DataContext>
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/Design/Images/BackgroundDark.jpg"
+            <ImageBrush ImageSource="{Binding BackgroundImg}"
                         Stretch="UniformToFill"/>
             
         </Grid.Background>
@@ -38,7 +38,7 @@
                    Grid.ColumnSpan="2"
                    FontSize="20"
                    VerticalAlignment="Center"
-                   Foreground="White"
+                   Foreground="{Binding FontColor}"
                    FontFamily="Lucida Grande"/>
         <TextBox Grid.Row="1"
                  Grid.ColumnSpan="2"
@@ -46,12 +46,12 @@
                  FontSize="20"
                  Text="{Binding Username}"
                  TextAlignment="Center"
-                 Foreground="White"
+                 Foreground="{Binding FontColor}"
                  FontFamily="Lucida Grande"
                  Style="{StaticResource MaterialDesignTextBox}"
-                 BorderBrush="#38c2a4"
-                 materialDesign:TextFieldAssist.UnderlineBrush="White"
-                 CaretBrush="White"
+                 BorderBrush="{Binding BtnColor}"
+                 materialDesign:TextFieldAssist.UnderlineBrush="{Binding FontColor}"
+                 CaretBrush="{Binding FontColor}"
                  />
         <TextBlock Grid.Row="2"
                    Grid.ColumnSpan="2"
@@ -60,7 +60,7 @@
                    FontSize="20"
                    VerticalAlignment="Center"
                    FontFamily="Lucida Grande"
-                   Foreground="White"/>
+                   Foreground="{Binding FontColor}"/>
 
         <PasswordBox Grid.Row="3"
                      Grid.ColumnSpan="2"
@@ -68,11 +68,11 @@
                      FontSize="20"
                      x:Name="myPswdBox"
                      HorizontalContentAlignment="Center"
-                     Foreground="White"
+                     Foreground="{Binding FontColor}"
                      Style="{StaticResource MaterialDesignPasswordBox}"
-                     materialDesign:TextFieldAssist.UnderlineBrush="White"
-                     BorderBrush="#38c2a4"
-                     CaretBrush="White"/>
+                     materialDesign:TextFieldAssist.UnderlineBrush="{Binding FontColor}"
+                     BorderBrush="{Binding BtnColor}"
+                     CaretBrush="{Binding FontColor}"/>
         
         <Button Grid.Column="0"
                 Grid.Row="4"
@@ -84,8 +84,8 @@
                 Command="{Binding BtnClickOk}"
                 Content="{Binding BtnContentOk}"
                 FontFamily="Lucida Grande"
-                Background="#38c2a4"
-                BorderBrush="#38c2a4"
+                Background="{Binding BtnColor}"
+                BorderBrush="{Binding BtnColor}"
                 FontSize="13"
                 >
             
@@ -95,8 +95,8 @@
                 Grid.Row="4"
                 Margin="10"
                 Height="40"
-                Background="#38c2a4"
-                BorderBrush="#38c2a4"
+                Background="{Binding BtnColor}"
+                BorderBrush="{Binding BtnColor}"
                 Style="{StaticResource MaterialDesignRaisedDarkButton}"
                 materialDesign:ButtonAssist.CornerRadius="15"
                 Command="{Binding BtnClickReg}"

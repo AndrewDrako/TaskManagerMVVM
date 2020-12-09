@@ -79,6 +79,7 @@
     </ApplicationDefinition>
     <Compile Include="Models\AppTheme.cs" />
     <Compile Include="Models\AuthWindowModel.cs" />
+    <Compile Include="Models\ChangeAppTheme.cs" />
     <Compile Include="Models\Model.cs" />
     <Compile Include="Models\RegModel.cs" />
     <Compile Include="ViewModels\AuthWindowViewModel.cs" />

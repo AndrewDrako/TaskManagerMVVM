@@ -77,13 +77,16 @@ namespace TaskManager.ViewModels
 
         #region Themes
 
-        public static int iTheme;
 
-        private AppTheme _SelectesTheme;
+        private AppTheme _SelectedTheme;
         public AppTheme SelectedTheme
         {
-            get => _SelectesTheme;
-            set => Set(ref _SelectesTheme, value);
+            get => _SelectedTheme;
+            set
+            {
+                IsEdited = true;
+                Set(ref _SelectedTheme, value);
+            }
         }
 
         #endregion
@@ -130,10 +133,10 @@ namespace TaskManager.ViewModels
 
             Themes = new ObservableCollection<AppTheme>
             {
-                new AppTheme{ Name = "Custom", Background = "/Design/Images/ThemeGreen.jpg", FontColor = "#FFFFFF", MainColor = "#323232", FirstColor = "#3F3F3F", SecondColor = "#38c2a4"}, 
-                new AppTheme{ Name = "Light", Background = "{x:Null}", FontColor = "#000000", MainColor = "#FFFFFF", FirstColor = "#FFFFFF", SecondColor = "#3F3F3F"}
+                new AppTheme{ Name = "Custom"}, 
+                new AppTheme{ Name = "Light"}
             };
-            _SelectesTheme = Themes[0];
+            _SelectedTheme = Themes[ChangeAppTheme.iTheme];
 
             #endregion
 

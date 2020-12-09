@@ -98,11 +98,48 @@ namespace TaskManager.ViewModels
 
         #endregion
 
+        #region Design
+
+        private string _BackgroundImg;
+        private string _FontColor;
+        private string _BtnColor;
+        
+
+
+        /// <summary>
+        /// Background image
+        /// </summary>
+        public string BackgroundImg
+        {
+            get => ChangeAppTheme.BackgroundImg[ChangeAppTheme.iTheme];
+            set => Set(ref _BackgroundImg, value);
+        }
+
+        /// <summary>
+        /// Font color
+        /// </summary>
+        public string FontColor
+        {
+            get => ChangeAppTheme.FontColor[ChangeAppTheme.iTheme];
+            set => Set(ref _FontColor, value);
+        }
+
+        /// <summary>
+        /// Buttons color
+        /// </summary>
+        public string BtnColor
+        {
+            get => ChangeAppTheme.BtnColor[ChangeAppTheme.iTheme];
+            set => Set(ref _BtnColor, value);
+        }
+
+        #endregion
+
         #region Commands
 
         // Команда кнопки ОК
 
-        public  ICommand BtnClickOk { get; }
+        public ICommand BtnClickOk { get; }
         private bool CanBtnClickOkExecute(object p) => CanClickOk;
         private void OnBtnClickOkExecuted(object p)
         {
@@ -158,7 +195,7 @@ namespace TaskManager.ViewModels
 
             #region App Theme
 
-            MainWindowModel.iTheme = MainWindowModel.ReadThemeKey();
+            ChangeAppTheme.iTheme = MainWindowModel.ReadThemeKey();
 
             #endregion
 
