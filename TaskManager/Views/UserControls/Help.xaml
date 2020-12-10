@@ -12,7 +12,7 @@
         <vm:HelpViewModel/>
     </UserControl.DataContext>
 
-    <Grid Background="#3F3F3F">
+    <Grid Background="{Binding PageColor}">
         <!--<Grid.Background>
             <ImageBrush ImageSource="/Design/Images/ThemeGreen.jpg"
                             Stretch="UniformToFill"/>
@@ -38,7 +38,7 @@
                     Grid.Column="1"
                     Grid.ColumnSpan="2"
                     FontSize="50"
-                    Foreground="White"
+                    Foreground="{Binding FontColor}"
                     FontFamily="Lucida Grande"
                     Text="{Binding Label1}"/>
         
@@ -51,7 +51,7 @@
                 BorderBrush="{x:Null}"
                 Height="150"
                 Width="150">
-            <materialDesign:PackIcon Kind="Vk" Foreground="#38c2a4"
+            <materialDesign:PackIcon Kind="Vk" Foreground="{Binding BtnColor}"
                                      Height="100"
                                      Width="100"/>
         </Button>
@@ -65,7 +65,7 @@
                 BorderBrush="{x:Null}"
                 Height="150"
                 Width="150">
-            <materialDesign:PackIcon Kind="Linkedin" Foreground="#38c2a4"
+            <materialDesign:PackIcon Kind="Linkedin" Foreground="{Binding BtnColor}"
                                      Height="100"
                                      Width="100"/>
         </Button>
@@ -79,7 +79,7 @@
                 BorderBrush="{x:Null}"
                 Height="150"
                 Width="150">
-            <materialDesign:PackIcon Kind="Github" Foreground="#38c2a4"
+            <materialDesign:PackIcon Kind="Github" Foreground="{Binding BtnColor}"
                                      Height="100"
                                      Width="100"/>
         </Button>
@@ -92,14 +92,14 @@
                 BorderBrush="{x:Null}"
                 Height="150"
                 Width="150">
-            <materialDesign:PackIcon Kind="Instagram" Foreground="#38c2a4"
+            <materialDesign:PackIcon Kind="Instagram" Foreground="{Binding BtnColor}"
                                      Height="100"
                                      Width="100"/>
         </Button>
         <TextBlock Grid.Row="2"
                    Grid.ColumnSpan="4"
                    Text="О чем это приложение"
-                   Foreground="White"
+                   Foreground="{Binding FontColor}"
                    FontFamily="Lucida Grande"
                    FontSize="20"
                    
@@ -110,7 +110,7 @@
                       Grid.ColumnSpan="4"
                       Grid.RowSpan="2">
             <TextBlock Margin="20"
-                       Foreground="White"
+                       Foreground="{Binding FontColor}"
                        FontFamily="Lucida Grande"
                        FontSize="17"
                        TextWrapping="WrapWithOverflow"

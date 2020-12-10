@@ -17,7 +17,7 @@ namespace TaskManager.Models
 
         public static string[] FontColor = new string[2]
         {
-            "#EEEEEE",
+            "#FFFFFF",
             "#000000"
         };
 
@@ -30,8 +30,32 @@ namespace TaskManager.Models
 
         public static string[] BackgroundColor = new string[2]
         {
-            "",
-            ""
+            "#323232",
+            "#DADADA"
+        };
+
+        public static string[] PageBackground = new string[2]
+        {
+            "{x:null}",
+            "#83A8E4"
+        };
+
+        public static string[] PageColor = new string[2]
+        {
+            "#3F3F3F",
+            "#FFFFFF"
+        };
+
+        public static string[] PageColor2 = new string[2]
+        {
+            "#4E4E4E",
+            "#DEDEDE"
+        };
+
+        public static string[] NoteColor = new string[2]
+        {
+            "#4E4E4E",
+            "#BCD1E9"
         };
 
         public static int iTheme;

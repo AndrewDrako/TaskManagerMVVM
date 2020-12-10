@@ -118,6 +118,43 @@ namespace TaskManager.ViewModels
 
         #endregion
 
+        #region Design
+
+        private string _BackgroundColor;
+        private string _BtnColor;
+        private string _PageBackground;
+
+
+        /// <summary>
+        /// Page background color
+        /// </summary>
+        public string PageBackground
+        {
+            get => ChangeAppTheme.PageBackground[ChangeAppTheme.iTheme];
+            set => Set(ref _PageBackground, value);
+        }
+
+
+        /// <summary>
+        /// Background image
+        /// </summary>
+        public string BackgroundColor
+        {
+            get => ChangeAppTheme.BackgroundColor[ChangeAppTheme.iTheme];
+            set => Set(ref _BackgroundColor, value);
+        }
+
+        /// <summary>
+        /// Buttons color
+        /// </summary>
+        public string BtnColor
+        {
+            get => ChangeAppTheme.BtnColor[ChangeAppTheme.iTheme];
+            set => Set(ref _BtnColor, value);
+        }
+
+        #endregion
+
         #region Opacity
 
         private double _UserControlOpacity;

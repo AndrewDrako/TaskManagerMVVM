@@ -13,7 +13,7 @@
     </UserControl.DataContext>
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/Design/Images/ThemeGreen.jpg"
+            <ImageBrush ImageSource="{Binding BackgroundImg}"
                             Stretch="UniformToFill"/>
         </Grid.Background>
         <Grid.ColumnDefinitions>
@@ -36,7 +36,7 @@
               Grid.Column="1"
               Grid.ColumnSpan="2"
               Grid.RowSpan="3"
-              Background="#3F3F3F">
+              Background="{Binding PageColor2}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -52,7 +52,7 @@
                        HorizontalAlignment="Right"
                        VerticalAlignment="Center"
                        Text="{Binding LabelLanguage}"
-                       Foreground="White"
+                       Foreground="{Binding FontColor}"
                        FontFamily="Lucida Grande"
                        FontSize="30"
                        Margin="0 0 20 0"/>
@@ -65,8 +65,8 @@
                       Width="200"
                       Margin="20 0 0 0"
                       Style="{StaticResource MaterialDesignComboBox}"
-                      materialDesign:TextFieldAssist.UnderlineBrush="#38c2a4"
-                      BorderBrush="#38c2a4"
+                      materialDesign:TextFieldAssist.UnderlineBrush="{Binding BtnColor}"
+                      BorderBrush="{Binding BtnColor}"
                       ItemsSource="{Binding Languages}"
                       SelectedItem="{Binding SelectedLanguage}">
                 
@@ -86,7 +86,7 @@
                    HorizontalAlignment="Right"
                    VerticalAlignment="Center"
                    Text="{Binding LabelAddColors}"
-                   Foreground="White"
+                   Foreground="{Binding FontColor}"
                    FontFamily="Lucida Grande"
                    FontSize="30"
                    Margin="0 0 20 0"/>
@@ -98,8 +98,8 @@
                       Width="200"
                       Margin="20 0 0 0"
                       Style="{StaticResource MaterialDesignComboBox}"
-                      materialDesign:TextFieldAssist.UnderlineBrush="#38c2a4"
-                      BorderBrush="#38c2a4"
+                      materialDesign:TextFieldAssist.UnderlineBrush="{Binding BtnColor}"
+                      BorderBrush="{Binding BtnColor}"
                       ItemsSource="{Binding Themes}"
                       SelectedItem="{Binding SelectedTheme}">
 
@@ -119,13 +119,13 @@
         <Grid Grid.Column="0"
               Grid.ColumnSpan="4"
               Grid.Row="10"
-              Background="#3F3F3F">
+              Background="{Binding PageColor}">
             <Button HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Content="{Binding LabelButtonApply}"
                     Command="{Binding ButtonSaveSettingsClick}"
-                    Background="#38c2a4"
-                    BorderBrush="#38c2a4"
+                    Background="{Binding BtnColor}"
+                    BorderBrush="{Binding BtnColor}"
                     Style="{StaticResource MaterialDesignRaisedDarkButton}"
                     materialDesign:ButtonAssist.CornerRadius="15"
                     FontFamily="Lucida Grande"

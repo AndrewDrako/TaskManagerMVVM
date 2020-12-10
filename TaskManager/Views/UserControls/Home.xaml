@@ -13,7 +13,7 @@
     </UserControl.DataContext>
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/Design/Images/ThemeGreen.jpg"
+            <ImageBrush ImageSource="{Binding BackgroundImg}"
                         Stretch="UniformToFill"/>
         </Grid.Background>
         <Grid.RowDefinitions>
@@ -28,12 +28,12 @@
 
         <Grid Grid.Row="0"
               Grid.ColumnSpan="2"
-              Background="#3F3F3F">
+              Background="{Binding PageColor}">
             <TextBlock FontSize="20"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Center"
                        Margin="10 0 0 0"
-                       Foreground="White"
+                       Foreground="{Binding FontColor}"
                        FontFamily="Lucida Grande">
                 <Run Text="{Binding Welcome}"/>
                 <Run Text=", "/>
@@ -53,18 +53,17 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Margin="10 0"
-                                Background="#4E4E4E"
-                                
+                                Background="{Binding PageColor2}"
                                 Width="600">
                             <TextBlock FontSize="20"
                                    Margin="10 5"
                                    Text="{Binding ProjectName}"
-                                   Foreground="White"
+                                   Foreground="{Binding FontColor}"
                                    FontWeight="Bold"
                                    FontFamily="Lucida Grande">
                             </TextBlock>
                             <TextBlock Text="{Binding PersonName}"
-                                   Foreground="White"
+                                   Foreground="{Binding FontColor}"
                                    Margin="10 5"
                                    FontFamily="Lucida Grande"/>
                         </StackPanel>
@@ -75,46 +74,46 @@
 
         <StackPanel Grid.Column="1"
                     Grid.Row="1"
-                    Background="#4E4E4E"
+                    Background="{Binding PageColor2}"
                     Visibility="{Binding ChangeControlVisibility, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <TextBlock Text="{Binding Label2}"
                            FontWeight="Bold"
-                           Foreground="White"
+                           Foreground="{Binding FontColor}"
                            Margin="10 5"
                            FontFamily="Lucida Grande"/>
             <TextBlock Text="{Binding Label3}" 
-                           Foreground="White"
+                           Foreground="{Binding FontColor}"
                            FontFamily="Lucida Grande"
                            Margin="10 5"/>
             <TextBox DataContext="{Binding SelectedProject}"
                          Text="{Binding ProjectName, UpdateSourceTrigger=PropertyChanged}"
                          MaxLength="20"
-                         Foreground="White"
+                         Foreground="{Binding FontColor}"
                          FontFamily="Lucida Grande"
                          Margin="10 5"
                          Style="{StaticResource MaterialDesignTextBox}"
-                         BorderBrush="#38c2a4"
-                         materialDesign:TextFieldAssist.UnderlineBrush="White"
-                         CaretBrush="White"/>
+                         BorderBrush="{Binding BtnColor}"
+                         materialDesign:TextFieldAssist.UnderlineBrush="{Binding FontColor}"
+                         CaretBrush="{Binding FontColor}"/>
             <TextBlock Text="{Binding Label4}"
-                           Foreground="White"
+                           Foreground="{Binding FontColor}"
                            FontFamily="Lucida Grande"
                            Margin="10 5"/>
             <TextBox DataContext="{Binding SelectedProject}"
                          Text="{Binding PersonName, UpdateSourceTrigger=PropertyChanged}"
                          MaxLength="20"
-                         Foreground="White"
+                         Foreground="{Binding FontColor}"
                          FontFamily="Lucida Grande"
                          Margin="10 5"
                          Style="{StaticResource MaterialDesignTextBox}"
-                         BorderBrush="#38c2a4"
-                         materialDesign:TextFieldAssist.UnderlineBrush="White"
-                         CaretBrush="White"/>
+                         BorderBrush="{Binding BtnColor}"
+                         materialDesign:TextFieldAssist.UnderlineBrush="{Binding FontColor}"
+                         CaretBrush="{Binding FontColor}"/>
         </StackPanel>
 
         <Grid Grid.Row="2"
               Grid.ColumnSpan="2"
-              Background="#3F3F3F">
+              Background="{Binding PageColor}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="0.4*"/>
@@ -123,32 +122,32 @@
                         Orientation="Horizontal">
                 <Button Command="{Binding AddCommand}"
                         ToolTip="{Binding AddTT}"
-                        Foreground="White"
+                        Foreground="{Binding FontColor}"
                         FontFamily="Lucida Grande"
                         Margin="10 0"
                         Background="{x:Null}"
                         BorderBrush="{x:Null}">
-                    <materialDesign:PackIcon Kind="PlusBox" Foreground="#38c2a4"/>
+                    <materialDesign:PackIcon Kind="PlusBox" Foreground="{Binding BtnColor}"/>
                 
                 </Button>
                 <Button Command="{Binding RemoveCommand}"
                         CommandParameter="{Binding SelectedProject}"
                         ToolTip="{Binding RemoveTT}"
-                        Foreground="White"
+                        Foreground="{Binding FontColor}"
                         FontFamily="Lucida Grande"
                         Background="{x:Null}"
                         BorderBrush="{x:Null}">
-                    <materialDesign:PackIcon Kind="Delete" Foreground="#38c2a4"/>
+                    <materialDesign:PackIcon Kind="Delete" Foreground="{Binding BtnColor}"/>
                 </Button>
                 <Button Command="{Binding SelectProject}"
                         CommandParameter="{Binding SelectedProject}"
                         ToolTip="{Binding SelectTT}"
-                        Foreground="White"
+                        Foreground="{Binding FontColor}"
                         FontFamily="Lucida Grande"
                         Margin="10 0"
                         Background="{x:Null}"
                         BorderBrush="{x:Null}">
-                    <materialDesign:PackIcon Kind="ClipboardCheck" Foreground="#38c2a4"/>
+                    <materialDesign:PackIcon Kind="ClipboardCheck" Foreground="{Binding BtnColor}"/>
                 </Button>
 
             </StackPanel>
