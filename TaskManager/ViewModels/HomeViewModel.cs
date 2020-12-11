@@ -41,8 +41,11 @@ namespace TaskManager.ViewModels
             }
             set
             {
-                this.ChangeControlVisibility = Visibility.Visible;
                 _SelectedProject = value;
+                if (_SelectedProject != null)
+                {
+                    this.ChangeControlVisibility = Visibility.Visible;
+                }
                 if (Projects.Contains(_SelectedProject) && _SelectedProject.ProjectName != null)
                 {
                     this.ChangeControlVisibility = Visibility.Collapsed;
