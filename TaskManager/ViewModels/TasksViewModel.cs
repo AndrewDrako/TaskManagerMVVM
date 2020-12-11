@@ -239,6 +239,7 @@ namespace TaskManager.ViewModels
             }
             set
             {
+                this.ChangeControlVisibility = Visibility.Visible;
                 Set(ref _SelectedNote, value);
             }
         }

@@ -65,11 +65,14 @@
                       Width="200"
                       Margin="20 0 0 0"
                       Style="{StaticResource MaterialDesignComboBox}"
+                      Foreground="#FF11C292"
                       materialDesign:TextFieldAssist.UnderlineBrush="{Binding BtnColor}"
+                      
                       BorderBrush="{Binding BtnColor}"
                       ItemsSource="{Binding Languages}"
                       SelectedItem="{Binding SelectedLanguage}">
-                
+
+
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Language}"
