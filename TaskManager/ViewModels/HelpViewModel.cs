@@ -73,14 +73,14 @@ namespace TaskManager.ViewModels
             set => Set(ref _FontColor, value);
         }
 
-        /// <summary>
-        /// Buttons color
-        /// </summary>
-        public string BtnColor
-        {
-            get => ChangeAppTheme.BtnColor[ChangeAppTheme.iTheme];
-            set => Set(ref _BtnColor, value);
-        }
+        ///// <summary>
+        ///// Buttons color
+        ///// </summary>
+        //public string BtnColor
+        //{
+        //    get => ChangeAppTheme.BtnColor[ChangeAppTheme.iTheme];
+        //    set => Set(ref _BtnColor, value);
+        //}
 
         #endregion
 

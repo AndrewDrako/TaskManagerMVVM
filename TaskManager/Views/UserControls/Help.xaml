@@ -11,6 +11,7 @@
     <UserControl.DataContext>
         <vm:HelpViewModel/>
     </UserControl.DataContext>
+    
 
     <Grid Background="{Binding PageColor}">
         <!--<Grid.Background>
@@ -51,7 +52,7 @@
                 BorderBrush="{x:Null}"
                 Height="150"
                 Width="150">
-            <materialDesign:PackIcon Kind="Vk" Foreground="{Binding BtnColor}"
+            <materialDesign:PackIcon Kind="Vk" Foreground="{StaticResource btnColor}"
                                      Height="100"
                                      Width="100"/>
         </Button>

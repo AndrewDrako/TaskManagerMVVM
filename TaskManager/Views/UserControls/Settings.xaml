@@ -11,11 +11,14 @@
     <UserControl.DataContext>
         <vm:SettingsViewModel/>
     </UserControl.DataContext>
+    <UserControl.Resources>
+        <ResourceDictionary Source="/Infrastructure/Resources/Design.xaml"/>
+    </UserControl.Resources>
     <Grid>
         <Grid.Background>
         
         <ImageBrush Stretch="UniformToFill"
-                    />
+                    ImageSource="{StaticResource imgSource}"/>
 
         </Grid.Background>
         <Grid.ColumnDefinitions>
@@ -54,7 +57,7 @@
                        HorizontalAlignment="Right"
                        VerticalAlignment="Center"
                        Text="{Binding LabelLanguage}"
-                       Foreground="{Binding FontColor}"
+                       Foreground="{StaticResource colorFirst}"
                        FontFamily="Lucida Grande"
                        FontSize="30"
                        Margin="0 0 20 0"/>
