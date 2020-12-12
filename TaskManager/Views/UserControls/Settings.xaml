@@ -13,8 +13,10 @@
     </UserControl.DataContext>
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="{Binding BackgroundImg}"
-                            Stretch="UniformToFill"/>
+        
+        <ImageBrush Stretch="UniformToFill"
+                    />
+
         </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
