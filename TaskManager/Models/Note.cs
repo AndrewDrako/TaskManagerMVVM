@@ -16,38 +16,6 @@ namespace TaskManager.Models
 
         #endregion
 
-        #region Цвет заметки
-
-        private string _Color;
-        private string _FontColor;
-        private string _BtnColor;
-
-        public string Color
-        {
-            get => ChangeAppTheme.NoteColor[ChangeAppTheme.iTheme];
-            set => Set(ref _Color, value);
-        }
-
-        /// <summary>
-        /// Font color
-        /// </summary>
-        public string FontColor
-        {
-            get => ChangeAppTheme.FontColor[ChangeAppTheme.iTheme];
-            set => Set(ref _FontColor, value);
-        }
-
-        /// <summary>
-        /// Buttons color
-        /// </summary>
-        public string BtnColor
-        {
-            get => ChangeAppTheme.BtnColor[ChangeAppTheme.iTheme];
-            set => Set(ref _BtnColor, value);
-        }
-
-
-        #endregion
 
         #region Контент заметки
 

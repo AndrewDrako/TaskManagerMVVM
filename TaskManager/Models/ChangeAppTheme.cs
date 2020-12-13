@@ -58,6 +58,12 @@ namespace TaskManager.Models
             "#BCD1E9"
         };
 
+        public static string[] AppTheme = new string[2]
+        {
+            "/Design/Themes/Custom.xaml",
+            "/Design/Themes/Light.xaml"
+        };
+
         public static int iTheme;
     }
 }

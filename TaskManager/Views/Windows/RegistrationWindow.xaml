@@ -14,10 +14,12 @@
     <Window.DataContext>
         <vm:RegistrationWindowViewModel/>
     </Window.DataContext>
+    <Window.Resources>
+        <ResourceDictionary Source="/Design/Themes/Light.xaml"/>
+    </Window.Resources>
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="{Binding BackgroundImg}"
-                        Stretch="UniformToFill"/>
+            <SolidColorBrush Color="{StaticResource backgroundColor}"/>
         </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -40,7 +42,7 @@
                    FontSize="20"
                    TextAlignment="Center"
                    Visibility="{Binding ChangeControlVisibility1}"
-                   Foreground="{Binding FontColor}"
+                   Foreground="{StaticResource fontColor}"
                    FontFamily="Cursive"/>
         
         <TextBox Grid.Row="1"
@@ -50,12 +52,12 @@
                  Visibility="{Binding ChangeControlVisibility1}"
                  Text="{Binding UserEmail}"
                  TextAlignment="Center"
-                 Foreground="{Binding FontColor}"
+                 Foreground="{StaticResource fontColor}"
                  FontFamily="Lucida Grande"
                  Style="{StaticResource MaterialDesignTextBox}"
-                 BorderBrush="{Binding BtnColor}"
-                 materialDesign:TextFieldAssist.UnderlineBrush="{Binding FontColor}"
-                 CaretBrush="{Binding FontColor}"/>
+                 BorderBrush="{StaticResource btnColor}"
+                 materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource fontColor}"
+                 CaretBrush="{StaticResource fontColor}"/>
         
         <TextBlock Grid.Row="2"
                    Grid.ColumnSpan="2"
@@ -64,7 +66,7 @@
                    FontSize="20"
                    TextAlignment="Center"
                    Visibility="{Binding ChangeControlVisibility1}"
-                   Foreground="{Binding FontColor}"
+                   Foreground="{StaticResource fontColor}"
                    FontFamily="Lucida Grande"/>
         
         <TextBox Grid.Row="3"
@@ -74,12 +76,12 @@
                  Visibility="{Binding ChangeControlVisibility1}"
                  Text="{Binding UserName}"
                  TextAlignment="Center"
-                 Foreground="{Binding FontColor}"
+                 Foreground="{StaticResource fontColor}"
                  FontFamily="Lucida Grande"
                  Style="{StaticResource MaterialDesignTextBox}"
-                 BorderBrush="{Binding BtnColor}"
-                 materialDesign:TextFieldAssist.UnderlineBrush="{Binding FontColor}"
-                 CaretBrush="{Binding FontColor}"/>
+                 BorderBrush="{StaticResource btnColor}"
+                 materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource fontColor}"
+                 CaretBrush="{StaticResource fontColor}"/>
         <TextBlock Grid.Row="4"
                    Grid.ColumnSpan="2"
                    Margin="10 10"
@@ -87,7 +89,7 @@
                    FontSize="20"
                    TextAlignment="Center"
                    Visibility="{Binding ChangeControlVisibility1}"
-                   Foreground="{Binding FontColor}"
+                   Foreground="{StaticResource fontColor}"
                    FontFamily="Lucida Grande"/>
         <!--<TextBlock Grid.Row="5"
                    Grid.Column="0"
@@ -105,12 +107,12 @@
                      Visibility="{Binding ChangeControlVisibility1}"
                      x:Name="regPasswordBox"
                      HorizontalContentAlignment="Center"
-                     Foreground="{Binding FontColor}"
+                     Foreground="{StaticResource fontColor}"
                      FontFamily="Lucida Grande"
                      Style="{StaticResource MaterialDesignPasswordBox}"
-                     BorderBrush="{Binding BtnColor}"
-                     materialDesign:TextFieldAssist.UnderlineBrush="{Binding FontColor}"
-                     CaretBrush="{Binding FontColor}"
+                     BorderBrush="{StaticResource btnColor}"
+                     materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource fontColor}"
+                     CaretBrush="{StaticResource fontColor}"
                      >
         </PasswordBox>
         <!--<PasswordBox Grid.Column="1"
@@ -128,8 +130,8 @@
                 FontFamily="Lucida Grande"
                 Style="{StaticResource MaterialDesignRaisedDarkButton}"
                 materialDesign:ButtonAssist.CornerRadius="15"
-                Background="{Binding BtnColor}"
-                BorderBrush="{Binding BtnColor}"/>
+                Background="{StaticResource btnColor}"
+                BorderBrush="{StaticResource btnColor}"/>
 
         <Button Grid.Column="1"
                 Grid.Row="7"
@@ -141,8 +143,8 @@
                 FontFamily="Lucida Grande"
                 Style="{StaticResource MaterialDesignRaisedDarkButton}"
                 materialDesign:ButtonAssist.CornerRadius="15"
-                Background="{Binding BtnColor}"
-                BorderBrush="{Binding BtnColor}"/>
+                Background="{StaticResource btnColor}"
+                BorderBrush="{StaticResource btnColor}"/>
 
         <TextBlock Text="{Binding Label8}"
                    TextWrapping="Wrap"
@@ -150,7 +152,7 @@
                    FontSize="20"
                    Grid.ColumnSpan="2"
                    Visibility="{Binding ChangeControlVisibility2}"
-                   Foreground="{Binding FontColor}"
+                   Foreground="{StaticResource fontColor}"
                    FontFamily="Lucida Grande"/>
         <TextBox Grid.ColumnSpan="2"
                  Grid.Row="1"
@@ -158,12 +160,12 @@
                  FontSize="20"
                  Text="{Binding KeyInput}"
                  Visibility="{Binding ChangeControlVisibility2}"
-                 Foreground="{Binding FontColor}"
+                 Foreground="{StaticResource fontColor}"
                  FontFamily="Lucida Grande"
                  Style="{StaticResource MaterialDesignTextBox}"
-                 BorderBrush="{Binding BtnColor}"
-                 materialDesign:TextFieldAssist.UnderlineBrush="{Binding FontColor}"
-                 CaretBrush="{Binding FontColor}"
+                 BorderBrush="{StaticResource btnColor}"
+                 materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource fontColor}"
+                 CaretBrush="{StaticResource fontColor}"
                  />
         <Button Grid.ColumnSpan="2"
                 Grid.RowSpan="2"
@@ -178,8 +180,8 @@
                 FontFamily="Lucida Grande"
                 Style="{StaticResource MaterialDesignRaisedDarkButton}"
                 materialDesign:ButtonAssist.CornerRadius="15"
-                Background="{Binding BtnColor}"
-                BorderBrush="{Binding BtnColor}"/>
+                Background="{StaticResource btnColor}"
+                BorderBrush="{StaticResource btnColor}"/>
 
 
 

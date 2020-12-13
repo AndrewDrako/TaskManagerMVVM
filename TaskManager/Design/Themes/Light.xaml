@@ -13,10 +13,10 @@
         #D7D7D7
     </Color>
     
-    <!--Combo box color-->
+    <!--Background Color-->
 
-    <Color x:Key="comboboxColor">
-        #D7D7D7
+    <Color x:Key="backgroundColor">
+        #FFFFFF
     </Color>
     
     <!--Font color-->
