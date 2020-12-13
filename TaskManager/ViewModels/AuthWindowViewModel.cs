@@ -100,7 +100,13 @@ namespace TaskManager.ViewModels
 
         #region Design
 
-        
+        private string _MainTheme = $"/Design/Themes/Custom.xaml";
+        public string MainTheme
+        {
+            get => _MainTheme;
+            set => Set(ref _MainTheme, value);
+        }
+
 
         #endregion
 

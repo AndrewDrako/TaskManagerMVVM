@@ -292,7 +292,7 @@ namespace TaskManager.ViewModels
                   (addCommand = new RelayCommand(obj =>
                   {
                       Note note = new Note();
-                      note.Color = Colors[Counter++];
+                      //note.Color = Colors[Counter++];
                       NotesToDo.Insert(0, note);
                       SelectedNote = note;
                       if (this.ChangeControlVisibility == Visibility.Collapsed)

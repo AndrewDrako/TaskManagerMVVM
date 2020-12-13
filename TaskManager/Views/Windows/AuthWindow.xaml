@@ -16,7 +16,8 @@
         <vm:AuthWindowViewModel/>
     </Window.DataContext>
     <Window.Resources>
-        <ResourceDictionary Source="/Design/Themes/Light.xaml"/>
+        <ResourceDictionary Source="{Binding MainTheme}"/>
+        
     </Window.Resources>
     <Grid>
         <Grid.Background>
