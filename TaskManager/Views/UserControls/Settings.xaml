@@ -12,7 +12,7 @@
         <vm:SettingsViewModel/>
     </UserControl.DataContext>
     <UserControl.Resources>
-        <ResourceDictionary Source="/Infrastructure/Resources/Design.xaml"/>
+        <ResourceDictionary Source="/Design/Themes/Light.xaml"/>
     </UserControl.Resources>
     <Grid>
         <Grid.Background>
@@ -41,7 +41,7 @@
               Grid.Column="1"
               Grid.ColumnSpan="2"
               Grid.RowSpan="3"
-              Background="{Binding PageColor2}">
+              Background="{StaticResource pageMainColor}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -57,7 +57,7 @@
                        HorizontalAlignment="Right"
                        VerticalAlignment="Center"
                        Text="{Binding LabelLanguage}"
-                       Foreground="{StaticResource colorFirst}"
+                       Foreground="{StaticResource fontColor}"
                        FontFamily="Lucida Grande"
                        FontSize="30"
                        Margin="0 0 20 0"/>
@@ -70,10 +70,10 @@
                       Width="200"
                       Margin="20 0 0 0"
                       Style="{StaticResource MaterialDesignComboBox}"
-                      Foreground="#FF11C292"
-                      materialDesign:TextFieldAssist.UnderlineBrush="{Binding BtnColor}"
-                      
-                      BorderBrush="{Binding BtnColor}"
+                      materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource btnColor}"
+                      Foreground="White"
+                      Background="Gray"
+                      BorderBrush="{StaticResource btnColor}"
                       ItemsSource="{Binding Languages}"
                       SelectedItem="{Binding SelectedLanguage}">
 
@@ -94,7 +94,7 @@
                    HorizontalAlignment="Right"
                    VerticalAlignment="Center"
                    Text="{Binding LabelAddColors}"
-                   Foreground="{Binding FontColor}"
+                   Foreground="{StaticResource fontColor}"
                    FontFamily="Lucida Grande"
                    FontSize="30"
                    Margin="0 0 20 0"/>
@@ -106,10 +106,12 @@
                       Width="200"
                       Margin="20 0 0 0"
                       Style="{StaticResource MaterialDesignComboBox}"
-                      materialDesign:TextFieldAssist.UnderlineBrush="{Binding BtnColor}"
-                      BorderBrush="{Binding BtnColor}"
+                      materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource btnColor}"
+                      BorderBrush="{StaticResource btnColor}"
                       ItemsSource="{Binding Themes}"
-                      SelectedItem="{Binding SelectedTheme}">
+                      Foreground="White"
+                      SelectedItem="{Binding SelectedTheme}"
+                      Background="Gray">
 
             <ComboBox.ItemTemplate>
                 <DataTemplate>
@@ -127,13 +129,13 @@
         <Grid Grid.Column="0"
               Grid.ColumnSpan="4"
               Grid.Row="10"
-              Background="{Binding PageColor}">
+              Background="{StaticResource pageMainColor}">
             <Button HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Content="{Binding LabelButtonApply}"
                     Command="{Binding ButtonSaveSettingsClick}"
-                    Background="{Binding BtnColor}"
-                    BorderBrush="{Binding BtnColor}"
+                    Background="{StaticResource btnColor}"
+                    BorderBrush="{StaticResource btnColor}"
                     Style="{StaticResource MaterialDesignRaisedDarkButton}"
                     materialDesign:ButtonAssist.CornerRadius="15"
                     FontFamily="Lucida Grande"

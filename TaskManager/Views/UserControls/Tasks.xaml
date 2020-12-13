@@ -11,10 +11,13 @@
     <UserControl.DataContext>
         <vm:TasksViewModel/>
     </UserControl.DataContext>
+    <UserControl.Resources>
+        <ResourceDictionary Source="/Design/Themes/Light.xaml"/>
+    </UserControl.Resources>
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="{Binding BackgroundImg}"
-                            Stretch="UniformToFill"/>
+            <ImageBrush ImageSource="{StaticResource imgSource}"
+                        Stretch="UniformToFill"/>
         </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
@@ -36,14 +39,14 @@
         </Grid.ColumnDefinitions>
         <Grid Grid.Row="0"
               Grid.ColumnSpan="12"
-              Background="{Binding PageColor}">
+              Background="{StaticResource pageSecondColor}">
             <TextBlock HorizontalAlignment="Left"
                        VerticalAlignment="Center"
                        Margin="10 0 0 0"
                        FontSize="15"
                        TextWrapping="WrapWithOverflow"
                        FontWeight="Bold"
-                       Foreground="{Binding FontColor}"
+                       Foreground="{StaticResource fontColor}"
                        FontFamily="Lucida Grande">
             <Run Text="{Binding Label1}"/>
             <Run Text=" "/>
@@ -67,16 +70,16 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Margin="0 0" 
-                                Background="{Binding Color}"
+                                Background="{StaticResource pageSecondColor}"
                                 >
                         <TextBlock FontSize="18" Text="{Binding Content}"
                                    TextWrapping="Wrap"
-                                   Foreground="{Binding FontColor}"
+                                   Foreground="{StaticResource fontColor}"
                                    FontFamily="Lucida Grande"
                                    FontWeight="DemiBold"/>
                         <TextBlock FontSize="10" Text="{Binding Target}"
                                    TextWrapping="Wrap"
-                                   Foreground="{Binding FontColor}"
+                                   Foreground="{StaticResource fontColor}"
                                    FontFamily="Lucida Grande"/>
 
                     </StackPanel>
@@ -96,16 +99,16 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Margin="0"
-                                Background="{Binding Color}"
+                                Background="{StaticResource pageSecondColor}"
                                 >
                         <TextBlock FontSize="18" Text="{Binding Content}"
                                    TextWrapping="Wrap"
-                                   Foreground="{Binding FontColor}"
+                                   Foreground="{StaticResource fontColor}"
                                    FontFamily="Lucida Grande"
                                    FontWeight="DemiBold"/>
                         <TextBlock FontSize="10" Text="{Binding Target}"
                                    TextWrapping="Wrap"
-                                   Foreground="{Binding FontColor}"
+                                   Foreground="{StaticResource fontColor}"
                                    FontFamily="Lucida Grande"/>
 
                     </StackPanel>
@@ -125,16 +128,16 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Margin="0"
-                                Background="{Binding Color}"
+                                Background="{StaticResource pageSecondColor}"
                                 >
                         <TextBlock FontSize="18" Text="{Binding Content}"
                                    TextWrapping="Wrap"
-                                   Foreground="{Binding FontColor}"
+                                   Foreground="{StaticResource fontColor}"
                                    FontFamily="Lucida Grande"
                                    FontWeight="DemiBold"/>
                         <TextBlock FontSize="10" Text="{Binding Target}"
                                    TextWrapping="Wrap"
-                                   Foreground="{Binding FontColor}"
+                                   Foreground="{StaticResource fontColor}"
                                    FontFamily="Lucida Grande"/>
 
                     </StackPanel>
@@ -146,7 +149,7 @@
         <!--Buttons-->
         <Grid Grid.Row="1"
               Grid.ColumnSpan="12"
-              Background="{Binding PageColor2}">
+              Background="{StaticResource pageMainColor}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150"/>
                 <ColumnDefinition />
@@ -163,52 +166,52 @@
             <Button Grid.Column="1"
                     Grid.Row="1"
                     ToolTip="{Binding SaveNoteTT}"
-                    Foreground="{Binding FontColor}"
+                    Foreground="{StaticResource fontColor}"
                     FontFamily="Lucida Grande"
                     Command="{Binding SaveNote}"
                     Visibility="{Binding ChangeControlVisibility}"
                     Background="{x:Null}"
                     BorderBrush="{x:Null}">
-                <materialDesign:PackIcon Kind="ContentSaveAlert" Foreground="{Binding BtnColor}" />
+                <materialDesign:PackIcon Kind="ContentSaveAlert" Foreground="{StaticResource btnColor}" />
                 
             </Button>
 
             <Button Grid.Column="2"
                     Grid.Row="1"
                     ToolTip="{Binding AddNoteTT}"
-                    Foreground="{Binding FontColor}"
+                    Foreground="{StaticResource fontColor}"
                     FontFamily="Lucida Grande"
                     Background="{x:Null}"
                     BorderBrush="{x:Null}"
                     Command="{Binding AddCommand}"
                     >
-                <materialDesign:PackIcon Kind="ViewGridPlus" Foreground="{Binding BtnColor}" />
+                <materialDesign:PackIcon Kind="ViewGridPlus" Foreground="{StaticResource btnColor}" />
             </Button>
 
             <Button Grid.Column="3"
                     Grid.Row="1"
                     ToolTip="{Binding delNoteTT}"
-                    Foreground="{Binding FontColor}"
+                    Foreground="{StaticResource fontColor}"
                     FontFamily="Lucida Grande"
                     Background="{x:Null}"
                     BorderBrush="{x:Null}"
                     Command="{Binding RemoveCommand}"
                     CommandParameter="{Binding SelectedNote}"
                     >
-                <materialDesign:PackIcon Kind="StickerRemove" Foreground="{Binding BtnColor}" />
+                <materialDesign:PackIcon Kind="StickerRemove" Foreground="{StaticResource btnColor}" />
             </Button>
 
             <Button Grid.Column="4"
                     Grid.Row="1"
                     ToolTip="{Binding TransferNoteTT}"
-                    Foreground="{Binding FontColor}"
+                    Foreground="{StaticResource fontColor}"
                     FontFamily="Lucida Grande"
                     Background="{x:Null}"
                     BorderBrush="{x:Null}"
                     Command="{Binding TransferProject}"
                     CommandParameter="{Binding SelectedNote}"
                     >
-                <materialDesign:PackIcon Kind="Transfer" Foreground="{Binding BtnColor}" />
+                <materialDesign:PackIcon Kind="Transfer" Foreground="{StaticResource btnColor}" />
             </Button>
             <!---->
             <Button Grid.Column="6"
@@ -216,25 +219,25 @@
                     Command="{Binding RemoveCommandInProgress}"
                     CommandParameter="{Binding ReadSelectedNote}"
                     ToolTip="{Binding delNoteTT}"
-                    Foreground="{Binding FontColor}"
+                    Foreground="{StaticResource fontColor}"
                     FontFamily="Lucida Grande"
                     Background="{x:Null}"
                     BorderBrush="{x:Null}"
                     >
-                <materialDesign:PackIcon Kind="StickerRemove" Foreground="{Binding BtnColor}" />
+                <materialDesign:PackIcon Kind="StickerRemove" Foreground="{StaticResource btnColor}" />
             </Button>
 
             <Button Grid.Column="7"
                     Grid.Row="1"
                     ToolTip="{Binding TransferNoteTT}"
-                    Foreground="{Binding FontColor}"
+                    Foreground="{StaticResource fontColor}"
                     FontFamily="Lucida Grande"
                     Background="{x:Null}"
                     BorderBrush="{x:Null}"
                     Command="{Binding TransferProjectInProgress}"
                     CommandParameter="{Binding ReadSelectedNote}"
                     >
-                <materialDesign:PackIcon Kind="Transfer" Foreground="{Binding BtnColor}" />
+                <materialDesign:PackIcon Kind="Transfer" Foreground="{StaticResource btnColor}" />
             </Button>
             <!---->
             <Button Grid.Column="9"
@@ -242,12 +245,12 @@
                     Command="{Binding RemoveCommandDone}"
                     CommandParameter="{Binding ReadSelectedNote}"
                     ToolTip="{Binding ClearNoteTT}"
-                    Foreground="{Binding FontColor}"
+                    Foreground="{StaticResource fontColor}"
                     FontFamily="Lucida Grande"
                     Background="{x:Null}"
                     BorderBrush="{x:Null}"
                     >
-                <materialDesign:PackIcon Kind="FileCheck" Foreground="{Binding BtnColor}" />
+                <materialDesign:PackIcon Kind="FileCheck" Foreground="{StaticResource btnColor}" />
             </Button>
 
             <!--3 Labels-->
@@ -256,7 +259,7 @@
                        Margin="5 0 0 0"
                        VerticalAlignment="Bottom"
                        Text="{Binding Label3}"
-                       Foreground="{Binding FontColor}"
+                       Foreground="{StaticResource fontColor}"
                        FontFamily="Lucida Grande"
                        FontSize="20"
                        FontWeight="ExtraBold"
@@ -267,7 +270,7 @@
                        Margin="5 0 0 0"
                        VerticalAlignment="Bottom"
                        Text="{Binding Label4}"
-                       Foreground="{Binding FontColor}"
+                       Foreground="{StaticResource fontColor}"
                        FontFamily="Lucida Grande"
                        FontSize="20"
                        FontWeight="ExtraBold"/>
@@ -277,7 +280,7 @@
                        Margin="5 0 0 0"
                        VerticalAlignment="Bottom"
                        Text="{Binding Label5}"
-                       Foreground="{Binding FontColor}"
+                       Foreground="{StaticResource fontColor}"
                        FontFamily="Lucida Grande"
                        FontSize="20"
                        FontWeight="ExtraBold"/>
@@ -286,9 +289,9 @@
         <StackPanel Orientation="Vertical"
                     Grid.Row="3"
                     Grid.ColumnSpan="5"
-                    Background="{Binding PageColor}">
+                    Background="{StaticResource pageMainColor}">
             <TextBlock Text="{Binding Label6}"
-                       Foreground="{Binding FontColor}"
+                       Foreground="{StaticResource fontColor}"
                        FontFamily="Lucida Grande"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
@@ -299,23 +302,23 @@
                      Text="{Binding Content, UpdateSourceTrigger=PropertyChanged}"
                      MaxLength="180"
                      Margin="10 0 0 0"
-                     Foreground="{Binding FontColor}"
+                     Foreground="{StaticResource fontColor}"
                      FontFamily="Lucida Grande"
                      Style="{StaticResource MaterialDesignTextBox}"
-                     BorderBrush="{Binding BtnColor}"
-                     materialDesign:TextFieldAssist.UnderlineBrush="{Binding FontColor}"
-                     CaretBrush="{Binding FontColor}"/>
+                     BorderBrush="{StaticResource btnColor}"
+                     materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource fontColor}"
+                     CaretBrush="{StaticResource fontColor}"/>
         </StackPanel>
         <StackPanel Orientation="Vertical"
                     Grid.Row="3"
                     Grid.Column="5"
                     Grid.ColumnSpan="5"
-                    Background="{Binding PageColor}">
+                    Background="{StaticResource pageMainColor}">
             <TextBlock Text="{Binding Label7}"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
                        FontSize="15"
-                       Foreground="{Binding FontColor}"
+                       Foreground="{StaticResource fontColor}"
                        FontFamily="Lucida Grande"
                        />
             <TextBox TextWrapping="Wrap"
@@ -323,11 +326,11 @@
                      Text="{Binding Target, UpdateSourceTrigger=PropertyChanged}"
                      MaxLength="30"
                      Margin="10 0 10 0"
-                     Foreground="{Binding FontColor}"
+                     Foreground="{StaticResource fontColor}"
                      Style="{StaticResource MaterialDesignTextBox}"
-                     BorderBrush="{Binding BtnColor}"
-                     materialDesign:TextFieldAssist.UnderlineBrush="{Binding FontColor}"
-                     CaretBrush="{Binding FontColor}"
+                     BorderBrush="{StaticResource btnColor}"
+                     materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource fontColor}"
+                     CaretBrush="{StaticResource fontColor}"
                      FontFamily="Lucida Grande"/>
         </StackPanel>
     </Grid>

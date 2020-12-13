@@ -218,14 +218,17 @@
     <Resource Include="Design\Icons\MainWindowIcon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Design\Images\HomeTheme.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Design\Images\ThemeGreen.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Design\Icons\AuthWindowIcon.png" />
     <Resource Include="Design\Icons\RegWindowIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Design\Images\whiteBackground.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Design\Images\BlueTheme.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

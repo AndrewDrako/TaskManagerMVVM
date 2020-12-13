@@ -1,5 +1,46 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:TaskManager.Design.Themes">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
+    <!--Background image-->
+
+    <ImageSource x:Key="imgSource">
+        /Design/Images/BlueTheme.jpg
+    </ImageSource>
+    
+    <!--Main stack panel color-->
+
+    <Color x:Key="mainSPColor">
+        #D7D7D7
+    </Color>
+    
+    <!--Combo box color-->
+
+    <Color x:Key="comboboxColor">
+        #D7D7D7
+    </Color>
+    
+    <!--Font color-->
+
+    <Brush x:Key="fontColor">
+        #000000
+    </Brush>
+    
+    <!--Button color-->
+
+    <Brush x:Key="btnColor">
+        #0088FF
+    </Brush>
+    
+    <!-- Page Main Color-->
+
+    <Brush x:Key="pageMainColor">
+        #FFFFFF
+    </Brush>
+    
+    <!--Page Second Color-->
+
+    <Brush x:Key="pageSecondColor">
+        #8ACFFF
+    </Brush>
+
 </ResourceDictionary>

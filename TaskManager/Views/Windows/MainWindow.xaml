@@ -12,12 +12,16 @@
         MinWidth="1000"
         MinHeight="550"
         WindowStyle="SingleBorderWindow"
-        Icon="/Design/Icons/MainWindowIcon.png"
-        Background="{Binding BackgroundColor}">
+        Icon="/Design/Icons/MainWindowIcon.png">
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
-
+    <Window.Resources>
+        <ResourceDictionary Source="/Design/Themes/Light.xaml"/>
+    </Window.Resources>
+    <Window.Background>
+        <SolidColorBrush Color="{StaticResource mainSPColor}"/>
+    </Window.Background>
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closing" >
             <i:InvokeCommandAction Command="{Binding CloseApplication}" />
@@ -37,7 +41,7 @@
                     BorderBrush="{x:Null}"
                     Height="50" 
                     FontSize="10">
-                <materialDesign:PackIcon Kind="Home" Foreground="{Binding BtnColor}"/>
+                <materialDesign:PackIcon Kind="Home" Foreground="{StaticResource btnColor}"/>
             </Button>
             
             <Button ToolTip="{Binding Path=ButtonContent2}" 
@@ -46,7 +50,7 @@
                     BorderBrush="{x:Null}"
                     Height="50" 
                     FontSize="10">
-                <materialDesign:PackIcon Kind="GridLarge" Foreground="{Binding BtnColor}"/>
+                <materialDesign:PackIcon Kind="GridLarge" Foreground="{StaticResource btnColor}"/>
             </Button>
 
             <Button ToolTip="{Binding Path=ButtonContent3}" 
@@ -55,7 +59,7 @@
                     BorderBrush="{x:Null}"
                     Height="50" 
                     FontSize="10">
-                <materialDesign:PackIcon Kind="Settings" Foreground="{Binding BtnColor}"/>
+                <materialDesign:PackIcon Kind="Settings" Foreground="{StaticResource btnColor}"/>
             </Button>
 
             <Button ToolTip="{Binding Path=ButtonContent4}" 
@@ -64,7 +68,7 @@
                     BorderBrush="{x:Null}"
                     Height="50" 
                     FontSize="10">
-                <materialDesign:PackIcon Kind="Account" Foreground="{Binding BtnColor}"/>
+                <materialDesign:PackIcon Kind="Account" Foreground="{StaticResource btnColor}"/>
             </Button>
             <Button ToolTip="{Binding Path=ButtonContent5}" 
                     Command="{Binding Path=FifthButtonClick}"
@@ -72,14 +76,13 @@
                     BorderBrush="{x:Null}"
                     Height="50" 
                     FontSize="10">
-                <materialDesign:PackIcon Kind="HelpBox" Foreground="{Binding BtnColor}"/>
+                <materialDesign:PackIcon Kind="HelpBox" Foreground="{StaticResource btnColor}"/>
             </Button>
         </StackPanel>
 
         <UserControl Grid.Column="1" 
                      Content="{Binding Path=CurrentPage}"
-                     Opacity="{Binding UserControlOpacity}"
-                     Background="{Binding PageBackground}">
+                     Opacity="{Binding UserControlOpacity}">
 
 
         </UserControl>
