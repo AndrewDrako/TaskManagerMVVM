@@ -11,12 +11,10 @@
     <UserControl.DataContext>
         <vm:AccountViewModel/>
     </UserControl.DataContext>
-    <UserControl.Resources>
-        <ResourceDictionary Source="/Design/Themes/Light.xaml"/>
-    </UserControl.Resources>
+    
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="{StaticResource imgSource}"
+            <ImageBrush ImageSource="{DynamicResource imgSource}"
                             Stretch="UniformToFill"/>
         </Grid.Background>
         <Grid.ColumnDefinitions>
@@ -34,7 +32,7 @@
         </Rectangle>-->
         <Grid Grid.ColumnSpan="2"
               Grid.Column="1"
-              Background="{StaticResource pageMainColor}">
+              Background="{DynamicResource pageMainColor}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -52,7 +50,7 @@
                                      VerticalAlignment="Center"
                                      Height="150"
                                      Width="150"
-                                     Foreground="{StaticResource btnColor}"/>
+                                     Foreground="{DynamicResource btnColor}"/>
 
             <TextBlock Text="{Binding Email}"
                        Grid.Row="1"
@@ -61,7 +59,7 @@
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
                        FontSize="30"
-                       Foreground="{StaticResource fontColor}"
+                       Foreground="{DynamicResource fontColor}"
                        FontFamily="Lucida Grande"
                        FontWeight="Bold">
                 <TextBlock.DataContext>
@@ -73,8 +71,8 @@
                     Margin="20 30 20 90"
                     Content="{Binding ButtonLabel1}"
                     Command="{Binding BtnClickLogOut}"
-                    Background="{StaticResource btnColor}"
-                    BorderBrush="{StaticResource btnColor}"
+                    Background="{DynamicResource btnColor}"
+                    BorderBrush="{DynamicResource btnColor}"
                     Style="{StaticResource MaterialDesignRaisedDarkButton}"
                     materialDesign:ButtonAssist.CornerRadius="15"
                     FontFamily="Lucida Grande"
@@ -85,8 +83,8 @@
                     Margin="20 30 20 90"
                     Content="{Binding ButtonLabel2}"
                     Command="{Binding BtnClickCreate}"
-                    Background="{StaticResource btnColor}"
-                    BorderBrush="{StaticResource btnColor}"
+                    Background="{DynamicResource btnColor}"
+                    BorderBrush="{DynamicResource btnColor}"
                     Style="{StaticResource MaterialDesignRaisedDarkButton}"
                     materialDesign:ButtonAssist.CornerRadius="15"
                     FontFamily="Lucida Grande"

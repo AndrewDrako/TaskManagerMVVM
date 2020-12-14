@@ -11,12 +11,12 @@
     <UserControl.DataContext>
         <vm:HomeViewModel/>
     </UserControl.DataContext>
-    <UserControl.Resources>
+    <!--<UserControl.Resources>
         <ResourceDictionary Source="/Design/Themes/Light.xaml"/>
-    </UserControl.Resources>
+    </UserControl.Resources>-->
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="{StaticResource imgSource}"
+            <ImageBrush ImageSource="{DynamicResource imgSource}"
                         Stretch="UniformToFill"/>
         </Grid.Background>
         <Grid.RowDefinitions>
@@ -31,12 +31,12 @@
 
         <Grid Grid.Row="0"
               Grid.ColumnSpan="2"
-              Background="{StaticResource pageMainColor}">
+              Background="{DynamicResource pageMainColor}">
             <TextBlock FontSize="20"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Center"
                        Margin="10 0 0 0"
-                       Foreground="{StaticResource fontColor}"
+                       Foreground="{DynamicResource fontColor}"
                        FontFamily="Lucida Grande">
                 <Run Text="{Binding Welcome}"/>
                 <Run Text=", "/>
@@ -56,17 +56,17 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Margin="10 0"
-                                Background="{StaticResource pageSecondColor}"
+                                Background="{DynamicResource pageSecondColor}"
                                 Width="600">
                             <TextBlock FontSize="20"
                                    Margin="10 5"
                                    Text="{Binding ProjectName}"
-                                   Foreground="{StaticResource fontColor}"
+                                   Foreground="{DynamicResource fontColor}"
                                    FontWeight="Bold"
                                    FontFamily="Lucida Grande">
                             </TextBlock>
                             <TextBlock Text="{Binding PersonName}"
-                                   Foreground="{StaticResource fontColor}"
+                                   Foreground="{DynamicResource fontColor}"
                                    Margin="10 5"
                                    FontFamily="Lucida Grande"/>
                         </StackPanel>
@@ -77,46 +77,46 @@
 
         <StackPanel Grid.Column="1"
                     Grid.Row="1"
-                    Background="{StaticResource pageSecondColor}"
+                    Background="{DynamicResource pageSecondColor}"
                     Visibility="{Binding ChangeControlVisibility, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <TextBlock Text="{Binding Label2}"
                            FontWeight="Bold"
-                           Foreground="{StaticResource fontColor}"
+                           Foreground="{DynamicResource fontColor}"
                            Margin="10 5"
                            FontFamily="Lucida Grande"/>
             <TextBlock Text="{Binding Label3}" 
-                           Foreground="{StaticResource fontColor}"
+                           Foreground="{DynamicResource fontColor}"
                            FontFamily="Lucida Grande"
                            Margin="10 5"/>
             <TextBox DataContext="{Binding SelectedProject}"
                          Text="{Binding ProjectName, UpdateSourceTrigger=PropertyChanged}"
                          MaxLength="20"
-                         Foreground="{StaticResource fontColor}"
+                         Foreground="{DynamicResource fontColor}"
                          FontFamily="Lucida Grande"
                          Margin="10 5"
                          Style="{StaticResource MaterialDesignTextBox}"
-                         BorderBrush="{StaticResource btnColor}"
-                         materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource fontColor}"
-                         CaretBrush="{StaticResource fontColor}"/>
+                         BorderBrush="{DynamicResource btnColor}"
+                         materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource fontColor}"
+                         CaretBrush="{DynamicResource fontColor}"/>
             <TextBlock Text="{Binding Label4}"
-                           Foreground="{StaticResource fontColor}"
+                           Foreground="{DynamicResource fontColor}"
                            FontFamily="Lucida Grande"
                            Margin="10 5"/>
             <TextBox DataContext="{Binding SelectedProject}"
                          Text="{Binding PersonName, UpdateSourceTrigger=PropertyChanged}"
                          MaxLength="20"
-                         Foreground="{StaticResource fontColor}"
+                         Foreground="{DynamicResource fontColor}"
                          FontFamily="Lucida Grande"
                          Margin="10 5"
                          Style="{StaticResource MaterialDesignTextBox}"
-                         BorderBrush="{StaticResource btnColor}"
-                         materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource fontColor}"
-                         CaretBrush="{StaticResource fontColor}"/>
+                         BorderBrush="{DynamicResource btnColor}"
+                         materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource fontColor}"
+                         CaretBrush="{DynamicResource fontColor}"/>
         </StackPanel>
 
         <Grid Grid.Row="2"
               Grid.ColumnSpan="2"
-              Background="{StaticResource pageMainColor}">
+              Background="{DynamicResource pageMainColor}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="0.4*"/>
@@ -130,7 +130,7 @@
                         Margin="10 0"
                         Background="{x:Null}"
                         BorderBrush="{x:Null}">
-                    <materialDesign:PackIcon Kind="PlusBox" Foreground="{StaticResource btnColor}"/>
+                    <materialDesign:PackIcon Kind="PlusBox" Foreground="{DynamicResource btnColor}"/>
                 
                 </Button>
                 <Button Command="{Binding RemoveCommand}"
@@ -140,7 +140,7 @@
                         FontFamily="Lucida Grande"
                         Background="{x:Null}"
                         BorderBrush="{x:Null}">
-                    <materialDesign:PackIcon Kind="Delete" Foreground="{StaticResource btnColor}"/>
+                    <materialDesign:PackIcon Kind="Delete" Foreground="{DynamicResource btnColor}"/>
                 </Button>
                 <Button Command="{Binding SelectProject}"
                         CommandParameter="{Binding SelectedProject}"
@@ -150,7 +150,7 @@
                         Margin="10 0"
                         Background="{x:Null}"
                         BorderBrush="{x:Null}">
-                    <materialDesign:PackIcon Kind="ClipboardCheck" Foreground="{StaticResource btnColor}"/>
+                    <materialDesign:PackIcon Kind="ClipboardCheck" Foreground="{DynamicResource btnColor}"/>
                 </Button>
 
             </StackPanel>

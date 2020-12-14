@@ -39,7 +39,7 @@
                    Grid.ColumnSpan="2"
                    FontSize="20"
                    VerticalAlignment="Center"
-                   Foreground="{StaticResource fontColor}"
+                   Foreground="{DynamicResource fontColor}"
                    FontFamily="Lucida Grande"/>
         <TextBox Grid.Row="1"
                  Grid.ColumnSpan="2"
@@ -47,12 +47,12 @@
                  FontSize="20"
                  Text="{Binding Username}"
                  TextAlignment="Center"
-                 Foreground="{StaticResource fontColor}"
+                 Foreground="{DynamicResource fontColor}"
                  FontFamily="Lucida Grande"
-                 Style="{StaticResource MaterialDesignTextBox}"
-                 BorderBrush="{StaticResource btnColor}"
+                 Style="{DynamicResource MaterialDesignTextBox}"
+                 BorderBrush="{DynamicResource btnColor}"
                  materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource fontColor}"
-                 CaretBrush="{StaticResource fontColor}"
+                 CaretBrush="{DynamicResource fontColor}"
                  />
         <TextBlock Grid.Row="2"
                    Grid.ColumnSpan="2"
@@ -61,7 +61,7 @@
                    FontSize="20"
                    VerticalAlignment="Center"
                    FontFamily="Lucida Grande"
-                   Foreground="{StaticResource fontColor}"/>
+                   Foreground="{DynamicResource fontColor}"/>
 
         <PasswordBox Grid.Row="3"
                      Grid.ColumnSpan="2"
@@ -69,11 +69,11 @@
                      FontSize="20"
                      x:Name="myPswdBox"
                      HorizontalContentAlignment="Center"
-                     Foreground="{StaticResource fontColor}"
+                     Foreground="{DynamicResource fontColor}"
                      Style="{StaticResource MaterialDesignPasswordBox}"
                      materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource fontColor}"
-                     BorderBrush="{StaticResource btnColor}"
-                     CaretBrush="{StaticResource fontColor}"/>
+                     BorderBrush="{DynamicResource btnColor}"
+                     CaretBrush="{DynamicResource fontColor}"/>
         
         <Button Grid.Column="0"
                 Grid.Row="4"
@@ -85,8 +85,8 @@
                 Command="{Binding BtnClickOk}"
                 Content="{Binding BtnContentOk}"
                 FontFamily="Lucida Grande"
-                Background="{StaticResource btnColor}"
-                BorderBrush="{StaticResource btnColor}"
+                Background="{DynamicResource btnColor}"
+                BorderBrush="{DynamicResource btnColor}"
                 FontSize="13"
                 >
             
@@ -96,8 +96,8 @@
                 Grid.Row="4"
                 Margin="10"
                 Height="40"
-                Background="{StaticResource btnColor}"
-                BorderBrush="{StaticResource btnColor}"
+                Background="{DynamicResource btnColor}"
+                BorderBrush="{DynamicResource btnColor}"
                 Style="{StaticResource MaterialDesignRaisedDarkButton}"
                 materialDesign:ButtonAssist.CornerRadius="15"
                 Command="{Binding BtnClickReg}"

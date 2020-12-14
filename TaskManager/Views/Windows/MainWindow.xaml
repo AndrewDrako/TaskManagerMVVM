@@ -16,11 +16,11 @@
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
-    <Window.Resources>
+    <!--<Window.Resources>
         <ResourceDictionary Source="/Design/Themes/Light.xaml"/>
-    </Window.Resources>
+    </Window.Resources>-->
     <Window.Background>
-        <SolidColorBrush Color="{StaticResource mainSPColor}"/>
+        <SolidColorBrush Color="{DynamicResource mainSPColor}"/>
     </Window.Background>
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closing" >
@@ -41,7 +41,7 @@
                     BorderBrush="{x:Null}"
                     Height="50" 
                     FontSize="10">
-                <materialDesign:PackIcon Kind="Home" Foreground="{StaticResource btnColor}"/>
+                <materialDesign:PackIcon Kind="Home" Foreground="{DynamicResource btnColor}"/>
             </Button>
             
             <Button ToolTip="{Binding Path=ButtonContent2}" 
@@ -50,7 +50,7 @@
                     BorderBrush="{x:Null}"
                     Height="50" 
                     FontSize="10">
-                <materialDesign:PackIcon Kind="GridLarge" Foreground="{StaticResource btnColor}"/>
+                <materialDesign:PackIcon Kind="GridLarge" Foreground="{DynamicResource btnColor}"/>
             </Button>
 
             <Button ToolTip="{Binding Path=ButtonContent3}" 
@@ -59,7 +59,7 @@
                     BorderBrush="{x:Null}"
                     Height="50" 
                     FontSize="10">
-                <materialDesign:PackIcon Kind="Settings" Foreground="{StaticResource btnColor}"/>
+                <materialDesign:PackIcon Kind="Settings" Foreground="{DynamicResource btnColor}"/>
             </Button>
 
             <Button ToolTip="{Binding Path=ButtonContent4}" 
@@ -68,7 +68,7 @@
                     BorderBrush="{x:Null}"
                     Height="50" 
                     FontSize="10">
-                <materialDesign:PackIcon Kind="Account" Foreground="{StaticResource btnColor}"/>
+                <materialDesign:PackIcon Kind="Account" Foreground="{DynamicResource btnColor}"/>
             </Button>
             <Button ToolTip="{Binding Path=ButtonContent5}" 
                     Command="{Binding Path=FifthButtonClick}"
@@ -76,7 +76,7 @@
                     BorderBrush="{x:Null}"
                     Height="50" 
                     FontSize="10">
-                <materialDesign:PackIcon Kind="HelpBox" Foreground="{StaticResource btnColor}"/>
+                <materialDesign:PackIcon Kind="HelpBox" Foreground="{DynamicResource btnColor}"/>
             </Button>
         </StackPanel>
 

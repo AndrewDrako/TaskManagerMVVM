@@ -11,15 +11,11 @@
     <UserControl.DataContext>
         <vm:HelpViewModel/>
     </UserControl.DataContext>
-    <UserControl.Resources>
-        <ResourceDictionary Source="/Design/Themes/Light.xaml"/>
-    </UserControl.Resources>
+    <UserControl.Background>
+        <SolidColorBrush Color="{DynamicResource backgroundColor}"/>
+    </UserControl.Background>
 
     <Grid>
-        <Grid.Background>
-            <ImageBrush ImageSource="{StaticResource imgSource}"
-                            Stretch="UniformToFill"/>
-        </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -41,7 +37,7 @@
                     Grid.Column="1"
                     Grid.ColumnSpan="2"
                     FontSize="50"
-                    Foreground="{StaticResource fontColor}"
+                    Foreground="{DynamicResource fontColor}"
                     FontFamily="Lucida Grande"
                     Text="{Binding Label1}"/>
         
@@ -54,7 +50,7 @@
                 BorderBrush="{x:Null}"
                 Height="150"
                 Width="150">
-            <materialDesign:PackIcon Kind="Vk" Foreground="{StaticResource btnColor}"
+            <materialDesign:PackIcon Kind="Vk" Foreground="{DynamicResource btnColor}"
                                      Height="100"
                                      Width="100"/>
         </Button>
@@ -68,7 +64,7 @@
                 BorderBrush="{x:Null}"
                 Height="150"
                 Width="150">
-            <materialDesign:PackIcon Kind="Linkedin" Foreground="{StaticResource btnColor}"
+            <materialDesign:PackIcon Kind="Linkedin" Foreground="{DynamicResource btnColor}"
                                      Height="100"
                                      Width="100"/>
         </Button>
@@ -82,7 +78,7 @@
                 BorderBrush="{x:Null}"
                 Height="150"
                 Width="150">
-            <materialDesign:PackIcon Kind="Github" Foreground="{StaticResource btnColor}"
+            <materialDesign:PackIcon Kind="Github" Foreground="{DynamicResource btnColor}"
                                      Height="100"
                                      Width="100"/>
         </Button>
@@ -95,14 +91,14 @@
                 BorderBrush="{x:Null}"
                 Height="150"
                 Width="150">
-            <materialDesign:PackIcon Kind="Instagram" Foreground="{StaticResource btnColor}"
+            <materialDesign:PackIcon Kind="Instagram" Foreground="{DynamicResource btnColor}"
                                      Height="100"
                                      Width="100"/>
         </Button>
         <TextBlock Grid.Row="2"
                    Grid.ColumnSpan="4"
                    Text="О чем это приложение"
-                   Foreground="{StaticResource fontColor}"
+                   Foreground="{DynamicResource fontColor}"
                    FontFamily="Lucida Grande"
                    FontSize="20"
                    
@@ -113,7 +109,7 @@
                       Grid.ColumnSpan="4"
                       Grid.RowSpan="2">
             <TextBlock Margin="20"
-                       Foreground="{StaticResource fontColor}"
+                       Foreground="{DynamicResource fontColor}"
                        FontFamily="Lucida Grande"
                        FontSize="17"
                        TextWrapping="WrapWithOverflow"

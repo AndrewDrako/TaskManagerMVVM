@@ -124,6 +124,7 @@ namespace TaskManager.ViewModels
 
         public SettingsViewModel()
         {
+
             #region Install Language
 
             Languages = new ObservableCollection<AppLanguage>
