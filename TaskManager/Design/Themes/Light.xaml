@@ -7,7 +7,7 @@
         /Design/Images/BlueTheme.jpg
     </ImageSource>
     
-    <!--Main stack panel color-->
+    <!--Main stack panel color--> 
 
     <Color x:Key="mainSPColor">
         #D7D7D7
