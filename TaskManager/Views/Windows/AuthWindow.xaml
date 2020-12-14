@@ -11,17 +11,15 @@
         WindowStartupLocation="CenterScreen"
         BorderBrush="Black"
         ResizeMode="NoResize"
-        Icon="/Design/Icons/AuthWindowIcon.png">
+        Icon="/Design/Icons/AuthWindowIcon.png"
+        >
     <Window.DataContext>
         <vm:AuthWindowViewModel/>
     </Window.DataContext>
-    <Window.Resources>
-        <ResourceDictionary Source="{Binding MainTheme}"/>
-        
-    </Window.Resources>
+    
     <Grid>
         <Grid.Background>
-            <SolidColorBrush Color="{StaticResource backgroundColor}"/>
+            <SolidColorBrush Color="{DynamicResource backgroundColor}"/>
 
         </Grid.Background>
         <Grid.ColumnDefinitions>
