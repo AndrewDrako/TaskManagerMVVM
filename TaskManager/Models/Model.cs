@@ -69,26 +69,29 @@ namespace TaskManager.Models
                 var projects = myDbContext.Projects.ToList();  // Выгружаем данные из бд в массив
                 foreach (var p in projects)  // Идем по массиву
                 {
-                    for (int i = 0; i < Projects.Count(); i++)  // Ищем элемент который есть в БД , но отсутсвует в коллекции проектов
+                    if (p.UserId == userId)
                     {
-                        if (p.UserId == userId)
+                        for (int i = 0; i < Projects.Count(); i++)  // Ищем элемент который есть в БД , но отсутсвует в коллекции проектов
                         {
-                            if (p.ProjectName == Projects[i].ProjectName && p.MasterName == Projects[i].PersonName)  // Если очередной элемент из Бд присуствует в текущей коллекции, то чекер становиться true, и прекращаем искать
+                            if (p.UserId == userId)
                             {
-                                isContains = true;
-                                break;
+                                if (p.ProjectName == Projects[i].ProjectName && p.MasterName == Projects[i].PersonName)  // Если очередной элемент из Бд присуствует в текущей коллекции, то чекер становиться true, и прекращаем искать
+                                {
+                                    isContains = true;
+                                    break;
+                                }
+                                isCurrentProject = true;
                             }
-                            isCurrentProject = true;
                         }
-                    }
-                    if (isContains == false && isCurrentProject == true)  // Усли очередной эл-нт из бд отсуствует в текущей коллекции, то мы его удаляем из бд
-                    {
-                        myDbContext.Projects.Attach(p);
-                        myDbContext.Projects.Remove(p);
-                        myDbContext.SaveChanges();
-                        break;
-                    }
-                    isContains = false;  // Ставим чекер false, чтобы продолжить цикл
+                        if (isContains == false && isCurrentProject == true)  // Усли очередной эл-нт из бд отсуствует в текущей коллекции, то мы его удаляем из бд
+                        {
+                            myDbContext.Projects.Attach(p);
+                            myDbContext.Projects.Remove(p);
+                            myDbContext.SaveChanges();
+                            break;
+                        }
+                        isContains = false;
+                    }// Ставим чекер false, чтобы продолжить цикл
                 }
 
             }
@@ -270,7 +273,7 @@ namespace TaskManager.Models
                 bool isContains = false; // Чекер для проверки измененных заметок To Do
                 foreach (var t in todos)
                 {
-                    if (t.ProjectId == /*toDoTable.ProjectId*/projectId)
+                    if (t.ProjectId == projectId)
                     {
                         for (int i = 0; i < NotesToDo.Count(); i++)  // Ищем элемент который есть в БД , но отсутсвует в коллекции заметок
                         {

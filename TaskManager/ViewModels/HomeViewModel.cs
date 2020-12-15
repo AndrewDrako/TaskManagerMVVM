@@ -108,11 +108,6 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-        #region Design
-
-        
-
-        #endregion
 
         #region Tooltips
 
