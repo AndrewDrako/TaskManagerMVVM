@@ -69,8 +69,7 @@
                       Margin="20 0 0 0"
                       Style="{StaticResource MaterialDesignComboBox}"
                       materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource btnColor}"
-                      Foreground="White"
-                      Background="Gray"
+                      Foreground="{DynamicResource fontColor}"
                       BorderBrush="{DynamicResource btnColor}"
                       ItemsSource="{Binding Languages}"
                       SelectedItem="{Binding SelectedLanguage}">
@@ -79,7 +78,7 @@
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Language}"
-                                   Foreground="White"
+                                   Foreground="{DynamicResource fontColor}"
                                    FontFamily="Lucida Grande"/>
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
@@ -107,14 +106,13 @@
                       materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource btnColor}"
                       BorderBrush="{DynamicResource btnColor}"
                       ItemsSource="{Binding Themes}"
-                      Foreground="White"
-                      SelectedItem="{Binding SelectedTheme}"
-                      Background="Gray">
+                      Foreground="{DynamicResource fontColor}"
+                      SelectedItem="{Binding SelectedTheme}">
 
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}"
-                                   Foreground="White"
+                                   Foreground="{DynamicResource fontColor}"
                                    FontFamily="Lucida Grande"/>
                 </DataTemplate>
             </ComboBox.ItemTemplate>

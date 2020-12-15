@@ -169,34 +169,9 @@ namespace TaskManager.ViewModels
             #endregion
 
             #region App Theme
-            string style;
-            ChangeAppTheme.iTheme = MainWindowModel.ReadThemeKey();
-            if (ChangeAppTheme.iTheme == 0)
-            {
-                style = "Design/Themes/Custom";
-            }
-            else
-            {
-                if (ChangeAppTheme.iTheme == 1)
-                {
-                    style = "Design/Themes/Light";
-                }
-                else
-                {
-                    style = "Design/Themes/Custom";
-                }
-            }
-            try
-            {
-                var uri = new Uri(style + ".xaml", UriKind.Relative);
-                ResourceDictionary resourceDict = Application.LoadComponent(uri) as ResourceDictionary;
-                Application.Current.Resources.Clear();
-                Application.Current.Resources.MergedDictionaries.Add(resourceDict);
-            }
-            catch
-            {
-                MessageBox.Show("Ошибка возникла при подключении стилей");
-            }
+
+            MainWindowModel.ReadThemeKey();
+
             #endregion
 
             #region Связь с БД

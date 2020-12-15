@@ -100,7 +100,7 @@ namespace TaskManager.Models
             }
         }
 
-        public static int ReadThemeKey()
+        public static void ReadThemeKey()
         {
             string filename = "theme_key.txt";
             string path = Directory.GetCurrentDirectory();
@@ -122,21 +122,42 @@ namespace TaskManager.Models
                 textFromFile = System.Text.Encoding.Default.GetString(array);
 
             }
-            if (textFromFile == "Custom")
+            string style;
+            if (textFromFile.IndexOf("Light") >= 0)
             {
-                return 0;
+                style = "Design/Themes/Light";
             }
             else
             {
-                if (textFromFile == "Lightm")
+                if (textFromFile.IndexOf("Custom") >= 0)
                 {
-                    return 1;
+                    style = "Design/Themes/Custom";
+                }
+                else
+                {
+                    if (textFromFile.IndexOf("Dark") >= 0)
+                    {
+                        style = "Design/Themes/Dark";
+                    }
+                    else
+                    {
+                        style = "Design/Themes/Custom";
+                    }
                 }
             }
-            return 0;
+            try
+            {
+                var uri = new Uri(style + ".xaml", UriKind.Relative);
+                ResourceDictionary resourceDict = Application.LoadComponent(uri) as ResourceDictionary;
+
+                Application.Current.Resources.Clear();
+                Application.Current.Resources.MergedDictionaries.Add(resourceDict);
+            }
+            catch
+            {
+                MessageBox.Show("Не удалось подключить темы приложения");
+            }
 
         }
-
-
     }
 }
