@@ -141,7 +141,8 @@ namespace TaskManager.ViewModels
             Themes = new ObservableCollection<AppTheme>
             {
                 new AppTheme{ Name = "Custom"}, 
-                new AppTheme{ Name = "Light"}
+                new AppTheme{ Name = "Light"},
+                new AppTheme{ Name = "Dark" }
             };
             _SelectedTheme = Themes[ChangeAppTheme.iTheme];
 
