@@ -110,12 +110,6 @@ namespace TaskManager.ViewModels
         #endregion
         #endregion
 
-        #region Design
-
-        
-
-        #endregion
-
         #region ToolTips
 
         #region Save note 

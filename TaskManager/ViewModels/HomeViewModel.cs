@@ -65,7 +65,7 @@ namespace TaskManager.ViewModels
         #region Labels
 
         private string _Welcome;
-        private string _Email = AuthWindowViewModel.authUser.Email;  
+        private string _Email = AuthWindowViewModel.authUser.UserName;  
         private string _Label2;
         private string _Label3;
         private string _Label4;
@@ -107,7 +107,6 @@ namespace TaskManager.ViewModels
         }
 
         #endregion
-
 
         #region Tooltips
 

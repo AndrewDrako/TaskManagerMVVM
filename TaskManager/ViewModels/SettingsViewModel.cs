@@ -51,12 +51,6 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-        #region Design
-
-        
-
-        #endregion
-
         #region Коллекции
 
         public static ObservableCollection<AppLanguage> Languages { get; set; }
@@ -82,7 +76,6 @@ namespace TaskManager.ViewModels
         #endregion
 
         #region Themes
-
 
         private AppTheme _SelectedTheme;
         public AppTheme SelectedTheme
@@ -144,7 +137,7 @@ namespace TaskManager.ViewModels
                 new AppTheme{ Name = "Light"},
                 new AppTheme{ Name = "Dark" }
             };
-            _SelectedTheme = Themes[ChangeAppTheme.iTheme];
+            _SelectedTheme = Themes[AuthWindowViewModel.SelectedTheme];
 
             #endregion
 

@@ -41,12 +41,6 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-        #region Design
-
-        
-
-        #endregion
-
         #region Commands
 
         #region Log Out

@@ -71,6 +71,12 @@ namespace TaskManager.ViewModels
 
         #endregion
 
+        #region Design
+
+        public static int SelectedTheme;
+
+        #endregion
+
         #region Outputs
 
         #region Username/Nickname
@@ -95,18 +101,6 @@ namespace TaskManager.ViewModels
             get => _CanClickOk;
             set => Set(ref _CanClickOk, value);
         }
-
-        #endregion
-
-        #region Design
-
-        private string _MainTheme = $"/Design/Themes/Custom.xaml";
-        public string MainTheme
-        {
-            get => _MainTheme;
-            set => Set(ref _MainTheme, value);
-        }
-
 
         #endregion
 
@@ -170,7 +164,7 @@ namespace TaskManager.ViewModels
 
             #region App Theme
 
-            MainWindowModel.ReadThemeKey();
+            SelectedTheme = MainWindowModel.ReadThemeKey();
 
             #endregion
 

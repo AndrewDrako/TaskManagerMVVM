@@ -19,13 +19,6 @@ namespace TaskManager.ViewModels
 {
     public class RegistrationWindowViewModel : ViewModel
     {
-
-        #region Design
-
-        
-
-        #endregion
-
         #region Labels
 
         #region Enter Email

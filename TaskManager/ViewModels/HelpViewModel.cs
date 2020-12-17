@@ -26,12 +26,6 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-        #region Design
-
-        
-
-        #endregion
-
         #region Commands
 
         // Vk

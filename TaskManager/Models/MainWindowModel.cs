@@ -100,10 +100,11 @@ namespace TaskManager.Models
             }
         }
 
-        public static void ReadThemeKey()
+        public static int ReadThemeKey()
         {
             string filename = "theme_key.txt";
             string path = Directory.GetCurrentDirectory();
+            int result = 0;
             //или ;
             if (!Directory.Exists(path + "/Files")) //если папки нет - создаем
             {
@@ -126,22 +127,26 @@ namespace TaskManager.Models
             if (textFromFile.IndexOf("Light") >= 0)
             {
                 style = "Design/Themes/Light";
+                result = 1;
             }
             else
             {
                 if (textFromFile.IndexOf("Custom") >= 0)
                 {
                     style = "Design/Themes/Custom";
+                    result = 0;
                 }
                 else
                 {
                     if (textFromFile.IndexOf("Dark") >= 0)
                     {
                         style = "Design/Themes/Dark";
+                        result = 2;
                     }
                     else
                     {
                         style = "Design/Themes/Custom";
+                        result = 0;
                     }
                 }
             }
@@ -158,6 +163,7 @@ namespace TaskManager.Models
                 MessageBox.Show("Не удалось подключить темы приложения");
             }
 
+            return result;
         }
     }
 }

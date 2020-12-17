@@ -118,12 +118,6 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-        #region Design
-
-       
-
-        #endregion
-
         #region Opacity
 
         private double _UserControlOpacity;
