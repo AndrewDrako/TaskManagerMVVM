@@ -22,7 +22,14 @@ namespace TaskManager.ViewModels
     {
         #region DbContext and User
 
+        /// <summary>
+        /// The major data base context
+        /// </summary>
         public static MyDbContext dbContext;
+        
+        /// <summary>
+        /// Local table which contains users
+        /// </summary>
         public static User authUser;
 
         #endregion
@@ -32,6 +39,7 @@ namespace TaskManager.ViewModels
         #region Enter username
 
         private string _Label1;
+
         public string Label1
         {
             get => TranslateLanguage.AuthLabelEnterUsername[TranslateLanguage.iLanguage];
@@ -54,6 +62,10 @@ namespace TaskManager.ViewModels
         #region Button contents
 
         private string _BtnContentOk;
+
+        /// <summary>
+        /// The name of the button that continues authorization
+        /// </summary>
         public string BtnContentOk
         {
             get => TranslateLanguage.RegBtnOk[TranslateLanguage.iLanguage];
@@ -61,6 +73,10 @@ namespace TaskManager.ViewModels
         }
 
         private string _BtnContentRegister;
+
+        /// <summary>
+        /// The name of the button that opens the registration window
+        /// </summary>
         public string BtnContentRegister
         {
             get => TranslateLanguage.AuthLabelRegister[TranslateLanguage.iLanguage];
@@ -73,6 +89,10 @@ namespace TaskManager.ViewModels
 
         #region Design
 
+
+        /// <summary>
+        /// The field that hosts the main theme of the application
+        /// </summary>
         public static int SelectedTheme;
 
         #endregion
@@ -96,6 +116,10 @@ namespace TaskManager.ViewModels
         #region Checker unlock button ok
 
         public static bool _CanClickOk = false;
+
+        /// <summary>
+        /// Boolean variable that is responsible for the activity of the continue button
+        /// </summary>
         public bool CanClickOk
         {
             get => _CanClickOk;
@@ -105,9 +129,10 @@ namespace TaskManager.ViewModels
         #endregion
 
         #region Commands
-
-        // Команда кнопки ОК
-
+ 
+        /// <summary>
+        /// Continue button click
+        /// </summary>
         public ICommand BtnClickOk { get; }
         private bool CanBtnClickOkExecute(object p) => CanClickOk;
         private void OnBtnClickOkExecuted(object p)
@@ -133,8 +158,10 @@ namespace TaskManager.ViewModels
             }
         }
 
-        // Команда кнопки регистрация
-
+        
+        /// <summary>
+        /// Registration button click
+        /// </summary>
         public ICommand BtnClickReg { get; }
         private bool CanBtnClickRegExecute(object p) => true;
         private void OnBtnClickRegExecuted(object p)
@@ -170,10 +197,9 @@ namespace TaskManager.ViewModels
 
             #region Связь с БД
 
-
             dbContext = new MyDbContext();
             
-            string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;  // Get the connection string
             SqlConnection sqlConnection = new SqlConnection(connectionString);
             try
             {
@@ -190,7 +216,6 @@ namespace TaskManager.ViewModels
                 if (AuthWindowModel.Key == 0)
                 {
                     AsyncCommands.ConnectToDB(dbContext);
-                    //DataBaseCommands.LoadDB(dbContext);
                 }
                 else
                 {
@@ -199,7 +224,7 @@ namespace TaskManager.ViewModels
                         if (AuthWindowModel.Key == 1)
                         {
                             DataBaseCommands.LoadDB(dbContext);
-                            User user = Model.FindUser(dbContext, AuthWindowModel.ReadLastUserName());  // из txt вставляем имя пользователя 
+                            User user = Model.FindUser(dbContext, AuthWindowModel.ReadLastUserName());  // from txt insert username
                             if (user != null)
                             {
                                 authUser.Id = user.Id;
@@ -232,8 +257,6 @@ namespace TaskManager.ViewModels
                 Window mainWindow = new MainWindow();
                 mainWindow.Show();
                 Application.Current.Windows[0].Close();
-
-
             }
             #endregion
 

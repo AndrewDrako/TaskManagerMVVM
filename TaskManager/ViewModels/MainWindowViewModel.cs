@@ -22,11 +22,14 @@ namespace TaskManager.ViewModels
     {
         #region DBContext
 
+        /// <summary>
+        /// Data base context who takes info from AuthViewModel
+        /// </summary>
         public static MyDbContext db = AuthWindowViewModel.dbContext;
 
         #endregion
 
-        #region Страницы приложения
+        #region UserControls
 
         private UserControl _Home;
         public static UserControl _Tasks;
@@ -38,7 +41,7 @@ namespace TaskManager.ViewModels
 
         #region Labels
 
-        #region Заголовок окна
+        #region Title
 
         private string _Title = "Task Manager";
 
@@ -51,7 +54,7 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-        #region Название кнопки номер 1
+        #region Button content Home
 
         private string _ButtonContent1;
 
@@ -64,7 +67,7 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-        #region Название кнопки номер 2
+        #region Button content Tasks
 
         private string _ButtonContent2;
 
@@ -77,7 +80,7 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-        #region Название кнопки номер 3
+        #region Button content Settings
 
         private string _ButtonContent3;
 
@@ -90,7 +93,7 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-        #region Название кнопки номер 4
+        #region Button content Account
 
         private string _ButtonContent4;
 
@@ -103,7 +106,7 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-        #region Название кнопки номер 5
+        #region Button content Help
 
         private string _ButtonContent5;
 
@@ -129,7 +132,7 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-        #region Основная (текущая страница)
+        #region Major/Current page/usercontrol
 
         private UserControl _CurrentPage;
 
@@ -146,7 +149,7 @@ namespace TaskManager.ViewModels
 
         #region Commands
 
-        #region Клик кнопки номер 1
+        #region Home button click
 
         public ICommand FirstButtonClick { get; }
 
@@ -159,7 +162,7 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-        #region Клик кнопки номер 2
+        #region Tasks button click
 
         public static ICommand SecondButtonClick { get; set; }
 
@@ -173,7 +176,7 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-        #region Клик кнопки номер 3
+        #region Settings button click
 
         public ICommand ThirdButtonClick { get; }
 
@@ -186,7 +189,7 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-        #region Клик кнопки номер 4
+        #region Account button click
 
         public ICommand FourthButtonClick { get; }
 
@@ -199,7 +202,7 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-        #region Клик кнопки номер 5
+        #region Help button click
 
         public ICommand FifthButtonClick { get; }
 
@@ -212,7 +215,7 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-        #region Закрытие Окна
+        #region Close Application button
 
         public ICommand CloseApplication { get; }
         private bool CanCloseApplicationExecute(object p) => true;
@@ -227,6 +230,10 @@ namespace TaskManager.ViewModels
 
         #region Functions
 
+        /// <summary>
+        /// The function is responsible for smooth switching between UserControls
+        /// </summary>
+        /// <param name="page"></param>
         private async void SlowOpacity(UserControl page)
         {
             await Task.Factory.StartNew(() =>
@@ -248,12 +255,12 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-        #region Конструктор 
+        #region Class Designer
         public MainWindowViewModel()
         { 
             _Settings = new Settings();
 
-            #region Создание окон
+            #region Create usercontrols
 
             _Home = new Home();
             MainWindowModel.IsTasksNotEmpty = false;
@@ -264,17 +271,14 @@ namespace TaskManager.ViewModels
 
             #endregion
 
-            #region Команды
+            #region Commands
 
             CloseApplication = new LambdaCommand(OnCloseApplicationExecuted, CanCloseApplicationExecute);
-
             FirstButtonClick = new LambdaCommand(OnFirstButtonClickExecuted, CanFirstButtonClickExecute);
             SecondButtonClick = new LambdaCommand(OnSecondButtonClickExecuted, CanSecondButtonClickExecute);
             ThirdButtonClick = new LambdaCommand(OnThirdButtonClickExecuted, CanThirdButtonClickExecute);
             FourthButtonClick = new LambdaCommand(OnFourthButtonClickExecuted, CanFourthButtonClickExecute);
             FifthButtonClick = new LambdaCommand(OnFifthButtonClickExecuted, CanFifthButtonClickExecute);
-            //SixButtonClick = new LambdaCommand(OnSixButtonClickExecuted, CanSixButtonClickExecute);
-
 
             #endregion
 

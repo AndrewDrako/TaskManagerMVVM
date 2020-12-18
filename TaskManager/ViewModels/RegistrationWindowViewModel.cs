@@ -99,32 +99,35 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-        #region Button content
-
-        // Ok
+        #region Buttons content
 
         private string _BtnContent1;
 
+        /// <summary>
+        /// Registration button content
+        /// </summary>
         public string BtnContent1
         {
             get => TranslateLanguage.RegBtnOk[TranslateLanguage.iLanguage];
             set => Set(ref _BtnContent1, value);
         }
 
-        // Accept key from email
-
         private string _BtnContent2;
 
+        /// <summary>
+        /// Accept key from Email button content
+        /// </summary>
         public string BtnContent2
         {
             get => TranslateLanguage.RegBtnAccept[TranslateLanguage.iLanguage];
             set => Set(ref _BtnContent2, value);
         }
 
-        // Log In
-
         private string _BtnContent3;
 
+        /// <summary>
+        /// Log In button content
+        /// </summary>
         public string BtnContent3
         {
             get => TranslateLanguage.RegBtnLogIn[TranslateLanguage.iLanguage];
@@ -172,7 +175,7 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-        #region Команды
+        #region Commands
 
         #region Click after enter email, password and username
 
@@ -260,7 +263,6 @@ namespace TaskManager.ViewModels
         private bool CanBtnClickLogInExecute(object p) => true;
         private void OnBtnClickLogInExecuted(object p)
         {
-            // Создание окна AuthWindow
             Window authWindow = new AuthWindow();
             authWindow.Show();
             Application.Current.Windows[0].Close();
@@ -272,20 +274,22 @@ namespace TaskManager.ViewModels
 
         #region Visibility 
 
-        // Visibilite first page
-
         private Visibility _VisibilityFirst = Visibility.Visible;
 
+        /// <summary>
+        /// First section visibility
+        /// </summary>
         public Visibility ChangeControlVisibility1
         {
             get { return _VisibilityFirst; }
             set => Set(ref _VisibilityFirst, value);
         }
 
-        // Visibility second page
-
         private Visibility _VisibilitySecond = Visibility.Collapsed;
 
+        /// <summary>
+        /// Second section visibility
+        /// </summary>
         public Visibility ChangeControlVisibility2
         {
             get { return _VisibilitySecond; }
@@ -300,7 +304,7 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-        #region Конструктор
+        #region Class Designer
 
         public RegistrationWindowViewModel()
         {
