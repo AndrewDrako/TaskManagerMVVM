@@ -51,7 +51,7 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-        #region Коллекции
+        #region Collections
 
         public static ObservableCollection<AppLanguage> Languages { get; set; }
         public static ObservableCollection<AppTheme> Themes { get; set; }
@@ -113,7 +113,7 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-        #region Конструктор
+        #region Class designer
 
         public SettingsViewModel()
         {

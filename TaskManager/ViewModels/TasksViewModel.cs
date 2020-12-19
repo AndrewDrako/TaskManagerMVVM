@@ -17,7 +17,7 @@ namespace TaskManager.ViewModels
 {
     internal class TasksViewModel : ViewModel
     {
-        #region БД
+        #region Data base
 
         /// <summary>
         /// To Do Column
@@ -46,7 +46,8 @@ namespace TaskManager.ViewModels
         #endregion
 
         #region Labels
-        #region Проект под именем...
+
+        #region Проект под именем.../ Project with name...
         private string _Label1;
         public string Label1
         {
@@ -55,7 +56,7 @@ namespace TaskManager.ViewModels
         }
         #endregion
 
-        #region Подготвила команда...
+        #region Подготвила команда.../Prepared by the team
         private string _Label2;
         public string Label2
         {
@@ -91,7 +92,7 @@ namespace TaskManager.ViewModels
         }
         #endregion
 
-        #region Напишите заметку
+        #region Write a note
         private string _Label6 = TranslateLanguage.LabelTasks3[TranslateLanguage.iLanguage];
         public string Label6
         {
@@ -100,7 +101,7 @@ namespace TaskManager.ViewModels
         }
         #endregion
 
-        #region Для чего это нужно сделать
+        #region Для чего это нужно сделать/For what
         private string _Label7 = TranslateLanguage.LabelTasks4[TranslateLanguage.iLanguage];
         public string Label7
         {
@@ -169,7 +170,7 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-        #region Записи/Заметки Selected
+        #region Note Selected
 
         private Note _SelectedNote;
 
@@ -198,7 +199,7 @@ namespace TaskManager.ViewModels
         }
         #endregion
 
-        #region коллекция записей/заметок
+        #region Note collection
 
         public ObservableCollection<Note> NotesToDo { get; set; }
 
@@ -207,7 +208,7 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-        #region Имя проекта и имя команды на доске
+        #region Project and team name on the kanban
 
         public static string _PName;
 
@@ -229,7 +230,7 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-        #region Visibiliity Кнопки save
+        #region Visibiliity save button
 
         private Visibility _Visibility = Visibility.Collapsed;
 
@@ -241,7 +242,7 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-        #region Visibility поля ввода заметок
+        #region Visibility input
 
         private Visibility _VisibilityWriteNote = Visibility.Collapsed;
 
@@ -255,7 +256,7 @@ namespace TaskManager.ViewModels
 
         #region Commands
 
-        #region Сохранение заметки
+        #region Save
 
         public ICommand SaveNote { get; }
         private bool CanSaveNoteExecute(object p) => MainWindowModel.IsConnectedToLocalServer;
@@ -447,23 +448,17 @@ namespace TaskManager.ViewModels
         #endregion
 
         #endregion
-
-        #region К какому проекту относиться запись
-
+        
+        /// <summary>
+        /// Current project id
+        /// </summary>
         public static int CurrentProjectId { get; set; }
 
-        #endregion
-
-        #region БД
-
-
-        #endregion
-
-        #region Конструктор
+        #region Class designer
 
         public TasksViewModel()
         {
-            #region Конструктор БД
+            #region Data base designer
             
             toDoTable = new ToDoTable();
             inProgressTable = new InProgressTable();
@@ -472,7 +467,7 @@ namespace TaskManager.ViewModels
             {
                 try
                 {
-                    var projects = MainWindowViewModel.db.Projects.ToList();  // Выгружаем данные из бд в массив
+                    var projects = MainWindowViewModel.db.Projects.ToList();  // Unloading data from the database into an array
                     foreach (var p in projects)
                     {
                         if (p.UserId == AuthWindowViewModel.authUser.Id)
@@ -501,7 +496,7 @@ namespace TaskManager.ViewModels
 
             #endregion
 
-            #region Коллекции
+            #region Collections
 
             NotesToDo = new ObservableCollection<Note>
             {
@@ -533,12 +528,12 @@ namespace TaskManager.ViewModels
 
             #endregion
 
-            if (MainWindowModel.IsConnectedToLocalServer == true)
+            if (MainWindowModel.IsConnectedToLocalServer == true)  // checking the connection to the server
             {
 
-                #region Заполнение коллекций
+                #region Filling collections
 
-                #region Заполение To DO
+                #region To DO
 
                 try
                 {
@@ -563,7 +558,7 @@ namespace TaskManager.ViewModels
 
                 #endregion
 
-                #region Заполнение In Progress
+                #region In Progress
 
                 try
                 {
@@ -588,7 +583,7 @@ namespace TaskManager.ViewModels
 
                 #endregion
 
-                #region Заполнение Done
+                #region Done
 
                 try
                 {

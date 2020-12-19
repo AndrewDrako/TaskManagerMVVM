@@ -74,7 +74,7 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-        #region Конструктор
+        #region Class designer
 
         public AccountViewModel()
         {

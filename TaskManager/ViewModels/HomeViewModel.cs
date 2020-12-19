@@ -23,7 +23,7 @@ namespace TaskManager.ViewModels
 {
     internal class HomeViewModel : ViewModel
     {
-        #region  data base: Записи в таблице ProjectTable
+        #region  data base: records in the table ProjectTable
 
         public static ProjectTable projectTable;
 
@@ -56,7 +56,7 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-        #region Коллекция проектов в приложении
+        #region Collection of projects in the application
 
         public ObservableCollection<Project> Projects { get; set; }
 
@@ -82,24 +82,27 @@ namespace TaskManager.ViewModels
             set => Set(ref _Email, value);
         }
 
-        // Выбранный проект
-
+        /// <summary>
+        /// Selected project label
+        /// </summary>
         public string Label2
         {
             get => TranslateLanguage.LabelSP[TranslateLanguage.iLanguage];
             set => Set(ref _Label2, value);
         }
 
-        // Имя проекта
-
+        /// <summary>
+        /// Project name label
+        /// </summary>
         public string Label3
         {
             get => TranslateLanguage.LabelPN[TranslateLanguage.iLanguage];
             set => Set(ref _Label3, value);
         }
 
-        // Имя команды работающей над проектом
-
+        /// <summary>
+        /// Сreator name label
+        /// </summary>
         public string Label4
         {
             get => TranslateLanguage.LabelON[TranslateLanguage.iLanguage];
@@ -157,9 +160,9 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-        #region Команды
+        #region Commands
 
-        #region Добавление проекта
+        #region Add
 
         private RelayCommand addCommand;
         public RelayCommand AddCommand
@@ -181,7 +184,7 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-        #region Удаление проекта
+        #region Remove
 
         private RelayCommand removeCommand;
         public RelayCommand RemoveCommand
@@ -209,7 +212,7 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-        #region Выбор проекта
+        #region Run
 
         private RelayCommand selectProject;
         public RelayCommand SelectProject
@@ -242,11 +245,11 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-        #region Конструктор 
+        #region Class designer 
 
         public HomeViewModel()
         {
-            #region Коллекция объектов
+            #region Object collection
 
             Projects = new ObservableCollection<Project>
             {
@@ -255,7 +258,7 @@ namespace TaskManager.ViewModels
 
             #endregion
 
-            #region Конструтор БД
+            #region database designer
             if (MainWindowModel.IsConnectedToLocalServer == true)
             {
                 projectTable = new ProjectTable();
@@ -263,7 +266,7 @@ namespace TaskManager.ViewModels
             }
             #endregion
 
-            #region БД: заносим данные в коллекцию объектов
+            #region filling the collection
             if (MainWindowModel.IsConnectedToLocalServer == true)
             {
                 try
