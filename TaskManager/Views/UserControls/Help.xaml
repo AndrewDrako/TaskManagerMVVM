@@ -36,7 +36,7 @@
                     Grid.Row="0"
                     Grid.Column="1"
                     Grid.ColumnSpan="2"
-                    FontSize="50"
+                    FontSize="40"
                     Foreground="{DynamicResource fontColor}"
                     FontFamily="Lucida Grande"
                     Text="{Binding Label1}"/>
@@ -97,7 +97,7 @@
         </Button>
         <TextBlock Grid.Row="2"
                    Grid.ColumnSpan="4"
-                   Text="О чем это приложение"
+                   Text="{Binding Label2}"
                    Foreground="{DynamicResource fontColor}"
                    FontFamily="Lucida Grande"
                    FontSize="20"

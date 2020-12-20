@@ -16,12 +16,25 @@ namespace TaskManager.ViewModels
     {
         #region Labels
 
-        private string _Label1 = "How to contact me";
-
+        private string _Label1;
+        private string _Label2;
+        
+        /// <summary>
+        /// How to contact me
+        /// </summary>
         public string Label1 
         { 
-            get => _Label1; 
+            get => TranslateLanguage.LabelHelp1[TranslateLanguage.iLanguage]; 
             set => Set(ref _Label1, value); 
+        }
+
+        /// <summary>
+        /// What is this app about
+        /// </summary>
+        public string Label2
+        {
+            get => TranslateLanguage.LabelHelp2[TranslateLanguage.iLanguage];
+            set => Set(ref _Label2, value);
         }
 
         #endregion

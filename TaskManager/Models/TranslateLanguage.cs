@@ -260,6 +260,26 @@ namespace TaskManager.Models
 
         #endregion
 
+        #region Help Labels
+
+        // How to contact me
+
+        public static string[] LabelHelp1 = new string[2]
+        {
+            "How to contact me?",
+            "Как связаться со мной?"
+        };
+
+        // What is this app about
+
+        public static string[] LabelHelp2 = new string[2]
+        {
+            "What is this app about?",
+            "О чем это приложение?"
+        };
+
+        #endregion
+
         #region RegWindow Labels
 
         // Enter email label
