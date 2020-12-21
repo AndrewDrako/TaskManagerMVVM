@@ -9,9 +9,7 @@ namespace TaskManager.Models
 {
     public class Project : ViewModel
     {
-
-
-        #region Имя проекта
+        #region Project name
 
         private string _ProjectName;
 
@@ -26,7 +24,7 @@ namespace TaskManager.Models
 
         #endregion
 
-        #region Имя создателея проекта
+        #region Project creator name
 
         private string _PersonName;
 

@@ -10,43 +10,51 @@ namespace TaskManager.Models
 {
     internal class MainWindowModel
     {
-
         /// <summary>
-        /// bool переменная которая отвечает за активность TAsks как только создан проект
+        /// bool variable which is responsible for Tasks activity as soon as the project is created
         /// </summary>
         public static bool IsTasksNotEmpty;
 
+        /// <summary>
+        /// bool variable that is responsible for connecting to the server
+        /// </summary>
         public static bool IsConnectedToLocalServer = true;
 
+        /// <summary>
+        /// Basic theme number
+        /// </summary>
         public static int iTheme = 0;
+
+        /// <summary>
+        /// the method that prints in the txt language of the application
+        /// </summary>
+        /// <param name="s"></param>
         public static void PrintLanguageKey(string s)
         {
             string filename = "language_key.txt";
             string path = Directory.GetCurrentDirectory();
-            //или ;
-            if (!Directory.Exists(path + "/Files")) //если папки нет - создаем
+            if (!Directory.Exists(path + "/Files")) // if there is no folder - create
             {
                 Directory.CreateDirectory(path + "/Files");
             }
-            //FileStream fs = File.Create(path + "/Files/" + filename);
-            //StreamWriter writer = new StreamWriter(fs);
-            //writer.Write("text");
-            //writer.Close();
             using (FileStream fstream = new FileStream(path + "/Files/" + filename, FileMode.OpenOrCreate))
             {
-                // преобразуем строку в байты
+                // convert the string to bytes
                 byte[] array = System.Text.Encoding.Default.GetBytes(s);
-                // запись массива байтов в файл
+                // writing a byte array to a file
                 fstream.Write(array, 0, array.Length);
             }
         }
 
+        /// <summary>
+        /// Method reads language from txt
+        /// </summary>
+        /// <returns></returns>
         public static int ReadLanguageKey()
         {
             string filename = "language_key.txt";
             string path = Directory.GetCurrentDirectory();
-            //или ;
-            if (!Directory.Exists(path + "/Files")) //если папки нет - создаем
+            if (!Directory.Exists(path + "/Files")) // if there is no folder - create
             {
                 Directory.CreateDirectory(path + "/Files");
             }
@@ -54,12 +62,12 @@ namespace TaskManager.Models
             string textFromFile;
             using (FileStream fstream = new FileStream(path + "/Files/" + filename, FileMode.OpenOrCreate))
             {
-                
-                // преобразуем строку в байты
+
+                // convert the string to bytes
                 byte[] array = new byte[fstream.Length];
-                // считываем данные
+                // read data
                 fstream.Read(array, 0, array.Length);
-                // декодируем байты в строку
+                // decode bytes to string
                 textFromFile = System.Text.Encoding.Default.GetString(array);
                 
             }
@@ -78,35 +86,37 @@ namespace TaskManager.Models
 
         }
 
+        /// <summary>
+        /// the method that prints in the txt theme of the application
+        /// </summary>
+        /// <param name="s"></param>
         public static void PrintThemeKey(string s)
         {
             string filename = "theme_key.txt";
             string path = Directory.GetCurrentDirectory();
-            //или ;
-            if (!Directory.Exists(path + "/Files")) //если папки нет - создаем
+            if (!Directory.Exists(path + "/Files")) // if there is no folder - create
             {
                 Directory.CreateDirectory(path + "/Files");
             }
-            //FileStream fs = File.Create(path + "/Files/" + filename);
-            //StreamWriter writer = new StreamWriter(fs);
-            //writer.Write("text");
-            //writer.Close();
             using (FileStream fstream = new FileStream(path + "/Files/" + filename, FileMode.OpenOrCreate))
             {
-                // преобразуем строку в байты
+                // convert the string to bytes
                 byte[] array = System.Text.Encoding.Default.GetBytes(s);
-                // запись массива байтов в файл
+                // writing a byte array to a file
                 fstream.Write(array, 0, array.Length);
             }
         }
 
+        /// <summary>
+        /// Method reads theme from txt
+        /// </summary>
+        /// <returns></returns>
         public static int ReadThemeKey()
         {
             string filename = "theme_key.txt";
             string path = Directory.GetCurrentDirectory();
             int result = 0;
-            //или ;
-            if (!Directory.Exists(path + "/Files")) //если папки нет - создаем
+            if (!Directory.Exists(path + "/Files")) // if there is no folder - create
             {
                 Directory.CreateDirectory(path + "/Files");
             }
@@ -115,11 +125,11 @@ namespace TaskManager.Models
             using (FileStream fstream = new FileStream(path + "/Files/" + filename, FileMode.OpenOrCreate))
             {
 
-                // преобразуем строку в байты
+                // convert the string to bytes
                 byte[] array = new byte[fstream.Length];
-                // считываем данные
+                // read data
                 fstream.Read(array, 0, array.Length);
-                // декодируем байты в строку
+                // decode bytes into a string
                 textFromFile = System.Text.Encoding.Default.GetString(array);
 
             }
@@ -153,10 +163,10 @@ namespace TaskManager.Models
             try
             {
                 var uri = new Uri(style + ".xaml", UriKind.Relative);
-                ResourceDictionary resourceDict = Application.LoadComponent(uri) as ResourceDictionary;
+                ResourceDictionary resourceDict = Application.LoadComponent(uri) as ResourceDictionary;  // get application resource dictionaries
 
-                Application.Current.Resources.Clear();
-                Application.Current.Resources.MergedDictionaries.Add(resourceDict);
+                Application.Current.Resources.Clear();  // clear resources
+                Application.Current.Resources.MergedDictionaries.Add(resourceDict);  // add our resource dictionary
             }
             catch
             {

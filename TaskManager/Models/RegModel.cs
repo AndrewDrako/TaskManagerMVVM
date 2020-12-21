@@ -10,6 +10,12 @@ namespace TaskManager.Models
 {
     public class RegModel
     {
+        /// <summary>
+        /// Method sends key to email async
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public static async Task SendEmailAsync(string s, int key)
         {
             MailAddress from = new MailAddress("msbigheadtti@gmail.com", "Andrew");

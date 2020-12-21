@@ -10,40 +10,45 @@ namespace TaskManager.Models
     {
         #region MainWindow Labels
 
-        // Button home
-
+        /// <summary>
+        /// Button home
+        /// </summary>
         public static string[] LabelHome = new string[2]
         {
             "Home",
             "Главная"
         };
 
-        // Button tasks
-
+        /// <summary>
+        /// Button tasks
+        /// </summary>
         public static string[] LabelTask = new string[2]
         {
             "Tasks",
             "Задачи"
         };
 
-        // button settings
-
+        /// <summary>
+        /// Button settings
+        /// </summary>
         public static string[] LabelSettings = new string[2]
         {
             "Settings",
             "Настройки"
         };
 
-        // button account
-
+        /// <summary>
+        /// Button account
+        /// </summary>
         public static string[] LabelAcc = new string[2]
         {
             "Account",
             "Аккаунт"
         };
 
-        // button help
-
+        /// <summary>
+        /// Button help
+        /// </summary>
         public static string[] LabelHelp = new string[2]
         {
             "Help",
@@ -54,56 +59,63 @@ namespace TaskManager.Models
 
         #region Home labels
 
-        // Welcome Label
-
+        /// <summary>
+        /// Welcome Label
+        /// </summary>
         public static string[] LabelWelcome = new string[2]
         {
             "Welcome",
             "Добро пожаловать"
         };
 
-        // Selceted project label
-
+        /// <summary>
+        /// Selected project label
+        /// </summary>
         public static string[] LabelSP = new string[2]
         {
             "Selected project",
             "Выбранный проект"
         };
 
-        // Project name label
-
+        /// <summary>
+        /// Project name label
+        /// </summary>
         public static string[] LabelPN = new string[2]
         {
             "Project name", 
             "Имя проекта"
         };
 
-        // Owner name label
-
+        /// <summary>
+        /// Owner name label
+        /// </summary>
         public static string[] LabelON = new string[2]
         {
             "Owner",
             "Владелец"
         };
 
-        // tooltip add
-
+        /// <summary>
+        /// tooltip add
+        /// </summary>
         public static string[] AddTT = new string[2]
         {
             "Create a project",
             "Создать проект"
         };
 
-        // tooltip remove
-
+        /// <summary>
+        /// tooltip remove
+        /// </summary>
         public static string[] RemoveTT = new string[2]
         {
             "Delete a project",
             "Удалить проект"
         };
 
-        // tooltip Select
-
+        /// <summary>
+        /// tooltip select
+        /// </summary>
         public static string[] SelectTT = new string[2]
         {
             "Run this project",
@@ -114,96 +126,108 @@ namespace TaskManager.Models
 
         #region Tasks Labels
 
-        // Structure of notes and tasks with title...
-
+        /// <summary>
+        /// Structure of notes and tasks with title...
+        /// </summary>
         public static string[] LabelTasks1 = new string[2]
         {
             "Structure of notes and tasks with title",
             "Структуру заметок и задач с названием"
         };
 
-        // prepared by the team...
-
+        /// <summary>
+        /// prepared by the team...
+        /// </summary>
         public static string[] LabelTasks2 = new string[2]
         {
             "prepared by the team",
             "подготовила команда"
         };
 
-        // TO DO label
-
+        /// <summary>
+        /// TO DO label
+        /// </summary>
         public static string[] LabelTasksToDo = new string[2]
         {
             "TO DO",
             "СДЕЛАТЬ"
         };
 
-        // IN Progress label
-
+        /// <summary>
+        /// IN Progress label
+        /// </summary>
         public static string[] LabelTasksInProgress = new string[2]
         {
             "IN PROGRESS",
             "В ПРОЦЕССЕ"
         };
 
-        // DONE label
-
+        /// <summary>
+        /// DONE label
+        /// </summary>
         public static string[] LabelTasksDone = new string[2]
         {
             "DONE",
             "ГОТОВО"
         };
 
-        // write a note label
-
+        /// <summary>
+        /// write a note label
+        /// </summary>
         public static string[] LabelTasks3 = new string[2]
         {
             "Write a note label",
             "Напишите заметку"
         };
 
-        // Why do you need to do it
-
+        /// <summary>
+        /// Why do you need to do it
+        /// </summary>
         public static string[] LabelTasks4 = new string[2]
         {
             "Why do you need to do it",
             "Для чего это нужно сделать"
         };
 
-        // Save note tooltip
-
+        /// <summary>
+        /// Save note tooltip
+        /// </summary>
         public static string[] SaveNoteTT = new string[2]
         {
             "Save all notes",
             "Сохранить заметки"
         };
 
-        // Remove note tooltip
-
+        /// <summary>
+        /// Remove note tooltip
+        /// </summary>
         public static string[] DelNoteTT = new string[2]
         {
             "Delete a note",
             "Удалить заметку"
         };
 
-        // Add note tooltip
-
+        /// <summary>
+        /// Add note tooltip
+        /// </summary>
         public static string[] AddNoteTT = new string[2]
         {
             "Create a note",
             "Создать заметку"
         };
 
-        // Transfer note tooltip
-
+        /// <summary>
+        /// Transfer note tooltip
+        /// </summary>
         public static string[] TransferNoteTT = new string[2]
         {
             "Transfer to next state",
             "Переместить в следущее положение"
         };
 
-        // Clear note tooltip
-
+        /// <summary>
+        /// Clear note tooltip
+        /// </summary>
         public static string[] ClearNoteTT = new string[2]
         {
             "Clear done note",
@@ -214,24 +238,27 @@ namespace TaskManager.Models
 
         #region Settings Labels
 
-        // Language label
-
+        /// <summary>
+        /// Language label
+        /// </summary>
         public static string[] LabelSettings1 = new string[2]
         {
             "Language",
             "Язык"
         };
 
-        // Add colors label
-
+        /// <summary>
+        /// Add colors label
+        /// </summary>
         public static string[] LabelSettings2 = new string[2]
         {
             "Change theme",
             "Изменить тему"
         };
 
-        // Button apply label
-
+        /// <summary>
+        /// Button apply label
+        /// </summary>
         public static string[] LabelSettingsButton = new string[2]
         {
             "Apply",
@@ -242,16 +269,18 @@ namespace TaskManager.Models
 
         #region Account Labels
 
-        // button log out label
-
+        /// <summary>
+        /// button log out label
+        /// </summary>
         public static string[] LabelAccBtn1 = new string[2]
         {
             "Log out",
             "Выйти"
         };
 
-        // button create a new label
-
+        /// <summary>
+        /// button create a new label
+        /// </summary>
         public static string[] LabelAccBtn2 = new string[2]
         {
             "Create a new",
@@ -262,16 +291,18 @@ namespace TaskManager.Models
 
         #region Help Labels
 
-        // How to contact me
-
+        /// <summary>
+        /// How to contact me
+        /// </summary>
         public static string[] LabelHelp1 = new string[2]
         {
             "How to contact me?",
             "Как связаться со мной?"
         };
 
-        // What is this app about
-
+        /// <summary>
+        /// What is this app about
+        /// </summary>
         public static string[] LabelHelp2 = new string[2]
         {
             "What is this app about?",
@@ -282,48 +313,54 @@ namespace TaskManager.Models
 
         #region RegWindow Labels
 
-        // Enter email label
-
+        /// <summary>
+        /// Enter email label
+        /// </summary>
         public static string[] RegLabelEnterEmail = new string[2]
         {
             "Enter your email",
             "Введите свой электронный адрес"
         };
 
-        // Enter nickname
-
+        /// <summary>
+        /// Enter nickname
+        /// </summary>
         public static string[] RegLabelEnterNickname = new string[2]
         {
             "What is your nickname",
             "Придумайте имя пользователя"
         };
 
-        // Enter password
-
+        /// <summary>
+        /// Enter password
+        /// </summary>
         public static string[] RegLabelEnterPassword = new string[2]
         {
             "Your password",
             "Придумайте пароль"
         };
 
-        // Enter password x1
-
+        /// <summary>
+        /// Enter password x1
+        /// </summary>
         public static string[] RegLabelEnterPassword1 = new string[2]
         {
             "Enter password",
             "Введите пароль"
         };
 
-        // Enter password x2
-
+        /// <summary>
+        /// Enter password x2
+        /// </summary>
         public static string[] RegLabelEnterPassword2 = new string[2]
         {
             "Repeat password",
             "Повторите пароль"
         };
 
-        // Enter Key
-
+        /// <summary>
+        /// Enter Key
+        /// </summary>
         public static string[] RegLabelKey = new string[2]
         {
             "Check your mail and enter the key from the letter",
@@ -332,7 +369,7 @@ namespace TaskManager.Models
 
 
 
-        // Button content
+        // Button contents
 
         public static string[] RegBtnOk = new string[2]
         {
@@ -356,19 +393,18 @@ namespace TaskManager.Models
 
         #region AuthWindow Labels
 
-        // Enter username
-
+        /// <summary>
+        /// Enter username
+        /// </summary>
         public static string[] AuthLabelEnterUsername = new string[2]
         {
             "Enter your nickname",
             "Введите имя пользователя"
         };
 
-        // Enter password
-        // same as RegLabelEnterPassword1
-
-        // Button content register
-
+        /// <summary>
+        /// Button content register
+        /// </summary>
         public static string[] AuthLabelRegister = new string[2]
         {
             "Register",
@@ -377,6 +413,9 @@ namespace TaskManager.Models
 
         #endregion
 
+        /// <summary>
+        /// Number of Languages
+        /// </summary>
         public static int iLanguage;
     }
 }

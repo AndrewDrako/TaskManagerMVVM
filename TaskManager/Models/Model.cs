@@ -12,6 +12,13 @@ namespace TaskManager.Models
 {
     public class Model
     { 
+        /// <summary>
+        /// Method finds users from dbcontext
+        /// </summary>
+        /// <param name="myDbContext"></param>
+        /// <param name="password"></param>
+        /// <param name="userName"></param>
+        /// <returns></returns>
         public static User FindUser(MyDbContext myDbContext, string password, string userName)
         {
             var users = myDbContext.Users.ToList();
@@ -25,6 +32,13 @@ namespace TaskManager.Models
             }
             return null;
         }
+        
+        /// <summary>
+        /// Method finds users from dbcontext only with username
+        /// </summary>
+        /// <param name="myDbContext"></param>
+        /// <param name="userName"></param>
+        /// <returns></returns>
         public static User FindUser(MyDbContext myDbContext, string userName)
         {
             var users = myDbContext.Users.ToList();
@@ -39,6 +53,11 @@ namespace TaskManager.Models
             return null;
         }
 
+        /// <summary>
+        /// Remove project from data base
+        /// </summary>
+        /// <param name="myDbContext"></param>
+        /// <param name="project"></param>
         public static void RemoveProjectFromDB(MyDbContext myDbContext, Project project)
         {
             try
@@ -60,6 +79,12 @@ namespace TaskManager.Models
             }
         }
 
+        /// <summary>
+        /// Change project name and creator
+        /// </summary>
+        /// <param name="myDbContext"></param>
+        /// <param name="Projects"></param>
+        /// <param name="userId"></param>
         public static void EditProjectName(MyDbContext myDbContext, ObservableCollection<Project> Projects, int userId)
         {
             bool isContains = false; // Чекер для проверки измененных проектов
@@ -101,6 +126,12 @@ namespace TaskManager.Models
             }
         }
 
+        /// <summary>
+        /// Add project
+        /// </summary>
+        /// <param name="myDbContext"></param>
+        /// <param name="project"></param>
+        /// <param name="projectTable"></param>
         public static void AddProjectToDB(MyDbContext myDbContext, Project project, ProjectTable projectTable)
         {
             try
@@ -131,6 +162,13 @@ namespace TaskManager.Models
             }
         }
 
+        /// <summary>
+        /// Remove note from data base
+        /// </summary>
+        /// <param name="myDbContext"></param>
+        /// <param name="note"></param>
+        /// <param name="projectId"></param>
+        /// <param name="s"></param>
         public static void RemoveNoteFromDB(MyDbContext myDbContext, Note note, int projectId, string s)
         {
             if (s == "TODO")
@@ -206,7 +244,13 @@ namespace TaskManager.Models
                 }
             }
         }
-
+        
+        /// <summary>
+        /// Transfer note to the In progress
+        /// </summary>
+        /// <param name="myDbContext"></param>
+        /// <param name="note"></param>
+        /// <param name="inProgressTable"></param>
         public static void TransferTo(MyDbContext myDbContext, Note note , InProgressTable inProgressTable)
         {
             try
@@ -236,6 +280,12 @@ namespace TaskManager.Models
             }
         }
 
+        /// <summary>
+        /// Transfer note to the Done
+        /// </summary>
+        /// <param name="myDbContext"></param>
+        /// <param name="note"></param>
+        /// <param name="doneTable"></param>
         public static void TransferTo(MyDbContext myDbContext, Note note, DoneTable doneTable)
         {
             try
@@ -265,6 +315,12 @@ namespace TaskManager.Models
             }
         }
 
+        /// <summary>
+        /// Change note 
+        /// </summary>
+        /// <param name="myDbContext"></param>
+        /// <param name="NotesToDo"></param>
+        /// <param name="projectId"></param>
         public static void EditNote(MyDbContext myDbContext, ObservableCollection<Note> NotesToDo, int projectId)
         {
             try
@@ -301,6 +357,12 @@ namespace TaskManager.Models
             }
         }
 
+        /// <summary>
+        /// Add note to data base
+        /// </summary>
+        /// <param name="myDbContext"></param>
+        /// <param name="NotesToDo"></param>
+        /// <param name="toDoTable"></param>
         public static void AddNotesToDB(MyDbContext myDbContext, ObservableCollection<Note> NotesToDo, ToDoTable toDoTable)
         {
             try

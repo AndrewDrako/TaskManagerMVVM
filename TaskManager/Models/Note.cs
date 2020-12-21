@@ -10,22 +10,13 @@ namespace TaskManager.Models
 {
     public class Note : ViewModel
     {
-        #region Первичный ключ
-
-        public int Id { get; set; }
-
-        #endregion
-
-
-        #region Контент заметки
+        #region Note content
 
         private string _Content = "";
         public string Content
         {
             get
-            {
-                
-                
+            { 
                 return _Content ;
             }
             set => Set(ref _Content, value);
@@ -33,7 +24,7 @@ namespace TaskManager.Models
 
         #endregion
 
-        #region Цель записи. Заголовок
+        #region Note goal
 
         private string _Target;
         public string Target

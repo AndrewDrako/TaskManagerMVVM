@@ -9,7 +9,13 @@ namespace TaskManager.Models
 {
     public class AuthWindowModel
     {
-        public static int Key; 
+        public static int Key;
+        
+        /// <summary>
+        /// Method prints to txt file a special key
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="filename"></param>
         public static void PrintKey(string s, string filename)
         {
             //string filename = "authreg_key.txt";
@@ -32,6 +38,10 @@ namespace TaskManager.Models
             }
         }
 
+        /// <summary>
+        /// Read key for registratiob or authorization
+        /// </summary>
+        /// <returns></returns>
         public static int ReadKey()
         {
             string filename = "authreg_key.txt";
@@ -69,6 +79,10 @@ namespace TaskManager.Models
 
         public static string LastUsername;
 
+        /// <summary>
+        /// Read last user name from txt
+        /// </summary>
+        /// <returns></returns>
         public static string ReadLastUserName()
         {
             string filename = "last_user_name.txt";
