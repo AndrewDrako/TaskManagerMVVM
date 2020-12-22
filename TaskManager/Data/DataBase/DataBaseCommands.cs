@@ -15,6 +15,10 @@ namespace TaskManager.Data.DataBase
 {
     public class DataBaseCommands
     {
+        /// <summary>
+        /// Load tables from sql server
+        /// </summary>
+        /// <param name="db"></param>
         public static void LoadDB(MyDbContext db)
         {
             try

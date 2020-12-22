@@ -209,18 +209,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Design\Images\BackgroundDark.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Design\Images\Background.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Design\Images\BackgroundBlur.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Design\Images\BackgroundWide.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Design\Icons\MainWindowIcon.png" />
   </ItemGroup>
   <ItemGroup>

@@ -9,27 +9,27 @@ namespace TaskManager.Data.DataBase.Tables
     public class ToDoTable
     {
         /// <summary>
-        /// Первичный ключ 
+        /// Primary key
         /// </summary>
         public int Id { get; set; }
 
         /// <summary>
-        /// Код проекта
+        /// Project reference
         /// </summary>
         public int ProjectId { get; set; }
 
         /// <summary>
-        /// Содержимое заметки
+        /// Note content
         /// </summary>
         public string Content { get; set; }
 
         /// <summary>
-        /// Для чего нужна заметка
+        /// Note main content
         /// </summary>
         public string LContent { get; set; }
 
         /// <summary>
-        /// связь с ProjectTable
+        /// Connection with ProjectTable
         /// </summary>
         public virtual ProjectTable ProjectTable { get; set; }
     }
