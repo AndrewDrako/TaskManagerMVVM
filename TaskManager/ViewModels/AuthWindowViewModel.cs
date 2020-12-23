@@ -195,7 +195,7 @@ namespace TaskManager.ViewModels
 
             #endregion
 
-            #region Связь с БД
+            #region Connection with data base
 
             dbContext = new MyDbContext();
             
