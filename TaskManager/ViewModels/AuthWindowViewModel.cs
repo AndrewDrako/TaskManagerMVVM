@@ -198,18 +198,19 @@ namespace TaskManager.ViewModels
             #region Connection with data base
 
             dbContext = new MyDbContext();
-            
-            string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;  // Get the connection string
-            SqlConnection sqlConnection = new SqlConnection(connectionString);
-            try
-            {
-                sqlConnection.Open();
-            }
-            catch
-            {
-                MessageBox.Show("Ошибка соединения с БД\nПриложение будет запущено, но не сможет сохранять файлы\n");
-                MainWindowModel.IsConnectedToLocalServer = false;
-            }
+
+            //string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;  // Get the connection string
+            //SqlConnection sqlConnection = new SqlConnection(connectionString);
+            //try
+            //{ 
+                //sqlConnection.Open();
+            //}s
+            //catch
+            //{
+                //MessageBox.Show("Ошибка соединения с БД\nПриложение будет запущено, но не сможет сохранять файлы\n");
+                //MainWindowModel.IsConnectedToLocalServer = false;
+                MainWindowModel.IsConnectedToLocalServer = true;
+            //}
             authUser = new User();
             if (MainWindowModel.IsConnectedToLocalServer == true)
             {
