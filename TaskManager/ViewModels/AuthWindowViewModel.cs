@@ -199,18 +199,19 @@ namespace TaskManager.ViewModels
 
             dbContext = new MyDbContext();
 
-            //string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;  // Get the connection string
-            //SqlConnection sqlConnection = new SqlConnection(connectionString);
-            //try
-            //{ 
-                //sqlConnection.Open();
-            //}s
-            //catch
-            //{
-                //MessageBox.Show("Ошибка соединения с БД\nПриложение будет запущено, но не сможет сохранять файлы\n");
-                //MainWindowModel.IsConnectedToLocalServer = false;
-                MainWindowModel.IsConnectedToLocalServer = true;
-            //}
+            string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;  // Get the connection string
+            SqlConnection sqlConnection = new SqlConnection(connectionString);
+            try
+            {
+                sqlConnection.Open();
+            }
+            catch
+            {
+                //MessageBox.Show(e.Message);
+                MessageBox.Show("Ошибка соединения с БД\nПриложение будет запущено, но не сможет сохранять файлы\n");
+                MainWindowModel.IsConnectedToLocalServer = false;
+                ////MainWindowModel.IsConnectedToLocalServer = true;
+            }
             authUser = new User();
             if (MainWindowModel.IsConnectedToLocalServer == true)
             {
