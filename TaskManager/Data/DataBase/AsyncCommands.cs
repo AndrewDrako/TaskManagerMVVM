@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,20 +23,39 @@ namespace TaskManager.Data.DataBase
         /// <returns></returns>
         public static async Task ConnectToDB(MyDbContext db)
         {
+            if (MainWindowModel.IsConnectedToLocalServer != false)
+            {
+                try
+                {
+
+                    await Task.Run(() => db.Users.Load());
+                    await Task.Run(() => db.Projects.Load());
+                    await Task.Run(() => db.ToDos.Load());
+                    await Task.Run(() => db.InProgresses.Load());
+                    await Task.Run(() => db.Dones.Load());
+                    AuthWindowViewModel._CanClickOk = true;
+                }
+                catch
+                {
+                    MessageBox.Show("Не удается найти или загрузить данные с сервера\n");
+                    MainWindowModel.IsConnectedToLocalServer = false;
+                    Application.Current.Shutdown();
+                }
+            }
+        }
+
+        public static async Task ConnectWithDB()
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;  // Get the connection string
+            SqlConnection connection = new SqlConnection(connectionString);
             try
             {
-                await Task.Run(() => db.Users.Load());
-                await Task.Run(() => db.Projects.Load());
-                await Task.Run(() => db.ToDos.Load());
-                await Task.Run(() => db.InProgresses.Load());
-                await Task.Run(() => db.Dones.Load());
-                AuthWindowViewModel._CanClickOk = true;
+                await connection.OpenAsync();
             }
             catch
             {
-                MessageBox.Show("Не удается найти загрузить данные с сервера\n");
+                MessageBox.Show("Ошибка соединения с БД\nПриложение будет запущено, но не сможет сохранять файлы\n");
                 MainWindowModel.IsConnectedToLocalServer = false;
-                Application.Current.Shutdown();
             }
         }
     }

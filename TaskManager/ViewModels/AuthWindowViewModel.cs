@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -196,22 +197,18 @@ namespace TaskManager.ViewModels
             #endregion
 
             #region Connection with data base
-
-            dbContext = new MyDbContext();
-
-            string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;  // Get the connection string
-            SqlConnection sqlConnection = new SqlConnection(connectionString);
+            string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            SqlConnection connection = new SqlConnection(connectionString);
             try
             {
-                sqlConnection.Open();
+                connection.Open();
             }
             catch
             {
-                //MessageBox.Show(e.Message);
-                MessageBox.Show("Ошибка соединения с БД\nПриложение будет запущено, но не сможет сохранять файлы\n");
+                MessageBox.Show("Невозможно найти сервер!\nПриложение продолжит работу но не сможет хранить данные.");
                 MainWindowModel.IsConnectedToLocalServer = false;
-                ////MainWindowModel.IsConnectedToLocalServer = true;
             }
+            dbContext = new MyDbContext();
             authUser = new User();
             if (MainWindowModel.IsConnectedToLocalServer == true)
             {
@@ -255,7 +252,7 @@ namespace TaskManager.ViewModels
             }
             else
             {
-                authUser.Email = "guest";
+                authUser.UserName = "Guest";
                 Window mainWindow = new MainWindow();
                 mainWindow.Show();
                 Application.Current.Windows[0].Close();
