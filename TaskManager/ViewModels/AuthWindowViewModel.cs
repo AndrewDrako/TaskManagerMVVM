@@ -147,6 +147,7 @@ namespace TaskManager.ViewModels
                 authUser = new User();
                 authUser.Id = user.Id;
                 authUser.Email = user.Email;
+                authUser.UserName = user.UserName;
                 Window mainWindow = new MainWindow();
                 mainWindow.Show();
                 AuthWindowModel.PrintKey("Can", "authreg_key.txt");
