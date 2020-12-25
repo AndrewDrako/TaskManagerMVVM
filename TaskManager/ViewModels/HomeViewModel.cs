@@ -225,6 +225,7 @@ namespace TaskManager.ViewModels
                         Project project = obj as Project;
                         if (project.PersonName != null && project.ProjectName != null)
                         {
+                            this.ChangeControlVisibility = Visibility.Collapsed;
                             MainWindowModel.IsTasksNotEmpty = true;  // Разблокировка кнопки tasks
                             TasksViewModel._PName = project.ProjectName;
                             TasksViewModel._TName = project.PersonName;
