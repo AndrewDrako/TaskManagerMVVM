@@ -258,7 +258,7 @@ namespace TaskManager.ViewModels
 
         #region Save
 
-        public ICommand SaveNote { get; }
+        public static ICommand SaveNote { get; set; }
         private bool CanSaveNoteExecute(object p) => MainWindowModel.IsConnectedToLocalServer;
         private void OnSaveNoteExecuted(object p)
         {

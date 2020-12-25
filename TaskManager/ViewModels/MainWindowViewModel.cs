@@ -158,6 +158,10 @@ namespace TaskManager.ViewModels
         private void OnFirstButtonClickExecuted(object p)
         {
             SlowOpacity(_Home);
+            if (_Tasks != null)
+            {
+                TasksViewModel.SaveNote.Execute(p);
+            }
         }
 
         #endregion
@@ -184,7 +188,11 @@ namespace TaskManager.ViewModels
 
         private void OnThirdButtonClickExecuted(object p)
         {
-            CurrentPage = _Settings;
+            SlowOpacity(_Settings);
+            if (_Tasks != null)
+            {
+                TasksViewModel.SaveNote.Execute(p);
+            }
         }
 
         #endregion
@@ -197,7 +205,11 @@ namespace TaskManager.ViewModels
 
         private void OnFourthButtonClickExecuted(object p)
         {
-            CurrentPage = _Account;
+            SlowOpacity(_Account);
+            if (_Tasks != null)
+            {
+                TasksViewModel.SaveNote.Execute(p);
+            }
         }
 
         #endregion
@@ -210,7 +222,7 @@ namespace TaskManager.ViewModels
 
         private void OnFifthButtonClickExecuted(object p)
         {
-            CurrentPage = _Help;
+            SlowOpacity(_Help);
         }
 
         #endregion
@@ -221,7 +233,10 @@ namespace TaskManager.ViewModels
         private bool CanCloseApplicationExecute(object p) => true;
         private void OnCloseApplicationExecuted(object p)
         {
-            
+            if (_Tasks != null)
+            {
+                TasksViewModel.SaveNote.Execute(p);
+            }
         }
 
         #endregion
