@@ -134,6 +134,17 @@ namespace TaskManager.ViewModels
             set => Set(ref _BtnContent3, value);
         }
 
+        private string _BtnContent4;
+
+        /// <summary>
+        /// Log In button content
+        /// </summary>
+        public string BtnContent4
+        {
+            get => TranslateLanguage.RegBtnBack[TranslateLanguage.iLanguage];
+            set => Set(ref _BtnContent4, value);
+        }
+
         #endregion
 
         #endregion
@@ -270,6 +281,18 @@ namespace TaskManager.ViewModels
 
         #endregion
 
+        #region Back click
+
+        public ICommand BtnClickBack { get; }
+        private bool CanBtnClickBackExecute(object p) => true;
+        private void OnBtnClickBackExecuted(object p)
+        {
+            this.ChangeControlVisibility1 = Visibility.Visible;
+            this.ChangeControlVisibility2 = Visibility.Collapsed;
+        }
+
+        #endregion
+
         #endregion
 
         #region Visibility 
@@ -308,12 +331,15 @@ namespace TaskManager.ViewModels
 
         public RegistrationWindowViewModel()
         {
+            UserEmail = null;
+            UserName = null;
             #region Commands
             
             BtnClick = new LambdaCommand(OnBtnClickExecuted, CanBtnClickExecute);
             BtnClickAccept = new LambdaCommand(OnBtnClickAcceptExecuted, CanBtnClickAcceptExecute);
             BtnClickLogIn = new LambdaCommand(OnBtnClickLogInExecuted, CanBtnClickLogInExecute);
-            
+            BtnClickBack = new LambdaCommand(OnBtnClickBackExecuted, CanBtnClickBackExecute);
+
             #endregion
         }
 

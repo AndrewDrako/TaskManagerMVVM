@@ -168,8 +168,8 @@ namespace TaskManager.ViewModels
         private bool CanBtnClickRegExecute(object p) => true;
         private void OnBtnClickRegExecuted(object p)
         {
-            Window regWondow = new RegistrationWindow();
-            regWondow.Show();
+            Window regWindow = new RegistrationWindow();
+            regWindow.Show();
             Application.Current.Windows[0].Close();
         }
 

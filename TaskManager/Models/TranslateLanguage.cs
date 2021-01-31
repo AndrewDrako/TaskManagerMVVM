@@ -389,6 +389,12 @@ namespace TaskManager.Models
             "Войти"
         };
 
+        public static string[] RegBtnBack = new string[2]
+        {
+            "Back",
+            "Назад"
+        };
+
         #endregion
 
         #region AuthWindow Labels
