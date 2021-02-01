@@ -45,11 +45,11 @@
                        FontWeight="Bold"
                        Foreground="{DynamicResource fontColor}"
                        FontFamily="Lucida Grande">
-            <Run Text="{Binding Label1}"/>
+            <Run Text="{Binding LabelTitleFirst}"/>
             <Run Text=" "/>
             <Run Text="{Binding PName}"/>
             <Run Text=", "/>
-            <Run Text="{Binding Label2}"/>
+            <Run Text="{Binding LabelSecTitle}"/>
             <Run Text=" "/>
             <Run Text="{Binding TName}"/>
             </TextBlock>
@@ -187,7 +187,7 @@
 
             <Button Grid.Column="3"
                     Grid.Row="1"
-                    ToolTip="{Binding delNoteTT}"
+                    ToolTip="{Binding DelNoteTT}"
                     Foreground="{DynamicResource fontColor}"
                     FontFamily="Lucida Grande"
                     Background="{x:Null}"
@@ -215,7 +215,7 @@
                     Grid.Row="1"
                     Command="{Binding RemoveCommandInProgress}"
                     CommandParameter="{Binding ReadSelectedNote}"
-                    ToolTip="{Binding delNoteTT}"
+                    ToolTip="{Binding DelNoteTT}"
                     Foreground="{DynamicResource fontColor}"
                     FontFamily="Lucida Grande"
                     Background="{x:Null}"
@@ -255,7 +255,7 @@
                        Grid.Column="0"
                        Margin="5 0 0 0"
                        VerticalAlignment="Bottom"
-                       Text="{Binding Label3}"
+                       Text="{Binding LabelToDo}"
                        Foreground="{DynamicResource fontColor}"
                        FontFamily="Lucida Grande"
                        FontSize="20"
@@ -266,7 +266,7 @@
                        Grid.Column="5"
                        Margin="5 0 0 0"
                        VerticalAlignment="Bottom"
-                       Text="{Binding Label4}"
+                       Text="{Binding LabelInPr}"
                        Foreground="{DynamicResource fontColor}"
                        FontFamily="Lucida Grande"
                        FontSize="20"
@@ -276,7 +276,7 @@
                        Grid.Column="8"
                        Margin="5 0 0 0"
                        VerticalAlignment="Bottom"
-                       Text="{Binding Label5}"
+                       Text="{Binding LabelDone}"
                        Foreground="{DynamicResource fontColor}"
                        FontFamily="Lucida Grande"
                        FontSize="20"
@@ -287,7 +287,7 @@
                     Grid.Row="3"
                     Grid.ColumnSpan="5"
                     Background="{DynamicResource pageMainColor}">
-            <TextBlock Text="{Binding Label6}"
+            <TextBlock Text="{Binding LabelTitleThree}"
                        Foreground="{DynamicResource fontColor}"
                        FontFamily="Lucida Grande"
                        HorizontalAlignment="Center"
@@ -311,7 +311,7 @@
                     Grid.Column="5"
                     Grid.ColumnSpan="5"
                     Background="{DynamicResource pageMainColor}">
-            <TextBlock Text="{Binding Label7}"
+            <TextBlock Text="{Binding LabelTitleFour}"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
                        FontSize="15"

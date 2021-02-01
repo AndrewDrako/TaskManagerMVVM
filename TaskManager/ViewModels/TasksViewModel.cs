@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using TaskManager.Data.DataBase;
 using TaskManager.Data.DataBase.Tables;
 using TaskManager.Infrastructure.Commands;
 using TaskManager.Infrastructure.Commands.Base;
@@ -17,7 +12,6 @@ namespace TaskManager.ViewModels
 {
     internal class TasksViewModel : ViewModel
     {
-        #region Data base
 
         /// <summary>
         /// To Do Column
@@ -34,225 +28,219 @@ namespace TaskManager.ViewModels
         /// </summary>
         public static DoneTable doneTable;
 
-        #endregion
-
-        #region Color Notes
-
         public string[] Colors;
         public string[] ColorsRepeat;
 
         public int Counter = 0;
 
-        #endregion
-
         #region Labels
 
-        #region Проект под именем.../ Project with name...
-        private string _Label1;
-        public string Label1
+        private string labelTitleFirst;
+
+        /// <summary>
+        /// Проект под именем.../ Project with name...
+        /// </summary>
+        public string LabelTitleFirst
         {
-            get => TranslateLanguage.LabelTasks1[TranslateLanguage.iLanguage];
-            set => Set(ref _Label1, value);
+            get => TranslateLanguage.LabelTasksFirstTitle[TranslateLanguage.iLanguage];
+            set => Set(ref labelTitleFirst, value);
         }
-        #endregion
+        
+        private string labelSecTitle;
 
-        #region Подготвила команда.../Prepared by the team
-        private string _Label2;
-        public string Label2
+        /// <summary>
+        /// Подготвила команда.../Prepared by the team
+        /// </summary>
+        public string LabelSecTitle
         {
-            get => TranslateLanguage.LabelTasks2[TranslateLanguage.iLanguage];
-            set => Set(ref _Label2, value);
+            get => TranslateLanguage.LabelTasksSecTitle[TranslateLanguage.iLanguage];
+            set => Set(ref labelSecTitle, value);
         }
-        #endregion
 
-        #region ToDo
-        private string _Label3 = TranslateLanguage.LabelTasksToDo[TranslateLanguage.iLanguage];
-        public string Label3
+        private string labelToDo = TranslateLanguage.LabelTasksToDo[TranslateLanguage.iLanguage];
+
+        /// <summary>
+        /// ToDo
+        /// </summary>
+        public string LabelToDo
         {
-            get => _Label3;
-            set => Set(ref _Label3, value);
+            get => labelToDo;
+            set => Set(ref labelToDo, value);
         }
-        #endregion
 
-        #region InProgress
-        private string _Label4 = TranslateLanguage.LabelTasksInProgress[TranslateLanguage.iLanguage];
-        public string Label4
+        private string labelInPr = TranslateLanguage.LabelTasksInProgress[TranslateLanguage.iLanguage];
+
+        /// <summary>
+        /// InProgress
+        /// </summary>
+        public string LabelInPr
         {
-            get => _Label4;
-            set => Set(ref _Label4, value);
+            get => labelInPr;
+            set => Set(ref labelInPr, value);
         }
-        #endregion
 
-        #region Done
-        private string _Label5 = TranslateLanguage.LabelTasksDone[TranslateLanguage.iLanguage];
-        public string Label5
+        private string labelDone = TranslateLanguage.LabelTasksDone[TranslateLanguage.iLanguage];
+
+        /// <summary>
+        /// Done
+        /// </summary>
+        public string LabelDone
         {
-            get => _Label5;
-            set => Set(ref _Label5, value);
+            get => labelDone;
+            set => Set(ref labelDone, value);
         }
-        #endregion
 
-        #region Write a note
-        private string _Label6 = TranslateLanguage.LabelTasks3[TranslateLanguage.iLanguage];
-        public string Label6
+        private string labelTitleThree = TranslateLanguage.LabelTasksTitleThree[TranslateLanguage.iLanguage];
+
+        /// <summary>
+        /// Write a note
+        /// </summary>
+        public string LabelTitleThree
         {
-            get => _Label6;
-            set => Set(ref _Label6, value);
+            get => labelTitleThree;
+            set => Set(ref labelTitleThree, value);
         }
-        #endregion
 
-        #region Для чего это нужно сделать/For what
-        private string _Label7 = TranslateLanguage.LabelTasks4[TranslateLanguage.iLanguage];
-        public string Label7
+        private string labelTitleFour = TranslateLanguage.LabelTasksTitleFour[TranslateLanguage.iLanguage];
+
+        /// <summary>
+        /// Для чего это нужно сделать/For what
+        /// </summary>
+        public string LabelTitleFour
         {
-            get => _Label7;
-            set => Set(ref _Label7, value);
+            get => labelTitleFour;
+            set => Set(ref labelTitleFour, value);
         }
+
         #endregion
-        #endregion
 
-        #region ToolTips
+        #region ToolTips 
 
-        #region Save note 
+        private string saveNoteTT;
 
-        private string _SaveNoteTT;
+        /// <summary>
+        /// Save note
+        /// </summary>
         public string SaveNoteTT
         {
             get => TranslateLanguage.SaveNoteTT[TranslateLanguage.iLanguage];
-            set => Set(ref _SaveNoteTT, value);
+            set => Set(ref saveNoteTT, value);
         }
 
-        #endregion
+        private string addNoteTT;
 
-        #region Add note 
-
-        private string _AddNoteTT;
+        /// <summary>
+        /// Add note
+        /// </summary>
         public string AddNoteTT
         {
             get => TranslateLanguage.AddNoteTT[TranslateLanguage.iLanguage];
-            set => Set(ref _AddNoteTT, value);
+            set => Set(ref addNoteTT, value);
         }
 
-        #endregion
+        private string delNoteTT;
 
-        #region Remove note 
-
-        private string _DelNoteTT;
-        public string delNoteTT
+        /// <summary>
+        /// Remove note 
+        /// </summary>
+        public string DelNoteTT
         {
             get => TranslateLanguage.DelNoteTT[TranslateLanguage.iLanguage];
-            set => Set(ref _DelNoteTT, value);
-        }
+            set => Set(ref delNoteTT, value);
+        } 
 
-        #endregion
+        private string transferNoteTT;
 
-        #region Transfer note 
-
-        private string _TransferNoteTT;
+        /// <summary>
+        /// Transfer note
+        /// </summary>
         public string TransferNoteTT
         {
             get => TranslateLanguage.TransferNoteTT[TranslateLanguage.iLanguage];
-            set => Set(ref _TransferNoteTT, value);
+            set => Set(ref transferNoteTT, value);
         }
 
-        #endregion
+        private string clearNoteTT;
 
-        #region Clear note 
-
-        private string _ClearNoteTT;
+        /// <summary>
+        /// Clear note 
+        /// </summary>
         public string ClearNoteTT
         {
             get => TranslateLanguage.ClearNoteTT[TranslateLanguage.iLanguage];
-            set => Set(ref _ClearNoteTT, value);
+            set => Set(ref clearNoteTT, value);
         }
 
         #endregion
 
-        #endregion
-
-        #region Note Selected
-
-        private Note _SelectedNote;
+        private Note selectedNote;
 
         public Note SelectedNote
         {
             get
             {
-                return _SelectedNote;
+                return selectedNote;
             }
             set
             {
                 this.ChangeControlVisibility = Visibility.Visible;
-                Set(ref _SelectedNote, value);
+                Set(ref selectedNote, value);
             }
         }
 
-        private Note _ReadSelectedNote;
+        private Note readSelectedNote;
 
         public Note ReadSelectedNote
         {
-            get => _ReadSelectedNote;
+            get => readSelectedNote;
             set
             {
-                Set(ref _ReadSelectedNote, value);
+                Set(ref readSelectedNote, value);
             }
         }
-        #endregion
-
-        #region Note collection
 
         public ObservableCollection<Note> NotesToDo { get; set; }
 
         public ObservableCollection<Note> NotesInProgress { get; set; }
         public ObservableCollection<Note> NotesDone { get; set; }
 
-        #endregion
-
-        #region Project and team name on the kanban
-
-        public static string _PName;
+        public static string pName;
 
         public string PName
         {
-            get => _PName;
-            set => Set(ref _PName, value);
+            get => pName;
+            set => Set(ref pName, value);
         }
 
-        public static string _TName;
+        public static string tName;
 
         public string TName
         {
-            get => _TName;
-            set => Set(ref _TName, value);
+            get => tName;
+            set => Set(ref tName, value);
         }
-
-
-
-        #endregion
-
-        #region Visibiliity save button
 
         private Visibility _Visibility = Visibility.Collapsed;
 
+        /// <summary>
+        /// Visibiliity save button
+        /// </summary>
         public Visibility ChangeControlVisibility
         {
             get { return _Visibility; }
             set => Set(ref _Visibility, value);
         }
 
-        #endregion
-
-        #region Visibility input
-
         private Visibility _VisibilityWriteNote = Visibility.Collapsed;
 
+        /// <summary>
+        /// Visibility input
+        /// </summary>
         public Visibility ChangeControlVisibilityWriteNote
         {
             get { return _VisibilityWriteNote; }
             set => Set(ref _VisibilityWriteNote, value);
         }
-
-        #endregion
 
         #region Commands
 
@@ -454,12 +442,8 @@ namespace TaskManager.ViewModels
         /// </summary>
         public static int CurrentProjectId { get; set; }
 
-        #region Class designer
-
         public TasksViewModel()
-        {
-            #region Data base designer
-            
+        {   
             toDoTable = new ToDoTable();
             inProgressTable = new InProgressTable();
             doneTable = new DoneTable();
@@ -472,7 +456,7 @@ namespace TaskManager.ViewModels
                     {
                         if (p.UserId == AuthWindowViewModel.authUser.Id)
                         {
-                            if (_PName == p.ProjectName && _TName == p.MasterName)
+                            if (pName == p.ProjectName && tName == p.MasterName)
                             {
                                 toDoTable.ProjectId = p.Id;
                                 inProgressTable.ProjectId = p.Id;
@@ -488,15 +472,7 @@ namespace TaskManager.ViewModels
                 }
             }
 
-            #endregion
-
-            #region Commands
-
             SaveNote = new LambdaCommand(OnSaveNoteExecuted, CanSaveNoteExecute);
-
-            #endregion
-
-            #region Collections
 
             NotesToDo = new ObservableCollection<Note>
             {
@@ -512,7 +488,7 @@ namespace TaskManager.ViewModels
             };
 
 
-            // Цвета заметок
+            //todo: Color Notes
 
             Colors = new string[]
             {
@@ -526,14 +502,10 @@ namespace TaskManager.ViewModels
             };
             ColorsRepeat = new string[10];
 
-            #endregion
-
             if (MainWindowModel.IsConnectedToLocalServer == true)  // checking the connection to the server
             {
 
-                #region Filling collections
-
-                #region To DO
+                // Filling collections
 
                 try
                 {
@@ -556,10 +528,6 @@ namespace TaskManager.ViewModels
                     MessageBox.Show("Ошибка произошла при заполнении коллеции TODO");
                 }
 
-                #endregion
-
-                #region In Progress
-
                 try
                 {
                     var inprogresses = MainWindowViewModel.db.InProgresses.ToList();
@@ -580,10 +548,6 @@ namespace TaskManager.ViewModels
                 {
                     MessageBox.Show("Ошибка произошла при заполнении коллеции INPROGRESS");
                 }
-
-                #endregion
-
-                #region Done
 
                 try
                 {
@@ -606,13 +570,7 @@ namespace TaskManager.ViewModels
                     MessageBox.Show("Ошибка произошла при заполнении коллеции DONE");
                 }
 
-                #endregion
-
-                #endregion
-
             }
         }
-
-        #endregion
     }
 }

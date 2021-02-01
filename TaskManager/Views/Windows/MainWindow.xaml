@@ -33,7 +33,7 @@
         
         <StackPanel Grid.Row="1">
             <Button Command="{Binding Path=FirstButtonClick}"
-                    ToolTip="{Binding Path=ButtonContent1}"
+                    ToolTip="{Binding Path=ButtonContentHome}"
                     Background="{x:Null}"
                     BorderBrush="{x:Null}"
                     Height="50" 
@@ -41,7 +41,7 @@
                 <materialDesign:PackIcon Kind="Home" Foreground="{DynamicResource btnColor}"/>
             </Button>
             
-            <Button ToolTip="{Binding Path=ButtonContent2}" 
+            <Button ToolTip="{Binding Path=ButtonContentTasks}" 
                     Command="{Binding Path=SecondButtonClick}"
                     Background="{x:Null}"
                     BorderBrush="{x:Null}"
@@ -50,7 +50,7 @@
                 <materialDesign:PackIcon Kind="GridLarge" Foreground="{DynamicResource btnColor}"/>
             </Button>
 
-            <Button ToolTip="{Binding Path=ButtonContent3}" 
+            <Button ToolTip="{Binding Path=ButtonContentSettings}" 
                     Command="{Binding Path=ThirdButtonClick}"
                     Background="{x:Null}"
                     BorderBrush="{x:Null}"
@@ -59,7 +59,7 @@
                 <materialDesign:PackIcon Kind="Settings" Foreground="{DynamicResource btnColor}"/>
             </Button>
 
-            <Button ToolTip="{Binding Path=ButtonContent4}" 
+            <Button ToolTip="{Binding Path=ButtonContentAccount}" 
                     Command="{Binding Path=FourthButtonClick}"
                     Background="{x:Null}"
                     BorderBrush="{x:Null}"
@@ -67,7 +67,7 @@
                     FontSize="10">
                 <materialDesign:PackIcon Kind="Account" Foreground="{DynamicResource btnColor}"/>
             </Button>
-            <Button ToolTip="{Binding Path=ButtonContent5}" 
+            <Button ToolTip="{Binding Path=ButtonContentHelp}" 
                     Command="{Binding Path=FifthButtonClick}"
                     Background="{x:Null}"
                     BorderBrush="{x:Null}"

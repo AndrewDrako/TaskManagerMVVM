@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
 using TaskManager.Infrastructure.Commands;
@@ -16,79 +11,67 @@ namespace TaskManager.ViewModels
     {
         #region Labels
 
-        private string _LabelLanguage = TranslateLanguage.LabelSettings1[TranslateLanguage.iLanguage];
+        private string labelLanguage = TranslateLanguage.LabelSettings1[TranslateLanguage.iLanguage];
 
         /// <summary>
         /// Label Change language
         /// </summary>
         public string LabelLanguage
         {
-            get => _LabelLanguage;
-            set => Set(ref _LabelLanguage, value);
+            get => labelLanguage;
+            set => Set(ref labelLanguage, value);
         }
 
-        private string _LabelAddColors = TranslateLanguage.LabelSettings2[TranslateLanguage.iLanguage];
+        private string labelAddColors = TranslateLanguage.LabelSettings2[TranslateLanguage.iLanguage];
 
         /// <summary>
         /// Label Do you want to add colors
         /// </summary>
         public string LabelAddColors
         {
-            get => _LabelAddColors;
-            set => Set(ref _LabelAddColors, value);
+            get => labelAddColors;
+            set => Set(ref labelAddColors, value);
         }
 
-        private string _LabelButtonApply = TranslateLanguage.LabelSettingsButton[TranslateLanguage.iLanguage];
+        private string labelButtonApply = TranslateLanguage.LabelSettingsButton[TranslateLanguage.iLanguage];
 
         /// <summary>
         /// Label content button accept
         /// </summary>
         public string LabelButtonApply
         {
-            get => _LabelButtonApply;
-            set => Set(ref _LabelButtonApply, value);
+            get => labelButtonApply;
+            set => Set(ref labelButtonApply, value);
         }
 
         #endregion
 
-        #region Collections
-
         public static ObservableCollection<AppLanguage> Languages { get; set; }
         public static ObservableCollection<AppTheme> Themes { get; set; }
 
-        #endregion
-
-        #region Languages
-
-        private AppLanguage _SelectedLanguage;
+        private AppLanguage selectedLanguage;
 
         public AppLanguage SelectedLanguage
         {
-            get { return _SelectedLanguage; }
+            get { return selectedLanguage; }
             set
             {
-                _SelectedLanguage = value;
+                selectedLanguage = value;
                 IsEdited = true;
                 OnPropertyChanged("SelectedLanguage");
             }
         }
 
-        #endregion
-
-        #region Themes
-
-        private AppTheme _SelectedTheme;
+        private AppTheme selectedTheme;
         public AppTheme SelectedTheme
         {
-            get => _SelectedTheme;
+            get => selectedTheme;
             set
             {
                 IsEdited = true;
-                Set(ref _SelectedTheme, value);
+                Set(ref selectedTheme, value);
             }
         }
-
-        #endregion
 
         #region Commands
 
@@ -113,23 +96,14 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-        #region Class designer
-
         public SettingsViewModel()
         {
-
-            #region Install Language
-
             Languages = new ObservableCollection<AppLanguage>
             {
                 new AppLanguage {Language = "English"},
                 new AppLanguage {Language = "Russian"}
             };
-            _SelectedLanguage = Languages[TranslateLanguage.iLanguage];
-
-            #endregion
-
-            #region Install Theme
+            selectedLanguage = Languages[TranslateLanguage.iLanguage];  // Install Language
 
             Themes = new ObservableCollection<AppTheme>
             {
@@ -137,17 +111,10 @@ namespace TaskManager.ViewModels
                 new AppTheme{ Name = "Light"},
                 new AppTheme{ Name = "Dark" }
             };
-            _SelectedTheme = Themes[AuthWindowViewModel.SelectedTheme];
-
-            #endregion
-
-            #region Commands
+            selectedTheme = Themes[AuthWindowViewModel.selectedTheme];  // Install Theme
 
             ButtonSaveSettingsClick = new LambdaCommand(OnButtonSaveSettingsClickExecuted, CanButtonSaveSettingsClickExecute);
 
-            #endregion
         }
-
-        #endregion
     }
 }

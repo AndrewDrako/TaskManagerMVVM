@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
+﻿using System.Configuration;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -21,8 +15,6 @@ namespace TaskManager.ViewModels
 {
     public class AuthWindowViewModel : ViewModel
     {
-        #region DbContext and User
-
         /// <summary>
         /// The major data base context
         /// </summary>
@@ -33,36 +25,31 @@ namespace TaskManager.ViewModels
         /// </summary>
         public static User authUser;
 
-        #endregion
-
         #region Labels
 
-        #region Enter username
+        private string labelUsername;
 
-        private string _Label1;
-
-        public string Label1
+        /// <summary>
+        /// Enter username
+        /// </summary>
+        public string LabelUsername
         {
             get => TranslateLanguage.AuthLabelEnterUsername[TranslateLanguage.iLanguage];
-            set => Set(ref _Label1, value);
+            set => Set(ref labelUsername, value);
         }
 
-        #endregion
+        private string labelPassword;
 
-        #region Enter password
-
-        private string _Label2;
-        public string Label2
+        /// <summary>
+        /// Enter password
+        /// </summary>
+        public string LabelPassword
         {
             get => TranslateLanguage.RegLabelEnterPassword1[TranslateLanguage.iLanguage];
-            set => Set(ref _Label2, value);
+            set => Set(ref labelPassword, value);
         }
 
-        #endregion
-
-        #region Button contents
-
-        private string _BtnContentOk;
+        private string btnContentOk;
 
         /// <summary>
         /// The name of the button that continues authorization
@@ -70,10 +57,10 @@ namespace TaskManager.ViewModels
         public string BtnContentOk
         {
             get => TranslateLanguage.RegBtnOk[TranslateLanguage.iLanguage];
-            set => Set(ref _BtnContentOk, value);
+            set => Set(ref btnContentOk, value);
         }
 
-        private string _BtnContentRegister;
+        private string btnContentRegister;
 
         /// <summary>
         /// The name of the button that opens the registration window
@@ -81,61 +68,50 @@ namespace TaskManager.ViewModels
         public string BtnContentRegister
         {
             get => TranslateLanguage.AuthLabelRegister[TranslateLanguage.iLanguage];
-            set => Set(ref _BtnContentRegister, value);
+            set => Set(ref btnContentRegister, value);
         }
 
         #endregion
-
-        #endregion
-
-        #region Design
-
 
         /// <summary>
         /// The field that hosts the main theme of the application
         /// </summary>
-        public static int SelectedTheme;
-
-        #endregion
+        public static int selectedTheme;
 
         #region Outputs
 
-        #region Username/Nickname
+        private string userName;
 
-        private string _Username;
-
+        /// <summary>
+        /// Username/Nickname
+        /// </summary>
         public string Username
         {
-            get => _Username;
-            set => Set(ref _Username, value);
+            get => userName;
+            set => Set(ref userName, value);
         }
 
         #endregion
 
-        #endregion
-
-        #region Checker unlock button ok
-
-        public static bool _CanClickOk = false;
+        public static bool canClickOk = false;
 
         /// <summary>
         /// Boolean variable that is responsible for the activity of the continue button
         /// </summary>
         public bool CanClickOk
         {
-            get => _CanClickOk;
-            set => Set(ref _CanClickOk, value);
+            get => canClickOk;
+            set => Set(ref canClickOk, value);
         }
-
-        #endregion
 
         #region Commands
  
+        public ICommand BtnClickOk { get; }
+        private bool CanBtnClickOkExecute(object p) => CanClickOk;
+
         /// <summary>
         /// Continue button click
         /// </summary>
-        public ICommand BtnClickOk { get; }
-        private bool CanBtnClickOkExecute(object p) => CanClickOk;
         private void OnBtnClickOkExecuted(object p)
         {
             var passwordBox = p as PasswordBox; 
@@ -160,12 +136,12 @@ namespace TaskManager.ViewModels
             }
         }
 
-        
+        public ICommand BtnClickReg { get; }
+        private bool CanBtnClickRegExecute(object p) => true;
+
         /// <summary>
         /// Registration button click
         /// </summary>
-        public ICommand BtnClickReg { get; }
-        private bool CanBtnClickRegExecute(object p) => true;
         private void OnBtnClickRegExecuted(object p)
         {
             Window regWindow = new RegistrationWindow();
@@ -175,29 +151,14 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-        #region Конструктор
-
         public AuthWindowViewModel()
         {
-            #region With auth and registration or not
+            AuthWindowModel.Key = AuthWindowModel.ReadKey();  // With auth and registration or not
 
-            AuthWindowModel.Key = AuthWindowModel.ReadKey();
+            TranslateLanguage.iLanguage = MainWindowModel.ReadLanguageKey();  // Translation dictionary
 
-            #endregion
+            selectedTheme = MainWindowModel.ReadThemeKey();  // App Theme
 
-            #region Translation dictionary
-
-            TranslateLanguage.iLanguage = MainWindowModel.ReadLanguageKey();
-
-            #endregion
-
-            #region App Theme
-
-            SelectedTheme = MainWindowModel.ReadThemeKey();
-
-            #endregion
-
-            #region Connection with data base
             string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
             SqlConnection connection = new SqlConnection(connectionString);
             try
@@ -258,16 +219,9 @@ namespace TaskManager.ViewModels
                 mainWindow.Show();
                 Application.Current.Windows[0].Close();
             }
-            #endregion
-
-            #region Commands
 
             BtnClickOk = new LambdaCommand(OnBtnClickOkExecuted, CanBtnClickOkExecute);
             BtnClickReg = new LambdaCommand(OnBtnClickRegExecuted, CanBtnClickRegExecute);
-
-            #endregion
         }
-
-        #endregion
     }
 }

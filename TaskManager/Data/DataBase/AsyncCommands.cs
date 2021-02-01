@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
+﻿using System.Configuration;
 using System.Data.Entity;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using TaskManager.Data.DataBase.Base;
-using TaskManager.Data.DataBase.Tables;
 using TaskManager.Models;
 using TaskManager.ViewModels;
 
@@ -33,7 +28,7 @@ namespace TaskManager.Data.DataBase
                     await Task.Run(() => db.ToDos.Load());
                     await Task.Run(() => db.InProgresses.Load());
                     await Task.Run(() => db.Dones.Load());
-                    AuthWindowViewModel._CanClickOk = true;
+                    AuthWindowViewModel.canClickOk = true;
                 }
                 catch
                 {

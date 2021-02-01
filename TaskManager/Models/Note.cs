@@ -1,38 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using TaskManager.ViewModels.Base;
+﻿using TaskManager.ViewModels.Base;
 
 namespace TaskManager.Models
 {
     public class Note : ViewModel
-    {
-        #region Note content
+    { 
+        private string content = "";
 
-        private string _Content = "";
+        /// <summary>
+        /// Note content
+        /// </summary>
         public string Content
         {
             get
             { 
-                return _Content ;
+                return content ;
             }
-            set => Set(ref _Content, value);
+            set => Set(ref content, value);
         }
 
-        #endregion
+        private string target;
 
-        #region Note goal
-
-        private string _Target;
+        /// <summary>
+        /// Note goal
+        /// </summary>
         public string Target
         {
-            get => _Target;
-            set => Set(ref _Target, value);
+            get => target;
+            set => Set(ref target, value);
         }
-
-        #endregion
     }
 }

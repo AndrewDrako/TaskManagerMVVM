@@ -1,47 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TaskManager.ViewModels.Base;
+﻿using TaskManager.ViewModels.Base;
 
 namespace TaskManager.Models
 {
     public class Project : ViewModel
-    {
-        #region Project name
-
-        private string _ProjectName;
+    { 
+        private string projectName;
 
         public string ProjectName
         {
-            get => _ProjectName;
+            get => projectName;
             set
             {   
-                Set(ref _ProjectName, value);
+                Set(ref projectName, value);
             }
         }
 
-        #endregion
-
-        #region Project creator name
-
-        private string _PersonName;
+        private string personName;
 
         public string PersonName
         {
-            get => _PersonName;
-            set => Set(ref _PersonName, value);
+            get => personName;
+            set => Set(ref personName, value);
         }
-
-        #endregion
 
         public Project()
         {
            
-        }
-
-        
-        
+        } 
     }
 }

@@ -1,19 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Data.Entity;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-using TaskManager.Data.DataBase;
-using TaskManager.Data.DataBase.Base;
 using TaskManager.Data.DataBase.Tables;
-using TaskManager.Infrastructure.Commands;
 using TaskManager.Infrastructure.Commands.Base;
 using TaskManager.Models;
 using TaskManager.ViewModels.Base;
@@ -22,14 +10,11 @@ using TaskManager.Views.UserControls;
 namespace TaskManager.ViewModels
 {
     internal class HomeViewModel : ViewModel
-    {
-        #region  data base: records in the table ProjectTable
-
+    { 
+        /// <summary>
+        /// data base: records in the table ProjectTable
+        /// </summary>
         public static ProjectTable projectTable;
-
-        #endregion
-
-        #region  selected project
 
         public static Project _SelectedProject;
         
@@ -54,97 +39,94 @@ namespace TaskManager.ViewModels
             }
         }
 
-        #endregion
-
-        #region Collection of projects in the application
-
+        /// <summary>
+        /// Collection of projects in the application
+        /// </summary>
         public ObservableCollection<Project> Projects { get; set; }
-
-        #endregion
 
         #region Labels
 
-        private string _Welcome;
-        private string _Email = AuthWindowViewModel.authUser.UserName;  
-        private string _Label2;
-        private string _Label3;
-        private string _Label4;
+        private string welcome;
+        private string email = AuthWindowViewModel.authUser.UserName;  
+        private string labelSP;
+        private string labelPN;
+        private string labelON;
 
         public string Welcome
         {
             get => TranslateLanguage.LabelWelcome[TranslateLanguage.iLanguage];
-            set => Set(ref _Welcome, value);
+            set => Set(ref welcome, value);
         }
 
         public string Email
         {
-            get => _Email;
-            set => Set(ref _Email, value);
+            get => email;
+            set => Set(ref email, value);
         }
 
         /// <summary>
         /// Selected project label
         /// </summary>
-        public string Label2
+        public string LabelSP
         {
             get => TranslateLanguage.LabelSP[TranslateLanguage.iLanguage];
-            set => Set(ref _Label2, value);
+            set => Set(ref labelSP, value);
         }
 
         /// <summary>
         /// Project name label
         /// </summary>
-        public string Label3
+        public string LabelPN
         {
             get => TranslateLanguage.LabelPN[TranslateLanguage.iLanguage];
-            set => Set(ref _Label3, value);
+            set => Set(ref labelPN, value);
         }
 
         /// <summary>
         /// Сreator name label
         /// </summary>
-        public string Label4
+        public string LabelON
         {
             get => TranslateLanguage.LabelON[TranslateLanguage.iLanguage];
-            set => Set(ref _Label4, value);
+            set => Set(ref labelON, value);
         }
 
         #endregion
 
         #region Tooltips
 
-        #region add tooltip
+        private string addTT;
 
-        private string _AddTT;
+        /// <summary>
+        /// add tooltip
+        /// </summary>
         public string AddTT
         {
             get => TranslateLanguage.AddTT[TranslateLanguage.iLanguage];
-            set => Set(ref _AddTT, value);
+            set => Set(ref addTT, value);
         }
 
-        #endregion
+        private string removeTT;
 
-        #region remove tooltip
-
-        private string _RemoveTT;
+        /// <summary>
+        /// remove tooltip
+        /// </summary>
         public string RemoveTT
         {
             get => TranslateLanguage.RemoveTT[TranslateLanguage.iLanguage];
-            set => Set(ref _RemoveTT, value);
+            set => Set(ref removeTT, value);
         }
 
-        #endregion
+        private string selectTT;
 
-        #region select tooltip
-
-        private string _SelectTT;
+        /// <summary>
+        /// select tooltip
+        /// </summary>
         public string SelectTT
         {
             get => TranslateLanguage.SelectTT[TranslateLanguage.iLanguage];
-            set => Set(ref _SelectTT, value);
+            set => Set(ref selectTT, value);
         }
-
-        #endregion
 
         #endregion
 
@@ -227,14 +209,14 @@ namespace TaskManager.ViewModels
                         {
                             this.ChangeControlVisibility = Visibility.Collapsed;
                             MainWindowModel.IsTasksNotEmpty = true;  // Разблокировка кнопки tasks
-                            TasksViewModel._PName = project.ProjectName;
-                            TasksViewModel._TName = project.PersonName;
+                            TasksViewModel.pName = project.ProjectName;
+                            TasksViewModel.tName = project.PersonName;
                             if (MainWindowModel.IsConnectedToLocalServer == true)
                             {
                                 Model.EditProjectName(MainWindowViewModel.db, Projects, projectTable.UserId);
                                 Model.AddProjectToDB(MainWindowViewModel.db, project, projectTable);
                             }
-                            MainWindowViewModel._Tasks = new Tasks(); // Открытие tasks
+                            MainWindowViewModel.tasks = new Tasks(); // Открытие tasks
                             MainWindowViewModel.SecondButtonClick.Execute(obj);
 
                         }
@@ -246,28 +228,20 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-        #region Class designer 
-
         public HomeViewModel()
         {
-            #region Object collection
-
-            Projects = new ObservableCollection<Project>
+            Projects = new ObservableCollection<Project>  // Object collection
             {
 
             };
 
-            #endregion
-
-            #region database designer
             if (MainWindowModel.IsConnectedToLocalServer == true)
             {
                 projectTable = new ProjectTable();
                 projectTable.UserId = AuthWindowViewModel.authUser.Id;
             }
-            #endregion
 
-            #region filling the collection
+            // filling collections
             if (MainWindowModel.IsConnectedToLocalServer == true)
             {
                 try
@@ -291,12 +265,6 @@ namespace TaskManager.ViewModels
                     MessageBox.Show("Ошибка произошла при заполнении коллекции Проекты");
                 }
             }
-            #endregion
-
         }
-
-        #endregion
-
-
     }
 }

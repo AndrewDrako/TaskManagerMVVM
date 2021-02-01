@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
 using TaskManager.Data.DataBase.Base;
@@ -11,137 +6,98 @@ using TaskManager.Infrastructure.Commands;
 using TaskManager.Models;
 using TaskManager.ViewModels.Base;
 using TaskManager.Views.UserControls;
-using TaskManager.Data.DataBase;
-using TaskManager.Data.DataBase.Tables;
-using TaskManager.Views.Windows;
 using System.Threading;
 
 namespace TaskManager.ViewModels
 {
     public class MainWindowViewModel : ViewModel
-    {
-        #region DBContext
-
+    { 
         /// <summary>
         /// Data base context who takes info from AuthViewModel
         /// </summary>
         public static MyDbContext db = AuthWindowViewModel.dbContext;
 
-        #endregion
-
-        #region UserControls
-
-        private UserControl _Home;
-        public static UserControl _Tasks;
-        private UserControl _Settings;
-        private UserControl _Account;
-        private UserControl _Help;
-
-        #endregion
+        private UserControl home;
+        public static UserControl tasks;
+        private UserControl settings;
+        private UserControl account;
+        private UserControl help;
 
         #region Labels
 
-        #region Title
-
-        private string _Title = "Task Manager";
+        private string title = "Task Manager";
 
         public string Title
         {
-            get => _Title;
+            get => title;
 
-            set => Set(ref _Title, value);
+            set => Set(ref title, value);
         }
 
-        #endregion
+        private string buttonContentHome;
 
-        #region Button content Home
-
-        private string _ButtonContent1;
-
-        public string ButtonContent1
+        public string ButtonContentHome
         {
             get => TranslateLanguage.LabelHome[TranslateLanguage.iLanguage];
 
-            set => Set(ref _ButtonContent1, value);
+            set => Set(ref buttonContentHome, value);
         }
 
-        #endregion
+        private string buttonContentTasks;
 
-        #region Button content Tasks
-
-        private string _ButtonContent2;
-
-        public string ButtonContent2
+        public string ButtonContentTasks
         {
             get => TranslateLanguage.LabelTask[TranslateLanguage.iLanguage];
 
-            set => Set(ref _ButtonContent2, value);
+            set => Set(ref buttonContentTasks, value);
         }
 
-        #endregion
+        private string buttonContentSettings;
 
-        #region Button content Settings
-
-        private string _ButtonContent3;
-
-        public string ButtonContent3
+        public string ButtonContentSettings
         {
             get => TranslateLanguage.LabelSettings[TranslateLanguage.iLanguage];
 
-            set => Set(ref _ButtonContent3, value);
+            set => Set(ref buttonContentSettings, value);
         }
 
-        #endregion
+        private string buttonContentAccount;
 
-        #region Button content Account
-
-        private string _ButtonContent4;
-
-        public string ButtonContent4
+        public string ButtonContentAccount
         {
             get => TranslateLanguage.LabelAcc[TranslateLanguage.iLanguage];
 
-            set => Set(ref _ButtonContent4, value);
+            set => Set(ref buttonContentAccount, value);
         }
 
-        #endregion
+        private string buttonContentHelp;
 
-        #region Button content Help
-
-        private string _ButtonContent5;
-
-        public string ButtonContent5
+        public string ButtonContentHelp
         {
             get => TranslateLanguage.LabelHelp[TranslateLanguage.iLanguage];
 
-            set => Set(ref _ButtonContent5, value);
+            set => Set(ref buttonContentHelp, value);
         }
 
         #endregion
 
-        #endregion
-
-        #region Opacity
-
-        private double _UserControlOpacity;
+        private double userControlOpacity;
         public double UserControlOpacity
         {
-            get => _UserControlOpacity;
-            set => Set(ref _UserControlOpacity, value);
+            get => userControlOpacity;
+            set => Set(ref userControlOpacity, value);
         }
-
-        #endregion
 
         #region Major/Current page/usercontrol
 
-        private UserControl _CurrentPage;
+        private UserControl currentPage;
 
         public UserControl CurrentPage
         {
-            get => _CurrentPage;
+            get => currentPage;
             set
             {
-                Set(ref _CurrentPage, value);
+                Set(ref currentPage, value);
             }
         }
 
@@ -149,101 +105,92 @@ namespace TaskManager.ViewModels
 
         #region Commands
 
-        #region Home button click
-
+        /// <summary>
+        /// Home button click
+        /// </summary>
         public ICommand FirstButtonClick { get; }
 
         private bool CanFirstButtonClickExecute(object p) => true;
 
         private void OnFirstButtonClickExecuted(object p)
         {
-            SlowOpacity(_Home);
-            if (_Tasks != null)
+            SlowOpacity(home);
+            if (tasks != null)
             {
                 TasksViewModel.SaveNote.Execute(p);
             }
         }
 
-        #endregion
-
-        #region Tasks button click
-
+        /// <summary>
+        /// Tasks button click
+        /// </summary>
         public static ICommand SecondButtonClick { get; set; }
 
         private bool CanSecondButtonClickExecute(object p) => MainWindowModel.IsTasksNotEmpty;
 
         private void OnSecondButtonClickExecuted(object p)
         {
-            SlowOpacity(_Tasks);
-            
+            SlowOpacity(tasks);
         }
 
-        #endregion
-
-        #region Settings button click
-
+        /// <summary>
+        /// Settings button click
+        /// </summary>
         public ICommand ThirdButtonClick { get; }
 
         private bool CanThirdButtonClickExecute(object p) => true;
 
         private void OnThirdButtonClickExecuted(object p)
         {
-            SlowOpacity(_Settings);
-            if (_Tasks != null)
+            SlowOpacity(settings);
+            if (tasks != null)
             {
                 TasksViewModel.SaveNote.Execute(p);
             }
         }
 
-        #endregion
-
-        #region Account button click
-
+        /// <summary>
+        /// Account button click
+        /// </summary>
         public ICommand FourthButtonClick { get; }
 
         private bool CanFourthButtonClickExecute(object p) => MainWindowModel.IsConnectedToLocalServer;
 
         private void OnFourthButtonClickExecuted(object p)
         {
-            SlowOpacity(_Account);
-            if (_Tasks != null)
+            SlowOpacity(account);
+            if (tasks != null)
             {
                 TasksViewModel.SaveNote.Execute(p);
             }
         }
 
-        #endregion
-
-        #region Help button click
-
+        /// <summary>
+        /// Help button click
+        /// </summary>
         public ICommand FifthButtonClick { get; }
 
         private bool CanFifthButtonClickExecute(object p) => true;
 
         private void OnFifthButtonClickExecuted(object p)
         {
-            SlowOpacity(_Help);
+            SlowOpacity(help);
         }
 
-        #endregion
-
-        #region Close Application button
-
+        /// <summary>
+        /// Close Application button
+        /// </summary>
         public ICommand CloseApplication { get; }
         private bool CanCloseApplicationExecute(object p) => true;
         private void OnCloseApplicationExecuted(object p)
         {
-            if (_Tasks != null)
+            if (tasks != null)
             {
                 TasksViewModel.SaveNote.Execute(p);
             }
         }
 
         #endregion
-
-        #endregion
-
-        #region Functions
 
         /// <summary>
         /// The function is responsible for smooth switching between UserControls
@@ -268,25 +215,16 @@ namespace TaskManager.ViewModels
             });
         } 
 
-        #endregion
-
-        #region Class Designer
         public MainWindowViewModel()
         { 
-            _Settings = new Settings();
+            settings = new Settings();
 
-            #region Create usercontrols
-
-            _Home = new Home();
+            home = new Home();
             MainWindowModel.IsTasksNotEmpty = false;
-            _Account = new Account();
-            _Help = new Help();
+            account = new Account();
+            help = new Help();
             UserControlOpacity = 1;
-            CurrentPage = _Home;
-
-            #endregion
-
-            #region Commands
+            CurrentPage = home;
 
             CloseApplication = new LambdaCommand(OnCloseApplicationExecuted, CanCloseApplicationExecute);
             FirstButtonClick = new LambdaCommand(OnFirstButtonClickExecuted, CanFirstButtonClickExecute);
@@ -294,11 +232,6 @@ namespace TaskManager.ViewModels
             ThirdButtonClick = new LambdaCommand(OnThirdButtonClickExecuted, CanThirdButtonClickExecute);
             FourthButtonClick = new LambdaCommand(OnFourthButtonClickExecuted, CanFourthButtonClickExecute);
             FifthButtonClick = new LambdaCommand(OnFifthButtonClickExecuted, CanFifthButtonClickExecute);
-
-            #endregion
-
         }
-
-        #endregion
     }
 }

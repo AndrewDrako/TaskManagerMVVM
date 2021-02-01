@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace TaskManager.Models
 {
     internal class TranslateLanguage 
@@ -129,7 +124,7 @@ namespace TaskManager.Models
         /// <summary>
         /// Structure of notes and tasks with title...
         /// </summary>
-        public static string[] LabelTasks1 = new string[2]
+        public static string[] LabelTasksFirstTitle = new string[2]
         {
             "Structure of notes and tasks with title",
             "Структуру заметок и задач с названием"
@@ -138,7 +133,7 @@ namespace TaskManager.Models
         /// <summary>
         /// prepared by the team...
         /// </summary>
-        public static string[] LabelTasks2 = new string[2]
+        public static string[] LabelTasksSecTitle = new string[2]
         {
             "prepared by the team",
             "подготовила команда"
@@ -174,7 +169,7 @@ namespace TaskManager.Models
         /// <summary>
         /// write a note label
         /// </summary>
-        public static string[] LabelTasks3 = new string[2]
+        public static string[] LabelTasksTitleThree = new string[2]
         {
             "Write a note label",
             "Напишите заметку"
@@ -183,7 +178,7 @@ namespace TaskManager.Models
         /// <summary>
         /// Why do you need to do it
         /// </summary>
-        public static string[] LabelTasks4 = new string[2]
+        public static string[] LabelTasksTitleFour = new string[2]
         {
             "Why do you need to do it",
             "Для чего это нужно сделать"
@@ -272,7 +267,7 @@ namespace TaskManager.Models
         /// <summary>
         /// button log out label
         /// </summary>
-        public static string[] LabelAccBtn1 = new string[2]
+        public static string[] LabelAccBtnLogOut = new string[2]
         {
             "Log out",
             "Выйти"
@@ -281,7 +276,7 @@ namespace TaskManager.Models
         /// <summary>
         /// button create a new label
         /// </summary>
-        public static string[] LabelAccBtn2 = new string[2]
+        public static string[] LabelAccBtnCreate = new string[2]
         {
             "Create a new",
             "Создать новый"
@@ -294,7 +289,7 @@ namespace TaskManager.Models
         /// <summary>
         /// How to contact me
         /// </summary>
-        public static string[] LabelHelp1 = new string[2]
+        public static string[] LabelHelpFirstTitle = new string[2]
         {
             "How to contact me?",
             "Как связаться со мной?"
@@ -303,7 +298,7 @@ namespace TaskManager.Models
         /// <summary>
         /// What is this app about
         /// </summary>
-        public static string[] LabelHelp2 = new string[2]
+        public static string[] LabelHelpSecondTitle = new string[2]
         {
             "What is this app about?",
             "О чем это приложение?"

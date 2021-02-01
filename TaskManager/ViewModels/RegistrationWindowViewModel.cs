@@ -1,18 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using TaskManager.ViewModels.Base;
 using TaskManager.Infrastructure.Commands;
 using System.Windows;
 using TaskManager.Models;
-using System.Security;
 using System.Windows.Controls;
-using TaskManager.Data.DataBase.Base;
 using TaskManager.Views.Windows;
-using TaskManager.Data.DataBase;
 using TaskManager.Data.DataBase.Tables;
 
 namespace TaskManager.ViewModels
@@ -21,177 +14,152 @@ namespace TaskManager.ViewModels
     {
         #region Labels
 
-        #region Enter Email
+        private string labelEmail;
 
-        private string _Label1;
-        public string Label1
+        /// <summary>
+        /// Enter Email
+        /// </summary>
+        public string LabelEmail
         {
             get => TranslateLanguage.RegLabelEnterEmail[TranslateLanguage.iLanguage];
-            set => Set(ref _Label1, value);
+            set => Set(ref labelEmail, value);
         }
 
-        #endregion
+        private string labelNickname;
 
-        #region Enter Nickname
-
-        private string _Label2;
-        public string Label2
+        /// <summary>
+        /// Enter Nickname
+        /// </summary>
+        public string LabelNickname
         {
             get => TranslateLanguage.RegLabelEnterNickname[TranslateLanguage.iLanguage];
-            set => Set(ref _Label2, value);
+            set => Set(ref labelNickname, value);
         }
 
-        #endregion
+        private string labelPassword;
 
-        #region Enter password
-
-        private string _Label3;
-        public string Label3
+        /// <summary>
+        /// Enter password
+        /// </summary>
+        public string LabelPassword
         {
             get => TranslateLanguage.RegLabelEnterPassword[TranslateLanguage.iLanguage];
-            set => Set(ref _Label3, value);
+            set => Set(ref labelPassword, value);
         }
 
-        #endregion
+        private string labelKey;
 
-        #region Enter password x1
-
-        private string _Label4;
-        public string Label4
-        {
-            get => TranslateLanguage.RegLabelEnterPassword1[TranslateLanguage.iLanguage];
-            set => Set(ref _Label4, value);
-        }
-
-        #endregion
-
-        #region Repeat password
-
-        private string _Label5;
-        public string Label5
-        {
-            get => TranslateLanguage.RegLabelEnterPassword2[TranslateLanguage.iLanguage];
-            set => Set(ref _Label5, value);
-        }
-
-        #endregion
-
-        #region Enter key
-        
-        private string _Label6;
-
-        public string Label6
+        /// <summary>
+        /// Enter key
+        /// </summary>
+        public string LabelKey
         {
             get => TranslateLanguage.RegLabelKey[TranslateLanguage.iLanguage];
-            set => Set(ref _Label6, value);
+            set => Set(ref labelKey, value);
         }
 
-        #endregion
+        private string labelCheckEmail;
 
-        #region Check email
-
-        private string _Label8;
-        public string Label8
+        /// <summary>
+        /// Check email
+        /// </summary>
+        public string LabelCheckEmail
         {
             get => TranslateLanguage.RegLabelKey[TranslateLanguage.iLanguage];
-            set => Set(ref _Label8, value);
+            set => Set(ref labelCheckEmail, value);
         }
 
-        #endregion
-
-        #region Buttons content
-
-        private string _BtnContent1;
+        private string btnContentReg;
 
         /// <summary>
         /// Registration button content
         /// </summary>
-        public string BtnContent1
+        public string BtnContentReg
         {
             get => TranslateLanguage.RegBtnOk[TranslateLanguage.iLanguage];
-            set => Set(ref _BtnContent1, value);
+            set => Set(ref btnContentReg, value);
         }
 
-        private string _BtnContent2;
+        private string btnContentAccept;
 
         /// <summary>
         /// Accept key from Email button content
         /// </summary>
-        public string BtnContent2
+        public string BtnContentAccept
         {
             get => TranslateLanguage.RegBtnAccept[TranslateLanguage.iLanguage];
-            set => Set(ref _BtnContent2, value);
+            set => Set(ref btnContentAccept, value);
         }
 
-        private string _BtnContent3;
+        private string btnContentAuth;
 
         /// <summary>
         /// Log In button content
         /// </summary>
-        public string BtnContent3
+        public string BtnContentAuth
         {
             get => TranslateLanguage.RegBtnLogIn[TranslateLanguage.iLanguage];
-            set => Set(ref _BtnContent3, value);
+            set => Set(ref btnContentAuth, value);
         }
 
-        private string _BtnContent4;
+        private string btnContentBack;
 
         /// <summary>
-        /// Log In button content
+        /// Back button content
         /// </summary>
-        public string BtnContent4
+        public string BtnContentBack
         {
             get => TranslateLanguage.RegBtnBack[TranslateLanguage.iLanguage];
-            set => Set(ref _BtnContent4, value);
+            set => Set(ref btnContentBack, value);
         }
-
-        #endregion
 
         #endregion
 
         #region OutPuts
 
-        #region Email
+        public static string userEmail;
 
-        public static string _UserEmail;
+        /// <summary>
+        /// Email
+        /// </summary>
         public string UserEmail 
         {
-            get => _UserEmail; 
-            set => Set(ref _UserEmail, value); 
+            get => userEmail; 
+            set => Set(ref userEmail, value); 
         }
 
-        #endregion
+        public static string userName;
 
-        #region Username
-
-        public static string _UserName;
+        /// <summary>
+        /// Username
+        /// </summary>
         public string UserName
         {
-            get => _UserName;
-            set => Set(ref _UserName, value);
+            get => userName;
+            set => Set(ref userName, value);
         }
 
-        #endregion
+        private string keyInput;
 
-        #region KeyInput
-
-        private string _KeyInput;
+        /// <summary>
+        /// KeyInput
+        /// </summary>
         public string KeyInput
         {
-            get => _KeyInput;
-            set => Set(ref _KeyInput, value);
+            get => keyInput;
+            set => Set(ref keyInput, value);
         }
-
-        #endregion
 
         #endregion
 
         #region Commands
 
-        #region Click after enter email, password and username
-
+        /// <summary>
+        /// Click after enter email, password and username
+        /// </summary>
         public ICommand BtnClick { get; }
         private bool CanBtnClickExecute(object p) => true;
+
         private void OnBtnClickExecuted(object p)
         {
             if (UserEmail == null || UserEmail == null)
@@ -206,8 +174,8 @@ namespace TaskManager.ViewModels
                 MessageBox.Show("Введенное имя занято попробуйте другое");
                 return;
             }
-            this.ChangeControlVisibility1 = Visibility.Collapsed;
-            this.ChangeControlVisibility2 = Visibility.Visible;
+            this.ChangeControlVisibilityFirst = Visibility.Collapsed;
+            this.ChangeControlVisibilitySecond = Visibility.Visible;
             Random rnd = new Random();
             KeyFromEmail = rnd.Next(100000, 999999);
             try
@@ -220,12 +188,11 @@ namespace TaskManager.ViewModels
             }
         }
 
-        #endregion
-
-        #region Click after enter key from email
-
+        /// <summary>
+        /// Click after enter key from email
+        /// </summary>
         public ICommand BtnClickAccept { get; }
-        private bool CanBtnClickAcceptExecute(object p) => AuthWindowViewModel._CanClickOk;
+        private bool CanBtnClickAcceptExecute(object p) => AuthWindowViewModel.canClickOk;
         private void OnBtnClickAcceptExecuted(object p)
         {
             if (KeyInput == null)
@@ -266,10 +233,9 @@ namespace TaskManager.ViewModels
             }
         }
 
-        #endregion
-
-        #region Log In click
-
+        /// <summary>
+        /// Log In click
+        /// </summary>
         public ICommand BtnClickLogIn { get; }
         private bool CanBtnClickLogInExecute(object p) => true;
         private void OnBtnClickLogInExecuted(object p)
@@ -279,70 +245,55 @@ namespace TaskManager.ViewModels
             Application.Current.Windows[0].Close();
         }
 
-        #endregion
-
-        #region Back click
-
+        /// <summary>
+        /// Back click
+        /// </summary>
         public ICommand BtnClickBack { get; }
         private bool CanBtnClickBackExecute(object p) => true;
         private void OnBtnClickBackExecuted(object p)
         {
-            this.ChangeControlVisibility1 = Visibility.Visible;
-            this.ChangeControlVisibility2 = Visibility.Collapsed;
+            this.ChangeControlVisibilityFirst = Visibility.Visible;
+            this.ChangeControlVisibilitySecond = Visibility.Collapsed;
         }
 
         #endregion
-
-        #endregion
-
-        #region Visibility 
-
-        private Visibility _VisibilityFirst = Visibility.Visible;
+ 
+        private Visibility visibilityFirst = Visibility.Visible;
 
         /// <summary>
         /// First section visibility
         /// </summary>
-        public Visibility ChangeControlVisibility1
+        public Visibility ChangeControlVisibilityFirst
         {
-            get { return _VisibilityFirst; }
-            set => Set(ref _VisibilityFirst, value);
+            get { return visibilityFirst; }
+            set => Set(ref visibilityFirst, value);
         }
 
-        private Visibility _VisibilitySecond = Visibility.Collapsed;
+        private Visibility visibilitySecond = Visibility.Collapsed;
 
         /// <summary>
         /// Second section visibility
         /// </summary>
-        public Visibility ChangeControlVisibility2
+        public Visibility ChangeControlVisibilitySecond
         {
-            get { return _VisibilitySecond; }
-            set => Set(ref _VisibilitySecond, value);
+            get { return visibilitySecond; }
+            set => Set(ref visibilitySecond, value);
         }
 
-        #endregion
-
-        #region Random Key from email
-
+        /// <summary>
+        /// Random Key from email
+        /// </summary>
         public static int KeyFromEmail;
-
-        #endregion
-
-        #region Class Designer
 
         public RegistrationWindowViewModel()
         {
             UserEmail = null;
             UserName = null;
-            #region Commands
             
             BtnClick = new LambdaCommand(OnBtnClickExecuted, CanBtnClickExecute);
             BtnClickAccept = new LambdaCommand(OnBtnClickAcceptExecuted, CanBtnClickAcceptExecute);
             BtnClickLogIn = new LambdaCommand(OnBtnClickLogInExecuted, CanBtnClickLogInExecute);
             BtnClickBack = new LambdaCommand(OnBtnClickBackExecuted, CanBtnClickBackExecute);
-
-            #endregion
         }
-
-        #endregion
     }
 }

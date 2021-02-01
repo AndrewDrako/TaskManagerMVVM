@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 using TaskManager.Infrastructure.Commands;
@@ -16,25 +11,25 @@ namespace TaskManager.ViewModels
     {
         #region Labels
 
-        private string _Label1;
-        private string _Label2;
+        private string labelFirstTitle;
+        private string labelSecondTitle;
         
         /// <summary>
         /// How to contact me
         /// </summary>
-        public string Label1 
+        public string LabelFirstTitle
         { 
-            get => TranslateLanguage.LabelHelp1[TranslateLanguage.iLanguage]; 
-            set => Set(ref _Label1, value); 
+            get => TranslateLanguage.LabelHelpFirstTitle[TranslateLanguage.iLanguage]; 
+            set => Set(ref labelFirstTitle, value); 
         }
 
         /// <summary>
         /// What is this app about
         /// </summary>
-        public string Label2
+        public string LabelSecondTitle
         {
-            get => TranslateLanguage.LabelHelp2[TranslateLanguage.iLanguage];
-            set => Set(ref _Label2, value);
+            get => TranslateLanguage.LabelHelpSecondTitle[TranslateLanguage.iLanguage];
+            set => Set(ref labelSecondTitle, value);
         }
 
         #endregion
@@ -42,11 +37,11 @@ namespace TaskManager.ViewModels
         #region Commands
 
         // Vk
-        public ICommand ButtonClickMyContact1 { get; }
+        public ICommand ButtonClickMyContactVK { get; }
 
-        private bool CanButtonClickMyContact1Execute(object p) => true;
+        private bool CanButtonClickMyContactVKExecute(object p) => true;
 
-        private void OnButtonClickMyContact1Executed(object p)
+        private void OnButtonClickMyContactVKExecuted(object p)
         {
             try
             {
@@ -60,11 +55,11 @@ namespace TaskManager.ViewModels
 
         // LinkedIn
 
-        public ICommand ButtonClickMyContact2 { get; }
+        public ICommand ButtonClickMyContactLI { get; }
 
-        private bool CanButtonClickMyContact2Execute(object p) => true;
+        private bool CanButtonClickMyContactLIExecute(object p) => true;
 
-        private void OnButtonClickMyContact2Executed(object p)
+        private void OnButtonClickMyContactLIExecuted(object p)
         {
             try
             {
@@ -78,11 +73,11 @@ namespace TaskManager.ViewModels
 
         // GitHub
 
-        public ICommand ButtonClickMyContact3 { get; }
+        public ICommand ButtonClickMyContactGH { get; }
 
-        private bool CanButtonClickMyContact3Execute(object p) => true;
+        private bool CanButtonClickMyContactGHExecute(object p) => true;
 
-        private void OnButtonClickMyContact3Executed(object p)
+        private void OnButtonClickMyContactGHExecuted(object p)
         {
             try
             {
@@ -96,11 +91,11 @@ namespace TaskManager.ViewModels
 
         // Instagram
 
-        public ICommand ButtonClickMyContact4 { get; }
+        public ICommand ButtonClickMyContactI { get; }
 
-        private bool CanButtonClickMyContact4Execute(object p) => true;
+        private bool CanButtonClickMyContactIExecute(object p) => true;
 
-        private void OnButtonClickMyContact4Executed(object p)
+        private void OnButtonClickMyContactIExecuted(object p)
         {
             try
             {
@@ -114,16 +109,12 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-        #region Конструктор
-
         public HelpViewModel()
         {
-            ButtonClickMyContact1 = new LambdaCommand(OnButtonClickMyContact1Executed, CanButtonClickMyContact1Execute);
-            ButtonClickMyContact2 = new LambdaCommand(OnButtonClickMyContact2Executed, CanButtonClickMyContact2Execute);
-            ButtonClickMyContact3 = new LambdaCommand(OnButtonClickMyContact3Executed, CanButtonClickMyContact3Execute);
-            ButtonClickMyContact4 = new LambdaCommand(OnButtonClickMyContact4Executed, CanButtonClickMyContact4Execute);
+            ButtonClickMyContactVK = new LambdaCommand(OnButtonClickMyContactVKExecuted, CanButtonClickMyContactVKExecute);
+            ButtonClickMyContactLI = new LambdaCommand(OnButtonClickMyContactLIExecuted, CanButtonClickMyContactLIExecute);
+            ButtonClickMyContactGH = new LambdaCommand(OnButtonClickMyContactGHExecuted, CanButtonClickMyContactGHExecute);
+            ButtonClickMyContactI = new LambdaCommand(OnButtonClickMyContactIExecuted, CanButtonClickMyContactIExecute);
         }
-
-        #endregion
     }
 }

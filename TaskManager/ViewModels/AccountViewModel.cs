@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
 using TaskManager.Infrastructure.Commands;
 using TaskManager.Models;
@@ -16,37 +11,40 @@ namespace TaskManager.ViewModels
     {
         #region Labels
 
-        private string _ButtonLabel1 = TranslateLanguage.LabelAccBtn1[TranslateLanguage.iLanguage];
+        private string buttonLabelLogOut = TranslateLanguage.LabelAccBtnLogOut[TranslateLanguage.iLanguage];
 
         /// <summary>
         /// Label Log Iut
         /// </summary>
-        public string ButtonLabel1 
+        public string ButtonLabelLogOut
         { 
-            get => _ButtonLabel1; 
-            set => Set(ref _ButtonLabel1, value); 
+            get => buttonLabelLogOut; 
+            set => Set(ref buttonLabelLogOut, value); 
         }
 
 
-        private string _ButtonLabel2 = TranslateLanguage.LabelAccBtn2[TranslateLanguage.iLanguage];
+        private string buttonLabelCreate = TranslateLanguage.LabelAccBtnCreate[TranslateLanguage.iLanguage];
 
         /// <summary>
         /// Label Create a new
         /// </summary>
-        public string ButtonLabel2
+        public string ButtonLabelCreate
         {
-            get => _ButtonLabel2;
-            set => Set(ref _ButtonLabel2, value);
+            get => buttonLabelCreate;
+            set => Set(ref buttonLabelCreate, value);
         }
 
         #endregion
 
         #region Commands
 
-        #region Log Out
-
         public ICommand BtnClickLogOut { get; }
         private bool CanBtnClickLogOutExecute(object p) => true;
+
+        /// <summary>
+        /// Log Out
+        /// </summary>
+        /// <param name="p"></param>
         private void OnBtnClickLogOutExecuted(object p)
         {
             AuthWindowModel.PrintKey("Cannot", "authreg_key.txt");
@@ -55,16 +53,17 @@ namespace TaskManager.ViewModels
             Application.Current.Windows[0].Close();
         }
 
-        #endregion
-
-        #region Create a new
-
         public ICommand BtnClickCreate { get; }
         private bool CanBtnClickCreateExecute(object p) => true;
+
+        /// <summary>
+        /// Create a new account
+        /// </summary>
+        /// <param name="p"></param>
         private void OnBtnClickCreateExecuted(object p)
         {
             AuthWindowModel.PrintKey("Cannot", "authreg_key.txt");
-            AuthWindowViewModel._CanClickOk = true;
+            AuthWindowViewModel.canClickOk = true;
             Window regWindow = new RegistrationWindow();
             regWindow.Show();
             Application.Current.Windows[0].Close();
@@ -72,20 +71,10 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-        #endregion
-
-        #region Class designer
-
         public AccountViewModel()
         {
-            #region Commands
-
             BtnClickLogOut = new LambdaCommand(OnBtnClickLogOutExecuted, CanBtnClickLogOutExecute);
             BtnClickCreate = new LambdaCommand(OnBtnClickCreateExecuted, CanBtnClickCreateExecute);
-
-            #endregion
         }
-
-        #endregion
     }
 }

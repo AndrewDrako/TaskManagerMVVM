@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TaskManager.ViewModels.Base;
+﻿using TaskManager.ViewModels.Base;
 
 namespace TaskManager.Models
 {
     internal class AppLanguage : ViewModel
     {
-        private string _Language;
+        private string language;
 
         public string Language
         {
-            get => _Language;
-            set => Set(ref _Language, value);
+            get => language;
+            set => Set(ref language, value);
         }
 
         public AppLanguage()

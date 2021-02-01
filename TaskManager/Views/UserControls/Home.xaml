@@ -79,12 +79,12 @@
                     Grid.Row="1"
                     Background="{DynamicResource pageSecondColor}"
                     Visibility="{Binding ChangeControlVisibility, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-            <TextBlock Text="{Binding Label2}"
+            <TextBlock Text="{Binding LabelSP}"
                            FontWeight="Bold"
                            Foreground="{DynamicResource fontColor}"
                            Margin="10 5"
                            FontFamily="Lucida Grande"/>
-            <TextBlock Text="{Binding Label3}" 
+            <TextBlock Text="{Binding LabelPN}" 
                            Foreground="{DynamicResource fontColor}"
                            FontFamily="Lucida Grande"
                            Margin="10 5"/>
@@ -98,7 +98,7 @@
                          BorderBrush="{DynamicResource btnColor}"
                          materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource fontColor}"
                          CaretBrush="{DynamicResource fontColor}"/>
-            <TextBlock Text="{Binding Label4}"
+            <TextBlock Text="{Binding LabelON}"
                            Foreground="{DynamicResource fontColor}"
                            FontFamily="Lucida Grande"
                            Margin="10 5"/>

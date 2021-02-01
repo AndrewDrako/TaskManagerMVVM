@@ -33,18 +33,18 @@ namespace TaskManager.ViewModels.Base
             Dispose(true);
         }
 
-        private bool _Disposed;
+        private bool disposed;
 
         /// <summary>
         /// Освобождение управляемых ресурсов
         /// </summary>
         protected virtual void Dispose(bool Disposing)
         {
-            if (!Disposing || _Disposed)
+            if (!Disposing || disposed)
             {
                 return;
             }
-            _Disposed = true;
+            disposed = true;
         }
     }
 }
