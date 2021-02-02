@@ -84,11 +84,11 @@ namespace TaskManager.ViewModels
         {
             //Language
             string s = SelectedLanguage.Language;
-            MainWindowModel.PrintLanguageKey(s);
+            MainWindowModel.PrintLanguageKey(s).GetAwaiter();
 
             //Theme
             string ss = SelectedTheme.Name;
-            MainWindowModel.PrintThemeKey(ss);
+            MainWindowModel.PrintThemeKey(ss).GetAwaiter();
 
             System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
             Application.Current.Shutdown();

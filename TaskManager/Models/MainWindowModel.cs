@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace TaskManager.Models
@@ -25,20 +26,20 @@ namespace TaskManager.Models
         /// the method that prints in the txt language of the application
         /// </summary>
         /// <param name="s"></param>
-        public static void PrintLanguageKey(string s)
+        public static async Task PrintLanguageKey(string s)
         {
             string filename = "language_key.txt";
             string path = Directory.GetCurrentDirectory();
             if (!Directory.Exists(path + "/Files")) // if there is no folder - create
             {
-                Directory.CreateDirectory(path + "/Files");
+                await Task.Run(() => Directory.CreateDirectory(path + "/Files"));
             }
             using (FileStream fstream = new FileStream(path + "/Files/" + filename, FileMode.OpenOrCreate))
             {
                 // convert the string to bytes
                 byte[] array = System.Text.Encoding.Default.GetBytes(s);
                 // writing a byte array to a file
-                fstream.Write(array, 0, array.Length);
+                await Task.Run(() => fstream.Write(array, 0, array.Length));
             }
         }
 
@@ -55,7 +56,7 @@ namespace TaskManager.Models
                 Directory.CreateDirectory(path + "/Files");
             }
             
-            string textFromFile;
+            string textFromFile = "English";
             using (FileStream fstream = new FileStream(path + "/Files/" + filename, FileMode.OpenOrCreate))
             {
 
@@ -77,29 +78,32 @@ namespace TaskManager.Models
                 {
                     return 1;
                 }
+                else
+                {
+                    return 0;
+                }
             }
-            return 0;
-
+            
         }
 
         /// <summary>
         /// the method that prints in the txt theme of the application
         /// </summary>
         /// <param name="s"></param>
-        public static void PrintThemeKey(string s)
+        public static async Task PrintThemeKey(string s)
         {
             string filename = "theme_key.txt";
             string path = Directory.GetCurrentDirectory();
             if (!Directory.Exists(path + "/Files")) // if there is no folder - create
             {
-                Directory.CreateDirectory(path + "/Files");
+                 await Task.Run(() => Directory.CreateDirectory(path + "/Files"));
             }
             using (FileStream fstream = new FileStream(path + "/Files/" + filename, FileMode.OpenOrCreate))
             {
                 // convert the string to bytes
                 byte[] array = System.Text.Encoding.Default.GetBytes(s);
                 // writing a byte array to a file
-                fstream.Write(array, 0, array.Length);
+                await Task.Run(() => fstream.Write(array, 0, array.Length));
             }
         }
 

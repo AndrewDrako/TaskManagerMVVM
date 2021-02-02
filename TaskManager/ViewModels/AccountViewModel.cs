@@ -47,7 +47,7 @@ namespace TaskManager.ViewModels
         /// <param name="p"></param>
         private void OnBtnClickLogOutExecuted(object p)
         {
-            AuthWindowModel.PrintKey("Cannot", "authreg_key.txt");
+            AuthWindowModel.PrintKey("Cannot", "authreg_key.txt").GetAwaiter();
             Window authWindow = new AuthWindow();
             authWindow.Show();
             Application.Current.Windows[0].Close();
@@ -62,7 +62,7 @@ namespace TaskManager.ViewModels
         /// <param name="p"></param>
         private void OnBtnClickCreateExecuted(object p)
         {
-            AuthWindowModel.PrintKey("Cannot", "authreg_key.txt");
+            AuthWindowModel.PrintKey("Cannot", "authreg_key.txt").GetAwaiter();
             AuthWindowViewModel.canClickOk = true;
             Window regWindow = new RegistrationWindow();
             regWindow.Show();

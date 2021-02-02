@@ -126,8 +126,8 @@ namespace TaskManager.ViewModels
                 authUser.UserName = user.UserName;
                 Window mainWindow = new MainWindow();
                 mainWindow.Show();
-                AuthWindowModel.PrintKey("Can", "authreg_key.txt");
-                AuthWindowModel.PrintKey(user.UserName, "last_user_name.txt");
+                AuthWindowModel.PrintKey("Can", "authreg_key.txt").GetAwaiter();
+                AuthWindowModel.PrintKey(user.UserName, "last_user_name.txt").GetAwaiter();
                 Application.Current.Windows[0].Close();
             }
             else
@@ -198,7 +198,7 @@ namespace TaskManager.ViewModels
                             }
                             else
                             {
-                                AuthWindowModel.PrintKey("Cannot", "authreg_key.txt");
+                                AuthWindowModel.PrintKey("Cannot", "authreg_key.txt").GetAwaiter();
                                 MessageBox.Show("Что-то пошло не так, перезайдите в приложение");
                                 Application.Current.Shutdown();
                             }

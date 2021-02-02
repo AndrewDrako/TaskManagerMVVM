@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Threading.Tasks;
 
 namespace TaskManager.Models
 {
@@ -11,19 +12,13 @@ namespace TaskManager.Models
         /// </summary>
         /// <param name="s"></param>
         /// <param name="filename"></param>
-        public static void PrintKey(string s, string filename)
+        public static async Task PrintKey(string s, string filename)
         {
-            //string filename = "authreg_key.txt";
             string path = Directory.GetCurrentDirectory();
-            //или ;
             if (!Directory.Exists(path + "/Files")) //если папки нет - создаем
             {
-                Directory.CreateDirectory(path + "/Files");
+                await Task.Run(() => Directory.CreateDirectory(path + "/Files"));
             }
-            //FileStream fs = File.Create(path + "/Files/" + filename);
-            //StreamWriter writer = new StreamWriter(fs);
-            //writer.Write("text");
-            //writer.Close();
             using (FileStream fstream = new FileStream(path + "/Files/" + filename, FileMode.Create))
             {
                 // преобразуем строку в байты
