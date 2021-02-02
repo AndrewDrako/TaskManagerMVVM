@@ -250,8 +250,8 @@ namespace TaskManager.ViewModels
         private bool CanSaveNoteExecute(object p) => MainWindowModel.IsConnectedToLocalServer;
         private void OnSaveNoteExecuted(object p)
         {
-            Model.EditNote(MainWindowViewModel.db, NotesToDo, toDoTable.ProjectId);
-            Model.AddNotesToDB(MainWindowViewModel.db, NotesToDo, toDoTable);
+            Model.EditNote(MainWindowViewModel.db, NotesToDo, toDoTable).GetAwaiter();
+            //Model.AddNotesToDB(MainWindowViewModel.db, NotesToDo, toDoTable).GetAwaiter();
             if (this.ChangeControlVisibility == Visibility.Visible)
             {
                 this.ChangeControlVisibility = Visibility.Collapsed;
@@ -306,7 +306,7 @@ namespace TaskManager.ViewModels
                           NotesToDo.Remove(note);
                           if (MainWindowModel.IsConnectedToLocalServer == true)
                           {
-                              Model.RemoveNoteFromDB(MainWindowViewModel.db, note, toDoTable.ProjectId, "TODO");
+                              Model.RemoveNoteFromDB(MainWindowViewModel.db, note, toDoTable.ProjectId, "TODO").GetAwaiter();
                           }
 
                       }
@@ -334,8 +334,8 @@ namespace TaskManager.ViewModels
                             NotesToDo.Remove(note);
                             if (MainWindowModel.IsConnectedToLocalServer == true)
                             {
-                                Model.TransferTo(MainWindowViewModel.db, note, inProgressTable);
-                                Model.RemoveNoteFromDB(MainWindowViewModel.db, note, toDoTable.ProjectId, "TODO");
+                                Model.TransferTo(MainWindowViewModel.db, note, inProgressTable, doneTable, toDoTable).GetAwaiter();
+                                //Model.RemoveNoteFromDB(MainWindowViewModel.db, note, toDoTable.ProjectId, "TODO").GetAwaiter();
                             }
 
                         }
@@ -365,7 +365,7 @@ namespace TaskManager.ViewModels
                           NotesInProgress.Remove(note);
                           if (MainWindowModel.IsConnectedToLocalServer == true)
                           {
-                              Model.RemoveNoteFromDB(MainWindowViewModel.db, note, inProgressTable.ProjectId, "INPROGRESS");
+                              Model.RemoveNoteFromDB(MainWindowViewModel.db, note, inProgressTable.ProjectId, "INPROGRESS").GetAwaiter();
                           }
 
                       }
@@ -393,8 +393,8 @@ namespace TaskManager.ViewModels
                             NotesInProgress.Remove(note);
                             if (MainWindowModel.IsConnectedToLocalServer == true)
                             {
-                                Model.TransferTo(MainWindowViewModel.db, note, doneTable);
-                                Model.RemoveNoteFromDB(MainWindowViewModel.db, note, inProgressTable.ProjectId, "INPROGRESS");
+                                Model.TransferTo(MainWindowViewModel.db, note, doneTable, inProgressTable, toDoTable).GetAwaiter();
+                                //Model.RemoveNoteFromDB(MainWindowViewModel.db, note, inProgressTable.ProjectId, "INPROGRESS").GetAwaiter();
                             }
                         }
                     }));
@@ -423,7 +423,7 @@ namespace TaskManager.ViewModels
                           NotesDone.Remove(note);
                           if (MainWindowModel.IsConnectedToLocalServer == true)
                           {
-                              Model.RemoveNoteFromDB(MainWindowViewModel.db, note, doneTable.ProjectId, "DONE");
+                              Model.RemoveNoteFromDB(MainWindowViewModel.db, note, doneTable.ProjectId, "DONE").GetAwaiter();
                           }
                       }
                   },

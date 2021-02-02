@@ -184,7 +184,7 @@ namespace TaskManager.ViewModels
                           MainWindowModel.IsTasksNotEmpty = false;
                           if (MainWindowModel.IsConnectedToLocalServer == true)
                           {
-                              Model.RemoveProjectFromDB(MainWindowViewModel.db, project);
+                              Model.RemoveProjectFromDB(MainWindowViewModel.db, project).GetAwaiter();
                           }
                       }
                   },
@@ -213,8 +213,8 @@ namespace TaskManager.ViewModels
                             TasksViewModel.tName = project.PersonName;
                             if (MainWindowModel.IsConnectedToLocalServer == true)
                             {
-                                Model.EditProjectName(MainWindowViewModel.db, Projects, projectTable.UserId);
-                                Model.AddProjectToDB(MainWindowViewModel.db, project, projectTable);
+                                //Model.EditProjectName(MainWindowViewModel.db, Projects, projectTable.UserId);
+                                Model.AddProjectToDB(MainWindowViewModel.db, project, projectTable).GetAwaiter();
                             }
                             MainWindowViewModel.tasks = new Tasks(); // Открытие tasks
                             MainWindowViewModel.SecondButtonClick.Execute(obj);

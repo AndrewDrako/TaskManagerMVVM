@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using TaskManager.Data.DataBase.Base;
 using TaskManager.Data.DataBase.Tables;
@@ -54,7 +55,8 @@ namespace TaskManager.Models
         /// </summary>
         /// <param name="myDbContext"></param>
         /// <param name="project"></param>
-        public static void RemoveProjectFromDB(MyDbContext myDbContext, Project project)
+
+        public static async Task RemoveProjectFromDB(MyDbContext myDbContext, Project project)
         {
             try
             {
@@ -63,9 +65,9 @@ namespace TaskManager.Models
                 {
                     if (p.ProjectName == project.ProjectName)
                     {
-                        myDbContext.Projects.Attach(p);
-                        myDbContext.Projects.Remove(p);
-                        myDbContext.SaveChanges();
+                        await Task.Run(() => myDbContext.Projects.Attach(p));
+                        await Task.Run(() => myDbContext.Projects.Remove(p));
+                        await Task.Run(() => myDbContext.SaveChanges());
                     }
                 }
             }
@@ -128,7 +130,7 @@ namespace TaskManager.Models
         /// <param name="myDbContext"></param>
         /// <param name="project"></param>
         /// <param name="projectTable"></param>
-        public static void AddProjectToDB(MyDbContext myDbContext, Project project, ProjectTable projectTable)
+        public static async Task AddProjectToDB(MyDbContext myDbContext, Project project, ProjectTable projectTable)
         {
             try
             {
@@ -146,9 +148,9 @@ namespace TaskManager.Models
                 {
                     projectTable.ProjectName = project.ProjectName;
                     projectTable.MasterName = project.PersonName;
-                    myDbContext.Projects.Attach(projectTable);
-                    myDbContext.Projects.Add(projectTable);
-                    myDbContext.SaveChanges();
+                    await Task.Run(() => myDbContext.Projects.Attach(projectTable));
+                    await Task.Run(() => myDbContext.Projects.Add(projectTable));
+                    await Task.Run(() => myDbContext.SaveChanges());
                     projects = myDbContext.Projects.ToList();
                 }
             }
@@ -165,7 +167,7 @@ namespace TaskManager.Models
         /// <param name="note"></param>
         /// <param name="projectId"></param>
         /// <param name="s"></param>
-        public static void RemoveNoteFromDB(MyDbContext myDbContext, Note note, int projectId, string s)
+        public static async Task RemoveNoteFromDB(MyDbContext myDbContext, Note note, int projectId, string s)
         {
             if (s == "TODO")
             {
@@ -178,9 +180,9 @@ namespace TaskManager.Models
                         {
                             if (note.Content == t.Content && note.Target == t.LContent)
                             {
-                                myDbContext.ToDos.Attach(t);
-                                myDbContext.ToDos.Remove(t);
-                                myDbContext.SaveChanges();
+                                await Task.Run(() => myDbContext.ToDos.Attach(t));
+                                await Task.Run(() => myDbContext.ToDos.Remove(t));
+                                await Task.Run(() => myDbContext.SaveChanges());
                                 break;
                             }
                         }
@@ -202,9 +204,9 @@ namespace TaskManager.Models
                         {
                             if (note.Content == inp.Content && note.Target == inp.LContent)
                             {
-                                myDbContext.InProgresses.Attach(inp);
-                                myDbContext.InProgresses.Remove(inp);
-                                myDbContext.SaveChanges();
+                                await Task.Run(() => myDbContext.InProgresses.Attach(inp));
+                                await Task.Run(() => myDbContext.InProgresses.Remove(inp));
+                                await Task.Run(() => myDbContext.SaveChanges());
                                 break;
                             }
                         }
@@ -226,9 +228,9 @@ namespace TaskManager.Models
                         {
                             if (note.Content == d.Content && note.Target == d.LContent)
                             {
-                                myDbContext.Dones.Attach(d);
-                                myDbContext.Dones.Remove(d);
-                                myDbContext.SaveChanges();
+                                await Task.Run(() => myDbContext.Dones.Attach(d));
+                                await Task.Run(() => myDbContext.Dones.Remove(d));
+                                await Task.Run(() => myDbContext.SaveChanges());
                                 break;
                             }
                         }
@@ -247,7 +249,7 @@ namespace TaskManager.Models
         /// <param name="myDbContext"></param>
         /// <param name="note"></param>
         /// <param name="inProgressTable"></param>
-        public static void TransferTo(MyDbContext myDbContext, Note note , InProgressTable inProgressTable)
+        public static async Task TransferTo(MyDbContext myDbContext, Note note , InProgressTable inProgressTable, DoneTable doneTable, ToDoTable toDoTable)
         {
             try
             {
@@ -265,15 +267,16 @@ namespace TaskManager.Models
                 {
                     inProgressTable.Content = note.Content;
                     inProgressTable.LContent = note.Target;
-                    myDbContext.InProgresses.Attach(inProgressTable);
-                    myDbContext.InProgresses.Add(inProgressTable);
-                    myDbContext.SaveChanges();
+                    await Task.Run(() => myDbContext.InProgresses.Attach(inProgressTable));
+                    await Task.Run(() => myDbContext.InProgresses.Add(inProgressTable));
+                    await Task.Run(() => myDbContext.SaveChanges());
                 }
             }
             catch
             {
                 MessageBox.Show("Ошибка возникла при переносе заметки в In Progress");
             }
+            await Task.Run(() => RemoveNoteFromDB(myDbContext, note, toDoTable.ProjectId, "TODO"));
         }
 
         /// <summary>
@@ -282,7 +285,7 @@ namespace TaskManager.Models
         /// <param name="myDbContext"></param>
         /// <param name="note"></param>
         /// <param name="doneTable"></param>
-        public static void TransferTo(MyDbContext myDbContext, Note note, DoneTable doneTable)
+        public static async Task TransferTo(MyDbContext myDbContext, Note note, DoneTable doneTable, InProgressTable inProgressTable, ToDoTable toDoTable)
         {
             try
             {
@@ -300,15 +303,16 @@ namespace TaskManager.Models
                 {
                     doneTable.Content = note.Content;
                     doneTable.LContent = note.Target;
-                    myDbContext.Dones.Attach(doneTable);
-                    myDbContext.Dones.Add(doneTable);
-                    myDbContext.SaveChanges();
+                    await Task.Run(() => myDbContext.Dones.Attach(doneTable));
+                    await Task.Run(() => myDbContext.Dones.Add(doneTable));
+                    await Task.Run(() => myDbContext.SaveChanges());
                 }
             }
             catch
             {
                 MessageBox.Show("Проблема возникла при переносе(добавлении) заметки из In Progress");
             }
+            await Task.Run(() => RemoveNoteFromDB(myDbContext, note, inProgressTable.ProjectId, "INPROGRESS"));
         }
 
         /// <summary>
@@ -317,10 +321,11 @@ namespace TaskManager.Models
         /// <param name="myDbContext"></param>
         /// <param name="NotesToDo"></param>
         /// <param name="projectId"></param>
-        public static void EditNote(MyDbContext myDbContext, ObservableCollection<Note> NotesToDo, int projectId)
+        public static async Task EditNote(MyDbContext myDbContext, ObservableCollection<Note> NotesToDo, ToDoTable toDoTable)
         {
             try
             {
+                int projectId = toDoTable.ProjectId;
                 var todos = myDbContext.ToDos.ToList();
                 bool isContains = false; // Чекер для проверки измененных заметок To Do
                 foreach (var t in todos)
@@ -337,9 +342,9 @@ namespace TaskManager.Models
                         }
                         if (isContains == false)  // Усли очередной эл-нт из бд отсуствует в текущей коллекции, то мы его удаляем из бд
                         {
-                            myDbContext.ToDos.Attach(t);
-                            myDbContext.ToDos.Remove(t);
-                            myDbContext.SaveChanges();
+                            await Task.Run(() => myDbContext.ToDos.Attach(t));
+                            await Task.Run(() => myDbContext.ToDos.Remove(t));
+                            await Task.Run(() => myDbContext.SaveChanges());
                             //todos = MainWindowViewModel.db.ToDos.ToList();
 
                         }
@@ -351,6 +356,7 @@ namespace TaskManager.Models
             {
                 MessageBox.Show("Исключение возникло при сохранении измененного проекта");
             }
+            await Task.Run(() => AddNotesToDB(myDbContext, NotesToDo, toDoTable));
         }
 
         /// <summary>
@@ -359,7 +365,7 @@ namespace TaskManager.Models
         /// <param name="myDbContext"></param>
         /// <param name="NotesToDo"></param>
         /// <param name="toDoTable"></param>
-        public static void AddNotesToDB(MyDbContext myDbContext, ObservableCollection<Note> NotesToDo, ToDoTable toDoTable)
+        public static async Task AddNotesToDB(MyDbContext myDbContext, ObservableCollection<Note> NotesToDo, ToDoTable toDoTable)
         {
             try
             {
@@ -379,9 +385,9 @@ namespace TaskManager.Models
                     {
                         toDoTable.Content = NotesToDo[i].Content;
                         toDoTable.LContent = NotesToDo[i].Target;
-                        myDbContext.ToDos.Attach(toDoTable);
-                        myDbContext.ToDos.Add(toDoTable);
-                        myDbContext.SaveChanges();
+                        await Task.Run(() => myDbContext.ToDos.Attach(toDoTable));
+                        await Task.Run(() => myDbContext.ToDos.Add(toDoTable));
+                        await Task.Run(() => myDbContext.SaveChanges());
                         todos = myDbContext.ToDos.ToList();
                     }
                     checker = false;
