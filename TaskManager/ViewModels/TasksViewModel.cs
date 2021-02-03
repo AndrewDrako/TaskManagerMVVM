@@ -334,7 +334,7 @@ namespace TaskManager.ViewModels
                             NotesToDo.Remove(note);
                             if (MainWindowModel.IsConnectedToLocalServer == true)
                             {
-                                Model.TransferTo(MainWindowViewModel.db, note, inProgressTable, doneTable, toDoTable).GetAwaiter();
+                                Model.TransferTo(MainWindowViewModel.db, note, inProgressTable).GetAwaiter();
                                 //Model.RemoveNoteFromDB(MainWindowViewModel.db, note, toDoTable.ProjectId, "TODO").GetAwaiter();
                             }
 
@@ -393,7 +393,7 @@ namespace TaskManager.ViewModels
                             NotesInProgress.Remove(note);
                             if (MainWindowModel.IsConnectedToLocalServer == true)
                             {
-                                Model.TransferTo(MainWindowViewModel.db, note, doneTable, inProgressTable, toDoTable).GetAwaiter();
+                                Model.TransferTo(MainWindowViewModel.db, note, doneTable).GetAwaiter();
                                 //Model.RemoveNoteFromDB(MainWindowViewModel.db, note, inProgressTable.ProjectId, "INPROGRESS").GetAwaiter();
                             }
                         }

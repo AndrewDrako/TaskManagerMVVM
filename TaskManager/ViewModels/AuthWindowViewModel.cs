@@ -159,17 +159,17 @@ namespace TaskManager.ViewModels
 
             selectedTheme = MainWindowModel.ReadThemeKey();  // App Theme
 
-            string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-            SqlConnection connection = new SqlConnection(connectionString);
-            try
-            {
-                connection.Open();
-            }
-            catch
-            {
-                MessageBox.Show("Невозможно найти сервер!\nПриложение продолжит работу но не сможет хранить данные.");
-                MainWindowModel.IsConnectedToLocalServer = false;
-            }
+            //string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            //SqlConnection connection = new SqlConnection(connectionString);
+            //try
+            //{
+            //    connection.Open();
+            //}
+            //catch
+            //{
+            //    MessageBox.Show("Невозможно найти сервер!\nПриложение продолжит работу но не сможет хранить данные.");
+            //    MainWindowModel.IsConnectedToLocalServer = false;
+            //}
             dbContext = new MyDbContext();
             authUser = new User();
             if (MainWindowModel.IsConnectedToLocalServer == true)

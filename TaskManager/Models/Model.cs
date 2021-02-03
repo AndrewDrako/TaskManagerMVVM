@@ -249,7 +249,7 @@ namespace TaskManager.Models
         /// <param name="myDbContext"></param>
         /// <param name="note"></param>
         /// <param name="inProgressTable"></param>
-        public static async Task TransferTo(MyDbContext myDbContext, Note note , InProgressTable inProgressTable, DoneTable doneTable, ToDoTable toDoTable)
+        public static async Task TransferTo(MyDbContext myDbContext, Note note , InProgressTable inProgressTable)
         {
             try
             {
@@ -257,10 +257,13 @@ namespace TaskManager.Models
                 var inprogresses = myDbContext.InProgresses.ToList();
                 foreach (var inp in inprogresses)
                 {
-                    if (inp.Content == note.Content && inp.LContent == note.Target)
+                    if (inProgressTable.ProjectId == inp.ProjectId)
                     {
-                        checker = true;
-                        break;
+                        if (inp.Content == note.Content && inp.LContent == note.Target)
+                        {
+                            checker = true;
+                            break;
+                        }
                     }
                 }
                 if (checker == false)
@@ -276,7 +279,7 @@ namespace TaskManager.Models
             {
                 MessageBox.Show("Ошибка возникла при переносе заметки в In Progress");
             }
-            await Task.Run(() => RemoveNoteFromDB(myDbContext, note, toDoTable.ProjectId, "TODO"));
+            await Task.Run(() => RemoveNoteFromDB(myDbContext, note, inProgressTable.ProjectId, "TODO"));
         }
 
         /// <summary>
@@ -285,7 +288,7 @@ namespace TaskManager.Models
         /// <param name="myDbContext"></param>
         /// <param name="note"></param>
         /// <param name="doneTable"></param>
-        public static async Task TransferTo(MyDbContext myDbContext, Note note, DoneTable doneTable, InProgressTable inProgressTable, ToDoTable toDoTable)
+        public static async Task TransferTo(MyDbContext myDbContext, Note note, DoneTable doneTable)
         {
             try
             {
@@ -293,10 +296,13 @@ namespace TaskManager.Models
                 var dones = myDbContext.Dones.ToList();
                 foreach (var d in dones)
                 {
-                    if (d.Content == note.Content && d.LContent == note.Target)
+                    if (doneTable.ProjectId == d.ProjectId)
                     {
-                        checker = true;
-                        break;
+                        if (d.Content == note.Content && d.LContent == note.Target)
+                        {
+                            checker = true;
+                            break;
+                        }
                     }
                 }
                 if (checker == false)
@@ -312,7 +318,7 @@ namespace TaskManager.Models
             {
                 MessageBox.Show("Проблема возникла при переносе(добавлении) заметки из In Progress");
             }
-            await Task.Run(() => RemoveNoteFromDB(myDbContext, note, inProgressTable.ProjectId, "INPROGRESS"));
+            await Task.Run(() => RemoveNoteFromDB(myDbContext, note, doneTable.ProjectId, "INPROGRESS"));
         }
 
         /// <summary>
