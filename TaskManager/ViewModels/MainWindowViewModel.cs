@@ -114,7 +114,7 @@ namespace TaskManager.ViewModels
 
         private void OnFirstButtonClickExecuted(object p)
         {
-            SlowOpacity(home);
+            CurrentPage = home;
             if (tasks != null)
             {
                 TasksViewModel.SaveNote.Execute(p);
@@ -130,7 +130,7 @@ namespace TaskManager.ViewModels
 
         private void OnSecondButtonClickExecuted(object p)
         {
-            SlowOpacity(tasks);
+            CurrentPage = tasks;
         }
 
         /// <summary>
@@ -142,7 +142,7 @@ namespace TaskManager.ViewModels
 
         private void OnThirdButtonClickExecuted(object p)
         {
-            SlowOpacity(settings);
+            CurrentPage = settings;
             if (tasks != null)
             {
                 TasksViewModel.SaveNote.Execute(p);
@@ -158,7 +158,7 @@ namespace TaskManager.ViewModels
 
         private void OnFourthButtonClickExecuted(object p)
         {
-            SlowOpacity(account);
+            CurrentPage = account;
             if (tasks != null)
             {
                 TasksViewModel.SaveNote.Execute(p);
@@ -174,7 +174,7 @@ namespace TaskManager.ViewModels
 
         private void OnFifthButtonClickExecuted(object p)
         {
-            SlowOpacity(help);
+            CurrentPage = help;
         }
 
         /// <summary>
@@ -192,28 +192,7 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-        /// <summary>
-        /// The function is responsible for smooth switching between UserControls
-        /// </summary>
-        /// <param name="page"></param>
-        private async void SlowOpacity(UserControl page)
-        {
-            await Task.Factory.StartNew(() =>
-            {
-                for (double i = 1.0; i > 0.1; i -= 0.1)
-                {
-                    UserControlOpacity = i;
-                    Thread.Sleep(25);
-                }
-                CurrentPage = page;
-                for (double i = 0.2; i < 1.1; i += 0.1)
-                {
-                    UserControlOpacity = i;
-                    Thread.Sleep(25);
-                }
-
-            });
-        } 
+        
 
         public MainWindowViewModel()
         { 

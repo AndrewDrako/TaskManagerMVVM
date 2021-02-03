@@ -32,21 +32,55 @@
         </Grid.ColumnDefinitions>
         
         <StackPanel Grid.Row="1">
-            <Button Command="{Binding Path=FirstButtonClick}"
+            <!--<Button Command="{Binding Path=FirstButtonClick}"
                     ToolTip="{Binding Path=ButtonContentHome}"
                     Background="{x:Null}"
                     BorderBrush="{x:Null}"
                     Height="50" 
                     FontSize="10">
                 <materialDesign:PackIcon Kind="Home" Foreground="{DynamicResource btnColor}"/>
+            </Button>-->
+
+
+            <Button Command="{Binding Path=FirstButtonClick}"
+                    ToolTip="{Binding Path=ButtonContentHome}"
+                    Background="{x:Null}"
+                    BorderBrush="{x:Null}"
+                    Height="50" 
+                    FontSize="10">
+                <Button.Triggers>
+                    <EventTrigger RoutedEvent="Button.Click">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation 
+                                    Storyboard.TargetName="opacityAnimatedUserControl"
+                                    Storyboard.TargetProperty="(UserControl.Opacity)" 
+                                    From="0" To="1" Duration="0:0:1" AutoReverse="False"  />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Button.Triggers>
+                <materialDesign:PackIcon Kind="Home" Foreground="{DynamicResource btnColor}"/>
             </Button>
-            
+
             <Button ToolTip="{Binding Path=ButtonContentTasks}" 
                     Command="{Binding Path=SecondButtonClick}"
                     Background="{x:Null}"
                     BorderBrush="{x:Null}"
                     Height="50" 
                     FontSize="10">
+                <Button.Triggers>
+                    <EventTrigger RoutedEvent="Button.Click">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation 
+                                    Storyboard.TargetName="opacityAnimatedUserControl"
+                                    Storyboard.TargetProperty="(UserControl.Opacity)" 
+                                    From="0" To="1" Duration="0:0:1" AutoReverse="False"  />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Button.Triggers>
                 <materialDesign:PackIcon Kind="GridLarge" Foreground="{DynamicResource btnColor}"/>
             </Button>
 
@@ -56,6 +90,18 @@
                     BorderBrush="{x:Null}"
                     Height="50" 
                     FontSize="10">
+                <Button.Triggers>
+                    <EventTrigger RoutedEvent="Button.Click">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation 
+                                    Storyboard.TargetName="opacityAnimatedUserControl"
+                                    Storyboard.TargetProperty="(UserControl.Opacity)" 
+                                    From="0" To="1" Duration="0:0:1" AutoReverse="False"  />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Button.Triggers>
                 <materialDesign:PackIcon Kind="Settings" Foreground="{DynamicResource btnColor}"/>
             </Button>
 
@@ -65,6 +111,18 @@
                     BorderBrush="{x:Null}"
                     Height="50" 
                     FontSize="10">
+                <Button.Triggers>
+                    <EventTrigger RoutedEvent="Button.Click">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation 
+                                    Storyboard.TargetName="opacityAnimatedUserControl"
+                                    Storyboard.TargetProperty="(UserControl.Opacity)" 
+                                    From="0" To="1" Duration="0:0:1" AutoReverse="False"  />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Button.Triggers>
                 <materialDesign:PackIcon Kind="Account" Foreground="{DynamicResource btnColor}"/>
             </Button>
             <Button ToolTip="{Binding Path=ButtonContentHelp}" 
@@ -73,13 +131,26 @@
                     BorderBrush="{x:Null}"
                     Height="50" 
                     FontSize="10">
+                <Button.Triggers>
+                    <EventTrigger RoutedEvent="Button.Click">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation 
+                                    Storyboard.TargetName="opacityAnimatedUserControl"
+                                    Storyboard.TargetProperty="(UserControl.Opacity)" 
+                                    From="0" To="1" Duration="0:0:1" AutoReverse="False"  />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Button.Triggers>
                 <materialDesign:PackIcon Kind="HelpBox" Foreground="{DynamicResource btnColor}"/>
             </Button>
         </StackPanel>
 
-        <UserControl Grid.Column="1" 
+        <UserControl Grid.Column="1"
+                     Name="opacityAnimatedUserControl"
                      Content="{Binding Path=CurrentPage}"
-                     Opacity="{Binding UserControlOpacity}">
+                     >
 
 
         </UserControl>
