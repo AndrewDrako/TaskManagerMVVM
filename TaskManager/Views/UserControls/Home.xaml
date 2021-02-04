@@ -57,7 +57,7 @@
                     <DataTemplate>
                         <StackPanel Margin="10 0"
                                 Background="{DynamicResource pageSecondColor}"
-                                Width="600">
+                                MinWidth="600">
                             <TextBlock FontSize="20"
                                    Margin="10 5"
                                    Text="{Binding ProjectName}"

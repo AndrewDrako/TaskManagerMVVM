@@ -46,7 +46,7 @@
                     ToolTip="{Binding Path=ButtonContentHome}"
                     Background="{x:Null}"
                     BorderBrush="{x:Null}"
-                    Height="50" 
+                    MinHeight="50"
                     FontSize="10">
                 <Button.Triggers>
                     <EventTrigger RoutedEvent="Button.Click">
@@ -67,7 +67,7 @@
                     Command="{Binding Path=SecondButtonClick}"
                     Background="{x:Null}"
                     BorderBrush="{x:Null}"
-                    Height="50" 
+                    MinHeight="50" 
                     FontSize="10">
                 <Button.Triggers>
                     <EventTrigger RoutedEvent="Button.Click">
@@ -88,7 +88,7 @@
                     Command="{Binding Path=ThirdButtonClick}"
                     Background="{x:Null}"
                     BorderBrush="{x:Null}"
-                    Height="50" 
+                    MinHeight="50" 
                     FontSize="10">
                 <Button.Triggers>
                     <EventTrigger RoutedEvent="Button.Click">
@@ -109,7 +109,7 @@
                     Command="{Binding Path=FourthButtonClick}"
                     Background="{x:Null}"
                     BorderBrush="{x:Null}"
-                    Height="50" 
+                    MinHeight="50" 
                     FontSize="10">
                 <Button.Triggers>
                     <EventTrigger RoutedEvent="Button.Click">
@@ -129,7 +129,7 @@
                     Command="{Binding Path=FifthButtonClick}"
                     Background="{x:Null}"
                     BorderBrush="{x:Null}"
-                    Height="50" 
+                    MinHeight="50" 
                     FontSize="10">
                 <Button.Triggers>
                     <EventTrigger RoutedEvent="Button.Click">

@@ -48,11 +48,11 @@
                 Command="{Binding ButtonClickMyContactVK}"
                 Background="{x:Null}"
                 BorderBrush="{x:Null}"
-                Height="150"
-                Width="150">
+                MinHeight="150"
+                MinWidth="150">
             <materialDesign:PackIcon Kind="Vk" Foreground="{DynamicResource btnColor}"
-                                     Height="100"
-                                     Width="100"/>
+                                     MinHeight="100"
+                                     MinWidth="100"/>
         </Button>
 
         <Button Grid.Column="1"
@@ -62,11 +62,11 @@
                 Command="{Binding ButtonClickMyContactLI}"
                 Background="{x:Null}"
                 BorderBrush="{x:Null}"
-                Height="150"
-                Width="150">
+                MinHeight="150"
+                MinWidth="150">
             <materialDesign:PackIcon Kind="Linkedin" Foreground="{DynamicResource btnColor}"
-                                     Height="100"
-                                     Width="100"/>
+                                     MinHeight="100"
+                                     MinWidth="100"/>
         </Button>
 
         <Button Grid.Column="2"
@@ -76,11 +76,11 @@
                 Command="{Binding ButtonClickMyContactGH}"
                 Background="{x:Null}"
                 BorderBrush="{x:Null}"
-                Height="150"
-                Width="150">
+                MinHeight="150"
+                MinWidth="150">
             <materialDesign:PackIcon Kind="Github" Foreground="{DynamicResource btnColor}"
-                                     Height="100"
-                                     Width="100"/>
+                                     MinHeight="100"
+                                     MinWidth="100"/>
         </Button>
         <Button Grid.Column="3"
                 Grid.Row="1"
@@ -89,11 +89,11 @@
                 Command="{Binding ButtonClickMyContactI}"
                 Background="{x:Null}"
                 BorderBrush="{x:Null}"
-                Height="150"
-                Width="150">
+                MinHeight="150"
+                MinWidth="150">
             <materialDesign:PackIcon Kind="Instagram" Foreground="{DynamicResource btnColor}"
-                                     Height="100"
-                                     Width="100"/>
+                                     MinHeight="100"
+                                     MinWidth="100"/>
         </Button>
         <TextBlock Grid.Row="2"
                    Grid.ColumnSpan="4"

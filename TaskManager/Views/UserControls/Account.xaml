@@ -48,8 +48,8 @@
                                      Grid.ColumnSpan="4"
                                      HorizontalAlignment="Center"
                                      VerticalAlignment="Center"
-                                     Height="150"
-                                     Width="150"
+                                     MinHeight="150"
+                                     MinWidth="150"
                                      Foreground="{DynamicResource btnColor}"/>
 
             <TextBlock Text="{Binding Email}"
