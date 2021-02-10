@@ -9,7 +9,7 @@ using System.Windows;
 using TaskManager.Data.DataBase.Base;
 using TaskManager.Data.DataBase.Tables;
 using TaskManager.Models;
-using TaskManager.ViewModels;
+
 
 namespace TaskManager.Data.DataBase
 {

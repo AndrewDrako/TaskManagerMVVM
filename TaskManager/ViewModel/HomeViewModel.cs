@@ -1,28 +1,33 @@
-﻿using System.Collections.ObjectModel;
+﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using TaskManager.Data.DataBase.Tables;
-using TaskManager.Infrastructure.Commands.Base;
 using TaskManager.Models;
-using TaskManager.ViewModels.Base;
 using TaskManager.Views.UserControls;
 
-namespace TaskManager.ViewModels
+namespace TaskManager.ViewModel
 {
-    internal class HomeViewModel : ViewModel
-    { 
+    public class HomeViewModel : ViewModelBase
+    {
         /// <summary>
         /// data base: records in the table ProjectTable
         /// </summary>
         public static ProjectTable projectTable;
 
         public static Project _SelectedProject;
-        
+
         public Project SelectedProject
         {
-            get 
+            get
             {
-                return _SelectedProject;   
+                return _SelectedProject;
             }
             set
             {
@@ -35,7 +40,7 @@ namespace TaskManager.ViewModels
                 {
                     this.ChangeControlVisibility = Visibility.Collapsed;
                 }
-                OnPropertyChanged("SelectedProject");
+                RaisePropertyChanged("SelectedProject");
             }
         }
 
@@ -47,7 +52,7 @@ namespace TaskManager.ViewModels
         #region Labels
 
         private string welcome;
-        private string email = AuthWindowViewModel.authUser.UserName;  
+        private string email = AuthViewModel.authUser.UserName;
         private string labelSP;
         private string labelPN;
         private string labelON;
@@ -144,92 +149,75 @@ namespace TaskManager.ViewModels
 
         #region Commands
 
-        #region Add
-
-        private RelayCommand addCommand;
-        public RelayCommand AddCommand
+        /// <summary>
+        /// Add
+        /// </summary>
+        public ICommand AddCommand { get; }
+        private bool CanAddCommandExecute() => true;
+        private void OnAddCommandExecuted()
         {
-            get
-            {
-                
-                return addCommand ??
-                  (addCommand = new RelayCommand(obj =>
-                  {
-                      this.ChangeControlVisibility = Visibility.Visible;
-                      Project project = new Project();
-                      Projects.Insert(0, project);
-                      SelectedProject = project;
+            this.ChangeControlVisibility = Visibility.Visible;
+            Project project = new Project();
+            Projects.Insert(0, project);
+            SelectedProject = project;
+        }
 
-                  }));
+        /// <summary>
+        /// Remove
+        /// </summary>
+        public ICommand RemoveCommand { get; }
+        private bool CanRemoveCommandExecute() => true;
+        private void OnRemoveCommandExecuted(object obj)
+        {
+            Project project = obj as Project;
+            if (project != null)
+            {
+                this.ChangeControlVisibility = Visibility.Collapsed;
+                Projects.Remove(project);
+                MainWindowModel.IsTasksNotEmpty = false;
+                if (MainWindowModel.IsConnectedToLocalServer == true)
+                {
+                    Model.RemoveProjectFromDB(MainViewModel.db, project).GetAwaiter();
+                }
             }
         }
 
-        #endregion
-
-        #region Remove
-
-        private RelayCommand removeCommand;
-        public RelayCommand RemoveCommand
+        /// <summary>
+        /// Run
+        /// </summary>
+        public ICommand SelectProject { get; }
+        private bool CanSelectProjectExecute() => true;
+        private void OnSelectProjectExecuted(object obj)
         {
-            get
+            Project project = obj as Project;
+            if (project != null)
             {
-                return removeCommand ??
-                  (removeCommand = new RelayCommand(obj =>
-                  {
-                      Project project = obj as Project;
-                      if (true)
-                      {
-                          this.ChangeControlVisibility = Visibility.Collapsed;
-                          Projects.Remove(project);
-                          MainWindowModel.IsTasksNotEmpty = false;
-                          if (MainWindowModel.IsConnectedToLocalServer == true)
-                          {
-                              Model.RemoveProjectFromDB(MainWindowViewModel.db, project).GetAwaiter();
-                          }
-                      }
-                  },
-                 (obj) => Projects.Count > 0));
-            }
-        }
-
-        #endregion
-
-        #region Run
-
-        private RelayCommand selectProject;
-        public RelayCommand SelectProject
-        {
-            get
-            {
-                return selectProject ??
-                    (selectProject = new RelayCommand(obj =>
+                if (project.PersonName != null && project.ProjectName != null)
+                {
+                    this.ChangeControlVisibility = Visibility.Collapsed;
+                    MainWindowModel.IsTasksNotEmpty = true;  // Разблокировка кнопки tasks
+                    TasksViewModel.pName = project.ProjectName;
+                    TasksViewModel.tName = project.PersonName;
+                    if (MainWindowModel.IsConnectedToLocalServer == true)
                     {
-                        Project project = obj as Project;
-                        if (project.PersonName != null && project.ProjectName != null)
-                        {
-                            this.ChangeControlVisibility = Visibility.Collapsed;
-                            MainWindowModel.IsTasksNotEmpty = true;  // Разблокировка кнопки tasks
-                            TasksViewModel.pName = project.ProjectName;
-                            TasksViewModel.tName = project.PersonName;
-                            if (MainWindowModel.IsConnectedToLocalServer == true)
-                            {
-                                //Model.EditProjectName(MainWindowViewModel.db, Projects, projectTable.UserId);
-                                Model.AddProjectToDB(MainWindowViewModel.db, project, projectTable).GetAwaiter();
-                            }
-                            MainWindowViewModel.tasks = new Tasks(); // Открытие tasks
-                            MainWindowViewModel.SecondButtonClick.Execute(obj);
+                        //Model.EditProjectName(MainWindowViewModel.db, Projects, projectTable.UserId);
+                        Model.AddProjectToDB(MainViewModel.db, project, projectTable).GetAwaiter();
+                    }
+                    MainViewModel.tasks = new Tasks(); // Открытие tasks
+                    MainViewModel.SecondButtonClick.Execute(obj);
 
-                        }
-                    }));
+                }
             }
         }
-
-        #endregion
 
         #endregion
 
         public HomeViewModel()
         {
+            AddCommand = new RelayCommand(OnAddCommandExecuted, CanAddCommandExecute);
+            RemoveCommand = new RelayCommand<object>((obj) => OnRemoveCommandExecuted(obj), CanRemoveCommandExecute());
+            SelectProject = new RelayCommand<object>((obj) => OnSelectProjectExecuted(obj), CanSelectProjectExecute());
+
             Projects = new ObservableCollection<Project>  // Object collection
             {
 
@@ -238,7 +226,7 @@ namespace TaskManager.ViewModels
             if (MainWindowModel.IsConnectedToLocalServer == true)
             {
                 projectTable = new ProjectTable();
-                projectTable.UserId = AuthWindowViewModel.authUser.Id;
+                projectTable.UserId = AuthViewModel.authUser.Id;
             }
 
             // filling collections
@@ -246,7 +234,7 @@ namespace TaskManager.ViewModels
             {
                 try
                 {
-                    var projects = MainWindowViewModel.db.Projects.ToList();
+                    var projects = MainViewModel.db.Projects.ToList();
                     foreach (var p in projects)
                     {
                         if (p.UserId == projectTable.UserId)

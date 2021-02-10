@@ -1,8 +1,8 @@
-﻿using TaskManager.ViewModels.Base;
+﻿using GalaSoft.MvvmLight;
 
 namespace TaskManager.Models
 {
-    internal class AppLanguage : ViewModel
+    public class AppLanguage : ViewModelBase
     {
         private string language;
 

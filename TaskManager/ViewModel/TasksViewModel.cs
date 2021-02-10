@@ -1,18 +1,20 @@
-﻿using System.Collections.ObjectModel;
+﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using TaskManager.Data.DataBase.Tables;
-using TaskManager.Infrastructure.Commands;
-using TaskManager.Infrastructure.Commands.Base;
 using TaskManager.Models;
-using TaskManager.ViewModels.Base;
 
-namespace TaskManager.ViewModels
+namespace TaskManager.ViewModel
 {
-    internal class TasksViewModel : ViewModel
+    public class TasksViewModel : ViewModelBase
     {
-
         /// <summary>
         /// To Do Column
         /// </summary>
@@ -45,7 +47,7 @@ namespace TaskManager.ViewModels
             get => TranslateLanguage.LabelTasksFirstTitle[TranslateLanguage.iLanguage];
             set => Set(ref labelTitleFirst, value);
         }
-        
+
         private string labelSecTitle;
 
         /// <summary>
@@ -147,7 +149,7 @@ namespace TaskManager.ViewModels
         {
             get => TranslateLanguage.DelNoteTT[TranslateLanguage.iLanguage];
             set => Set(ref delNoteTT, value);
-        } 
+        }
 
         private string transferNoteTT;
 
@@ -244,13 +246,15 @@ namespace TaskManager.ViewModels
 
         #region Commands
 
-        #region Save
 
+        /// <summary>
+        /// Save
+        /// </summary>
         public static ICommand SaveNote { get; set; }
-        private bool CanSaveNoteExecute(object p) => MainWindowModel.IsConnectedToLocalServer;
-        private void OnSaveNoteExecuted(object p)
+        private bool CanSaveNoteExecute() => MainWindowModel.IsConnectedToLocalServer;
+        private void OnSaveNoteExecuted()
         {
-            Model.EditNote(MainWindowViewModel.db, NotesToDo, toDoTable).GetAwaiter();
+            Model.EditNote(MainViewModel.db, NotesToDo, toDoTable).GetAwaiter();
             //Model.AddNotesToDB(MainWindowViewModel.db, NotesToDo, toDoTable).GetAwaiter();
             if (this.ChangeControlVisibility == Visibility.Visible)
             {
@@ -259,175 +263,137 @@ namespace TaskManager.ViewModels
 
         }
 
-        #endregion
+
 
         #region ToDo
 
-        #region Add
+        /// <summary>
+        /// Add
+        /// </summary>
+        public ICommand AddCommand { get; }
 
-        private RelayCommand addCommand;
-        public RelayCommand AddCommand
+        private bool CanAddCommandExecute() => true;
+        private void OnAddCommandExecuted()
         {
-            get
+            Note note = new Note();
+            //note.Color = Colors[Counter++];
+            NotesToDo.Insert(0, note);
+            SelectedNote = note;
+            if (this.ChangeControlVisibility == Visibility.Collapsed)
             {
-
-                return addCommand ??
-                  (addCommand = new RelayCommand(obj =>
-                  {
-                      Note note = new Note();
-                      //note.Color = Colors[Counter++];
-                      NotesToDo.Insert(0, note);
-                      SelectedNote = note;
-                      if (this.ChangeControlVisibility == Visibility.Collapsed)
-                      {
-                          this.ChangeControlVisibility = Visibility.Visible;
-                      }
-
-                  }));
+                this.ChangeControlVisibility = Visibility.Visible;
             }
         }
 
-        #endregion
-
-        #region Remove
-
-        private RelayCommand removeCommand;
-        public RelayCommand RemoveCommand
+        /// <summary>
+        /// Remove
+        /// </summary>
+        public ICommand RemoveCommand { get; }
+        private bool CanRemoveCommandExecute() => true;
+        private void OnRemoveCommandExecuted(object obj)
         {
-            get
+            Note note = obj as Note;
+            if (note != null)
             {
-                return removeCommand ??
-                  (removeCommand = new RelayCommand(obj =>
-                  {
+                NotesToDo.Remove(note);
+                if (MainWindowModel.IsConnectedToLocalServer == true)
+                {
+                    Model.RemoveNoteFromDB(MainViewModel.db, note, toDoTable.ProjectId, "TODO").GetAwaiter();
+                }
 
-                      Note note = obj as Note;
-                      if (note != null)
-                      {
-                          NotesToDo.Remove(note);
-                          if (MainWindowModel.IsConnectedToLocalServer == true)
-                          {
-                              Model.RemoveNoteFromDB(MainWindowViewModel.db, note, toDoTable.ProjectId, "TODO").GetAwaiter();
-                          }
-
-                      }
-                  },
-                 (obj) => NotesToDo.Count > 0));
             }
         }
 
-        #endregion
+        /// <summary>
+        /// Transfer to InProgress
+        /// </summary>
+        public ICommand TransferProject { get; }
 
-        #region Transfer to InProgress
-
-        private RelayCommand transferProject;
-        public RelayCommand TransferProject
+        private bool CanTransferProjectExecute() => true;
+        private void OnTransferProjectExecuted(object obj)
         {
-            get
+            Note note = obj as Note;
+            if (note != null)
             {
-                return transferProject ??
-                    (transferProject = new RelayCommand(obj =>
+                if (NotesToDo.Contains(note) == true)
+                {
+                    NotesInProgress.Insert(0, note);
+                    NotesToDo.Remove(note);
+                    if (MainWindowModel.IsConnectedToLocalServer == true)
                     {
-                        Note note = obj as Note;
-                        if (note != null && NotesToDo.Contains(note) == true)
-                        { 
-                            NotesInProgress.Insert(0, note);
-                            NotesToDo.Remove(note);
-                            if (MainWindowModel.IsConnectedToLocalServer == true)
-                            {
-                                Model.TransferTo(MainWindowViewModel.db, note, inProgressTable).GetAwaiter();
-                                //Model.RemoveNoteFromDB(MainWindowViewModel.db, note, toDoTable.ProjectId, "TODO").GetAwaiter();
-                            }
+                        Model.TransferTo(MainViewModel.db, note, inProgressTable).GetAwaiter();
+                        //Model.RemoveNoteFromDB(MainWindowViewModel.db, note, toDoTable.ProjectId, "TODO").GetAwaiter();
+                    }
 
-                        }
-                    }));
+                }
             }
         }
-
-        #endregion
 
         #endregion
 
         #region InProgress
 
-        #region Remove
-
-        private RelayCommand removeCommandInProgress;
-        public RelayCommand RemoveCommandInProgress
+        /// <summary>
+        /// Remove
+        /// </summary>
+        public ICommand RemoveCommandInProgress { get; }
+        private bool CanRemoveCommandInProgressExecute() => true;
+        private void OnRemoveCommandInProgressExxecuted(object obj)
         {
-            get
+            Note note = obj as Note;
+            if (note != null)
             {
-                return removeCommandInProgress ??
-                  (removeCommandInProgress = new RelayCommand(obj =>
-                  {
-                      Note note = obj as Note;
-                      if (note != null)
-                      {
-                          NotesInProgress.Remove(note);
-                          if (MainWindowModel.IsConnectedToLocalServer == true)
-                          {
-                              Model.RemoveNoteFromDB(MainWindowViewModel.db, note, inProgressTable.ProjectId, "INPROGRESS").GetAwaiter();
-                          }
+                NotesInProgress.Remove(note);
+                if (MainWindowModel.IsConnectedToLocalServer == true)
+                {
+                    Model.RemoveNoteFromDB(MainViewModel.db, note, inProgressTable.ProjectId, "INPROGRESS").GetAwaiter();
+                }
 
-                      }
-                  },
-                 (obj) => NotesInProgress.Count > 0));
             }
         }
 
-        #endregion
-
-        #region Transfer to DONE
-
-        private RelayCommand transferProjectInProgress;
-        public RelayCommand TransferProjectInProgress
+        /// <summary>
+        /// Transfer to DONE
+        /// </summary>
+        public ICommand TransferProjectInProgress { get; }
+        private bool CanTransferProjectInProgressExecute() => true;
+        private void OnTransferProjectInProgressExecuted(object obj)
         {
-            get
+            Note note = obj as Note;
+            if (note != null)
             {
-                return transferProjectInProgress ??
-                    (transferProjectInProgress = new RelayCommand(obj =>
+                if (NotesInProgress.Contains(note) == true)
+                {
+                    NotesDone.Insert(0, note);
+                    NotesInProgress.Remove(note);
+                    if (MainWindowModel.IsConnectedToLocalServer == true)
                     {
-                        Note note = obj as Note;
-                        if (note != null && NotesInProgress.Contains(note) == true)
-                        {
-                            NotesDone.Insert(0, note);
-                            NotesInProgress.Remove(note);
-                            if (MainWindowModel.IsConnectedToLocalServer == true)
-                            {
-                                Model.TransferTo(MainWindowViewModel.db, note, doneTable).GetAwaiter();
-                                //Model.RemoveNoteFromDB(MainWindowViewModel.db, note, inProgressTable.ProjectId, "INPROGRESS").GetAwaiter();
-                            }
-                        }
-                    }));
+                        Model.TransferTo(MainViewModel.db, note, doneTable).GetAwaiter();
+                        //Model.RemoveNoteFromDB(MainWindowViewModel.db, note, inProgressTable.ProjectId, "INPROGRESS").GetAwaiter();
+                    }
+                }
             }
         }
-
-        #endregion
 
         #endregion
 
         #region Done
 
-        #region Remove
-
-        private RelayCommand removeCommandDone;
-        public RelayCommand RemoveCommandDone
+        /// <summary>
+        /// Remove
+        /// </summary>
+        public ICommand RemoveCommandDone { get; }
+        private bool CanRemoveCommandDoneExecute() => true;
+        private void OnRemoveCommandDoneExecuted(object obj)
         {
-            get
+            Note note = obj as Note;
+            if (note != null)
             {
-                return removeCommandDone ??
-                  (removeCommandDone = new RelayCommand(obj =>
-                  {
-                      Note note = obj as Note;
-                      if (note != null)
-                      {
-                          NotesDone.Remove(note);
-                          if (MainWindowModel.IsConnectedToLocalServer == true)
-                          {
-                              Model.RemoveNoteFromDB(MainWindowViewModel.db, note, doneTable.ProjectId, "DONE").GetAwaiter();
-                          }
-                      }
-                  },
-                 (obj) => NotesDone.Count > 0));
+                NotesDone.Remove(note);
+                if (MainWindowModel.IsConnectedToLocalServer == true)
+                {
+                    Model.RemoveNoteFromDB(MainViewModel.db, note, doneTable.ProjectId, "DONE").GetAwaiter();
+                }
             }
         }
 
@@ -435,15 +401,13 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-        #endregion
-        
         /// <summary>
         /// Current project id
         /// </summary>
         public static int CurrentProjectId { get; set; }
 
         public TasksViewModel()
-        {   
+        {
             toDoTable = new ToDoTable();
             inProgressTable = new InProgressTable();
             doneTable = new DoneTable();
@@ -451,10 +415,10 @@ namespace TaskManager.ViewModels
             {
                 try
                 {
-                    var projects = MainWindowViewModel.db.Projects.ToList();  // Unloading data from the database into an array
+                    var projects = MainViewModel.db.Projects.ToList();  // Unloading data from the database into an array
                     foreach (var p in projects)
                     {
-                        if (p.UserId == AuthWindowViewModel.authUser.Id)
+                        if (p.UserId == AuthViewModel.authUser.Id)
                         {
                             if (pName == p.ProjectName && tName == p.MasterName)
                             {
@@ -472,7 +436,15 @@ namespace TaskManager.ViewModels
                 }
             }
 
-            SaveNote = new LambdaCommand(OnSaveNoteExecuted, CanSaveNoteExecute);
+
+            SaveNote = new RelayCommand(OnSaveNoteExecuted, CanSaveNoteExecute);
+            RemoveCommand = new RelayCommand<object>((obj) => OnRemoveCommandExecuted(obj), CanRemoveCommandExecute());
+            AddCommand = new RelayCommand(OnAddCommandExecuted, CanAddCommandExecute);
+            TransferProject = new RelayCommand<object>((obj) => OnTransferProjectExecuted(obj), CanTransferProjectExecute());
+            RemoveCommandInProgress = new RelayCommand<object>((obj) => OnRemoveCommandInProgressExxecuted(obj), CanRemoveCommandInProgressExecute());
+            TransferProjectInProgress = new RelayCommand<object>((obj) => OnTransferProjectInProgressExecuted(obj), CanTransferProjectInProgressExecute());
+            RemoveCommandDone = new RelayCommand<object>((obj) => OnRemoveCommandDoneExecuted(obj), CanRemoveCommandDoneExecute());
+
 
             NotesToDo = new ObservableCollection<Note>
             {
@@ -509,7 +481,7 @@ namespace TaskManager.ViewModels
 
                 try
                 {
-                    var todos = MainWindowViewModel.db.ToDos.ToList();
+                    var todos = MainViewModel.db.ToDos.ToList();
                     foreach (var t in todos)
                     {
                         if (t.ProjectId == toDoTable.ProjectId)
@@ -530,7 +502,7 @@ namespace TaskManager.ViewModels
 
                 try
                 {
-                    var inprogresses = MainWindowViewModel.db.InProgresses.ToList();
+                    var inprogresses = MainViewModel.db.InProgresses.ToList();
                     foreach (var inp in inprogresses)
                     {
                         if (inp.ProjectId == inProgressTable.ProjectId)
@@ -551,7 +523,7 @@ namespace TaskManager.ViewModels
 
                 try
                 {
-                    var dones = MainWindowViewModel.db.Dones.ToList();
+                    var dones = MainViewModel.db.Dones.ToList();
                     foreach (var d in dones)
                     {
                         if (d.ProjectId == doneTable.ProjectId)

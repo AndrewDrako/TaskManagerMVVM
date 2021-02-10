@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using TaskManager.Data.DataBase.Base;
 using TaskManager.Models;
-using TaskManager.ViewModels;
+using TaskManager.ViewModel;
 
 namespace TaskManager.Data.DataBase
 {
@@ -28,7 +28,7 @@ namespace TaskManager.Data.DataBase
                     await Task.Run(() => db.ToDos.Load());
                     await Task.Run(() => db.InProgresses.Load());
                     await Task.Run(() => db.Dones.Load());
-                    AuthWindowViewModel.canClickOk = true;
+                    AuthViewModel.canClickOk = true;
                 }
                 catch
                 {

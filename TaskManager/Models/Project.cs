@@ -1,8 +1,8 @@
-﻿using TaskManager.ViewModels.Base;
+﻿using GalaSoft.MvvmLight;
 
 namespace TaskManager.Models
 {
-    public class Project : ViewModel
+    public class Project : ViewModelBase
     { 
         private string projectName;
 

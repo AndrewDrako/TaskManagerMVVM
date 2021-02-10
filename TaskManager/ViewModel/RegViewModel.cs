@@ -1,16 +1,20 @@
-﻿using System;
-using System.Windows.Input;
-using TaskManager.ViewModels.Base;
-using TaskManager.Infrastructure.Commands;
+﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
-using TaskManager.Models;
 using System.Windows.Controls;
-using TaskManager.Views.Windows;
+using System.Windows.Input;
 using TaskManager.Data.DataBase.Tables;
+using TaskManager.Models;
+using TaskManager.Views.Windows;
 
-namespace TaskManager.ViewModels
+namespace TaskManager.ViewModel
 {
-    public class RegistrationWindowViewModel : ViewModel
+    public class RegViewModel : ViewModelBase
     {
         #region Labels
 
@@ -122,10 +126,10 @@ namespace TaskManager.ViewModels
         /// <summary>
         /// Email
         /// </summary>
-        public string UserEmail 
+        public string UserEmail
         {
-            get => userEmail; 
-            set => Set(ref userEmail, value); 
+            get => userEmail;
+            set => Set(ref userEmail, value);
         }
 
         public static string userName;
@@ -158,7 +162,7 @@ namespace TaskManager.ViewModels
         /// Click after enter email, password and username
         /// </summary>
         public ICommand BtnClick { get; }
-        private bool CanBtnClickExecute(object p) => true;
+        private bool CanBtnClickExecute() => true;
 
         private void OnBtnClickExecuted(object p)
         {
@@ -168,7 +172,7 @@ namespace TaskManager.ViewModels
                 return;
             }
 
-            User user = Model.FindUser(AuthWindowViewModel.dbContext, UserName);
+            User user = Model.FindUser(AuthViewModel.dbContext, UserName);
             if (user != null)
             {
                 MessageBox.Show("Введенное имя занято попробуйте другое");
@@ -192,7 +196,7 @@ namespace TaskManager.ViewModels
         /// Click after enter key from email
         /// </summary>
         public ICommand BtnClickAccept { get; }
-        private bool CanBtnClickAcceptExecute(object p) => AuthWindowViewModel.canClickOk;
+        private bool CanBtnClickAcceptExecute() => AuthViewModel.canClickOk;
         private void OnBtnClickAcceptExecuted(object p)
         {
             if (KeyInput == null)
@@ -205,7 +209,7 @@ namespace TaskManager.ViewModels
                 var passwordBox = p as PasswordBox;
                 var password = passwordBox.Password;
 
-                User user = Model.FindUser(AuthWindowViewModel.dbContext, password, UserName);
+                User user = Model.FindUser(AuthViewModel.dbContext, password, UserName);
                 if (user != null)
                 {
                     MessageBox.Show("У вас уже есть аккаунт");
@@ -218,9 +222,9 @@ namespace TaskManager.ViewModels
                         Password = password,
                         UserName = UserName
                     };
-                    AuthWindowViewModel.dbContext.Users.Attach(user);
-                    AuthWindowViewModel.dbContext.Users.Add(user);
-                    AuthWindowViewModel.dbContext.SaveChanges();
+                    AuthViewModel.dbContext.Users.Attach(user);
+                    AuthViewModel.dbContext.Users.Add(user);
+                    AuthViewModel.dbContext.SaveChanges();
                     MessageBox.Show("Отлично, у вас есть аккаунт!\nТеперь выполните вход");
                     Window authWindow = new AuthWindow();
                     authWindow.Show();
@@ -237,8 +241,8 @@ namespace TaskManager.ViewModels
         /// Log In click
         /// </summary>
         public ICommand BtnClickLogIn { get; }
-        private bool CanBtnClickLogInExecute(object p) => true;
-        private void OnBtnClickLogInExecuted(object p)
+        private bool CanBtnClickLogInExecute() => true;
+        private void OnBtnClickLogInExecuted()
         {
             Window authWindow = new AuthWindow();
             authWindow.Show();
@@ -249,15 +253,15 @@ namespace TaskManager.ViewModels
         /// Back click
         /// </summary>
         public ICommand BtnClickBack { get; }
-        private bool CanBtnClickBackExecute(object p) => true;
-        private void OnBtnClickBackExecuted(object p)
+        private bool CanBtnClickBackExecute() => true;
+        private void OnBtnClickBackExecuted()
         {
             this.ChangeControlVisibilityFirst = Visibility.Visible;
             this.ChangeControlVisibilitySecond = Visibility.Collapsed;
         }
 
         #endregion
- 
+
         private Visibility visibilityFirst = Visibility.Visible;
 
         /// <summary>
@@ -285,15 +289,15 @@ namespace TaskManager.ViewModels
         /// </summary>
         public static int KeyFromEmail;
 
-        public RegistrationWindowViewModel()
+        public RegViewModel()
         {
             UserEmail = null;
             UserName = null;
-            
-            BtnClick = new LambdaCommand(OnBtnClickExecuted, CanBtnClickExecute);
-            BtnClickAccept = new LambdaCommand(OnBtnClickAcceptExecuted, CanBtnClickAcceptExecute);
-            BtnClickLogIn = new LambdaCommand(OnBtnClickLogInExecuted, CanBtnClickLogInExecute);
-            BtnClickBack = new LambdaCommand(OnBtnClickBackExecuted, CanBtnClickBackExecute);
+
+            BtnClick = new RelayCommand<object>((obj) => OnBtnClickExecuted(obj), CanBtnClickExecute());
+            BtnClickAccept = new RelayCommand<object>((obj) => OnBtnClickAcceptExecuted(obj), CanBtnClickAcceptExecute());
+            BtnClickLogIn = new RelayCommand(OnBtnClickLogInExecuted, CanBtnClickLogInExecute);
+            BtnClickBack = new RelayCommand(OnBtnClickBackExecuted, CanBtnClickBackExecute);
         }
     }
 }

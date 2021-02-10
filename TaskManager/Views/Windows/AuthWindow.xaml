@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TaskManager.Views.Windows"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:vm="clr-namespace:TaskManager.ViewModels"
+        xmlns:vm="clr-namespace:TaskManager.ViewModel"
         mc:Ignorable="d"
         Height="450"  
         Width="400"
@@ -15,7 +15,7 @@
         Icon="/Design/Icons/AuthWindowIcon.png"
         >
     <Window.DataContext>
-        <vm:AuthWindowViewModel/>
+        <vm:AuthViewModel/>
     </Window.DataContext>
     
     <Grid>

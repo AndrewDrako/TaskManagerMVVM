@@ -1,26 +1,31 @@
-﻿using System.Diagnostics;
+﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using TaskManager.Infrastructure.Commands;
 using TaskManager.Models;
-using TaskManager.ViewModels.Base;
 
-namespace TaskManager.ViewModels
+namespace TaskManager.ViewModel
 {
-    internal class HelpViewModel : ViewModel
+    public class HelpViewModel : ViewModelBase
     {
         #region Labels
 
         private string labelFirstTitle;
         private string labelSecondTitle;
-        
+
         /// <summary>
         /// How to contact me
         /// </summary>
         public string LabelFirstTitle
-        { 
-            get => TranslateLanguage.LabelHelpFirstTitle[TranslateLanguage.iLanguage]; 
-            set => Set(ref labelFirstTitle, value); 
+        {
+            get => TranslateLanguage.LabelHelpFirstTitle[TranslateLanguage.iLanguage];
+            set => Set(ref labelFirstTitle, value);
         }
 
         /// <summary>
@@ -39,9 +44,9 @@ namespace TaskManager.ViewModels
         // Vk
         public ICommand ButtonClickMyContactVK { get; }
 
-        private bool CanButtonClickMyContactVKExecute(object p) => true;
+        private bool CanButtonClickMyContactVKExecute() => true;
 
-        private void OnButtonClickMyContactVKExecuted(object p)
+        private void OnButtonClickMyContactVKExecuted()
         {
             try
             {
@@ -57,9 +62,9 @@ namespace TaskManager.ViewModels
 
         public ICommand ButtonClickMyContactLI { get; }
 
-        private bool CanButtonClickMyContactLIExecute(object p) => true;
+        private bool CanButtonClickMyContactLIExecute() => true;
 
-        private void OnButtonClickMyContactLIExecuted(object p)
+        private void OnButtonClickMyContactLIExecuted()
         {
             try
             {
@@ -75,9 +80,9 @@ namespace TaskManager.ViewModels
 
         public ICommand ButtonClickMyContactGH { get; }
 
-        private bool CanButtonClickMyContactGHExecute(object p) => true;
+        private bool CanButtonClickMyContactGHExecute() => true;
 
-        private void OnButtonClickMyContactGHExecuted(object p)
+        private void OnButtonClickMyContactGHExecuted()
         {
             try
             {
@@ -93,9 +98,9 @@ namespace TaskManager.ViewModels
 
         public ICommand ButtonClickMyContactI { get; }
 
-        private bool CanButtonClickMyContactIExecute(object p) => true;
+        private bool CanButtonClickMyContactIExecute() => true;
 
-        private void OnButtonClickMyContactIExecuted(object p)
+        private void OnButtonClickMyContactIExecuted()
         {
             try
             {
@@ -111,10 +116,10 @@ namespace TaskManager.ViewModels
 
         public HelpViewModel()
         {
-            ButtonClickMyContactVK = new LambdaCommand(OnButtonClickMyContactVKExecuted, CanButtonClickMyContactVKExecute);
-            ButtonClickMyContactLI = new LambdaCommand(OnButtonClickMyContactLIExecuted, CanButtonClickMyContactLIExecute);
-            ButtonClickMyContactGH = new LambdaCommand(OnButtonClickMyContactGHExecuted, CanButtonClickMyContactGHExecute);
-            ButtonClickMyContactI = new LambdaCommand(OnButtonClickMyContactIExecuted, CanButtonClickMyContactIExecute);
+            ButtonClickMyContactVK = new RelayCommand(OnButtonClickMyContactVKExecuted, CanButtonClickMyContactVKExecute);
+            ButtonClickMyContactLI = new RelayCommand(OnButtonClickMyContactLIExecuted, CanButtonClickMyContactLIExecute);
+            ButtonClickMyContactGH = new RelayCommand(OnButtonClickMyContactGHExecuted, CanButtonClickMyContactGHExecute);
+            ButtonClickMyContactI = new RelayCommand(OnButtonClickMyContactIExecuted, CanButtonClickMyContactIExecute);
         }
     }
 }

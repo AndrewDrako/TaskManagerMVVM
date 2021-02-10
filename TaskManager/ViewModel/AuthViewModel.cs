@@ -1,25 +1,28 @@
-﻿using System.Configuration;
-using System.Data.SqlClient;
+﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using TaskManager.Data.DataBase;
 using TaskManager.Data.DataBase.Base;
 using TaskManager.Data.DataBase.Tables;
-using TaskManager.Infrastructure.Commands;
 using TaskManager.Models;
-using TaskManager.ViewModels.Base;
 using TaskManager.Views.Windows;
 
-namespace TaskManager.ViewModels
+namespace TaskManager.ViewModel
 {
-    public class AuthWindowViewModel : ViewModel
+    public class AuthViewModel : ViewModelBase
     {
         /// <summary>
         /// The major data base context
         /// </summary>
         public static MyDbContext dbContext;
-        
+
         /// <summary>
         /// Local table which contains users
         /// </summary>
@@ -105,20 +108,20 @@ namespace TaskManager.ViewModels
         }
 
         #region Commands
- 
+
         public ICommand BtnClickOk { get; }
-        private bool CanBtnClickOkExecute(object p) => CanClickOk;
+        private bool CanBtnClickOkExecute() => CanClickOk;
 
         /// <summary>
         /// Continue button click
         /// </summary>
         private void OnBtnClickOkExecuted(object p)
         {
-            var passwordBox = p as PasswordBox; 
+            var passwordBox = p as PasswordBox;
             var password = passwordBox.Password;
 
             User user = Model.FindUser(dbContext, password, Username);
-            if(user != null)
+            if (user != null)
             {
                 authUser = new User();
                 authUser.Id = user.Id;
@@ -137,12 +140,12 @@ namespace TaskManager.ViewModels
         }
 
         public ICommand BtnClickReg { get; }
-        private bool CanBtnClickRegExecute(object p) => true;
+        private bool CanBtnClickRegExecute() => true;
 
         /// <summary>
         /// Registration button click
         /// </summary>
-        private void OnBtnClickRegExecuted(object p)
+        private void OnBtnClickRegExecuted()
         {
             Window regWindow = new RegistrationWindow();
             regWindow.Show();
@@ -151,7 +154,7 @@ namespace TaskManager.ViewModels
 
         #endregion
 
-        public AuthWindowViewModel()
+        public AuthViewModel()
         {
             AuthWindowModel.Key = AuthWindowModel.ReadKey();  // With auth and registration or not
 
@@ -220,8 +223,8 @@ namespace TaskManager.ViewModels
                 Application.Current.Windows[0].Close();
             }
 
-            BtnClickOk = new LambdaCommand(OnBtnClickOkExecuted, CanBtnClickOkExecute);
-            BtnClickReg = new LambdaCommand(OnBtnClickRegExecuted, CanBtnClickRegExecute);
+            BtnClickOk = new RelayCommand<object>((obj) => OnBtnClickOkExecuted(obj), CanBtnClickOkExecute());
+            BtnClickReg = new RelayCommand(OnBtnClickRegExecuted, CanBtnClickRegExecute);
         }
     }
 }

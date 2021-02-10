@@ -1,13 +1,19 @@
-﻿using System.Collections.ObjectModel;
+﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using TaskManager.Infrastructure.Commands;
 using TaskManager.Models;
-using TaskManager.ViewModels.Base;
 
-namespace TaskManager.ViewModels
+
+namespace TaskManager.ViewModel
 {
-    internal class SettingsViewModel : ViewModel
+    public class SettingsViewModel : ViewModelBase
     {
         #region Labels
 
@@ -56,9 +62,11 @@ namespace TaskManager.ViewModels
             get { return selectedLanguage; }
             set
             {
+                if (selectedLanguage == value)
+                    return;
                 selectedLanguage = value;
                 IsEdited = true;
-                OnPropertyChanged("SelectedLanguage");
+                RaisePropertyChanged("SelectedLanguage");
             }
         }
 
@@ -78,9 +86,9 @@ namespace TaskManager.ViewModels
         public bool IsEdited = false;
         public ICommand ButtonSaveSettingsClick { get; }
 
-        private bool CanButtonSaveSettingsClickExecute(object p) => IsEdited;
+        private bool CanButtonSaveSettingsClickExecute() => IsEdited;
 
-        private void OnButtonSaveSettingsClickExecuted(object p)
+        private void OnButtonSaveSettingsClickExecuted()
         {
             //Language
             string s = SelectedLanguage.Language;
@@ -107,13 +115,13 @@ namespace TaskManager.ViewModels
 
             Themes = new ObservableCollection<AppTheme>
             {
-                new AppTheme{ Name = "Custom"}, 
+                new AppTheme{ Name = "Custom"},
                 new AppTheme{ Name = "Light"},
                 new AppTheme{ Name = "Dark" }
             };
-            selectedTheme = Themes[AuthWindowViewModel.selectedTheme];  // Install Theme
+            selectedTheme = Themes[AuthViewModel.selectedTheme];  // Install Theme
 
-            ButtonSaveSettingsClick = new LambdaCommand(OnButtonSaveSettingsClickExecuted, CanButtonSaveSettingsClickExecute);
+            ButtonSaveSettingsClick = new RelayCommand(OnButtonSaveSettingsClickExecuted, CanButtonSaveSettingsClickExecute);
 
         }
     }

@@ -1,21 +1,19 @@
-﻿using System.Threading.Tasks;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using System.Windows.Controls;
 using System.Windows.Input;
 using TaskManager.Data.DataBase.Base;
-using TaskManager.Infrastructure.Commands;
 using TaskManager.Models;
-using TaskManager.ViewModels.Base;
 using TaskManager.Views.UserControls;
-using System.Threading;
 
-namespace TaskManager.ViewModels
+namespace TaskManager.ViewModel
 {
-    public class MainWindowViewModel : ViewModel
-    { 
+    public class MainViewModel : ViewModelBase
+    {
         /// <summary>
         /// Data base context who takes info from AuthViewModel
         /// </summary>
-        public static MyDbContext db = AuthWindowViewModel.dbContext;
+        public static MyDbContext db = AuthViewModel.dbContext;
 
         private UserControl home;
         public static UserControl tasks;
@@ -110,14 +108,14 @@ namespace TaskManager.ViewModels
         /// </summary>
         public ICommand FirstButtonClick { get; }
 
-        private bool CanFirstButtonClickExecute(object p) => true;
+        private bool CanFirstButtonClickExecute() => true;
 
-        private void OnFirstButtonClickExecuted(object p)
+        private void OnFirstButtonClickExecuted(object obj)
         {
             CurrentPage = home;
             if (tasks != null)
             {
-                TasksViewModel.SaveNote.Execute(p);
+                TasksViewModel.SaveNote.Execute(obj);
             }
         }
 
@@ -126,9 +124,9 @@ namespace TaskManager.ViewModels
         /// </summary>
         public static ICommand SecondButtonClick { get; set; }
 
-        private bool CanSecondButtonClickExecute(object p) => MainWindowModel.IsTasksNotEmpty;
+        private bool CanSecondButtonClickExecute() => MainWindowModel.IsTasksNotEmpty;
 
-        private void OnSecondButtonClickExecuted(object p)
+        private void OnSecondButtonClickExecuted()
         {
             CurrentPage = tasks;
         }
@@ -138,14 +136,14 @@ namespace TaskManager.ViewModels
         /// </summary>
         public ICommand ThirdButtonClick { get; }
 
-        private bool CanThirdButtonClickExecute(object p) => true;
+        private bool CanThirdButtonClickExecute() => true;
 
-        private void OnThirdButtonClickExecuted(object p)
+        private void OnThirdButtonClickExecuted(object obj)
         {
             CurrentPage = settings;
             if (tasks != null)
             {
-                TasksViewModel.SaveNote.Execute(p);
+                TasksViewModel.SaveNote.Execute(obj);
             }
         }
 
@@ -154,14 +152,14 @@ namespace TaskManager.ViewModels
         /// </summary>
         public ICommand FourthButtonClick { get; }
 
-        private bool CanFourthButtonClickExecute(object p) => MainWindowModel.IsConnectedToLocalServer;
+        private bool CanFourthButtonClickExecute() => MainWindowModel.IsConnectedToLocalServer;
 
-        private void OnFourthButtonClickExecuted(object p)
+        private void OnFourthButtonClickExecuted(object obj)
         {
             CurrentPage = account;
             if (tasks != null)
             {
-                TasksViewModel.SaveNote.Execute(p);
+                TasksViewModel.SaveNote.Execute(obj);
             }
         }
 
@@ -170,9 +168,9 @@ namespace TaskManager.ViewModels
         /// </summary>
         public ICommand FifthButtonClick { get; }
 
-        private bool CanFifthButtonClickExecute(object p) => true;
+        private bool CanFifthButtonClickExecute() => true;
 
-        private void OnFifthButtonClickExecuted(object p)
+        private void OnFifthButtonClickExecuted()
         {
             CurrentPage = help;
         }
@@ -181,21 +179,25 @@ namespace TaskManager.ViewModels
         /// Close Application button
         /// </summary>
         public ICommand CloseApplication { get; }
-        private bool CanCloseApplicationExecute(object p) => true;
-        private void OnCloseApplicationExecuted(object p)
+        private bool CanCloseApplicationExecute() => true;
+        private void OnCloseApplicationExecuted(object obj)
         {
             if (tasks != null)
             {
-                TasksViewModel.SaveNote.Execute(p);
+                TasksViewModel.SaveNote.Execute(obj);
             }
         }
 
         #endregion
 
-        
 
-        public MainWindowViewModel()
-        { 
+
+        
+        /// <summary>
+        /// Initializes a new instance of the MainViewModel class.
+        /// </summary>
+        public MainViewModel()
+        {
             settings = new Settings();
 
             home = new Home();
@@ -205,12 +207,12 @@ namespace TaskManager.ViewModels
             UserControlOpacity = 1;
             CurrentPage = home;
 
-            CloseApplication = new LambdaCommand(OnCloseApplicationExecuted, CanCloseApplicationExecute);
-            FirstButtonClick = new LambdaCommand(OnFirstButtonClickExecuted, CanFirstButtonClickExecute);
-            SecondButtonClick = new LambdaCommand(OnSecondButtonClickExecuted, CanSecondButtonClickExecute);
-            ThirdButtonClick = new LambdaCommand(OnThirdButtonClickExecuted, CanThirdButtonClickExecute);
-            FourthButtonClick = new LambdaCommand(OnFourthButtonClickExecuted, CanFourthButtonClickExecute);
-            FifthButtonClick = new LambdaCommand(OnFifthButtonClickExecuted, CanFifthButtonClickExecute);
+            CloseApplication = new RelayCommand<object>((obj) => OnCloseApplicationExecuted(obj), CanCloseApplicationExecute());
+            FirstButtonClick = new RelayCommand<object>((obj) => OnFirstButtonClickExecuted(obj), CanFirstButtonClickExecute());
+            SecondButtonClick = new RelayCommand(OnSecondButtonClickExecuted, CanSecondButtonClickExecute);
+            ThirdButtonClick = new RelayCommand<object>((obj) => OnThirdButtonClickExecuted(obj), CanThirdButtonClickExecute());
+            FourthButtonClick = new RelayCommand<object>((obj) => OnFourthButtonClickExecuted(obj), CanFourthButtonClickExecute());
+            FifthButtonClick = new RelayCommand(OnFifthButtonClickExecuted, CanFifthButtonClickExecute);
         }
     }
 }

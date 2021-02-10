@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TaskManager.Views.Windows"
-        xmlns:vm="clr-namespace:TaskManager.ViewModels"
+        xmlns:vm="clr-namespace:TaskManager.ViewModel"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:m="clr-namespace:TaskManager.Models"
         mc:Ignorable="d"
@@ -13,7 +13,7 @@
         ResizeMode="NoResize"
         Icon="/Design/Icons/RegWindowIcon.png">
     <Window.DataContext>
-        <vm:RegistrationWindowViewModel/>
+        <vm:RegViewModel/>
     </Window.DataContext>
     <!--<Window.Resources>
         <ResourceDictionary Source="/Design/Themes/Light.xaml"/>

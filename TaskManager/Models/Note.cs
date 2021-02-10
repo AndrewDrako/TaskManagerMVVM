@@ -1,8 +1,8 @@
-﻿using TaskManager.ViewModels.Base;
+﻿using GalaSoft.MvvmLight;
 
 namespace TaskManager.Models
 {
-    public class Note : ViewModel
+    public class Note : ViewModelBase
     { 
         private string content = "";
 

@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TaskManager"
-        xmlns:vm="clr-namespace:TaskManager.ViewModels" 
+        xmlns:vm="clr-namespace:TaskManager.ViewModel" 
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
@@ -14,7 +14,7 @@
         WindowStyle="SingleBorderWindow"
         Icon="/Design/Icons/MainWindowIcon.png">
     <Window.DataContext>
-        <vm:MainWindowViewModel/>
+        <vm:MainViewModel/>
     </Window.DataContext>
     <Window.Background>
         <SolidColorBrush Color="{DynamicResource mainSPColor}"/>
