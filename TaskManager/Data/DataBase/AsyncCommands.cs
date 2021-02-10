@@ -1,6 +1,7 @@
 ﻿using System.Configuration;
 using System.Data.Entity;
 using System.Data.SqlClient;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using TaskManager.Data.DataBase.Base;
@@ -29,6 +30,10 @@ namespace TaskManager.Data.DataBase
                     await Task.Run(() => db.InProgresses.Load());
                     await Task.Run(() => db.Dones.Load());
                     AuthViewModel.canClickOk = true;
+                    AuthViewModel.BtnClickOk.RaiseCanExecuteChanged();
+                    
+                    
+
                 }
                 catch
                 {

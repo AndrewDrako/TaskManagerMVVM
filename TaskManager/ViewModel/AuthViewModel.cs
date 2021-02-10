@@ -104,13 +104,21 @@ namespace TaskManager.ViewModel
         public bool CanClickOk
         {
             get => canClickOk;
-            set => Set(ref canClickOk, value);
+            set 
+            {
+                if (canClickOk == value)
+                    return;
+                canClickOk = value;
+                RaisePropertyChanged("CanClickOk");
+                BtnClickOk.RaiseCanExecuteChanged();
+            }
+
         }
 
         #region Commands
 
-        public ICommand BtnClickOk { get; }
-        private bool CanBtnClickOkExecute() => CanClickOk;
+        public static RelayCommand<object> BtnClickOk { get; set; }
+        private bool CanBtnClickOkExecute(object p) => CanClickOk;
 
         /// <summary>
         /// Continue button click
@@ -223,7 +231,7 @@ namespace TaskManager.ViewModel
                 Application.Current.Windows[0].Close();
             }
 
-            BtnClickOk = new RelayCommand<object>((obj) => OnBtnClickOkExecuted(obj), CanBtnClickOkExecute());
+            BtnClickOk = new RelayCommand<object>((obj) => OnBtnClickOkExecuted(obj), (obj) => CanBtnClickOkExecute(obj));
             BtnClickReg = new RelayCommand(OnBtnClickRegExecuted, CanBtnClickRegExecute);
         }
     }

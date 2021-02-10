@@ -65,8 +65,9 @@ namespace TaskManager.ViewModel
                 if (selectedLanguage == value)
                     return;
                 selectedLanguage = value;
-                IsEdited = true;
+                isEdited = true;
                 RaisePropertyChanged("SelectedLanguage");
+                ButtonSaveSettingsClick.RaiseCanExecuteChanged();
             }
         }
 
@@ -76,19 +77,34 @@ namespace TaskManager.ViewModel
             get => selectedTheme;
             set
             {
-                IsEdited = true;
-                Set(ref selectedTheme, value);
+                if (selectedTheme == value)
+                    return;
+                selectedTheme = value;
+                isEdited = true;
+                RaisePropertyChanged("SelectedTheme");
+                ButtonSaveSettingsClick.RaiseCanExecuteChanged();
             }
         }
 
         #region Commands
 
-        public bool IsEdited = false;
-        public ICommand ButtonSaveSettingsClick { get; }
+        private bool isEdited = false;
+        public bool IsEdited 
+        { 
+            get => isEdited;
+            set
+            {
+                if (isEdited == value)
+                    return;
+                isEdited = value;
+                RaisePropertyChanged("IsEdited");
+            } 
+        }
+        public RelayCommand<object> ButtonSaveSettingsClick { get; }
 
-        private bool CanButtonSaveSettingsClickExecute() => IsEdited;
+        private bool CanButtonSaveSettingsClickExecute(object obj) => IsEdited;
 
-        private void OnButtonSaveSettingsClickExecuted()
+        private void OnButtonSaveSettingsClickExecuted(object obj)
         {
             //Language
             string s = SelectedLanguage.Language;
@@ -121,7 +137,7 @@ namespace TaskManager.ViewModel
             };
             selectedTheme = Themes[AuthViewModel.selectedTheme];  // Install Theme
 
-            ButtonSaveSettingsClick = new RelayCommand(OnButtonSaveSettingsClickExecuted, CanButtonSaveSettingsClickExecute);
+            ButtonSaveSettingsClick = new RelayCommand<object>((obj) => OnButtonSaveSettingsClickExecuted(obj), (obj) => CanButtonSaveSettingsClickExecute(obj));
 
         }
     }
