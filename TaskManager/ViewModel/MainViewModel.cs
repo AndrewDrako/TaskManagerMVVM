@@ -106,7 +106,7 @@ namespace TaskManager.ViewModel
         /// <summary>
         /// Home button click
         /// </summary>
-        public ICommand FirstButtonClick { get; }
+        public RelayCommand<object> FirstButtonClick { get; }
 
         private bool CanFirstButtonClickExecute() => true;
 
@@ -122,7 +122,7 @@ namespace TaskManager.ViewModel
         /// <summary>
         /// Tasks button click
         /// </summary>
-        public static ICommand SecondButtonClick { get; set; }
+        public static RelayCommand SecondButtonClick { get; set; }
 
         private bool CanSecondButtonClickExecute() => MainWindowModel.IsTasksNotEmpty;
 
@@ -134,7 +134,7 @@ namespace TaskManager.ViewModel
         /// <summary>
         /// Settings button click
         /// </summary>
-        public ICommand ThirdButtonClick { get; }
+        public RelayCommand<object> ThirdButtonClick { get; }
 
         private bool CanThirdButtonClickExecute() => true;
 
@@ -150,7 +150,7 @@ namespace TaskManager.ViewModel
         /// <summary>
         /// Account button click
         /// </summary>
-        public ICommand FourthButtonClick { get; }
+        public RelayCommand<object> FourthButtonClick { get; }
 
         private bool CanFourthButtonClickExecute() => MainWindowModel.IsConnectedToLocalServer;
 
@@ -166,7 +166,7 @@ namespace TaskManager.ViewModel
         /// <summary>
         /// Help button click
         /// </summary>
-        public ICommand FifthButtonClick { get; }
+        public RelayCommand FifthButtonClick { get; }
 
         private bool CanFifthButtonClickExecute() => true;
 
@@ -178,7 +178,7 @@ namespace TaskManager.ViewModel
         /// <summary>
         /// Close Application button
         /// </summary>
-        public ICommand CloseApplication { get; }
+        public RelayCommand<object> CloseApplication { get; }
         private bool CanCloseApplicationExecute() => true;
         private void OnCloseApplicationExecuted(object obj)
         {

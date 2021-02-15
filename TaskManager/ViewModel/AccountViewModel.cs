@@ -46,7 +46,7 @@ namespace TaskManager.ViewModel
         /// <summary>
         /// Log Out
         /// </summary>
-        public ICommand BtnClickLogOut { get; }
+        public RelayCommand BtnClickLogOut { get; }
         private bool CanBtnClickLogOutExecute() => true;
         private void OnBtnClickLogOutExecuted()
         {
@@ -59,7 +59,7 @@ namespace TaskManager.ViewModel
         /// <summary>
         /// Create a new account
         /// </summary>
-        public ICommand BtnClickCreate { get; }
+        public RelayCommand BtnClickCreate { get; }
         private bool CanBtnClickCreateExecute() => true;
 
         private void OnBtnClickCreateExecuted()

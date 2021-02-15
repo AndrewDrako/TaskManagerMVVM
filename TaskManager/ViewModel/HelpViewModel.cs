@@ -42,7 +42,7 @@ namespace TaskManager.ViewModel
         #region Commands
 
         // Vk
-        public ICommand ButtonClickMyContactVK { get; }
+        public RelayCommand ButtonClickMyContactVK { get; }
 
         private bool CanButtonClickMyContactVKExecute() => true;
 
@@ -60,7 +60,7 @@ namespace TaskManager.ViewModel
 
         // LinkedIn
 
-        public ICommand ButtonClickMyContactLI { get; }
+        public RelayCommand ButtonClickMyContactLI { get; }
 
         private bool CanButtonClickMyContactLIExecute() => true;
 
@@ -78,7 +78,7 @@ namespace TaskManager.ViewModel
 
         // GitHub
 
-        public ICommand ButtonClickMyContactGH { get; }
+        public RelayCommand ButtonClickMyContactGH { get; }
 
         private bool CanButtonClickMyContactGHExecute() => true;
 
@@ -96,7 +96,7 @@ namespace TaskManager.ViewModel
 
         // Instagram
 
-        public ICommand ButtonClickMyContactI { get; }
+        public RelayCommand ButtonClickMyContactI { get; }
 
         private bool CanButtonClickMyContactIExecute() => true;
 

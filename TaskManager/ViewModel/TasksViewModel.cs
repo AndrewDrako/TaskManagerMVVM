@@ -250,7 +250,7 @@ namespace TaskManager.ViewModel
         /// <summary>
         /// Save
         /// </summary>
-        public static ICommand SaveNote { get; set; }
+        public static RelayCommand SaveNote { get; set; }
         private bool CanSaveNoteExecute() => MainWindowModel.IsConnectedToLocalServer;
         private void OnSaveNoteExecuted()
         {
@@ -270,7 +270,7 @@ namespace TaskManager.ViewModel
         /// <summary>
         /// Add
         /// </summary>
-        public ICommand AddCommand { get; }
+        public RelayCommand AddCommand { get; }
 
         private bool CanAddCommandExecute() => true;
         private void OnAddCommandExecuted()
@@ -288,7 +288,7 @@ namespace TaskManager.ViewModel
         /// <summary>
         /// Remove
         /// </summary>
-        public ICommand RemoveCommand { get; }
+        public RelayCommand<object> RemoveCommand { get; }
         private bool CanRemoveCommandExecute() => true;
         private void OnRemoveCommandExecuted(object obj)
         {
@@ -307,7 +307,7 @@ namespace TaskManager.ViewModel
         /// <summary>
         /// Transfer to InProgress
         /// </summary>
-        public ICommand TransferProject { get; }
+        public RelayCommand<object> TransferProject { get; }
 
         private bool CanTransferProjectExecute() => true;
         private void OnTransferProjectExecuted(object obj)
@@ -336,7 +336,7 @@ namespace TaskManager.ViewModel
         /// <summary>
         /// Remove
         /// </summary>
-        public ICommand RemoveCommandInProgress { get; }
+        public RelayCommand<object> RemoveCommandInProgress { get; }
         private bool CanRemoveCommandInProgressExecute() => true;
         private void OnRemoveCommandInProgressExxecuted(object obj)
         {
@@ -355,7 +355,7 @@ namespace TaskManager.ViewModel
         /// <summary>
         /// Transfer to DONE
         /// </summary>
-        public ICommand TransferProjectInProgress { get; }
+        public RelayCommand<object> TransferProjectInProgress { get; }
         private bool CanTransferProjectInProgressExecute() => true;
         private void OnTransferProjectInProgressExecuted(object obj)
         {
@@ -382,7 +382,7 @@ namespace TaskManager.ViewModel
         /// <summary>
         /// Remove
         /// </summary>
-        public ICommand RemoveCommandDone { get; }
+        public RelayCommand<object> RemoveCommandDone { get; }
         private bool CanRemoveCommandDoneExecute() => true;
         private void OnRemoveCommandDoneExecuted(object obj)
         {
@@ -484,7 +484,7 @@ namespace TaskManager.ViewModel
                     var todos = MainViewModel.db.ToDos.ToList();
                     foreach (var t in todos)
                     {
-                        if (t.ProjectId == toDoTable.ProjectId)
+                        if (t.ProjectId == toDoTable.ProjectId && toDoTable.ProjectId != 0)
                         {
                             Note note = new Note
                             {

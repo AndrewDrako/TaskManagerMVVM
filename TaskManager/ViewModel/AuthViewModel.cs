@@ -147,7 +147,7 @@ namespace TaskManager.ViewModel
             }
         }
 
-        public ICommand BtnClickReg { get; }
+        public RelayCommand BtnClickReg { get; }
         private bool CanBtnClickRegExecute() => true;
 
         /// <summary>

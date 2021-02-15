@@ -161,10 +161,10 @@ namespace TaskManager.ViewModel
         /// <summary>
         /// Click after enter email, password and username
         /// </summary>
-        public ICommand BtnClick { get; }
+        public RelayCommand BtnClick { get; }
         private bool CanBtnClickExecute() => true;
 
-        private void OnBtnClickExecuted(object p)
+        private void OnBtnClickExecuted()
         {
             if (UserEmail == null || UserEmail == null)
             {
@@ -195,7 +195,7 @@ namespace TaskManager.ViewModel
         /// <summary>
         /// Click after enter key from email
         /// </summary>
-        public ICommand BtnClickAccept { get; }
+        public RelayCommand<object> BtnClickAccept { get; }
         private bool CanBtnClickAcceptExecute() => AuthViewModel.canClickOk;
         private void OnBtnClickAcceptExecuted(object p)
         {
@@ -240,7 +240,7 @@ namespace TaskManager.ViewModel
         /// <summary>
         /// Log In click
         /// </summary>
-        public ICommand BtnClickLogIn { get; }
+        public RelayCommand BtnClickLogIn { get; }
         private bool CanBtnClickLogInExecute() => true;
         private void OnBtnClickLogInExecuted()
         {
@@ -252,7 +252,7 @@ namespace TaskManager.ViewModel
         /// <summary>
         /// Back click
         /// </summary>
-        public ICommand BtnClickBack { get; }
+        public RelayCommand BtnClickBack { get; }
         private bool CanBtnClickBackExecute() => true;
         private void OnBtnClickBackExecuted()
         {
@@ -294,7 +294,7 @@ namespace TaskManager.ViewModel
             UserEmail = null;
             UserName = null;
 
-            BtnClick = new RelayCommand<object>((obj) => OnBtnClickExecuted(obj), CanBtnClickExecute());
+            BtnClick = new RelayCommand(OnBtnClickExecuted, CanBtnClickExecute);
             BtnClickAccept = new RelayCommand<object>((obj) => OnBtnClickAcceptExecuted(obj), CanBtnClickAcceptExecute());
             BtnClickLogIn = new RelayCommand(OnBtnClickLogInExecuted, CanBtnClickLogInExecute);
             BtnClickBack = new RelayCommand(OnBtnClickBackExecuted, CanBtnClickBackExecute);

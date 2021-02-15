@@ -100,11 +100,11 @@ namespace TaskManager.ViewModel
                 RaisePropertyChanged("IsEdited");
             } 
         }
-        public RelayCommand<object> ButtonSaveSettingsClick { get; }
+        public RelayCommand ButtonSaveSettingsClick { get; }
 
-        private bool CanButtonSaveSettingsClickExecute(object obj) => IsEdited;
+        private bool CanButtonSaveSettingsClickExecute() => IsEdited;
 
-        private void OnButtonSaveSettingsClickExecuted(object obj)
+        private void OnButtonSaveSettingsClickExecuted()
         {
             //Language
             string s = SelectedLanguage.Language;
@@ -137,7 +137,7 @@ namespace TaskManager.ViewModel
             };
             selectedTheme = Themes[AuthViewModel.selectedTheme];  // Install Theme
 
-            ButtonSaveSettingsClick = new RelayCommand<object>((obj) => OnButtonSaveSettingsClickExecuted(obj), (obj) => CanButtonSaveSettingsClickExecute(obj));
+            ButtonSaveSettingsClick = new RelayCommand(OnButtonSaveSettingsClickExecuted, CanButtonSaveSettingsClickExecute);
 
         }
     }

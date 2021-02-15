@@ -152,7 +152,7 @@ namespace TaskManager.ViewModel
         /// <summary>
         /// Add
         /// </summary>
-        public ICommand AddCommand { get; }
+        public RelayCommand AddCommand { get; }
         private bool CanAddCommandExecute() => true;
         private void OnAddCommandExecuted()
         {
@@ -165,7 +165,7 @@ namespace TaskManager.ViewModel
         /// <summary>
         /// Remove
         /// </summary>
-        public ICommand RemoveCommand { get; }
+        public RelayCommand<object> RemoveCommand { get; }
         private bool CanRemoveCommandExecute() => true;
         private void OnRemoveCommandExecuted(object obj)
         {
@@ -185,7 +185,7 @@ namespace TaskManager.ViewModel
         /// <summary>
         /// Run
         /// </summary>
-        public ICommand SelectProject { get; }
+        public RelayCommand<object> SelectProject { get; }
         private bool CanSelectProjectExecute() => true;
         private void OnSelectProjectExecuted(object obj)
         {
@@ -196,6 +196,7 @@ namespace TaskManager.ViewModel
                 {
                     this.ChangeControlVisibility = Visibility.Collapsed;
                     MainWindowModel.IsTasksNotEmpty = true;  // Разблокировка кнопки tasks
+                    MainViewModel.SecondButtonClick.RaiseCanExecuteChanged();
                     TasksViewModel.pName = project.ProjectName;
                     TasksViewModel.tName = project.PersonName;
                     if (MainWindowModel.IsConnectedToLocalServer == true)
