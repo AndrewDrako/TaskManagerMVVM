@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Runtime.Serialization.Formatters;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Entity;
 using System.Windows;
 using TaskManager.Data.DataBase.Base;
-using TaskManager.Data.DataBase.Tables;
 using TaskManager.Models;
 
 

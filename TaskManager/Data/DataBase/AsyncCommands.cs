@@ -1,7 +1,6 @@
 ﻿using System.Configuration;
 using System.Data.Entity;
 using System.Data.SqlClient;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using TaskManager.Data.DataBase.Base;

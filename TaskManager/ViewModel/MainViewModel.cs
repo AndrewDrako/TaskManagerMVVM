@@ -1,7 +1,6 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System.Windows.Controls;
-using System.Windows.Input;
 using TaskManager.Data.DataBase.Base;
 using TaskManager.Models;
 using TaskManager.Views.UserControls;
