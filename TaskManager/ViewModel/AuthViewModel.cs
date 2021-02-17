@@ -132,7 +132,7 @@ namespace TaskManager.ViewModel
                 Window mainWindow = new MainWindow();
                 mainWindow.Show();
                 AuthWindowModel.PrintKey("Can", "authreg_key.txt").GetAwaiter();
-                AuthWindowModel.PrintKey(user.UserName, "last_user_name.txt").GetAwaiter();
+                AuthWindowModel.PrintKey(user.Id, "last_user.txt").GetAwaiter();
                 Application.Current.Windows[0].Close();
             }
             else
@@ -190,7 +190,7 @@ namespace TaskManager.ViewModel
                         if (AuthWindowModel.Key == 1)
                         {
                             DataBaseCommands.LoadDB(dbContext);
-                            User user = Model.FindUser(dbContext, AuthWindowModel.ReadLastUserName());  // from txt insert username
+                            User user = Model.FindUser(dbContext, AuthWindowModel.ReadLastUser());  // from txt insert username
                             if (user != null)
                             {
                                 authUser.Id = user.Id;

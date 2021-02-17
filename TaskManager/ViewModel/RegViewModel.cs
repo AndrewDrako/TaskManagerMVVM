@@ -167,12 +167,6 @@ namespace TaskManager.ViewModel
                 return;
             }
 
-            User user = Model.FindUser(AuthViewModel.dbContext, UserName);
-            if (user != null)
-            {
-                MessageBox.Show("Введенное имя занято попробуйте другое");
-                return;
-            }
             this.ChangeControlVisibilityFirst = Visibility.Collapsed;
             this.ChangeControlVisibilitySecond = Visibility.Visible;
             Random rnd = new Random();

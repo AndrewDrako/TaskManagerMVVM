@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace TaskManager.Models
@@ -23,6 +24,22 @@ namespace TaskManager.Models
             {
                 // преобразуем строку в байты
                 byte[] array = System.Text.Encoding.Default.GetBytes(s);
+                // запись массива байтов в файл
+                fstream.Write(array, 0, array.Length);
+            }
+        }
+
+        public static async Task PrintKey(int id, string filename)
+        {
+            string path = Directory.GetCurrentDirectory();
+            if (!Directory.Exists(path + "/Files")) //если папки нет - создаем
+            {
+                await Task.Run(() => Directory.CreateDirectory(path + "/Files"));
+            }
+            using (FileStream fstream = new FileStream(path + "/Files/" + filename, FileMode.Create))
+            {
+                // преобразуем строку в байты
+                byte[] array = BitConverter.GetBytes(id);
                 // запись массива байтов в файл
                 fstream.Write(array, 0, array.Length);
             }
@@ -73,16 +90,16 @@ namespace TaskManager.Models
         /// Read last user name from txt
         /// </summary>
         /// <returns></returns>
-        public static string ReadLastUserName()
+        public static int ReadLastUser()
         {
-            string filename = "last_user_name.txt";
+            string filename = "last_user.txt";
             string path = Directory.GetCurrentDirectory();
             if (!Directory.Exists(path + "/Files")) //если папки нет - создаем
             {
                 Directory.CreateDirectory(path + "/Files");
             }
 
-            string textFromFile;
+            int textFromFile;
             using (FileStream fstream = new FileStream(path + "/Files/" + filename, FileMode.OpenOrCreate))
             {
 
@@ -91,7 +108,7 @@ namespace TaskManager.Models
                 // считываем данные
                 fstream.Read(array, 0, array.Length);
                 // декодируем байты в строку
-                textFromFile = System.Text.Encoding.Default.GetString(array);
+                textFromFile = BitConverter.ToInt32(array, 0);
 
             }
             return textFromFile;

@@ -36,12 +36,12 @@ namespace TaskManager.Models
         /// <param name="myDbContext"></param>
         /// <param name="userName"></param>
         /// <returns></returns>
-        public static User FindUser(MyDbContext myDbContext, string userName)
+        public static User FindUser(MyDbContext myDbContext, int id)
         {
             var users = myDbContext.Users.ToList();
             foreach (var ur in users)
             {
-                if (ur.UserName == userName)
+                if (ur.Id == id)
                 {
                     return ur;
                 }
