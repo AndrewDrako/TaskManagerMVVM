@@ -197,10 +197,10 @@ namespace TaskManager.ViewModel
                     if (MainWindowModel.IsConnectedToLocalServer == true)
                     {
                         //Model.EditProjectName(MainWindowViewModel.db, Projects, projectTable.UserId);
-                        Model.AddProjectToDB(MainViewModel.db, project, projectTable).GetAwaiter();
+                        Model.AddProjectToDB(MainViewModel.db, project, projectTable, obj).GetAwaiter();
                     }
-                    MainViewModel.tasks = new Tasks(); // Открытие tasks
-                    MainViewModel.SecondButtonClick.Execute(obj);
+                    //MainViewModel.tasks = new Tasks(); // Открытие tasks
+                    //MainViewModel.SecondButtonClick.Execute(obj);
 
                 }
             }

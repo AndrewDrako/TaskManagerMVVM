@@ -181,7 +181,7 @@ namespace TaskManager.ViewModel
             {
                 if (AuthWindowModel.Key == 0)
                 {
-                    AsyncCommands.ConnectToDB(dbContext);
+                    AsyncCommands.ConnectToDB(dbContext).GetAwaiter();
                 }
                 else
                 {

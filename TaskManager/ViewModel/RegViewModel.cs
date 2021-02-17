@@ -184,7 +184,7 @@ namespace TaskManager.ViewModel
         /// <summary>
         /// Click after enter key from email
         /// </summary>
-        public RelayCommand<object> BtnClickAccept { get; }
+        public static RelayCommand<object> BtnClickAccept { get; set; }
         private bool CanBtnClickAcceptExecute() => AuthViewModel.canClickOk;
         private void OnBtnClickAcceptExecuted(object p)
         {

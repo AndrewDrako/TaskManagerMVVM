@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using TaskManager.Data.DataBase.Base;
 using TaskManager.Data.DataBase.Tables;
+using TaskManager.ViewModel;
+using TaskManager.Views.UserControls;
 
 namespace TaskManager.Models
 {
@@ -130,7 +132,7 @@ namespace TaskManager.Models
         /// <param name="myDbContext"></param>
         /// <param name="project"></param>
         /// <param name="projectTable"></param>
-        public static async Task AddProjectToDB(MyDbContext myDbContext, Project project, ProjectTable projectTable)
+        public static async Task AddProjectToDB(MyDbContext myDbContext, Project project, ProjectTable projectTable, object obj)
         {
             try
             {
@@ -153,11 +155,14 @@ namespace TaskManager.Models
                     await Task.Run(() => myDbContext.SaveChanges());
                     projects = myDbContext.Projects.ToList();
                 }
+                MainViewModel.tasks = new Tasks(); // Открытие tasks
+                MainViewModel.SecondButtonClick.Execute(obj);
             }
             catch
             {
                 MessageBox.Show("Исключение возникло при добавлении проекта(выборе)");
             }
+
         }
 
         /// <summary>

@@ -30,6 +30,7 @@ namespace TaskManager.Data.DataBase
                     await Task.Run(() => db.Dones.Load());
                     AuthViewModel.canClickOk = true;
                     AuthViewModel.BtnClickOk.RaiseCanExecuteChanged();
+                    RegViewModel.BtnClickAccept.RaiseCanExecuteChanged();
                     
                     
 
